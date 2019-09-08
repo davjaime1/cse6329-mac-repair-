@@ -132,7 +132,7 @@ DROP TABLE IF EXISTS `roles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `roles` (
-  `id` int(11) NOT NULL,
+  `id` varchar(45) NOT NULL,
   `name` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -144,7 +144,7 @@ CREATE TABLE `roles` (
 
 LOCK TABLES `roles` WRITE;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-INSERT INTO `roles` VALUES (0,'Admin'),(1,'User'),(2,'Facility Manager'),(3,'Repairer');
+INSERT INTO `roles` VALUES ('A','Admin'),('FM','Facility Manager'),('R','Repairer'),('U','User');
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -156,7 +156,7 @@ DROP TABLE IF EXISTS `states`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `states` (
-  `id` int(11) NOT NULL,
+  `id` varchar(45) NOT NULL,
   `name` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -168,7 +168,7 @@ CREATE TABLE `states` (
 
 LOCK TABLES `states` WRITE;
 /*!40000 ALTER TABLE `states` DISABLE KEYS */;
-INSERT INTO `states` VALUES (0,'Alabama'),(1,'Alaska'),(2,'Arizona'),(3,'Arkansas'),(4,'California'),(5,'Colorado'),(6,'Connecticut'),(7,'Delaware'),(8,'Florida'),(9,'Georgia'),(10,'Hawaii'),(11,'Idaho'),(12,'Illinois'),(13,'Indiana'),(14,'Iowa'),(15,'Kansas'),(16,'Kentucky'),(17,'Louisiana'),(18,'Maine'),(19,'Maryland'),(20,'Massachusetts'),(21,'Michigan'),(22,'Minnesota'),(23,'Mississippi'),(24,'Missouri'),(25,'Montana'),(26,'Nebraska'),(27,'Nevada'),(28,'New Hampshire'),(29,'New Jersey'),(30,'New Mexico'),(31,'New York'),(32,'North Carolina'),(33,'North Dakota'),(34,'Ohio'),(35,'Oklahoma'),(36,'Oregon'),(37,'Pennsylvania'),(38,'Rhode Island'),(39,'South Carolina'),(40,'South Dakota'),(41,'Tennessee'),(42,'Texas'),(43,'Utah'),(44,'Vermont'),(45,'Virginia'),(46,'Washington'),(47,'West Virginia'),(48,'Wisconsin'),(49,'Wyoming');
+INSERT INTO `states` VALUES ('AK','Alaska'),('AL','Alabama'),('AR','Arkansas'),('AZ','Arizona'),('CA','California'),('CO','Colorado'),('CT','Connecticut'),('DE','Delaware'),('FL','Florida'),('GA','Georgia'),('HI','Hawaii'),('IA','Iowa'),('ID','Idaho'),('IL','Illinois'),('IN','Indiana'),('KS','Kansas'),('KY','Kentucky'),('LA','Louisiana'),('MA','Massachusetts'),('MD','Maryland'),('ME','Maine'),('MI','Michigan'),('MN','Minnesota'),('MO','Missouri'),('MS','Mississippi'),('MT','Montana'),('NC','North Carolina'),('ND','North Dakota'),('NE','Nebraska'),('NH','New Hampshire'),('NJ','New Jersey'),('NM','New Mexico'),('NV','Nevada'),('NY','New York'),('OH','Ohio'),('OK','Oklahoma'),('OR','Oregon'),('PA','Pennsylvania'),('RI','Rhode Island'),('SC','South Carolina'),('SD','South Dakota'),('TN','Tennessee'),('TX','Texas'),('UT','Utah'),('VA','Virginia'),('VT','Vermont'),('WA','Washington'),('WI','Wisconsin'),('WV','West Virginia'),('WY','Wyoming');
 /*!40000 ALTER TABLE `states` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -185,10 +185,10 @@ CREATE TABLE `users` (
   `firstname` varchar(45) NOT NULL,
   `lastname` varchar(45) NOT NULL,
   `password` varchar(120) NOT NULL,
-  `role` int(11) NOT NULL,
+  `role` varchar(45) NOT NULL,
   `address` varchar(120) NOT NULL,
   `city` varchar(45) NOT NULL,
-  `state` int(10) NOT NULL,
+  `state` varchar(45) NOT NULL,
   `zip` int(5) NOT NULL,
   `phone` int(10) NOT NULL,
   `email` varchar(120) NOT NULL,
@@ -242,4 +242,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-09-07 20:33:03
+-- Dump completed on 2019-09-07 20:44:03
