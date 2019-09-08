@@ -1,5 +1,6 @@
 CREATE DATABASE  IF NOT EXISTS `database` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `database`;
+
 -- MySQL dump 10.13  Distrib 8.0.17, for Win64 (x86_64)
 --
 -- Host: localhost    Database: database
@@ -173,6 +174,55 @@ INSERT INTO `states` VALUES ('AK','Alaska'),('AL','Alabama'),('AR','Arkansas'),(
 UNLOCK TABLES;
 
 --
+-- Table structure for table `urgency`
+--
+
+DROP TABLE IF EXISTS `urgency`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `urgency` (
+  `id` varchar(45) NOT NULL,
+  `urgency` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `urgency`
+--
+
+LOCK TABLES `urgency` WRITE;
+/*!40000 ALTER TABLE `urgency` DISABLE KEYS */;
+INSERT INTO `urgency` VALUES ('Un','Unusable'), ('Ma','Major'),('Me','Medium'),('Mi','Minor');
+/*!40000 ALTER TABLE `urgency` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `estimateofrepair`
+--
+
+DROP TABLE IF EXISTS `estimateofrepair`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `estimateofrepair` (
+  `id` varchar(16) NOT NULL,
+  `repairtime` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `estimateofrepair`
+--
+
+LOCK TABLES `estimateofrepair` WRITE;
+/*!40000 ALTER TABLE `estimateofrepair` DISABLE KEYS */;
+INSERT INTO `estimateofrepair` VALUES ('MD','Multiple days'), ('1D','One day'),('1H','One hour'),('30M','30 minutes');
+/*!40000 ALTER TABLE `estimateofrepair` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+--
 -- Table structure for table `users`
 --
 
@@ -232,6 +282,186 @@ LOCK TABLES `venues` WRITE;
 INSERT INTO `venues` VALUES ('I','Indoor'),('O','Outdoor');
 /*!40000 ALTER TABLE `venues` ENABLE KEYS */;
 UNLOCK TABLES;
+
+
+
+--
+-- Table structure for table `mar`
+--
+
+DROP TABLE IF EXISTS `mar`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `mar` (
+  `marnumber` varchar(16) NOT NULL,
+  `date` date NOT NULL,
+  `facilitytype` varchar(45) NOT NULL,
+  `facilityname` varchar(45) NOT NULL,
+  `description` varchar(120) NOT NULL,
+  `urgency` varchar(45) NOT NULL,
+  `reportedby` varchar(120) NOT NULL,
+  PRIMARY KEY (`marnumber`),
+  INDEX `fk_mar_facilitytype_idx` (`facilitytype`),
+  INDEX `fk_mar_facilityname_idx` (`facilityname`),
+  INDEX `fk_mar_urgency_idx` (`urgency`),
+  CONSTRAINT `fk_mar_facilitytype` FOREIGN KEY (`facilitytype`) REFERENCES `facilitytypes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_mar_facilityname` FOREIGN KEY (`facilityname`) REFERENCES `facilities` (`name`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_mar_urgency` FOREIGN KEY (`urgency`) REFERENCES `urgency` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `mar`
+--
+
+LOCK TABLES `mar` WRITE;
+/*!40000 ALTER TABLE `mar` DISABLE KEYS */;
+/*!40000 ALTER TABLE `mar` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+--
+-- Table structure for table `assignedmar`
+--
+
+DROP TABLE IF EXISTS `assignedmar`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `assignedmar` (
+  `assignedmar` varchar(16) NOT NULL,
+  `date` date NOT NULL,
+  `assignedto` varchar(16) NOT NULL,
+  `assignedDate` varchar(45) NOT NULL,
+  `estimateofrepair` varchar(45) NOT NULL,
+  PRIMARY KEY (`assignedmar`),
+  KEY `fk_amar_assignedmar_idx` (`assignedmar`),
+  KEY `fk_amar_assignedto_idx` (`assignedto`),
+  KEY `fk_amar_estimateofrepair_idx` (`estimateofrepair`),
+  CONSTRAINT `fk_amar_assignedmar` FOREIGN KEY (`assignedmar`) REFERENCES `mar` (`marnumber`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_amar_assignedto` FOREIGN KEY (`assignedto`) REFERENCES `user` (`username`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_amar_estimateofrepair` FOREIGN KEY (`estimateofrepair`) REFERENCES `estimateofrepair` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `assignedmar`
+--
+
+LOCK TABLES `assignedmar` WRITE;
+/*!40000 ALTER TABLE `assignedmar` DISABLE KEYS */;
+/*!40000 ALTER TABLE `assignedmar` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+
+--
+-- Table structure for table `requestedmar`
+--
+
+DROP TABLE IF EXISTS `requestedmar`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `requestedmar` (
+  `requestedmar` varchar(16) NOT NULL,
+  `date` date NOT NULL,
+  `assignedto` varchar(16) NOT NULL,
+  `assignedDate` varchar(45) NOT NULL,
+  `estimateofrepair` varchar(45) NOT NULL,
+  `from` datetime  NOT NULL,
+  `to` datetime NOT NULL,
+  PRIMARY KEY (`requestedmar`),
+  KEY `fk_rmar_requestedmar_idx` (`requestedmar`),
+  KEY `fk_rmar_assignedto_idx` (`assignedto`),
+  KEY `fk_rmar_estimateofrepair_idx` (`estimateofrepair`),
+  CONSTRAINT `fk_rmar_requestedmar` FOREIGN KEY (`requestedmar`) REFERENCES `mar` (`marnumber`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_rmar_assignedto` FOREIGN KEY (`assignedto`) REFERENCES `user` (`username`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_rmar_estimateofrepair` FOREIGN KEY (`estimateofrepair`) REFERENCES `estimateofrepair` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `requestedmar`
+--
+
+LOCK TABLES `requestedmar` WRITE;
+/*!40000 ALTER TABLE `requestedmar` DISABLE KEYS */;
+/*!40000 ALTER TABLE `requestedmar` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+
+--
+-- Table structure for table `repairSchedule`
+--
+
+DROP TABLE IF EXISTS `repairSchedule`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `repairSchedule` (
+  `username` varchar(16) NOT NULL,
+  `mar` varchar(16) NOT NULL,
+  `date` datetime  NOT NULL,
+  PRIMARY KEY (`username`),
+  KEY `fk_rs_username_idx` (`username`),
+  KEY `fk_rs_mar_idx` (`mar`),
+  CONSTRAINT `fk_rs_username` FOREIGN KEY (`username`) REFERENCES `user` (`username`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_rs_mar` FOREIGN KEY (`mar`) REFERENCES `mar` (`marnumber`) ON DELETE NO ACTION ON UPDATE NO ACTION
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `repairSchedule`
+--
+
+LOCK TABLES `repairSchedule` WRITE;
+/*!40000 ALTER TABLE `repairSchedule` DISABLE KEYS */;
+/*!40000 ALTER TABLE `repairSchedule` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+--
+-- Table structure for table `facilityreservation`
+--
+
+DROP TABLE IF EXISTS `facilityreservation`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `facilityreservation` (
+  `reservationid` varchar(16) NOT NULL,
+  `facilityname` varchar(45) NOT NULL,
+  `facilitytype` varchar(45) NOT NULL,
+  `venue` varchar(45) NOT NULL,
+  `reservedUser` varchar(45) NOT NULL,
+  `date` date  NOT NULL,
+  `to` datetime  NOT NULL,
+  `from` datetime  NOT NULL,
+  PRIMARY KEY (`reservationid`),
+  KEY `fk_fr_facilityname_idx` (`facilityname`),
+  KEY `fk_fr_facilitytype_idx` (`facilitytype`),
+  KEY `fk_fr_venue_idx` (`venue`),
+  KEY `fk_fr_reservedUser_idx` (`reservedUser`),
+  CONSTRAINT `fk_fr_facilityname` FOREIGN KEY (`facilityname`) REFERENCES `facilities` (`name`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_fr_facilitytype` FOREIGN KEY (`facilitytype`) REFERENCES `facilitytypes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_fr_venue` FOREIGN KEY (`venue`) REFERENCES `venue` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_fr_reservedUser` FOREIGN KEY (`reservedUser`) REFERENCES `user` (`username`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `repairSchedule`
+--
+
+LOCK TABLES `facilityreservation` WRITE;
+/*!40000 ALTER TABLE `facilityreservation` DISABLE KEYS */;
+/*!40000 ALTER TABLE `facilityreservation` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
