@@ -297,8 +297,8 @@ CREATE TABLE `mar` (
   `date` date NOT NULL,
   `facilitytype` varchar(45) NOT NULL,
   `facilityname` varchar(45) NOT NULL,
-  `description` varchar(120) NOT NULL,
-  `urgency` varchar(45) NOT NULL,
+  `description` varchar(120),
+  `urgency` varchar(45),
   `reportedby` varchar(120) NOT NULL,
   PRIMARY KEY (`marnumber`),
   INDEX `fk_mar_facilitytype_idx` (`facilitytype`),
@@ -331,16 +331,26 @@ DROP TABLE IF EXISTS `assignedmar`;
 CREATE TABLE `assignedmar` (
   `assignedmar` varchar(16) NOT NULL,
   `date` date NOT NULL,
+  `facilitytype` varchar(45) NOT NULL,
+  `facilityname` varchar(45) NOT NULL,
+  `description` varchar(120),
+  `urgency` varchar(45),
   `assignedto` varchar(16) NOT NULL,
   `assignedDate` varchar(45) NOT NULL,
   `estimateofrepair` varchar(45) NOT NULL,
   PRIMARY KEY (`assignedmar`),
-  KEY `fk_amar_assignedmar_idx` (`assignedmar`),
-  KEY `fk_amar_assignedto_idx` (`assignedto`),
-  KEY `fk_amar_estimateofrepair_idx` (`estimateofrepair`),
+  INDEX `fk_amar_assignedmar_idx` (`assignedmar`),
+  INDEX `fk_amar_facilitytype_idx` (`facilitytype`),
+  INDEX `fk_amar_facilityname_idx` (`facilityname`),
+  INDEX `fk_amar_urgency_idx` (`urgency`),
+  INDEX `fk_amar_assignedto_idx` (`assignedto`),
+  INDEX `fk_amar_estimateofrepair_idx` (`estimateofrepair`),
   CONSTRAINT `fk_amar_assignedmar` FOREIGN KEY (`assignedmar`) REFERENCES `mar` (`marnumber`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_amar_assignedto` FOREIGN KEY (`assignedto`) REFERENCES `user` (`username`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_amar_estimateofrepair` FOREIGN KEY (`estimateofrepair`) REFERENCES `estimateofrepair` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_amar_estimateofrepair` FOREIGN KEY (`estimateofrepair`) REFERENCES `estimateofrepair` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_amar_facilitytype` FOREIGN KEY (`facilitytype`) REFERENCES `facilitytypes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_amar_facilityname` FOREIGN KEY (`facilityname`) REFERENCES `facilities` (`name`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_amar_urgency` FOREIGN KEY (`urgency`) REFERENCES `urgency` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
