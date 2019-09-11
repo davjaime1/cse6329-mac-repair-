@@ -15,7 +15,7 @@ import mac_repair.model.Facility;
 
 
 @WebServlet("/MarController")
-public class MarController extends HttpServlet
+public class CreateMarController extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
     
@@ -28,21 +28,21 @@ public class MarController extends HttpServlet
         
         // Lists the available facilities to report in the form of
         // Facility Type | Facility Name
-        if (action.equalsIgnoreCase("listFacilities"))
+        if (action.equalsIgnoreCase("listFacilitiesNameOnly"))
         {
             ArrayList<Facility> facilitiesInDB = new ArrayList<Facility>();
-            facilitiesInDB = FacilityDAO.listFacilities();
+            facilitiesInDB = FacilityDAO.listFacilitiesNameOnly();
+            session.setAttribute("FACILITIES", facilitiesInDB);
+            getServletContext().getRequestDispatcher("/reportMAR.jsp").forward(request, response);
         }
+        
+        System.out.println("get happened");
         response.getWriter().append("Served at: ").append(request.getContextPath());
     }
     
-    /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-     */
+    
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        // TODO Auto-generated method stub
-        doGet(request, response);
     }
     
 }

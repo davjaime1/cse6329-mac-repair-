@@ -26,18 +26,21 @@ public class FacilityDAO
             while (facilityList.next())
             {
                 Facility facility = new Facility();
-                facility.setFacilityName(facilityList.getString("name"));
+                facility.setName(facilityList.getString("name"));
                 facilityListInDB.add(facility);
             }
         }
         catch (SQLException e)
         {
+            System.out.println("SQL error");
         }
+        
+        
         return facilityListInDB;
     }
     
     
-    public static ArrayList<Facility> listFacilities()
+    public static ArrayList<Facility> listFacilitiesNameOnly()
     {
         return returnMatchingFacilitiesList("SELECT name FROM facilities ORDER BY name");
     }

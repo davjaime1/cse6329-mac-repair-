@@ -2,15 +2,15 @@ package mac_repair.model;
 
 public class Facility
 {
-    private String facilityName;
+    private String name;
     
-    public String getFacilityName()
+    public String getName()
     {
-        return facilityName;
+        return name;
     }
     
-    public void setFacilityName(String s)
+    public void setName(String s)
     {
-        facilityName = s;
+        name = s;
     }
 }
