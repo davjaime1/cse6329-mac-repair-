@@ -11,7 +11,7 @@ import mac_repair.util.SQLConnection;
 
 public class FacilityDAO
 {
-    static SQLConnection DBMgr = SQLConnection.getInstance();
+    private static SQLConnection DBMgr = SQLConnection.getInstance();
     
     private static ArrayList<Facility> returnMatchingFacilitiesList(String queryString)
     {
@@ -27,12 +27,12 @@ public class FacilityDAO
             {
                 Facility facility = new Facility();
                 facility.setName(facilityList.getString("name"));
+                System.out.println("Facility Name: " + facility.getName());
                 facilityListInDB.add(facility);
             }
         }
         catch (SQLException e)
         {
-            System.out.println("SQL error");
         }
         
         

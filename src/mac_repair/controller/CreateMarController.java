@@ -14,7 +14,7 @@ import mac_repair.data.FacilityDAO;
 import mac_repair.model.Facility;
 
 
-@WebServlet("/MarController")
+@WebServlet("/CreateMarController")
 public class CreateMarController extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
@@ -26,18 +26,24 @@ public class CreateMarController extends HttpServlet
         String action = request.getParameter("action");
         session.removeAttribute("errorMsgs");
         
-        // Lists the available facilities to report in the form of
-        // Facility Type | Facility Name
-        if (action.equalsIgnoreCase("listFacilitiesNameOnly"))
+        // Lists the available facilities to report
+        if (action.equalsIgnoreCase("NewMarAction"))
         {
             ArrayList<Facility> facilitiesInDB = new ArrayList<Facility>();
             facilitiesInDB = FacilityDAO.listFacilitiesNameOnly();
             session.setAttribute("FACILITIES", facilitiesInDB);
-            getServletContext().getRequestDispatcher("/reportMAR.jsp").forward(request, response);
+
+            ArrayList<Urgency> urgenciesInDB = new ArrayList<Urgency>();
+            urgenciesInDB = UrgencyDAO.listUrgencies();
+            session.setAttribute("URGENCIES", urgenciesInDB);
+
+            getServletContext().getRequestDispatcher("/CreateMar.jsp").forward(request, response);
         }
-        
-        System.out.println("get happened");
-        response.getWriter().append("Served at: ").append(request.getContextPath());
+        else 
+        {
+            System.out.println("ERROR: CreateMarController: INCORRECT ACTION");
+            response.getWriter().append("Served at: ").append(request.getContextPath());
+        }
     }
     
     

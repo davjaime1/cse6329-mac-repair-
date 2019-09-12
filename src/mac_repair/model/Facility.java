@@ -1,7 +1,10 @@
 package mac_repair.model;
 
-public class Facility
+import java.io.Serializable;
+
+public class Facility implements Serializable
 {
+    private static final long serialVersionUID = -5533857792763363793L;
     private String name;
     
     public String getName()
@@ -9,8 +12,8 @@ public class Facility
         return name;
     }
     
-    public void setName(String s)
+    public void setName(String name)
     {
-        name = s;
+        this.name = name;
     }
 }
