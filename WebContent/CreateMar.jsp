@@ -47,13 +47,13 @@
                 <c:forEach items="${URGENCIES}" var="item" varStatus="status">
                     <tr>
                         <td><input type="radio" id="radioUrgency${status.count}" name="radioUrgency" value="${status.count}"></td>
-                        <td><c:out value="${item.name}" /></td>
+                        <td><c:out value="${item.urgency}" /></td>
                     </tr>
                 </c:forEach>
             </table>
 
             <h4>Description</h4>
-            <input type="text" id="description" name="description" size="500px">
+            <textarea maxlength="120" required wrap></textarea>
 
             <input type="submit" id="submit" value="submit">
 

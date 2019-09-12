@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import mac_repair.data.FacilityDAO;
+import mac_repair.data.UrgencyDAO;
 import mac_repair.model.Facility;
+import mac_repair.model.Urgency;
 
 
 @WebServlet("/CreateMarController")
