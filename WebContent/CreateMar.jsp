@@ -16,46 +16,31 @@
 
     <div class="col-md-4">
 
-        <form action="/mac_repair/CreateMarController?action=listFacilitiesNameOnly" method="post">
+        <form action="/mac_repair/CreateMarController?action=SubmitMarAction" method="post">
 
-            <table border="1" class="myTable">
-                <tr class="myTableRow">
-                    <th class="myTableHead" style="width: 20px; ">Select Facility</th>
-                    <th class="myTableHead" style="padding-right: 20px; text-align: left">Facility Name</th>
-                </tr>
+            <p>
+                Select Facility:&nbsp;
+                <select name="facilityDropDown" required>
+                    <c:forEach items="${FACILITIES}" var="facility">
+                        <option value="${facility.name}">${facility.name}</option>
+                    </c:forEach>
+                </select>
+            </p>
 
-                <c:forEach items="${FACILITIES}" var="item" varStatus="status">
-                    <tr class="myTableRow">
-                        <td class="myTableCell" style="width: 20px; text-align: center">
-                            <input type="radio" id="radioFacility${status.count}" name="radioFacility" value="${status.count}">
-                        </td>
-                        <td class="myTableCell" style="padding-right: 20px; ">
-                            <c:out value="${item.name}" />
-                        </td>
-                    </tr>
-                </c:forEach>
-            </table>
+            <p>
+                Select Urgency:&nbsp;
+                <select name="urgencyDropDown" required>
+                    <c:forEach items="${URGENCIES}" var="urgency">
+                        <option value="${urgency.urgency}">${urgency.urgency}</option>
+                    </c:forEach>
+                </select>
+            </p>
 
-            <br>
-
-            <table border="1">
-                <tr>
-                    <th>Select Urgency</th>
-                    <th>Urgency</th>
-                </tr>
-
-                <c:forEach items="${URGENCIES}" var="item" varStatus="status">
-                    <tr>
-                        <td><input type="radio" id="radioUrgency${status.count}" name="radioUrgency" value="${status.count}"></td>
-                        <td><c:out value="${item.urgency}" /></td>
-                    </tr>
-                </c:forEach>
-            </table>
-
-            <h4>Description</h4>
-            <textarea maxlength="120" required wrap></textarea>
-
-            <input type="submit" id="submit" value="submit">
+            <p>
+                Description<br>
+                <textarea name=descriptionTextArea maxlength="120" required wrap="soft"></textarea>
+                <input type="submit" id="submitButton" value="submit">
+            </p>
 
         </form>
     </div>

@@ -13,21 +13,32 @@ public class FacilityDAO
 {
     private static SQLConnection DBMgr = SQLConnection.getInstance();
     
+    /**
+     * Returns an ArrayList of all facilities in the database based on query string.
+     */
     private static ArrayList<Facility> returnMatchingFacilitiesList(String queryString)
     {
         ArrayList<Facility> facilityListInDB = new ArrayList<Facility>();
         
+        // Attempt to connect to the database.
         Statement stmt = null;
         Connection conn = SQLConnection.getDBConnection();
         try
         {
+            // Execute query to get results from database.
             stmt = conn.createStatement();
             ResultSet facilityList = stmt.executeQuery(queryString);
+
+            // Go through SQL list, make a facility from the info, and put into array list.
             while (facilityList.next())
             {
                 Facility facility = new Facility();
                 facility.setName(facilityList.getString("name"));
-                System.out.println("Facility Name: " + facility.getName());
+                facility.setType(facilityList.getString("facilitytype"));
+                facility.setInterval(facilityList.getString("interval"));
+                facility.setDuration(facilityList.getString("duration"));
+                facility.setVenue(facilityList.getString("venue"));
+                
                 facilityListInDB.add(facility);
             }
         }
@@ -39,9 +50,11 @@ public class FacilityDAO
         return facilityListInDB;
     }
     
-    
-    public static ArrayList<Facility> listFacilitiesNameOnly()
+    /**
+     * Gets all the facilities and related information currently stored in the database.
+     */
+    public static ArrayList<Facility> listFacilities()
     {
-        return returnMatchingFacilitiesList("SELECT name FROM facilities ORDER BY name");
+        return returnMatchingFacilitiesList("SELECT * FROM facilities ORDER BY name");
     }
 }
