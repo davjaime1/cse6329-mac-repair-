@@ -1,0 +1,41 @@
+<%@page import="java.util.ArrayList"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Facility List</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="style.css" rel="stylesheet" type="text/css" />
+<body>
+      <div class="logo"><h1><a href="/mac_repair">MAC Repair</a></h1></div>
+      <div class="menu_nav">
+  </div>
+<input name="errMsg"  value="<c:out value='${errorMsgs.errorMsg}'/>" type="text"  style ="background-color: white; color: red; border: none; width:800px" disabled="disabled">
+<table>
+<tr>
+	<td>
+	<form action="/mac_repair/FM_RepairerScheduleController?action=searchrepairschedule" method="post">
+	<table style="width: 1200px; ">
+	<tr>
+	<tr>
+  	<td> Repairer User Name: </td>
+ 	<td> <input name="idusername" value="<c:out value='${repairschedule.username}'/>" type="text" maxlength="45">  </td>
+  	<td> <input name="marnumberError"  value="<c:out value='${errorMsgs.marNumberError}'/>" type="text"  style ="background-color: white; color: red; border: none; width: 800px"   disabled="disabled" maxlength="60"> </td>
+	</tr>
+ 
+    <tr>
+    <td> MAR Number: </td>
+    <td> <input name="idmarnumber" value="<c:out value='${repairschedule.marID}'/>" type="text" maxlength="16"> </td>
+ 	<td> <input name="facilityname"  value="<c:out value='${errorMsgs.usernameError}'/>" type="text"  style ="background-color: white; color: red; border: none; width: 800px"   disabled="disabled" maxlength="60"> </td>
+
+    </tr>
+
+</table>
+  <input type="submit" value="Submit">
+	</form>      
+</td>
+</tr>
+</table>
+</body>
+</html>

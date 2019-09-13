@@ -52,17 +52,17 @@ DROP TABLE IF EXISTS `facilities`;
 CREATE TABLE `facilities` (
   `name` varchar(45) NOT NULL,
   `facilitytype` varchar(45) NOT NULL,
-  `interval` varchar(45) NOT NULL,
+  `time_interval` varchar(45) NOT NULL,
   `duration` varchar(45) NOT NULL,
   `venue` varchar(45) NOT NULL,
   PRIMARY KEY (`name`),
   KEY `fk_facilitytype_idx` (`facilitytype`),
-  KEY `fk_idx` (`interval`),
+  KEY `fk_time_interval` (`time_interval`),
   KEY `fk_duration_idx` (`duration`),
   KEY `fk_venue_idx` (`venue`),
   CONSTRAINT `fk_duration` FOREIGN KEY (`duration`) REFERENCES `durations` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_facilitytype` FOREIGN KEY (`facilitytype`) REFERENCES `facilitytypes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_interval` FOREIGN KEY (`interval`) REFERENCES `intervals` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_time_interval` FOREIGN KEY (`time_interval`) REFERENCES `intervals` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_venue` FOREIGN KEY (`venue`) REFERENCES `venues` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -239,8 +239,8 @@ CREATE TABLE `users` (
   `address` varchar(120) NOT NULL,
   `city` varchar(45) NOT NULL,
   `state` varchar(45) NOT NULL,
-  `zip` int(5) NOT NULL,
-  `phone` int(10) NOT NULL,
+  `zip` varchar(5) NOT NULL,
+  `phone` varchar(10) NOT NULL,
   `email` varchar(120) NOT NULL,
   PRIMARY KEY (`username`),
   KEY `fk_role_idx` (`role`),
@@ -294,11 +294,11 @@ DROP TABLE IF EXISTS `mar`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `mar` (
   `marnumber` varchar(16) NOT NULL,
-  `date` date NOT NULL,
+  `assigneddate` date NOT NULL,
   `facilitytype` varchar(45) NOT NULL,
   `facilityname` varchar(45) NOT NULL,
-  `description` varchar(120) NOT NULL,
-  `urgency` varchar(45) NOT NULL,
+  `description` varchar(120),
+  `urgency` varchar(45),
   `reportedby` varchar(120) NOT NULL,
   PRIMARY KEY (`marnumber`),
   INDEX `fk_mar_facilitytype_idx` (`facilitytype`),
@@ -318,40 +318,6 @@ CREATE TABLE `mar` (
 LOCK TABLES `mar` WRITE;
 /*!40000 ALTER TABLE `mar` DISABLE KEYS */;
 /*!40000 ALTER TABLE `mar` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
---
--- Table structure for table `assignedmar`
---
-
-DROP TABLE IF EXISTS `assignedmar`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `assignedmar` (
-  `assignedmar` varchar(16) NOT NULL,
-  `date` date NOT NULL,
-  `assignedto` varchar(16) NOT NULL,
-  `assignedDate` varchar(45) NOT NULL,
-  `estimateofrepair` varchar(45) NOT NULL,
-  PRIMARY KEY (`assignedmar`),
-  KEY `fk_amar_assignedmar_idx` (`assignedmar`),
-  KEY `fk_amar_assignedto_idx` (`assignedto`),
-  KEY `fk_amar_estimateofrepair_idx` (`estimateofrepair`),
-  CONSTRAINT `fk_amar_assignedmar` FOREIGN KEY (`assignedmar`) REFERENCES `mar` (`marnumber`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_amar_assignedto` FOREIGN KEY (`assignedto`) REFERENCES `user` (`username`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_amar_estimateofrepair` FOREIGN KEY (`estimateofrepair`) REFERENCES `estimateofrepair` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `assignedmar`
---
-
-LOCK TABLES `assignedmar` WRITE;
-/*!40000 ALTER TABLE `assignedmar` DISABLE KEYS */;
-/*!40000 ALTER TABLE `assignedmar` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
@@ -392,6 +358,54 @@ LOCK TABLES `requestedmar` WRITE;
 UNLOCK TABLES;
 
 
+CREATE DATABASE  IF NOT EXISTS `database` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `database`;
+
+
+--
+-- Table structure for table `assignedmar`
+--
+
+DROP TABLE IF EXISTS `assignedmar`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `assignedmar` (
+  `assignedmar` varchar(16) NOT NULL,
+  `reporteddate` date NOT NULL,
+  `facilitytype` varchar(45) NOT NULL,
+  `facilityname` varchar(45) NOT NULL,
+  `description` varchar(120),
+  `urgency` varchar(45),
+  `reportedby` varchar(45),
+  `assignedto` varchar(16) NOT NULL,
+  `assignedDate` date NOT NULL,
+  `estimateofrepair` varchar(45) NOT NULL,
+  PRIMARY KEY (`assignedmar`),
+  INDEX `fk_amar_facilitytype_idx` (`facilitytype`),
+  INDEX `fk_amar_facilityname_idx` (`facilityname`),
+  INDEX `fk_amar_urgency_idx` (`urgency`),
+  INDEX `fk_amar_assignedto_idx` (`assignedto`),
+  INDEX `fk_amar_estimateofrepair_idx` (`estimateofrepair`),
+  INDEX `fk_amar_reportedby_idx` (`reportedby`),
+  CONSTRAINT `fk_amar_assignedto` FOREIGN KEY (`assignedto`) REFERENCES `users` (`username`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_amar_estimateofrepair` FOREIGN KEY (`estimateofrepair`) REFERENCES `estimateofrepair` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_amar_facilitytype` FOREIGN KEY (`facilitytype`) REFERENCES `facilitytypes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_amar_facilityname` FOREIGN KEY (`facilityname`) REFERENCES `facilities` (`name`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_amar_reportedby` FOREIGN KEY (`reportedby`) REFERENCES `users` (`username`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_amar_urgency` FOREIGN KEY (`urgency`) REFERENCES `urgency` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `assignedmar`
+--
+
+LOCK TABLES `assignedmar` WRITE;
+/*!40000 ALTER TABLE `assignedmar` DISABLE KEYS */;
+/*!40000 ALTER TABLE `assignedmar` ENABLE KEYS */;
+UNLOCK TABLES;
+
 
 --
 -- Table structure for table `repairSchedule`
@@ -403,12 +417,12 @@ DROP TABLE IF EXISTS `repairSchedule`;
 CREATE TABLE `repairSchedule` (
   `username` varchar(16) NOT NULL,
   `mar` varchar(16) NOT NULL,
-  `date` datetime  NOT NULL,
+  `scheduleDate` date  NOT NULL,
   PRIMARY KEY (`username`),
   KEY `fk_rs_username_idx` (`username`),
   KEY `fk_rs_mar_idx` (`mar`),
-  CONSTRAINT `fk_rs_username` FOREIGN KEY (`username`) REFERENCES `user` (`username`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_rs_mar` FOREIGN KEY (`mar`) REFERENCES `mar` (`marnumber`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_rs_username` FOREIGN KEY (`username`) REFERENCES `users` (`username`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_rs_mar` FOREIGN KEY (`mar`) REFERENCES `assignedmar` (`assignedmar`) ON DELETE NO ACTION ON UPDATE NO ACTION
 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
