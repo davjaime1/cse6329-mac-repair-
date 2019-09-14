@@ -53,8 +53,7 @@ public class CreateMarController extends HttpServlet
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        String action = request.getParameter("action"),
-                url = "";
+        String action = request.getParameter("action");
         HttpSession session = request.getSession();
         
         /*
@@ -92,6 +91,9 @@ public class CreateMarController extends HttpServlet
             
             // Gets the current date.
             String dateStr = DateTimeFormatter.ofPattern("yyyyMMdd").format(LocalDate.now()).toString();
+            
+            // Getting the current username for the session.
+            String reportedByStr = (String) session.getAttribute("username");
             
             // Gets the MAR number.
             int marNum = MarNumber.num.getAndIncrement();
