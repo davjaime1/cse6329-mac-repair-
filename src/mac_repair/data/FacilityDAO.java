@@ -35,7 +35,7 @@ public class FacilityDAO
                 Facility facility = new Facility();
                 facility.setName(facilityList.getString("name"));
                 facility.setType(facilityList.getString("facilitytype"));
-                facility.setInterval(facilityList.getString("interval"));
+                facility.setInterval(facilityList.getString("time_interval"));
                 facility.setDuration(facilityList.getString("duration"));
                 facility.setVenue(facilityList.getString("venue"));
                 
