@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="ISO-8859-1">
-    <title>Create MAR Result</title>
+    <title>Submitted MAR</title>
 </head>
 
 <body>
@@ -12,7 +12,6 @@
     <h1>Submitted MAR</h1>
 
     <p>
-        TODO: Fill in with MAR to display result to user <br>
         Facility Type: ${cmr_facilitytype} <br>
         Facility Name: ${cmr_facilityname} <br>
         Urgency: ${cmr_urgency} <br>
@@ -26,7 +25,11 @@
     </p>
     
     <p>
-        <li><a href="UserHome.jsp">User Home</a></li>
+        <% 
+        // TODO needs to go back to the dependent home page
+        // This will need to be a post action.
+        %>
+        <li><a href="UserHome.jsp">View Profile</a></li>
     </p>
 </body>
 

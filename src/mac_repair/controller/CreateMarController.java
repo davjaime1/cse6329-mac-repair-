@@ -4,12 +4,14 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import mac_repair.data.FM_MARDAO;
 import mac_repair.data.FacilityDAO;
 import mac_repair.data.UrgencyDAO;
@@ -56,11 +58,9 @@ public class CreateMarController extends HttpServlet
         String action = request.getParameter("action");
         HttpSession session = request.getSession();
         
-        /*
-         * After the user clicks the select button after
+        /* After the user clicks the select button after
          * filling in the value for the MAR creation,
-         * this action occurs.
-         */
+         * this action occurs. */
         if (action.equalsIgnoreCase("SubmitMarAction"))
         {
             String facilityName = request.getParameter("facilityDropDown");
@@ -86,9 +86,6 @@ public class CreateMarController extends HttpServlet
                 }
             }
             
-            // Gets the current user off the session attribute. TODO
-            String reportedByStr = "TO BE FILLED IN";
-            
             // Gets the current date.
             String dateStr = DateTimeFormatter.ofPattern("yyyyMMdd").format(LocalDate.now()).toString();
             
@@ -98,18 +95,17 @@ public class CreateMarController extends HttpServlet
             // Gets the MAR number.
             int marNum = MarNumber.num.getAndIncrement();
             
-            
             // Creating the MAR object to insert into the database.
             FM_MAR marObj = new FM_MAR();
             marObj.setMarID(Integer.toString(marNum));
             marObj.setFacilityName(selectedFacility.getName());
             marObj.setFacilityType(selectedFacility.getType());
-            marObj.setUrgency(selectedUrgency.getUrgency());
+            marObj.setUrgency(selectedUrgency.getId());
             marObj.setDescription(descriptionStr);
             marObj.setReportedUser(reportedByStr);
             marObj.setDate(dateStr);
             
-            
+            // Insert the MAR object into the database.
             FM_MARDAO.insertMAR(marObj);
             
             
