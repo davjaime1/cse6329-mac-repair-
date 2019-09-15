@@ -460,8 +460,8 @@ CREATE TABLE `facilityreservation` (
   KEY `fk_fr_reservedUser_idx` (`reservedUser`),
   CONSTRAINT `fk_fr_facilityname` FOREIGN KEY (`facilityname`) REFERENCES `facilities` (`name`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_fr_facilitytype` FOREIGN KEY (`facilitytype`) REFERENCES `facilitytypes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_fr_venue` FOREIGN KEY (`venue`) REFERENCES `venue` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_fr_reservedUser` FOREIGN KEY (`reservedUser`) REFERENCES `user` (`username`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_fr_venue` FOREIGN KEY (`venue`) REFERENCES `venues` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_fr_reservedUser` FOREIGN KEY (`reservedUser`) REFERENCES `users` (`username`) ON DELETE NO ACTION ON UPDATE NO ACTION
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
