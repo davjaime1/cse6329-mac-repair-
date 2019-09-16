@@ -19,17 +19,19 @@
         Date: ${cmr_date} <br>
         MAR Number: ${cmr_marnumber} <br>
     </p>
-    
+
     <p>
         Description: ${cmr_description}
     </p>
-    
+
     <p>
-        <% 
-        // TODO needs to go back to the dependent home page
-        // This will need to be a post action.
-        %>
-        <li><a href="UserHome.jsp">View Profile</a></li>
+        <ul>
+            <% 
+           // TODO needs to go back to the dependent home page
+           // This will need to be a post action.
+           %>
+            <li><a href="UserHome.jsp">View Profile</a></li>
+        </ul>
     </p>
 </body>
 
