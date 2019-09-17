@@ -418,7 +418,6 @@ CREATE TABLE `repairSchedule` (
   `username` varchar(16) NOT NULL,
   `mar` varchar(16) NOT NULL,
   `scheduleDate` date  NOT NULL,
-  PRIMARY KEY (`username`),
   KEY `fk_rs_username_idx` (`username`),
   KEY `fk_rs_mar_idx` (`mar`),
   CONSTRAINT `fk_rs_username` FOREIGN KEY (`username`) REFERENCES `users` (`username`) ON DELETE NO ACTION ON UPDATE NO ACTION,
