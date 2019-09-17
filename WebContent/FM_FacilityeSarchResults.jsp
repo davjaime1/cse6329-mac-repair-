@@ -4,16 +4,12 @@
 <html>
 <head>
 <title>Facility List</title>
+<h1><a href="/mac_repair/FM_FacilityController?action=homepage"  target="_top"> Home Page </a></h1> 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="style.css" rel="stylesheet" type="text/css" />
 <body>
-    <div class="header_resize">
-      <div class="logo"><h1><a href="/mac_repair">MAC Management Application</a></h1></div>
-      
-  </div>
 
-
-     
+ 
       
   <form action="/mac_repair/FM_FacilityController?action=listSpecificCompany" method="post">          
        <table border="1" class="myTable"> 

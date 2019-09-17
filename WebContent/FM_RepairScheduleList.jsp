@@ -4,17 +4,10 @@
 <html>
 <head>
 <title>Repairer Schedule List</title>
+<h1><a href="/mac_repair/FM_RepairerScheduleController?action=homepage"  target="_top"> Home Page </a></h1> 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="style.css" rel="stylesheet" type="text/css" />
-<body>
-    <div class="header_resize">
-      <div class="logo"><h1><a href="/mac_repair">List of Schedule Repair</a></h1></div>
-      <div class="menu_nav">
-      </div>
-  </div>
-
-      
-       
+<body>      
 <table border="1" class="myTable"> 
 			<tr class="myTableRow"> 
 				<th class="myTableHead" style="padding-right: 20px; text-align: left">Repairer User Name</th>

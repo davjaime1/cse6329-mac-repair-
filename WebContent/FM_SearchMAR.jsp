@@ -5,12 +5,11 @@
 <html>
 <head>
 <title>MAR List</title>
+<h1><a href="/mac_repair/FM_MARController?action=homepage"  target="_top"> Home Page </a></h1> 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="style.css" rel="stylesheet" type="text/css" />
 <body>
-      <div class="logo"><h1><a href="/mac_repair">MAC Repair</a></h1></div>
-      <div class="menu_nav">
-  </div>
+
 <input name="errMsg"  value="<c:out value='${errorMsgs.errorMsg}'/>" type="text"  style ="background-color: white; color: red; border: none; width:800px" disabled="disabled">
 <table>
 <tr>

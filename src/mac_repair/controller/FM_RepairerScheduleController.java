@@ -27,8 +27,24 @@ public class FM_RepairerScheduleController extends HttpServlet {
 		HttpSession session = request.getSession();
 		String action = request.getParameter("action");
 		session.removeAttribute("errorMsgs");
+		String url= "";
 //		List companies
-		if (action.equalsIgnoreCase("listRepaierschedule")) {
+		if(null == session.getAttribute("username"))
+		{
+			url="/login.jsp";
+			getServletContext().getRequestDispatcher(url).forward(request, response);
+		}
+		else if(action.equalsIgnoreCase("homepage"))
+		{
+			url="/FM_Home.jsp";
+			getServletContext().getRequestDispatcher(url).forward(request, response);
+		}
+		else if(action.equalsIgnoreCase("searchPage"))
+		{
+			url="/FM_SearchRepairSchedule.jsp";
+			getServletContext().getRequestDispatcher(url).forward(request, response);
+		}
+		else if (action.equalsIgnoreCase("listRepaierschedule")) {
 			ArrayList<FM_RepairSchedule> repairscheduleInDB = new ArrayList<FM_RepairSchedule>();
 			repairscheduleInDB=FM_RepairScheduleDAO.listRepairSchedule();
 			session.setAttribute("REPAIRSCHEDULE", repairscheduleInDB);				

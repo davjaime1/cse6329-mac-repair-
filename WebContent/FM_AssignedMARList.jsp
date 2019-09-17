@@ -4,14 +4,10 @@
 <html>
 <head>
 <title>MAR List</title>
+<h1><a href="/mac_repair/FM_AssignMARController?action=homepage"  target="_top"> Home Page </a></h1> 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="style.css" rel="stylesheet" type="text/css" />
 <body>
-    <div class="header_resize">
-      <div class="logo"><h1><a href="/mac_repair">List of MAR</a></h1></div>
-      <div class="menu_nav">
-      </div>
-  </div>
 
 <input name="errMsg"  value="<c:out value='${errorMsgs}'/>" type="text"  style ="background-color: white; color: red; border: none; width:800px" disabled="disabled">
      <div class="mainbar"><div class="submb"></div></div>

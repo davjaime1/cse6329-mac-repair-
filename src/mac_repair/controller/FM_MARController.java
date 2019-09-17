@@ -27,7 +27,24 @@ public class FM_MARController extends HttpServlet {
 		String action = request.getParameter("action");
 		session.removeAttribute("errorMsgs");
 //		List companies
-		if (action.equalsIgnoreCase("listmar")) {
+		String url= "";
+//		List companies
+		if(null == session.getAttribute("username"))
+		{
+			url="/login.jsp";
+			getServletContext().getRequestDispatcher(url).forward(request, response);
+		}
+		else if(action.equalsIgnoreCase("homepage"))
+		{
+			url="/FM_Home.jsp";
+			getServletContext().getRequestDispatcher(url).forward(request, response);
+		}
+		else if(action.equalsIgnoreCase("searchPage"))
+		{
+			url="/FM_SearchMAR.jsp";
+			getServletContext().getRequestDispatcher(url).forward(request, response);
+		}
+		else if (action.equalsIgnoreCase("listmar")) {
 			ArrayList<FM_MAR> marInDB = new ArrayList<FM_MAR>();
 			marInDB=FM_MARDAO.listMARs();
 			session.setAttribute("MARS", marInDB);				

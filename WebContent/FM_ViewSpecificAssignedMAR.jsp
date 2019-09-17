@@ -5,12 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>View Specific Assigned MAR</title>
+<h1><a href="/mac_repair/FM_AssignMARController?action=homepage"  target="_top"> Home Page </a></h1> 
 </head>
-    <div class="header_resize">
-      <div class="logo"><h1><a href="/mac_repair">MAC Repair Application</a></h1></div>
-      <div class="menu_nav">
-      </div>
-  </div>
+
 <body>
 <table>
   <tr>
