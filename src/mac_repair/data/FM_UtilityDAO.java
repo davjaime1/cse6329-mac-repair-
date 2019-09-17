@@ -16,6 +16,7 @@ import mac_repair.model.FM_TimeInterval;
 import mac_repair.model.FM_Urgency;
 import mac_repair.model.FM_Venue;
 import mac_repair.util.SQLConnection;
+import mac_repair.model.State;
 
 public class FM_UtilityDAO {
 	public static ArrayList<FM_Repairers>  listRepairers()  {  
@@ -184,6 +185,31 @@ public class FM_UtilityDAO {
 				FM_Urgency urgency = new FM_Urgency(); 
 				urgency.setId( urgencyList.getString("id"));
 				urgency.setUrgency( urgencyList.getString("urgency"));
+
+				urgencyListInDB.add(urgency);	
+			}
+		} catch (SQLException e) {}
+		return urgencyListInDB;
+	}
+	
+	public static ArrayList<State>  listStates()  {  
+		return ReturnMatchingStates(" SELECT * from states ORDER BY id");
+	}
+
+
+	private static ArrayList<State> ReturnMatchingStates(String queryString) {
+		// TODO Auto-generated method stub
+		ArrayList<State> urgencyListInDB = new ArrayList<State>();
+		
+		Statement stmt = null;
+		Connection conn = SQLConnection.getDBConnection();  
+		try {
+			stmt = conn.createStatement();
+			ResultSet urgencyList = stmt.executeQuery(queryString);
+			while ( urgencyList.next()) {
+				State urgency = new State(); 
+				urgency.setId( urgencyList.getString("id"));
+				urgency.setName( urgencyList.getString("name"));
 
 				urgencyListInDB.add(urgency);	
 			}

@@ -37,9 +37,9 @@
           <li><a href="/mac_repair/FM_AssignMARController?action=searchPage"  target="_top"><span>Search Assigned MARs</span></a></li>
           <li><a href="/mac_repair/FM_RepairerScheduleController?action=listRepaierschedule" target="_top"><span>View Repairers Schedule</span></a></li>
           <li><a href="/mac_repair/FM_RepairerScheduleController?action=searchPage"  target="_top"><span>Search Repairers Schedule</span></a></li>
-          <li><a href="/mac_repair/ViewProfileController?action=viewProfile"  target="_top"><span>View Profile</span></a></li>
-          <li><a href="/mac_repair/ViewProfileController?action=updateProfile"  target="_top"><span>Update Profile</span></a></li>
-          <li><a href="/mac_repair/ViewProfileController?action=logOut"  target="_top"><span>Log Out</span></a></li>
+          <li><a href="/mac_repair/UserController?action=viewProfile"  target="_top"><span>View Profile</span></a></li>
+          <li><a href="/mac_repair/UserController?action=updateProfile"  target="_top"><span>Update Profile</span></a></li>
+          <li><a href="/mac_repair/UserController?action=logOut"  target="_top"><span>Log Out</span></a></li>
           
         </ul>
       </div>
