@@ -358,10 +358,6 @@ LOCK TABLES `requestedmar` WRITE;
 UNLOCK TABLES;
 
 
-CREATE DATABASE  IF NOT EXISTS `database` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `database`;
-
-
 --
 -- Table structure for table `assignedmar`
 --
