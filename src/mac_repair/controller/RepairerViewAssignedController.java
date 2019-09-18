@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import mac_repair.data.FM_AssignMARDAO;
 //import cse6329.model.Repairer;
 import mac_repair.data.RepairerViewAssignedDAO;
 import mac_repair.model.*;
@@ -25,10 +26,11 @@ public class RepairerViewAssignedController extends HttpServlet {
 		String username = (String)session.getAttribute("username");
 		//session.removeAttribute("errorMsgs");
 //		List companies
+		String repairer = (String)session.getAttribute("username");
 		if (action.equalsIgnoreCase("listReservedRepairers")) {
-			ArrayList<RepairerViewAssigned> reservedListInDB = new ArrayList<RepairerViewAssigned>();
-			reservedListInDB=RepairerViewAssignedDAO.listReservedRepairs(username);
-			session.setAttribute("REPAIRERS", reservedListInDB);				
+			ArrayList<FM_AssignMAR> assignedmarInDB = new ArrayList<FM_AssignMAR>();
+			assignedmarInDB=FM_AssignMARDAO.listAssignedMARstoaRepairer(repairer);
+			session.setAttribute("ASSIGNEDMARS", assignedmarInDB);						
 			getServletContext().getRequestDispatcher("/ViewReservedRepairs.jsp").forward(request, response);
 		}
 		else // redirect all other gets to post
