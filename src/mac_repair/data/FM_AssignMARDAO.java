@@ -100,7 +100,10 @@ public class FM_AssignMARDAO {
 	public static ArrayList<FM_AssignMAR>  searchMARByFacilityName(String facilityName)  {  
 		return ReturnMatchingAssignedMARList(" SELECT * from assignedmar WHERE facilityname LIKE '%"+facilityName+"%' ORDER BY assignedmar");
 	}
-
+	public static ArrayList<FM_AssignMAR>  listAssignedMARstoaRepairer(String username)  {  
+		return ReturnMatchingAssignedMARList(" SELECT * from assignedmar WHERE assignedto = '"+username+"' ORDER BY assignedmar");
+}
+	
 
 	//determine if companyID is unique
 	public static Boolean marIDunique(String marnumber)  {  
