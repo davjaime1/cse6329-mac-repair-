@@ -26,10 +26,6 @@
 
     <p>
         <ul>
-            <% 
-           // TODO needs to go back to the dependent home page
-           // This will need to be a post action.
-           %>
             <li><a href="UserHome.jsp">View Profile</a></li>
         </ul>
     </p>
