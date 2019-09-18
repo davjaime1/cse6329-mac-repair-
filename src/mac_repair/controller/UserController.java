@@ -83,6 +83,7 @@ public class UserController extends HttpServlet {
 			session.setAttribute("STATE", stateInDB);
 
 			url="/Register.jsp";
+			getServletContext().getRequestDispatcher("/Register.jsp").forward(request, response);
 		}
 		else if (action.equalsIgnoreCase("registerUser") ) {  
 			UserModel user = new UserModel();
@@ -93,6 +94,7 @@ public class UserController extends HttpServlet {
 			if (!CerrorMsgs.getErrorMsg().equals("")) {// if error messages
 				session.setAttribute("errorMsgs", CerrorMsgs);
 				url="/Register.jsp";
+				getServletContext().getRequestDispatcher("/Register.jsp").forward(request, response);
 			}
 			else {// if no error messages
 				UserModelDAO.insertUser(user);
@@ -100,6 +102,7 @@ public class UserController extends HttpServlet {
 				facerrorMsgs.setErrorMsg("Facility Added SucessFully");
 
 				url="/index.jsp";
+				getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
 			}
 		}
 		else if(action.equalsIgnoreCase("viewProfile"))
@@ -117,6 +120,7 @@ public class UserController extends HttpServlet {
 			
 			session.setAttribute("USERS", currentUser);
 			url="/ViewProfile.jsp";
+			getServletContext().getRequestDispatcher("/ViewProfile.jsp").forward(request, response);
 		}
 		
 		else {
@@ -146,38 +150,43 @@ public class UserController extends HttpServlet {
 						currentUser.setUsername(username);
 						currentUser.setPassword(password);
 						session.setAttribute("USERS", currentUser);
-						url="/login.jsp";
+						url="/index.jsp";
+						getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
 					}
 					else {
 				    
 						if(currentUser.getRole().equals("FM"))
 							{
+								url = "/FM_Home.jsp";
 								session.setAttribute("username", username);
 								request.setAttribute("username", username);
 								request.getRequestDispatcher("/FM_Home.jsp").forward(request, response);
 							}
 						else if(currentUser.getRole().equals("U"))
 						{
+							url = "/UserHome.jsp";
 							session.setAttribute("username", username);
 							request.setAttribute("username", username);
 							request.getRequestDispatcher("/UserHome.jsp").forward(request, response);
 						}
 						else if(currentUser.getRole().equals("A"))
 						{
+							url = "/AdminHome.jsp";
 							session.setAttribute("username", username);
 							request.setAttribute("username", username);
-							request.getRequestDispatcher("/adminHome.jsp").forward(request, response);
+							request.getRequestDispatcher("/AdminHome.jsp").forward(request, response);
 						}
 						else
 						{
+							url = "/Repairer_Home.jsp";
 							session.setAttribute("username", username);
 							request.setAttribute("username", username);
 							request.getRequestDispatcher("/Repairer_Home.jsp").forward(request, response);
 						}
 					}
-
+					
 		
 		}
-		getServletContext().getRequestDispatcher(url).forward(request, response);
+		
 	}
 }
