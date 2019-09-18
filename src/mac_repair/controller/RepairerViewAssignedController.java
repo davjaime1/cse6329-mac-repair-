@@ -23,6 +23,7 @@ public class RepairerViewAssignedController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String action = request.getParameter("action");
+		String username = (String)session.getAttribute("username");
 		//session.removeAttribute("errorMsgs");
 //		List companies
 		String repairer = (String)session.getAttribute("username");
@@ -40,6 +41,7 @@ public class RepairerViewAssignedController extends HttpServlet {
 
 		String action = request.getParameter("action"), url="";
 		HttpSession session = request.getSession();
+		String username = (String)session.getAttribute("username");
 		RepairerViewAssigned res = new RepairerViewAssigned();
 		int selectedReservedIndex;
 		session.removeAttribute("errorMsgs");
@@ -51,7 +53,7 @@ public class RepairerViewAssignedController extends HttpServlet {
 			RepairerViewAssigned selectedReservation = new RepairerViewAssigned();
 
 			//view button was used instead of radio button
-			reservedListInDB=RepairerViewAssignedDAO.searchReservedRepair(request.getParameter("id"));
+			reservedListInDB=RepairerViewAssignedDAO.searchReservedRepair(request.getParameter("id"), username);
 			selectedReservation.setReserved(	reservedListInDB.get(0).getDate(), reservedListInDB.get(0).getMarnum(), reservedListInDB.get(0).getFacilitytype(), reservedListInDB.get(0).getFacilityname(),
 												reservedListInDB.get(0).getTo(), reservedListInDB.get(0).getFrom());
 			session.setAttribute("REPAIRERS", selectedReservation);

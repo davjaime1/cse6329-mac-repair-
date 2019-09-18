@@ -16,11 +16,10 @@
     <section>
 
         <ul>
-            <% // Anchors will always do a doGet() %>
             <li><a href="/mac_repair/CreateMarController?action=NewMarAction">Create MAR</a></li>
-          <li><a href="/mac_repair/UserController?action=viewProfile"  target="_top"><span>View Profile</span></a></li>
-          <li><a href="/mac_repair/UserController?action=updateProfile"  target="_top"><span>Update Profile</span></a></li>
-          <li><a href="/mac_repair/UserController?action=logOut"  target="_top"><span>Log Out</span></a></li>
+            <li><a href="/mac_repair/UserController?action=viewProfile" target="_top"><span>View Profile</span></a></li>
+            <li><a href="/mac_repair/UserController?action=updateProfile" target="_top"><span>Update Profile</span></a></li>
+            <li><a href="/mac_repair/UserController?action=logOut" target="_top"><span>Log Out</span></a></li>
         </ul>
 
     </section>

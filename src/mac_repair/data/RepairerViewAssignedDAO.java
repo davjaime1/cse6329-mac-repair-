@@ -40,13 +40,13 @@ public class RepairerViewAssignedDAO {
 	
 
 	//************************************************8
-	public static ArrayList<RepairerViewAssigned>  listReservedRepairs() {  
-			return ReturnReservedList("SELECT r.scheduleDate, m.marnumber, m.facilitytype, m.facilityname, f.to, f.from FROM repairschedule r, mar m, facilityreservation f WHERE r.mar = m.marnumber AND r.mar = r.mar AND r.username = \"David\"");
+	public static ArrayList<RepairerViewAssigned>  listReservedRepairs(String username) { 
+			return ReturnReservedList("SELECT r.scheduleDate, m.marnumber, m.facilitytype, m.facilityname, f.to, f.from FROM repairschedule r, mar m, facilityreservation f WHERE r.mar = m.marnumber AND f.reservedUser = r.username AND m.facilityname = f.facilityname AND r.username = " + username + "");
 	}
 	
 	//search company with company ID
 	//***************************************************8
-	public static ArrayList<RepairerViewAssigned>   searchReservedRepair (String idMarnum)  {  
-			return ReturnReservedList(" SELECT r.scheduleDate, m.marnumber, m.facilitytype, m.facilityname, f.to, f.from FROM repairschedule r, mar m, facilityreservation f WHERE r.mar = m.marnumber AND r.mar = r.mar AND r.username = \"David\" AND m.marnumber = '"+idMarnum+"'");
+	public static ArrayList<RepairerViewAssigned>   searchReservedRepair (String idMarnum, String username)  {  
+			return ReturnReservedList("SELECT r.scheduleDate, m.marnumber, m.facilitytype, m.facilityname, f.to, f.from FROM repairschedule r, mar m, facilityreservation f WHERE r.mar = m.marnumber AND f.reservedUser = r.username AND m.facilityname = f.facilityname AND r.username = "+ username +" AND m.marnumber = '"+idMarnum+"'");
 	}
 }
