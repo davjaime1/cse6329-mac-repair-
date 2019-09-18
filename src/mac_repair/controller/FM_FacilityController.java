@@ -28,7 +28,24 @@ public class FM_FacilityController extends HttpServlet {
 		String action = request.getParameter("action");
 		session.removeAttribute("errorMsgs");
 //		List companies
-		if (action.equalsIgnoreCase("listfacilities")) {
+		String url= "";
+//		List companies
+		if(null == session.getAttribute("username"))
+		{
+			url="/login.jsp";
+			getServletContext().getRequestDispatcher(url).forward(request, response);
+		}
+		else if(action.equalsIgnoreCase("homepage"))
+		{
+			url="/FM_Home.jsp";
+			getServletContext().getRequestDispatcher(url).forward(request, response);
+		}
+		else if(action.equalsIgnoreCase("searchPage"))
+		{
+			url="/FM_SearchFacility.jsp";
+			getServletContext().getRequestDispatcher(url).forward(request, response);
+		}
+		else if (action.equalsIgnoreCase("listfacilities")) {
 			ArrayList<FM_Facility> facilityInDB = new ArrayList<FM_Facility>();
 			facilityInDB=FM_FacilityDAO.listFacilities();
 			session.setAttribute("FACILITIES", facilityInDB);				
@@ -112,32 +129,7 @@ public class FM_FacilityController extends HttpServlet {
 				url="/FM_AddFacility.jsp";
 			}
 		  
-//		else { //action=listSpecificCompany
-//			ArrayList<MAR> marInDB = new ArrayList<MAR>();
-//			MAR selectedCompany = new MAR();
-////			if (request.getParameter("radioCompany")!=null) {
-////				selectedCompanyIndex = Integer.parseInt(request.getParameter("radioCompany")) - 1;
-////				companyInDB=CompanyDAO.listCompanies(); 
-////				selectedCompany.setCompany(	companyInDB.get(selectedCompanyIndex).getIdcompany(), companyInDB.get(selectedCompanyIndex).getCompany_name(), 
-////						companyInDB.get(selectedCompanyIndex).getPhone(), companyInDB.get(selectedCompanyIndex).getEmail());
-////				session.setAttribute("COMPANIES", selectedCompany);
-////				url="/ListSpecificCompany.jsp";					
-////			}
-////			else { // determine if Submit button was clicked without selecting a company
-////				if (request.getParameter("ListSelectedCompanyButton")!=null) {
-////					String errorMsgs =  "Please select a company";
-////					session.setAttribute("errorMsgs",errorMsgs);
-////					url="/listCompany.jsp";					
-////				}
-////				else { //view button was used instead of radio button
-//					marInDB=MARDAO.searchMARByNumber(request.getParameter("id"));
-//					selectedCompany.setCompany(	marInDB.get(0).getIdcompany(), marInDB.get(0).getCompany_name(), 
-//							marInDB.get(0).getPhone(), marInDB.get(0).getEmail());
-//					session.setAttribute("COMPANIES", selectedCompany);
-//					url="/ListSpecificCompany.jsp";					
-//				}
-//			}
-//		}
+
 		getServletContext().getRequestDispatcher(url).forward(request, response);		
 	}
 }

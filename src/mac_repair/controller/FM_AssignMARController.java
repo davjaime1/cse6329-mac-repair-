@@ -34,7 +34,24 @@ public class FM_AssignMARController extends HttpServlet {
 		String action = request.getParameter("action");
 		session.removeAttribute("errorMsgs");
 //		List companies
-		if (action.equalsIgnoreCase("listassignedmar")) {
+		String url= "";
+//		List companies
+		if(null == session.getAttribute("username"))
+		{
+			url="/login.jsp";
+			getServletContext().getRequestDispatcher(url).forward(request, response);
+		}
+		else if(action.equalsIgnoreCase("homepage"))
+		{
+			url="/FM_Home.jsp";
+			getServletContext().getRequestDispatcher(url).forward(request, response);
+		}
+		else if(action.equalsIgnoreCase("searchPage"))
+		{
+			url="/FM_SearchFacility.jsp";
+			getServletContext().getRequestDispatcher(url).forward(request, response);
+		}
+		else if (action.equalsIgnoreCase("listassignedmar")) {
 			ArrayList<FM_AssignMAR> assignedmarInDB = new ArrayList<FM_AssignMAR>();
 			assignedmarInDB=FM_AssignMARDAO.listAssignedMARs();
 			session.setAttribute("ASSIGNEDMARS", assignedmarInDB);				

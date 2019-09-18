@@ -16,7 +16,8 @@
 	    $datepicker.datepicker('setDate', new Date());
   } );
   </script>
-<title>Company form</title>
+<title>Modify Assigned MAR</title>
+<h1><a href="/mac_repair/FM_AssignMARController?action=homepage"  target="_top"> Home Page </a></h1> 
 </head>
 <body>
 <input name="errMsg"  value="<c:out value='${errorMsgs.errorMsg}'/>" type="text"  style ="background-color: white; color: red; border: none; width:800px" disabled="disabled">

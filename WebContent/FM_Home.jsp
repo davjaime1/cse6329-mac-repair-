@@ -4,7 +4,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>Company Management</title>
+<title>Facility Manager Homepage</title>
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="style.css" rel="stylesheet" type="text/css" />
 </head>
@@ -27,16 +28,19 @@
 
       <div class="menu_nav">
         <ul>
-          <li><a href="ViewProfile.jsp"  target="_top"><span>View Profile</span></a></li>
           <li><a href="/mac_repair/FM_FacilityController?action=listfacilities" target="_top"><span>View Available Facilities</span></a></li>
-          <li><a href="FM_SearchMAR.jsp"  target="_top"><span>Search Available Facilities</span></a></li>
+          <li><a href="/mac_repair/FM_FacilityController?action=searchPage"  target="_top"><span>Search Available Facilities</span></a></li>
           <li><a href="/mac_repair/FM_FacilityController?action=showaddfacility"  target="_top"><span>Add new Facility</span></a></li>
           <li><a href="/mac_repair/FM_MARController?action=listmar"  target="_top"><span>List MARS</span></a></li>
-          <li><a href="FM_SearchMAR.jsp"  target="_top"><span>Search Requested MARs</span></a></li>
+          <li><a href="/mac_repair/FM_MARController?action=searchPage"  target="_top"><span>Search Requested MARs</span></a></li>
           <li><a href="/mac_repair/FM_AssignMARController?action=listassignedmar"   target="_top"><span>View Assigned MARs</span></a></li>
-          <li><a href="FM_SearchAssignedMAR.jsp"  target="_top"><span>Search Assigned MARs</span></a></li>
+          <li><a href="/mac_repair/FM_AssignMARController?action=searchPage"  target="_top"><span>Search Assigned MARs</span></a></li>
           <li><a href="/mac_repair/FM_RepairerScheduleController?action=listRepaierschedule" target="_top"><span>View Repairers Schedule</span></a></li>
-          <li><a href="FM_SearchRepairSchedule.jsp"  target="_top"><span>Search Repairers Schedule</span></a></li>
+          <li><a href="/mac_repair/FM_RepairerScheduleController?action=searchPage"  target="_top"><span>Search Repairers Schedule</span></a></li>
+          <li><a href="/mac_repair/UserController?action=viewProfile"  target="_top"><span>View Profile</span></a></li>
+          <li><a href="/mac_repair/UserController?action=updateProfile"  target="_top"><span>Update Profile</span></a></li>
+          <li><a href="/mac_repair/UserController?action=logOut"  target="_top"><span>Log Out</span></a></li>
+          
         </ul>
       </div>
     </div>

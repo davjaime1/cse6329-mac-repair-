@@ -29,7 +29,9 @@
         <ul>
           <li><a href="RequestReservation.jsp"  target="_top"><span>Request Reservation</span></a></li>
           <li><a href="/mac_repair/RepairerViewAssignedController?action=listReservedRepairers" target="_top"><span>View My Reserved Repairs</span></a></li>
-          <li><a href="ViewProfile.jsp"  target="_top"><span>View My Profile</span></a></li>
+          <li><a href="/mac_repair/UserController?action=viewProfile"  target="_top"><span>View Profile</span></a></li>
+          <li><a href="/mac_repair/UserController?action=updateProfile"  target="_top"><span>Update Profile</span></a></li>
+          <li><a href="/mac_repair/UserController?action=logOut"  target="_top"><span>Log Out</span></a></li>
         </ul>
       </div>
     </div>
