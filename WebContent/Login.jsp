@@ -21,7 +21,8 @@
 
             <tr>
                 <td> Password: </td>
-                <td> <input name="password" value="<c:out value='${users.password}'/>" type="password" maxlength="16"> </td>
+                <td> <input name="password" value="<c:out value='${users.password}'/>" type="password" maxlength="16">
+                </td>
             </tr>
 
         </table>

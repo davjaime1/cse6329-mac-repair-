@@ -14,37 +14,43 @@
         <h2>Create MAR</h2>
     </header>
 
-    <div class="col-md-4">
+    <form action="/mac_repair/CreateMarController?action=SubmitMarAction" method="post">
 
-        <form action="/mac_repair/CreateMarController?action=SubmitMarAction" method="post">
+        <table border="1">
+            <tr>
+                <td>Select Facility</td>
+                <td>
+                    <select name="facilityDropDown" required>
+                        <c:forEach items="${FACILITIES}" var="facility">
+                            <option value="${facility.name}">${facility.name}</option>
+                        </c:forEach>
+                    </select>
+                </td>
+            </tr>
 
-            <p>
-                Select Facility:&nbsp;
-                <select name="facilityDropDown" required>
-                    <c:forEach items="${FACILITIES}" var="facility">
-                        <option value="${facility.name}">${facility.name}</option>
-                    </c:forEach>
-                </select>
-            </p>
+            <tr>
+                <td>Select Urgency</td>
+                <td>
+                    <select name="urgencyDropDown" required>
+                        <c:forEach items="${URGENCIES}" var="urgency">
+                            <option value="${urgency.urgency}">${urgency.urgency}</option>
+                        </c:forEach>
+                    </select>
+                </td>
+            </tr>
+        </table>
 
-            <p>
-                Select Urgency:&nbsp;
-                <select name="urgencyDropDown" required>
-                    <c:forEach items="${URGENCIES}" var="urgency">
-                        <option value="${urgency.urgency}">${urgency.urgency}</option>
-                    </c:forEach>
-                </select>
-            </p>
+        <p>
+            Description<br>
+            <textarea name=descriptionTextArea maxlength="120" required wrap="soft"></textarea>
+            <input type="submit" id="submitButton" value="submit">
+        </p>
 
-            <p>
-                Description<br>
-                <textarea name=descriptionTextArea maxlength="120" required wrap="soft"></textarea>
-                <input type="submit" id="submitButton" value="submit">
-            </p>
+        <ul>
+            <li><a href="/mac_repair/UserController?action=ToHomePage">Back to Home</a></li>
+        </ul>
 
-        </form>
-
-    </div>
+    </form>
 </body>
 
 </html>
