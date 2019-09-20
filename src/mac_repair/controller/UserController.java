@@ -29,7 +29,19 @@ public class UserController extends HttpServlet
     
     private void userParam(HttpServletRequest request, UserModel user)
     {
-        user.setUser(request.getParameter("idusername"), request.getParameter("idutaID"), request.getParameter("idfirstname"), request.getParameter("idlastname"), request.getParameter("idpassword"), request.getParameter("idrole"), request.getParameter("idaddress"), request.getParameter("idstate"), request.getParameter("idcity"), request.getParameter("idzip"), request.getParameter("idphone"), request.getParameter("idemail"));
+        user.setUser(
+                request.getParameter("idusername"),
+                request.getParameter("idutaID"),
+                request.getParameter("idfirstname"),
+                request.getParameter("idlastname"),
+                request.getParameter("idpassword"),
+                request.getParameter("idrole"),
+                request.getParameter("idaddress"),
+                request.getParameter("idstate"),
+                request.getParameter("idcity"),
+                request.getParameter("idzip"),
+                request.getParameter("idphone"),
+                request.getParameter("idemail"));
     }
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
@@ -37,9 +49,8 @@ public class UserController extends HttpServlet
         HttpSession session = request.getSession();
         String action = request.getParameter("action");
         session.removeAttribute("errorMsgs");
-        // List companies
         String url = "";
-        // List companies
+        
         if (action.equalsIgnoreCase("loginProfile"))
         {
             url = "/index.jsp";
@@ -51,22 +62,51 @@ public class UserController extends HttpServlet
             url = "/index.jsp";
             getServletContext().getRequestDispatcher(url).forward(request, response);
         }
-        
-        else // redirect all other gets to post
+        else if (action.equalsIgnoreCase("ToHomePage"))
+        {
+            /* This action displays the user's home page based on their role. */
+            String roleId = (String) session.getAttribute("LOGIN_ROLE"),
+                    homePageUrl;
+
+            if (roleId.equalsIgnoreCase("U"))
+            {
+                homePageUrl = "/UserHome.jsp";
+            }
+            else if (roleId.equalsIgnoreCase("FM"))
+            {
+                homePageUrl = "/FM_Home.jsp";
+            }
+            else if (roleId.equalsIgnoreCase("A"))
+            {
+                homePageUrl = "/AdminHome.jsp";
+            }
+            else if (roleId.equalsIgnoreCase("R"))
+            {
+                homePageUrl = "/Repairer_Home.jsp";
+            }
+            else
+            {
+                /* Just log out the user in case of a bad role. */
+                session.removeAttribute("LOGIN_ROLE");
+                homePageUrl = "/index.jsp";
+            }
+            
+            getServletContext().getRequestDispatcher(homePageUrl).forward(request, response);
+        }
+        else
+        {
+            // redirect all other gets to post
             doPost(request, response);
+        }
     }
     
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        // TODO Auto-generated method stub
-        // doGet(request, response);
-        
-        String action = request.getParameter("action"), url = "";
+        String action = request.getParameter("action");
         HttpSession session = request.getSession();
-        
-        // int selectedCompanyIndex;
         session.removeAttribute("errorMsgs");
+        
         
         if (action.equalsIgnoreCase("registerProfile"))
         {
@@ -76,8 +116,6 @@ public class UserController extends HttpServlet
             session.setAttribute("ROLE", roleInDB);
             stateInDB = FM_UtilityDAO.listStates();
             session.setAttribute("STATE", stateInDB);
-            
-            url = "/Register.jsp";
             getServletContext().getRequestDispatcher("/Register.jsp").forward(request, response);
         }
         else if (action.equalsIgnoreCase("registerUser"))
@@ -88,18 +126,17 @@ public class UserController extends HttpServlet
             user.validateUser(action, CerrorMsgs);
             session.setAttribute("user", user);
             if (!CerrorMsgs.getErrorMsg().equals(""))
-            {// if error messages
+            {
+                // if error messages
                 session.setAttribute("errorMsgs", CerrorMsgs);
-                url = "/Register.jsp";
                 getServletContext().getRequestDispatcher("/Register.jsp").forward(request, response);
             }
             else
-            {// if no error messages
+            {
+                // if no error messages
                 UserModelDAO.insertUser(user);
                 UserErrorMsgs facerrorMsgs = new UserErrorMsgs();
                 facerrorMsgs.setErrorMsg("Facility Added SucessFully");
-                
-                url = "/index.jsp";
                 getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
             }
         }
@@ -111,18 +148,26 @@ public class UserController extends HttpServlet
             ArrayList<UserModel> fetch_profile = new ArrayList<UserModel>();
             fetch_profile = UserModelDAO.returnProfile(username);
             UserModel currentUser = new UserModel();
-            currentUser.setUser(fetch_profile.get(0).getUsername(), fetch_profile.get(0).getUtaId(), fetch_profile.get(0).getFirstName(), fetch_profile.get(0).getLastName(), fetch_profile.get(0).getPassword(), fetch_profile.get(0).getRole(), fetch_profile.get(0).getAddress(),
-                    fetch_profile.get(0).getState(), fetch_profile.get(0).getCity(),
-                    fetch_profile.get(0).getZip(), fetch_profile.get(0).getPhone(), fetch_profile.get(0).getEmail());
+            currentUser.setUser(
+                    fetch_profile.get(0).getUsername(),
+                    fetch_profile.get(0).getUtaId(),
+                    fetch_profile.get(0).getFirstName(),
+                    fetch_profile.get(0).getLastName(),
+                    fetch_profile.get(0).getPassword(),
+                    fetch_profile.get(0).getRole(),
+                    fetch_profile.get(0).getAddress(),
+                    fetch_profile.get(0).getState(),
+                    fetch_profile.get(0).getCity(),
+                    fetch_profile.get(0).getZip(),
+                    fetch_profile.get(0).getPhone(),
+                    fetch_profile.get(0).getEmail());
             
             session.setAttribute("USERS", currentUser);
-            url = "/ViewProfile.jsp";
             getServletContext().getRequestDispatcher("/ViewProfile.jsp").forward(request, response);
         }
         
-        else
+        else // (action == loginUser)
         {
-            
             String username = request.getParameter("idusername");
             String password = request.getParameter("idpassword");
             
@@ -132,9 +177,19 @@ public class UserController extends HttpServlet
             UserModel currentUser = new UserModel();
             if (fetch_profile.size() != 0)
             {
-                currentUser.setUser(fetch_profile.get(0).getUsername(), fetch_profile.get(0).getUtaId(), fetch_profile.get(0).getFirstName(), fetch_profile.get(0).getLastName(), fetch_profile.get(0).getPassword(), fetch_profile.get(0).getRole(), fetch_profile.get(0).getAddress(),
-                        fetch_profile.get(0).getState(), fetch_profile.get(0).getCity(),
-                        fetch_profile.get(0).getZip(), fetch_profile.get(0).getPhone(), fetch_profile.get(0).getEmail());
+                currentUser.setUser(
+                        fetch_profile.get(0).getUsername(),
+                        fetch_profile.get(0).getUtaId(),
+                        fetch_profile.get(0).getFirstName(),
+                        fetch_profile.get(0).getLastName(),
+                        fetch_profile.get(0).getPassword(),
+                        fetch_profile.get(0).getRole(),
+                        fetch_profile.get(0).getAddress(),
+                        fetch_profile.get(0).getState(),
+                        fetch_profile.get(0).getCity(),
+                        fetch_profile.get(0).getZip(),
+                        fetch_profile.get(0).getPhone(),
+                        fetch_profile.get(0).getEmail());
                 currentUser.validateLogin(action, password, CerrorMsgs);
             }
             else
@@ -145,47 +200,42 @@ public class UserController extends HttpServlet
             
             session.setAttribute("errorMsgs", CerrorMsgs);
             if (!CerrorMsgs.getErrorMsg().equals(""))
-            {// if error messages
+            {
+                // if error messages
                 currentUser.setUsername(username);
                 currentUser.setPassword(password);
                 session.setAttribute("USERS", currentUser);
-                url = "/index.jsp";
                 getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
             }
             else
             {
+                /* Sets the role attribute for the user that just logged in
+                 * so that other pages can use the role info. */
+                session.setAttribute("LOGIN_ROLE", currentUser.getRole());
+                String url;
                 
+                /* Goes to the home corresponding to the role. */
                 if (currentUser.getRole().equals("FM"))
                 {
                     url = "/FM_Home.jsp";
-                    session.setAttribute("username", username);
-                    request.setAttribute("username", username);
-                    request.getRequestDispatcher("/FM_Home.jsp").forward(request, response);
                 }
                 else if (currentUser.getRole().equals("U"))
                 {
                     url = "/UserHome.jsp";
-                    session.setAttribute("username", username);
-                    request.setAttribute("username", username);
-                    request.getRequestDispatcher("/UserHome.jsp").forward(request, response);
                 }
                 else if (currentUser.getRole().equals("A"))
                 {
                     url = "/AdminHome.jsp";
-                    session.setAttribute("username", username);
-                    request.setAttribute("username", username);
-                    request.getRequestDispatcher("/AdminHome.jsp").forward(request, response);
                 }
-                else
+                else /* getRole() == "R" */
                 {
                     url = "/Repairer_Home.jsp";
-                    session.setAttribute("username", username);
-                    request.setAttribute("username", username);
-                    request.getRequestDispatcher("/Repairer_Home.jsp").forward(request, response);
                 }
+                
+                session.setAttribute("username", username);
+                request.setAttribute("username", username);
+                request.getRequestDispatcher(url).forward(request, response);
             }
-            
-            
         }
         
     }
