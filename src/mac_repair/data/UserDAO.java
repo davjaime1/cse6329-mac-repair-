@@ -52,6 +52,11 @@ public class UserDAO
         return userListInDB;
     }
     
+    public static ArrayList<User> listAllUsers()
+    {
+        return getUserListFromQuery("SELECT * FROM users ORDER BY username");
+    }
+    
     public static ArrayList<User> listUserWithUsername(String us)
     {
         return getUserListFromQuery(String.format("SELECT * FROM users WHERE username='%s'", us));

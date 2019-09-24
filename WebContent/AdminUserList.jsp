@@ -6,12 +6,12 @@
 
 <head>
     <meta charset="ISO-8859-1">
-    <title>Search Users Result</title>
+    <title>User List</title>
 </head>
 
 <body>
 
-    <h1>Filtered Users</h1>
+    <h1>User List</h1>
 
     <table border="1">
         <tr>

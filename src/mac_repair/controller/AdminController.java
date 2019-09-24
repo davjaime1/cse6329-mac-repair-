@@ -30,6 +30,17 @@ public class AdminController extends HttpServlet
             session.setAttribute("ROLES", RoleDAO.listRoles());
             getServletContext().getRequestDispatcher("/AdminSearchUsers.jsp").forward(request, response);
         }
+        else if (action.equalsIgnoreCase("ListAllUsersAction"))
+        {
+            ArrayList<User> usersInDB = UserDAO.listAllUsers();
+            
+            /* Removes self from user list before displaying it. */
+            String loginUsername = (String) session.getAttribute("username");
+            usersInDB.removeIf(u -> (u.getUsername().equals(loginUsername)));
+            
+            session.setAttribute("USERS", usersInDB);
+            getServletContext().getRequestDispatcher("/AdminUserList.jsp").forward(request, response);
+        }
         else
         {
             System.out.println("ERROR: AdminController: INCORRECT ACTION at doGet()");
@@ -61,7 +72,7 @@ public class AdminController extends HttpServlet
             {
                 ArrayList<User> usersInDB = UserDAO.listUsersWithRole(roleIdStr);
                 session.setAttribute("USERS", usersInDB);
-                getServletContext().getRequestDispatcher("/AdminFilteredUsers.jsp").forward(request, response);
+                getServletContext().getRequestDispatcher("/AdminUserList.jsp").forward(request, response);
             }
         }
         else
