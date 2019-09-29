@@ -18,13 +18,13 @@ import mac_repair.data.UrgencyDAO;
 import mac_repair.model.FM_MAR;
 import mac_repair.model.Facility;
 import mac_repair.model.Urgency;
-import mac_repair.util.MarNumber;
 
 
-@WebServlet("/CreateMarController")
-public class CreateMarController extends HttpServlet
+@WebServlet("/MarController")
+public class MarController extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
+    private static final String classname = MarController.class.getName();
     
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
@@ -46,9 +46,15 @@ public class CreateMarController extends HttpServlet
             
             getServletContext().getRequestDispatcher("/CreateMar.jsp").forward(request, response);
         }
+        else if (action.equalsIgnoreCase("ViewMarsAction"))
+        {
+            ArrayList<FM_MAR> marsInDB = FM_MARDAO.listMarsReportedBy((String) session.getAttribute("username"));
+            session.setAttribute("MARS", marsInDB);
+            session.getServletContext().getRequestDispatcher("/MarList.jsp").forward(request, response);
+        }
         else
         {
-            System.out.println("ERROR: CreateMarController: INCORRECT ACTION at doGet()");
+            System.out.println("ERROR: " + classname + ": INCORRECT ACTION at doGet()");
             response.getWriter().append("Served at: ").append(request.getContextPath());
         }
     }
@@ -92,8 +98,8 @@ public class CreateMarController extends HttpServlet
             // Getting the current username for the session.
             String reportedByStr = (String) session.getAttribute("username");
             
-            // Gets the MAR number.
-            int marNum = MarNumber.num.getAndIncrement();
+            // Gets the current MAR number from the database.
+            int marNum = FM_MARDAO.getCurrentMarNumber();
             
             // Creating the MAR object to insert into the database.
             FM_MAR marObj = new FM_MAR();
@@ -122,7 +128,7 @@ public class CreateMarController extends HttpServlet
         }
         else
         {
-            System.out.println("ERROR: CreateMarController: INCORRECT ACTION at doPost()");
+            System.out.println("ERROR: " + classname + ": INCORRECT ACTION at doPost()");
             response.getWriter().append("Served at: ").append(request.getContextPath());
         }
     }
