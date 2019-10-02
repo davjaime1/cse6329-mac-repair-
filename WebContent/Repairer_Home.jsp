@@ -27,8 +27,9 @@
 
       <div class="menu_nav">
         <ul>
-          <li><a href="RequestReservation.jsp"  target="_top"><span>Request Reservation</span></a></li>
-          <li><a href="/mac_repair/RepairerViewAssignedController?action=listReservedRepairers" target="_top"><span>View My Reserved Repairs</span></a></li>
+          <li><a href="/mac_repair/RepairerViewAssignedController?action=listAssignedRepairers" target="_top"><span>View My Assigned Repairs</span></a></li>
+          <li><a href="/mac_repair/RepairerMakeReserveController?action=repairerReserve" target="_top"><span>Make a Reservation For Repairs</span></a></li>
+          <li><a href="/mac_repair/RepairerViewReservedController?action=listReservedRepairers" target="_top"><span>View My Reserved Repairs</span></a></li>
           <li><a href="/mac_repair/UserController?action=viewProfile"  target="_top"><span>View Profile</span></a></li>
           <li><a href="/mac_repair/UserController?action=updateProfile"  target="_top"><span>Update Profile</span></a></li>
           <li><a href="/mac_repair/UserController?action=logOut"  target="_top"><span>Log Out</span></a></li>
