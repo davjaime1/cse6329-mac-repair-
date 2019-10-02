@@ -30,32 +30,32 @@ public class Facility implements Serializable
     {
         this.type = type;
     }
-
+    
     public String getInterval()
     {
         return interval;
     }
-
+    
     public void setInterval(String interval)
     {
         this.interval = interval;
     }
-
+    
     public String getDuration()
     {
         return duration;
     }
-
+    
     public void setDuration(String duration)
     {
         this.duration = duration;
     }
-
+    
     public String getVenue()
     {
         return venue;
     }
-
+    
     public void setVenue(String venue)
     {
         this.venue = venue;

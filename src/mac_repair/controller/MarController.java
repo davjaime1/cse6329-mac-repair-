@@ -30,6 +30,7 @@ public class MarController extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         HttpSession session = request.getSession();
+        session.removeAttribute("ERR_MSG");
         String action = request.getParameter("action");
         
         if (action.equalsIgnoreCase("NewMarAction"))
@@ -48,8 +49,8 @@ public class MarController extends HttpServlet
         }
         else if (action.equalsIgnoreCase("ViewMarsAction"))
         {
-            ArrayList<FM_MAR> marsInDB = FM_MARDAO.listMarsReportedBy((String) session.getAttribute("username"));
-            session.setAttribute("MARS", marsInDB);
+            session.setAttribute("MARS", FM_MARDAO.listMarsReportedBy((String) session.getAttribute("username")));
+            session.setAttribute("FACILITIES", FacilityDAO.listFacilities());
             session.getServletContext().getRequestDispatcher("/MarList.jsp").forward(request, response);
         }
         else
@@ -61,8 +62,10 @@ public class MarController extends HttpServlet
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        String action = request.getParameter("action");
         HttpSession session = request.getSession();
+        session.removeAttribute("ERR_MSG");
+        String action = request.getParameter("action");
+        
         
         /* After the user clicks the select button after
          * filling in the value for the MAR creation,
@@ -125,6 +128,27 @@ public class MarController extends HttpServlet
             session.setAttribute("cmr_marnumber", marNum);
             
             getServletContext().getRequestDispatcher("/CreateMarResult.jsp").forward(request, response);
+        }
+        else if (action.equalsIgnoreCase("ApplyMarFilterAction"))
+        {
+            /* Check if a selection has been made. If not -- default value selected -- then
+             * show an error message.
+             * 
+             * Else, show a new list of MARs with the filter applied. */
+            String facilityName = request.getParameter("facilityNameDropDown");
+            if (facilityName.equalsIgnoreCase("default"))
+            {
+                /* Show same page with error message. */
+                session.setAttribute("ERR_MSG", "No facility name selected!");
+                getServletContext().getRequestDispatcher("/MarList.jsp").forward(request, response);
+            }
+            else
+            {
+                session.setAttribute("MARS", FM_MARDAO.listMarsWithFacilityNameAndUsername(
+                        facilityName,
+                        (String) session.getAttribute("username")));
+                getServletContext().getRequestDispatcher("/MarList.jsp").forward(request, response);
+            }
         }
         else
         {

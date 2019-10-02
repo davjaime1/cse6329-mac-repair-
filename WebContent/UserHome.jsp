@@ -4,13 +4,13 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>User Home</title>
+    <title>User Home > ${username}</title>
 </head>
 
 <body>
 
     <header>
-        <h2>User Home</h2>
+        <h2>User Home > ${username}</h2>
     </header>
 
     <section>

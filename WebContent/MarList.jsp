@@ -10,36 +10,70 @@
 </head>
 
 <body>
-    <h1>MAR List</h1>
+    <p>
+        <h1>MAR List</h1>
+    </p>
 
-    <table border="1">
-        <tr>
-            <td>MAR Number</td>
-            <td>Date</td>
-            <td>Facility Name</td>
-        </tr>
+    <p>
+        <!-- Search box -->
+        <h2>Filter By</h2>
+        <form action="/mac_repair/MarController?action=ApplyMarFilterAction" method="post">
+            <table border="1">
+                <tr>
+                    <td>Facility Name</td>
+                    <td>
+                        <select name="facilityNameDropDown">
+                            <option value="default">-- Select a Facility Name</option>
+                            <c:forEach items="${FACILITIES}" var="facility">
+                                <option value="${facility.name}">${facility.name}</option>
+                            </c:forEach>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="submit" value="Submit">
+                    </td>
+                    <td>
+                        <font color="red">${ERR_MSG}</font>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </p>
 
-        <c:forEach items="${MARS}" var="item">
+    <p>
+        <!-- Start of MAR table -->
+        <h2>Result</h2>
+        <table border="1">
             <tr>
-                <td>
-                    <c:out value="${item.marID}" />
-                </td>
-                <td>
-                    <c:out value="${item.date}" />
-                </td>
-                <td>
-                    <c:out value="${item.facilityName}" />
-                </td>
-                <td>
-                    <a href="/mac_repair/MarController?action=ListSpecificMarAction&username=${item.marID}">View</a>
-                </td>
+                <td>MAR Number</td>
+                <td>Date</td>
+                <td>Facility Name</td>
             </tr>
-        </c:forEach>
-    </table>
 
-    <ul>
-        <li><a href="UserHome.jsp">User Home</a></li>
-    </ul>
+            <c:forEach items="${MARS}" var="item">
+                <tr>
+                    <td>
+                        <c:out value="${item.marID}" />
+                    </td>
+                    <td>
+                        <c:out value="${item.date}" />
+                    </td>
+                    <td>
+                        <c:out value="${item.facilityName}" />
+                    </td>
+                    <td>
+                        <a href="/mac_repair/MarController?action=ListSpecificMarAction&username=${item.marID}">View</a>
+                    </td>
+                </tr>
+            </c:forEach>
+        </table>
+    </p>
+
+    <p>
+        <ul>
+            <li><a href="UserHome.jsp">User Home</a></li>
+        </ul>
+    </p>
 </body>
 
 </html>

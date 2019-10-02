@@ -114,6 +114,19 @@ public class FM_MARDAO
         return ReturnMatchingMARList(String.format("SELECT * FROM mar WHERE reportedby='%s' ORDER BY marnumber", userString));
     }
     
+    public static ArrayList<FM_MAR> listMarsWithFacilityNameAndUsername(
+            String facilityName,
+            String username)
+    {
+        return ReturnMatchingMARList(
+                String.format("SELECT * FROM mar WHERE " +
+                        "facilityname='%s' " +
+                        "AND reportedby='%s' " +
+                        "ORDER BY marnumber",
+                        facilityName,
+                        username));
+    }
+    
     public static ArrayList<FM_MAR> listMARs()
     {
         return ReturnMatchingMARList(" SELECT * from mar WHERE assigneddate = CURDATE() ORDER BY marnumber");
