@@ -28,7 +28,7 @@ public class RepairerViewAssignedController extends HttpServlet {
 //		List companies
 		String repairer = (String)session.getAttribute("username");
 		if (action.equalsIgnoreCase("listReservedRepairers")) {
-			ArrayList<FM_AssignMAR> assignedmarInDB = new ArrayList<FM_AssignMAR>();
+			ArrayList<FM_MAR> assignedmarInDB = new ArrayList<FM_MAR>();
 			assignedmarInDB=FM_AssignMARDAO.listAssignedMARstoaRepairer(repairer);
 			session.setAttribute("ASSIGNEDMARS", assignedmarInDB);						
 			getServletContext().getRequestDispatcher("/ViewReservedRepairs.jsp").forward(request, response);
