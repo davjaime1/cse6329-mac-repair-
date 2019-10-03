@@ -109,6 +109,24 @@ public class FM_MARDAO
         StoreListinDB(mar, "INSERT INTO mar (marnumber,assigneddate,facilitytype,facilityname,description,urgency,reportedby) ");
     }
     
+    public static ArrayList<FM_MAR> listMarsReportedBy(String userString)
+    {
+        return ReturnMatchingMARList(String.format("SELECT * FROM mar WHERE reportedby='%s' ORDER BY marnumber", userString));
+    }
+    
+    public static ArrayList<FM_MAR> listMarsWithFacilityNameAndUsername(
+            String facilityName,
+            String username)
+    {
+        return ReturnMatchingMARList(
+                String.format("SELECT * FROM mar WHERE " +
+                        "facilityname='%s' " +
+                        "AND reportedby='%s' " +
+                        "ORDER BY marnumber",
+                        facilityName,
+                        username));
+    }
+    
     public static ArrayList<FM_MAR> listMARs()
     {
         return ReturnMatchingMARList(" SELECT * from mar WHERE assigneddate = CURDATE() ORDER BY marnumber");
@@ -135,5 +153,40 @@ public class FM_MARDAO
     public static Boolean marIDunique(String marnumber)
     {
         return (ReturnMatchingMARList(" SELECT * from mar WHERE marnumber = '" + marnumber + "' ORDER BY marnumber").isEmpty());
+    }
+    
+    
+    /**
+     * Gets the current unused MAR number.
+     * 
+     * @return an unused int for the MAR number
+     */
+    public static int getCurrentMarNumber()
+    {
+        Statement stmt = null;
+        Connection conn = SQLConnection.getDBConnection();
+        int result = -1;
+        try
+        {
+            stmt = conn.createStatement();
+            String query = "SELECT * FROM marnumber";
+            ResultSet marNumberList = stmt.executeQuery(query);
+            
+            // Goes to the first and only item.
+            marNumberList.first();
+            result = marNumberList.getInt("current");
+            
+            /* After getting the MAR number, automatically increment
+             * for the next MAR form. */
+            query = "UPDATE marnumber SET current=" + (result + 1);
+            stmt.executeUpdate(query);
+            conn.commit();
+        }
+        catch (SQLException e)
+        {
+            System.out.println("Could not retrieve/update current MAR number from database\n" + e.getMessage());
+        }
+        
+        return result;
     }
 }

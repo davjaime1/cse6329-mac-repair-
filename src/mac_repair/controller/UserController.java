@@ -67,7 +67,7 @@ public class UserController extends HttpServlet
             /* This action displays the user's home page based on their role. */
             String roleId = (String) session.getAttribute("LOGIN_ROLE"),
                     homePageUrl;
-
+            
             if (roleId.equalsIgnoreCase("U"))
             {
                 homePageUrl = "/UserHome.jsp";

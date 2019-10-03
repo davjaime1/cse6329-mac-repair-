@@ -14,7 +14,7 @@
         <h2>Create MAR</h2>
     </header>
 
-    <form action="/mac_repair/CreateMarController?action=SubmitMarAction" method="post">
+    <form action="/mac_repair/MarController?action=SubmitMarAction" method="post">
 
         <table border="1">
             <tr>
