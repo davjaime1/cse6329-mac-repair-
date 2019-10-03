@@ -1,6 +1,7 @@
 package mac_repair.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,14 +10,38 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import mac_repair.data.FM_UtilityDAO;
+import mac_repair.data.RoleDAO;
 import mac_repair.data.UserDAO;
+import mac_repair.data.UserModelDAO;
+import mac_repair.model.Role;
+import mac_repair.model.State;
 import mac_repair.model.User;
+import mac_repair.model.UserErrorMsgs;
+import mac_repair.model.UserModel;
 
 @WebServlet("/AdminSpecificUserController")
 public class AdminSpecificUserController extends HttpServlet
 {
     private static final long serialVersionUID = -617967594294823878L;
     
+    private void userParam(HttpServletRequest request, UserModel user)
+    {
+        user.setUser(
+                request.getParameter("idusername"),
+                request.getParameter("idutaID"),
+                request.getParameter("idfirstname"),
+                request.getParameter("idlastname"),
+                request.getParameter("idpassword"),
+                request.getParameter("idrole"),
+                request.getParameter("idaddress"),
+                request.getParameter("idstate"),
+                request.getParameter("idcity"),
+                request.getParameter("idzip"),
+                request.getParameter("idphone"),
+                request.getParameter("idemail"));
+    }
+
     @Override
     protected void doGet(
             HttpServletRequest request,
@@ -29,22 +54,37 @@ public class AdminSpecificUserController extends HttpServlet
         if (action.equalsIgnoreCase("ListSpecificUserAction"))
         {
             String usernameStr = request.getParameter("username");
-            User selectedUser = UserDAO.listUserWithUsername(usernameStr).get(0);
+//            String username = (String) session.getAttribute("username");
+          //  System.out.println(username);
             
-            session.setAttribute("ad_user_username", selectedUser.getUsername());
-            session.setAttribute("ad_user_id", selectedUser.getId());
-            session.setAttribute("ad_user_firstname", selectedUser.getFirstname());
-            session.setAttribute("ad_user_lastname", selectedUser.getLastname());
-            session.setAttribute("ad_user_password", selectedUser.getPassword());
-            session.setAttribute("ad_user_role", selectedUser.getRole());
-            session.setAttribute("ad_user_address", selectedUser.getAddress());
-            session.setAttribute("ad_user_city", selectedUser.getCity());
-            session.setAttribute("ad_user_state", selectedUser.getState());
-            session.setAttribute("ad_user_zip", selectedUser.getZip());
-            session.setAttribute("ad_user_phone", selectedUser.getPhone());
-            session.setAttribute("ad_user_email", selectedUser.getEmail());
+            ArrayList<UserModel> fetch_profile = new ArrayList<UserModel>();
+            fetch_profile = UserModelDAO.returnProfile(usernameStr);
+            UserModel currentUser = new UserModel();
+            currentUser.setUser(
+                    fetch_profile.get(0).getUsername(),
+                    fetch_profile.get(0).getUtaId(),
+                    fetch_profile.get(0).getFirstName(),
+                    fetch_profile.get(0).getLastName(),
+                    fetch_profile.get(0).getPassword(),
+                    fetch_profile.get(0).getRole(),
+                    fetch_profile.get(0).getAddress(),
+                    fetch_profile.get(0).getState(),
+                    fetch_profile.get(0).getCity(),
+                    fetch_profile.get(0).getZip(),
+                    fetch_profile.get(0).getPhone(),
+                    fetch_profile.get(0).getEmail());
             
-            getServletContext().getRequestDispatcher("/AdminSpecificUser.jsp").forward(request, response);
+            session.setAttribute("olduser", currentUser);
+            session.setAttribute("user", currentUser);
+
+            ArrayList<State> stateInDB = new ArrayList<State>();
+            ArrayList<Role> roleInDB = new ArrayList<Role>();
+            roleInDB = RoleDAO.listRoles();
+            session.setAttribute("ROLE", roleInDB);
+            stateInDB = FM_UtilityDAO.listStates();
+            session.setAttribute("STATE", stateInDB);
+           
+            getServletContext().getRequestDispatcher("/AdminUpdateProfile.jsp").forward(request, response);
         }
         else
         {
@@ -64,40 +104,59 @@ public class AdminSpecificUserController extends HttpServlet
         
         if (action.equalsIgnoreCase("ApplyNewValuesAction"))
         {
-            String newFirstName = request.getParameter("firstnameTextBox").trim();
-            String newRoleId = request.getParameter("roleDropDown");
-            
-            /* In the event that no fields are changed, then just show the same page
-             * with a red error message. */
-            if (newFirstName.isEmpty() &&
-                    newRoleId.equalsIgnoreCase("default"))
+ //           String newFirstName = request.getParameter("firstnameTextBox").trim();
+ //           String newRoleId = request.getParameter("roleDropDown");
+        	session.removeAttribute("user");
+        	session.removeAttribute("errorMsgs");
+            UserModel user = new UserModel();
+            UserErrorMsgs CerrorMsgs = new UserErrorMsgs();
+            userParam(request, user);
+            user.validateUser(action, CerrorMsgs);
+            session.setAttribute("user", user);
+            if (!CerrorMsgs.getErrorMsg().equals(""))
             {
-                request.setAttribute("ERR_MSG", "No change made.");
-                getServletContext().getRequestDispatcher("/AdminSpecificUser.jsp").forward(request, response);
+                // if error messages
+                session.setAttribute("errorMsgs", CerrorMsgs);
+                getServletContext().getRequestDispatcher("/UpdateProfile.jsp").forward(request, response);
             }
             else
             {
-                User updatedUser = UserDAO.listUserWithUsername((String) session.getAttribute("ad_user_username")).get(0);
-                
-                /* Check fields one by one. If they have data, use the new data. If they are empty,
-                 * use the original value. */
-                if (!newFirstName.isEmpty())
-                {
-                    updatedUser.setFirstname(newFirstName);
-                }
-                
-                if (!newRoleId.equalsIgnoreCase("default"))
-                {
-                    updatedUser.setRole(newRoleId);
-                }
-                
-                
-                /* Send update to the database. */
-                UserDAO.updateUser(updatedUser);
-                
-                /* Refresh the page with the new changes.. */
-                response.sendRedirect("/mac_repair/AdminSpecificUserController?action=ListSpecificUserAction&username=" + updatedUser.getUsername());
+                // if no error messages
+                UserModelDAO.updatetUser(user);
+                String usernameStr = request.getParameter("idusername");
+//              String username = (String) session.getAttribute("username");
+            //  System.out.println(username);
+              
+              ArrayList<UserModel> fetch_profile = new ArrayList<UserModel>();
+              fetch_profile = UserModelDAO.returnProfile(usernameStr);
+              UserModel currentUser = new UserModel();
+              currentUser.setUser(
+                      fetch_profile.get(0).getUsername(),
+                      fetch_profile.get(0).getUtaId(),
+                      fetch_profile.get(0).getFirstName(),
+                      fetch_profile.get(0).getLastName(),
+                      fetch_profile.get(0).getPassword(),
+                      fetch_profile.get(0).getRole(),
+                      fetch_profile.get(0).getAddress(),
+                      fetch_profile.get(0).getState(),
+                      fetch_profile.get(0).getCity(),
+                      fetch_profile.get(0).getZip(),
+                      fetch_profile.get(0).getPhone(),
+                      fetch_profile.get(0).getEmail());
+              
+              session.setAttribute("olduser", currentUser);
+
+              ArrayList<State> stateInDB = new ArrayList<State>();
+              ArrayList<Role> roleInDB = new ArrayList<Role>();
+              roleInDB = RoleDAO.listRoles();
+              session.setAttribute("ROLE", roleInDB);
+              stateInDB = FM_UtilityDAO.listStates();
+              session.setAttribute("STATE", stateInDB);
+              session.removeAttribute("errorMsgs");
+              getServletContext().getRequestDispatcher("/AdminUpdateProfile.jsp").forward(request, response);
+
             }
+
         }
         else
         {

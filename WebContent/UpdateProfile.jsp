@@ -114,6 +114,9 @@
 </tr>
 </table>
 
+       <ul>
+              <li><a href="/mac_repair/UserController?action=ToHomePage">Back to Home</a></li>
+       </ul>
 
 </body>
 </html>

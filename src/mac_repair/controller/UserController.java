@@ -106,7 +106,8 @@ public class UserController extends HttpServlet
         String action = request.getParameter("action");
         HttpSession session = request.getSession();
         session.removeAttribute("errorMsgs");
-        
+        session.removeAttribute("user");
+        session.removeAttribute("USERS");
         
         if (action.equalsIgnoreCase("registerProfile"))
         {
@@ -168,7 +169,7 @@ public class UserController extends HttpServlet
         else if (action.equalsIgnoreCase("updateProfileView"))
         {
             String username = (String) session.getAttribute("username");
-            System.out.println(username);
+          //  System.out.println(username);
             
             ArrayList<UserModel> fetch_profile = new ArrayList<UserModel>();
             fetch_profile = UserModelDAO.returnProfile(username);
