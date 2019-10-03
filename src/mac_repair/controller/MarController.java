@@ -33,6 +33,7 @@ public class MarController extends HttpServlet
         session.removeAttribute("ERR_MSG");
         String action = request.getParameter("action");
         
+        /* Action occurs when a user creates a MAR. */
         if (action.equalsIgnoreCase("NewMarAction"))
         {
             // Lists the available facilities to report
@@ -47,12 +48,34 @@ public class MarController extends HttpServlet
             
             getServletContext().getRequestDispatcher("/CreateMar.jsp").forward(request, response);
         }
-        else if (action.equalsIgnoreCase("ViewMarsAction"))
+        
+        /* Shows a list of MARs created by the user. */
+        else if (action.equalsIgnoreCase("ListMarsAction"))
         {
             session.setAttribute("MARS", FM_MARDAO.listMarsReportedBy((String) session.getAttribute("username")));
             session.setAttribute("FACILITIES", FacilityDAO.listFacilities());
             session.getServletContext().getRequestDispatcher("/MarList.jsp").forward(request, response);
         }
+        
+        /* Show more details of the MAR selected by the user. */
+        else if (action.equalsIgnoreCase("ViewSpecificMar"))
+        {
+            FM_MAR mar = FM_MARDAO.getSpecificMar(request.getParameter("marid"));
+            
+            // Sets the values for the results page after the user has submitted a MAR.
+            session.setAttribute("cmr_facilitytype", mar.getFacilityType());
+            session.setAttribute("cmr_facilityname", mar.getFacilityName());
+            session.setAttribute("cmr_urgency", mar.getUrgency());
+            session.setAttribute("cmr_description", mar.getDescription());
+            session.setAttribute("cmr_reportedby", mar.getReportedUser());
+            session.setAttribute("cmr_date", mar.getDate());
+            session.setAttribute("cmr_marnumber", mar.getMarID());
+            
+            getServletContext().getRequestDispatcher("/SpecificMar.jsp").forward(request, response);
+            
+        }
+        
+        /* Occurs only if a non-existent action is executed. */
         else
         {
             System.out.println("ERROR: " + classname + ": INCORRECT ACTION at doGet()");
@@ -127,7 +150,7 @@ public class MarController extends HttpServlet
             session.setAttribute("cmr_date", dateStr);
             session.setAttribute("cmr_marnumber", marNum);
             
-            getServletContext().getRequestDispatcher("/CreateMarResult.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher("/SpecificMar.jsp").forward(request, response);
         }
         else if (action.equalsIgnoreCase("ApplyMarFilterAction"))
         {
