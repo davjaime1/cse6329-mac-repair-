@@ -18,6 +18,7 @@ import mac_repair.data.UrgencyDAO;
 import mac_repair.model.FM_MAR;
 import mac_repair.model.Facility;
 import mac_repair.model.Urgency;
+import mac_repair.util.MarValidator;
 
 
 @WebServlet("/MarController")
@@ -95,62 +96,72 @@ public class MarController extends HttpServlet
          * this action occurs. */
         if (action.equalsIgnoreCase("SubmitMarAction"))
         {
-            String facilityName = request.getParameter("facilityDropDown");
-            String urgencyStr = request.getParameter("urgencyDropDown");
+            // If description box is empty, set error message.
             String descriptionStr = request.getParameter("descriptionTextArea");
-            
-            Facility selectedFacility = new Facility();
-            Urgency selectedUrgency = new Urgency();
-            for (Facility f : FacilityDAO.listFacilities())
+            if (!MarValidator.validDescription(descriptionStr))
             {
-                if (f.getName().equalsIgnoreCase(facilityName))
-                {
-                    selectedFacility = f;
-                    break;
-                }
+                session.setAttribute("ERR_MSG", "Description cannot be empty.");
+                getServletContext().getRequestDispatcher("/CreateMar.jsp").forward(request, response);
             }
-            for (Urgency u : UrgencyDAO.listUrgencies())
+            else
             {
-                if (u.getUrgency().equalsIgnoreCase(urgencyStr))
+                String facilityName = request.getParameter("facilityDropDown");
+                String urgencyStr = request.getParameter("urgencyDropDown");
+                
+                Facility selectedFacility = new Facility();
+                Urgency selectedUrgency = new Urgency();
+                for (Facility f : FacilityDAO.listFacilities())
                 {
-                    selectedUrgency = u;
-                    break;
+                    if (f.getName().equalsIgnoreCase(facilityName))
+                    {
+                        selectedFacility = f;
+                        break;
+                    }
                 }
+                for (Urgency u : UrgencyDAO.listUrgencies())
+                {
+                    if (u.getUrgency().equalsIgnoreCase(urgencyStr))
+                    {
+                        selectedUrgency = u;
+                        break;
+                    }
+                }
+                
+                // Gets the current date.
+                String dateStr = DateTimeFormatter.ofPattern("yyyyMMdd").format(LocalDate.now()).toString();
+                
+                // Getting the current username for the session.
+                String reportedByStr = (String) session.getAttribute("username");
+                
+                // Gets the current MAR number from the database.
+                int marNum = FM_MARDAO.getCurrentMarNumber();
+                
+                // Creating the MAR object to insert into the database.
+                FM_MAR marObj = new FM_MAR();
+                marObj.setMarID(Integer.toString(marNum));
+                marObj.setFacilityName(selectedFacility.getName());
+                marObj.setFacilityType(selectedFacility.getType());
+                marObj.setUrgency(selectedUrgency.getId());
+                marObj.setDescription(descriptionStr);
+                marObj.setReportedUser(reportedByStr);
+                marObj.setDate(dateStr);
+                
+                // Insert the MAR object into the database.
+                FM_MARDAO.insertMAR(marObj);
+                
+                
+                // Sets the values for the results page after the user has submitted a MAR.
+                session.setAttribute("cmr_facilitytype", selectedFacility.getType());
+                session.setAttribute("cmr_facilityname", selectedFacility.getName());
+                session.setAttribute("cmr_urgency", selectedUrgency.getUrgency());
+                session.setAttribute("cmr_description", descriptionStr);
+                session.setAttribute("cmr_reportedby", reportedByStr);
+                session.setAttribute("cmr_date", dateStr);
+                session.setAttribute("cmr_marnumber", marNum);
+                
+                getServletContext().getRequestDispatcher("/SpecificMar.jsp").forward(request, response);
             }
             
-            // Gets the current date.
-            String dateStr = DateTimeFormatter.ofPattern("yyyyMMdd").format(LocalDate.now()).toString();
-            
-            // Getting the current username for the session.
-            String reportedByStr = (String) session.getAttribute("username");
-            
-            // Gets the current MAR number from the database.
-            int marNum = FM_MARDAO.getCurrentMarNumber();
-            
-            // Creating the MAR object to insert into the database.
-            FM_MAR marObj = new FM_MAR();
-            marObj.setMarID(Integer.toString(marNum));
-            marObj.setFacilityName(selectedFacility.getName());
-            marObj.setFacilityType(selectedFacility.getType());
-            marObj.setUrgency(selectedUrgency.getId());
-            marObj.setDescription(descriptionStr);
-            marObj.setReportedUser(reportedByStr);
-            marObj.setDate(dateStr);
-            
-            // Insert the MAR object into the database.
-            FM_MARDAO.insertMAR(marObj);
-            
-            
-            // Sets the values for the results page after the user has submitted a MAR.
-            session.setAttribute("cmr_facilitytype", selectedFacility.getType());
-            session.setAttribute("cmr_facilityname", selectedFacility.getName());
-            session.setAttribute("cmr_urgency", selectedUrgency.getUrgency());
-            session.setAttribute("cmr_description", descriptionStr);
-            session.setAttribute("cmr_reportedby", reportedByStr);
-            session.setAttribute("cmr_date", dateStr);
-            session.setAttribute("cmr_marnumber", marNum);
-            
-            getServletContext().getRequestDispatcher("/SpecificMar.jsp").forward(request, response);
         }
         else if (action.equalsIgnoreCase("ApplyMarFilterAction"))
         {

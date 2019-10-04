@@ -22,7 +22,9 @@
                 <td>
                     <select name="facilityDropDown" required>
                         <c:forEach items="${FACILITIES}" var="facility">
-                            <option value="${facility.name}">${facility.name}</option>
+                            <option value="${facility.name}">
+                                <c:out value="${facility.name}" />
+                            </option>
                         </c:forEach>
                     </select>
                 </td>
@@ -33,7 +35,9 @@
                 <td>
                     <select name="urgencyDropDown" required>
                         <c:forEach items="${URGENCIES}" var="urgency">
-                            <option value="${urgency.urgency}">${urgency.urgency}</option>
+                            <option value="${urgency.urgency}">
+                                <c:out value="${urgency.urgency}" />
+                            </option>
                         </c:forEach>
                     </select>
                 </td>
@@ -42,7 +46,13 @@
 
         <p>
             Description<br>
-            <textarea name=descriptionTextArea maxlength="120" required wrap="soft"></textarea>
+            <textarea name=descriptionTextArea maxlength="120" wrap="soft"></textarea>
+            <font color="red">
+                <c:out value="${ERR_MSG}" />
+            </font>
+        </p>
+
+        <p>
             <input type="submit" id="submitButton" value="submit">
         </p>
 
