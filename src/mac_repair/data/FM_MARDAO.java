@@ -109,6 +109,13 @@ public class FM_MARDAO
         StoreListinDB(mar, "INSERT INTO mar (marnumber,assigneddate,facilitytype,facilityname,description,urgency,reportedby) ");
     }
     
+    
+    public static FM_MAR getSpecificMar(String marid)
+    {
+        return ReturnMatchingMARList(String.format(
+                "SELECT * FROM mar WHERE marnumber='%s'", marid)).get(0);
+    }
+    
     public static ArrayList<FM_MAR> listMarsReportedBy(String userString)
     {
         return ReturnMatchingMARList(String.format("SELECT * FROM mar WHERE reportedby='%s' ORDER BY marnumber", userString));
