@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Company form</title>
+<title>Specifc Reserved Repairs</title>
 </head>
 <div style="float:right">
 	  <form align="right" name="form1" method="post" action="index.jsp">
@@ -14,7 +14,7 @@
 	  </form>
 	  </div>
     <div class="header_resize">
-      <div class="logo"><h1><a href="/mac_repair">Mac Repair</a></h1></div>
+      <div class="logo"><h1><a href="/mac_repair/Repairer_Home.jsp">Mac Repair</a></h1></div>
       <div class="menu_nav">
       </div>
   </div>
@@ -59,7 +59,14 @@
 </td>
 </tr>
 </table>
-<button onclick="window.location.href = 'DeleteMar.jsp';" class="btn default">Cancel Repair</button>
-<button onclick="window.location.href = 'AssignMar.jsp';" class="btn default">Modify Repair</button>
+<form name="Cancel Reservation" action="/mac_repair/RepairerReservationsController?action=cancelReservations&id=${REPAIRERS.facilityname}&date=${REPAIRERS.date}&from=${REPAIRERS.from}&to=${REPAIRERS.to}" method="post">
+    <input name="action" value="cancelReservation" type="hidden">
+    <input type="submit" value="Cancel Reservation">
+    </form>
+    <br />
+<form name="Modify Reservation" action="/mac_repair/RepairerReservationsController?action=modifyReservations&id=${REPAIRERS.facilityname}&date=${REPAIRERS.date}" method="post">
+    <input name="action" value="modifyReservation" type="hidden">
+    <input type="submit" value="Modify Reservation">
+    </form>
 </body>
 </html>

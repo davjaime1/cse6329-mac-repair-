@@ -11,11 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 //import cse6329.model.Repairer;
-import mac_repair.data.RepairerViewAssignedDAO;
+import mac_repair.data.RepairerViewReservedDAO;
 import mac_repair.model.*;
 
-@WebServlet("/RepairerViewAssignedController")
-public class RepairerViewAssignedController extends HttpServlet {
+@WebServlet("/RepairerViewReservedController")
+public class RepairerViewReservedController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -25,11 +25,11 @@ public class RepairerViewAssignedController extends HttpServlet {
 		String username = (String)session.getAttribute("username");
 		//session.removeAttribute("errorMsgs");
 //		List companies
-		if (action.equalsIgnoreCase("listAssignedRepairers")) {
-			ArrayList<RepairerViewAssigned> reservedListInDB = new ArrayList<RepairerViewAssigned>();
-			reservedListInDB=RepairerViewAssignedDAO.listAssignedRepairs(username);
+		if (action.equalsIgnoreCase("listReservedRepairers")) {
+			ArrayList<RepairerViewReserved> reservedListInDB = new ArrayList<RepairerViewReserved>();
+			reservedListInDB=RepairerViewReservedDAO.listReservedRepairs(username);
 			session.setAttribute("REPAIRERS", reservedListInDB);				
-			getServletContext().getRequestDispatcher("/ViewAssignedRepairs.jsp").forward(request, response);
+			getServletContext().getRequestDispatcher("/ViewReservedRepairs.jsp").forward(request, response);
 		}
 		else // redirect all other gets to post
 			doPost(request,response);
@@ -40,24 +40,22 @@ public class RepairerViewAssignedController extends HttpServlet {
 		String action = request.getParameter("action"), url="";
 		HttpSession session = request.getSession();
 		String username = (String)session.getAttribute("username");
-		RepairerViewAssigned res = new RepairerViewAssigned();
+		RepairerViewReserved res = new RepairerViewReserved();
 		int selectedReservedIndex;
 		session.removeAttribute("errorMsgs");
 
-		if (action.equalsIgnoreCase("listSpecificAssignedRepairs") )
+		if (action.equalsIgnoreCase("listSpecificResesrvedRepairs") )
 		{
 			//action=listSpecificCompany
-			ArrayList<RepairerViewAssigned> reservedListInDB = new ArrayList<RepairerViewAssigned>();
-			RepairerViewAssigned selectedReservation = new RepairerViewAssigned();
+			ArrayList<RepairerViewReserved> reservedListInDB = new ArrayList<RepairerViewReserved>();
+			RepairerViewReserved selectedReservation = new RepairerViewReserved();
 
 			//view button was used instead of radio button
-			reservedListInDB=RepairerViewAssignedDAO.searchAssignedRepair(request.getParameter("id"), username);
-			selectedReservation.setReserved(	reservedListInDB.get(0).getAssignedmar(), reservedListInDB.get(0).getFacilityname(), reservedListInDB.get(0).getFacilitytype(),
-												reservedListInDB.get(0).getUrgency(), reservedListInDB.get(0).getDescription(), reservedListInDB.get(0).getReporteddate(),
-												reservedListInDB.get(0).getReportedby(), reservedListInDB.get(0).getAssignedDate(),
-												reservedListInDB.get(0).getEstimateofrepair());
+			reservedListInDB=RepairerViewReservedDAO.searchReservedRepair(request.getParameter("id"), username);
+			selectedReservation.setReserved(	reservedListInDB.get(0).getDate(), reservedListInDB.get(0).getMarnum(), reservedListInDB.get(0).getFacilitytype(), reservedListInDB.get(0).getFacilityname(),
+												reservedListInDB.get(0).getTo(), reservedListInDB.get(0).getFrom());
 			session.setAttribute("REPAIRERS", selectedReservation);
-			url="/ListSpecificAssignedRepair.jsp";					
+			url="/ListSpecificReservedRepair.jsp";					
 		}
 
 		getServletContext().getRequestDispatcher(url).forward(request, response);	

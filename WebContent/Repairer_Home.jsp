@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>Company Management</title>
+<title>Repairer Home</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="style.css" rel="stylesheet" type="text/css" />
 </head>
@@ -27,8 +27,8 @@
 
       <div class="menu_nav">
         <ul>
-          <li><a href="RequestReservation.jsp"  target="_top"><span>Request Reservation</span></a></li>
-          <li><a href="/mac_repair/RepairerViewAssignedController?action=listReservedRepairers" target="_top"><span>View My Reserved Repairs</span></a></li>
+          <li><a href="/mac_repair/RepairerViewAssignedController?action=listAssignedRepairers" target="_top"><span>View My Assigned Repairs</span></a></li>
+          <li><a href="/mac_repair/RepairerViewReservedController?action=listReservedRepairers" target="_top"><span>View My Reserved Repairs</span></a></li>
           <li><a href="/mac_repair/UserController?action=viewProfile"  target="_top"><span>View Profile</span></a></li>
           <li><a href="/mac_repair/UserController?action=updateProfile"  target="_top"><span>Update Profile</span></a></li>
           <li><a href="/mac_repair/UserController?action=logOut"  target="_top"><span>Log Out</span></a></li>

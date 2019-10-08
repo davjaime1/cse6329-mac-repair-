@@ -24,12 +24,15 @@ public class RepairerViewAssignedDAO {
 				RepairerViewAssigned res = new RepairerViewAssigned();
 				//java.sql.Timestamp dbSqlTimestamp = reservedList.getTimestamp(1);
 				//res.setDate(dbSqlTimestamp);
-				res.setDate(reservedList.getString("scheduleDate"));
-				res.setMarnum(reservedList.getString("marnumber"));
-				res.setFacilitytype(reservedList.getString("facilitytype"));
+				res.setAssignedmar(reservedList.getString("marnumber"));
 				res.setFacilityname(reservedList.getString("facilityname"));
-				res.setTo(reservedList.getString("to"));
-				res.setFrom(reservedList.getString("from"));
+				res.setFacilitytype(reservedList.getString("facilitytype"));
+				res.setUrgency(reservedList.getString("urgency"));
+				res.setDescription(reservedList.getString("description"));
+				res.setReporteddate(reservedList.getString("reporteddate"));
+				res.setReportedby(reservedList.getString("reportedby"));
+				res.setAssignedDate(reservedList.getString("assignedDate"));
+				res.setEstimateofrepair(reservedList.getString("estimateofrepair"));
 				//res.setPhone(reservedList.getString("phone"));
 				//res.setEmail(reservedList.getString("email"));  
 				reservedListInDB.add(res);	
@@ -40,13 +43,15 @@ public class RepairerViewAssignedDAO {
 	
 
 	//************************************************8
-	public static ArrayList<RepairerViewAssigned>  listReservedRepairs(String username) { 
-			return ReturnReservedList("SELECT r.scheduleDate, m.marnumber, m.facilitytype, m.facilityname, f.to, f.from FROM repairschedule r, mar m, facilityreservation f WHERE r.mar = m.marnumber AND f.reservedUser = r.username AND m.facilityname = f.facilityname AND r.username = " + username + "");
+	public static ArrayList<RepairerViewAssigned>  listAssignedRepairs(String username) { 
+			return ReturnReservedList("SELECT a.marnumber, a.facilityname, a.facilitytype, a.urgency, a.description, a.reporteddate, a.reportedby, "
+					+ "a.assignedDate, a.estimateofrepair FROM mar a WHERE a.assignedTo = \"" + username + "\"");
 	}
 	
 	//search company with company ID
 	//***************************************************8
-	public static ArrayList<RepairerViewAssigned>   searchReservedRepair (String idMarnum, String username)  {  
-			return ReturnReservedList("SELECT r.scheduleDate, m.marnumber, m.facilitytype, m.facilityname, f.to, f.from FROM repairschedule r, mar m, facilityreservation f WHERE r.mar = m.marnumber AND f.reservedUser = r.username AND m.facilityname = f.facilityname AND r.username = "+ username +" AND m.marnumber = '"+idMarnum+"'");
+	public static ArrayList<RepairerViewAssigned>   searchAssignedRepair (String idMarnum, String username)  {  
+			return ReturnReservedList("SELECT a.marnumber, a.facilityname, a.facilitytype, a.urgency, a.description, a.reporteddate, a.reportedby,"
+					+ " a.assignedDate, a.estimateofrepair FROM mar a WHERE a.assignedTo = \"" + username + "\" AND a.marnumber = \""+idMarnum+"\"");
 	}
 }
