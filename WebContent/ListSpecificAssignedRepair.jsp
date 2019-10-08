@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Company form</title>
+<title>Specific Assigned Repair</title>
 </head>
 <div style="float:right">
 	  <form align="right" name="form1" method="post" action="index.jsp">
@@ -14,7 +14,7 @@
 	  </form>
 	  </div>
     <div class="header_resize">
-      <div class="logo"><h1><a href="/mac_repair">Mac Repair</a></h1></div>
+      <div class="logo"><h1><a href="/mac_repair/Repairer_Home.jsp">Mac Repair</a></h1></div>
       <div class="menu_nav">
       </div>
   </div>
@@ -24,7 +24,7 @@
    <td>
          <table border="1" class="myTable"> 
     <tr>
-    <td> Date: </td>
+    <td> Mar Number: </td>
     <td> <c:out value="${REPAIRERS.assignedmar}" /> </td>
     </tr>
 
@@ -74,7 +74,10 @@
 </td>
 </tr>
 </table>
-<button onclick="window.location.href = 'DeleteMar.jsp';" class="btn default">Cancel Repair</button>
-<button onclick="window.location.href = 'AssignMar.jsp';" class="btn default">Modify Repair</button>
+
+    <form name="Make Reservation" action="/mac_repair/RepairerReservationsController?action=searchFreeFacilities&id=${REPAIRERS.facilityname}&date=${REPAIRERS.assignedDate}" method="post">
+    <input name="action" value="searchFreeFacilities" type="hidden">
+    <input type="submit" value="Make Reservation">
+    </form>
 </body>
 </html>

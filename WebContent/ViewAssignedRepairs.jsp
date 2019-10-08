@@ -3,7 +3,7 @@
  <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>Companies List</title>
+<title>Assigned Repairs</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="style.css" rel="stylesheet" type="text/css" />
 <body>
@@ -15,7 +15,7 @@
 	  </form>
 	  </div>
     <div class="header_resize">
-      <div class="logo"><h1><a href="<c:url value='/mac_repair' />">Mac Repair</a></h1></div>
+      <div class="logo"><h1><a href="<c:url value='/Repairer_Home.jsp' />">Mac Repair</a></h1></div>
       <div class="menu_nav">
       </div>
   </div>

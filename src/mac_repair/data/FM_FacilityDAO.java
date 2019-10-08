@@ -35,6 +35,24 @@ public class FM_FacilityDAO {
 		return facilityListInDB;
 	}
 	
+	private static ArrayList<Facility> ReturnMatchingFacilityNames (String queryString) {
+		ArrayList<Facility> facilityNamesInDB = new ArrayList<Facility>();
+		
+		Statement stmt = null;
+		Connection conn = SQLConnection.getDBConnection();  
+		try {
+			stmt = conn.createStatement();
+			ResultSet facilityNames = stmt.executeQuery(queryString);
+			while (facilityNames.next()) {
+				Facility facility = new Facility(); 
+				facility.setName(facilityNames.getString("name"));
+				facility.setType(facilityNames.getString("facilitytype"));
+				facilityNamesInDB.add(facility);
+			}
+		} catch (SQLException e) {}
+		return facilityNamesInDB;
+	}
+	
 	
 
 	private static void StoreListinDB (FM_Facility mar,String queryString) {
@@ -76,5 +94,10 @@ public class FM_FacilityDAO {
 	//determine if companyID is unique
 	public static Boolean facilityNameunique(String name)  {  
 			return (ReturnMatchingFacilityList(" SELECT * from facilities WHERE name = '"+name+"' ORDER BY name").isEmpty());
+	}
+	
+	public static ArrayList<Facility> listFacilitiesNames(){
+		return ReturnMatchingFacilityNames(" SELECT name, facilitytype from facilities");
+
 	}
 }
