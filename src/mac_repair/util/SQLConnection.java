@@ -14,10 +14,10 @@ public class SQLConnection
 
     private SQLConnection() 
     {
-        DB_DRIVER = "com.mysql.jdbc.Driver";
+        DB_DRIVER = "com.mysql.cj.jdbc.Driver";
         DB_CONNECTION = "jdbc:mysql://localhost:3306/database?autoReconnect=true&useSSL=false";
         DB_USER = "root";
-        DB_PASSWORD = "Slothisme1234";
+        DB_PASSWORD = "root";
     }
 
     public static synchronized SQLConnection getInstance() 

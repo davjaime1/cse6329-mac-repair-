@@ -30,8 +30,8 @@ public class RepairerViewReservedDAO {
 				res.setMarnum(reservedList.getString("marnumber"));
 				res.setFacilitytype(reservedList.getString("facilitytype"));
 				res.setFacilityname(reservedList.getString("facilityname"));
-				res.setTo(reservedList.getString("to"));
-				res.setFrom(reservedList.getString("from"));
+				res.setTo(reservedList.getString("to").substring(0,19));
+				res.setFrom(reservedList.getString("from").substring(0,19));
 				//res.setPhone(reservedList.getString("phone"));
 				//res.setEmail(reservedList.getString("email"));  
 				reservedListInDB.add(res);	
@@ -334,5 +334,19 @@ public class RepairerViewReservedDAO {
         {
             System.out.println("Could remove reservation from database\n" + e.getMessage());
         }
+	}
+	
+	public static boolean canMakeRes(String idMarnum, String username)
+	{
+		ArrayList<RepairerViewReserved> list = new ArrayList<RepairerViewReserved>();
+		list = ReturnReservedList("SELECT r.scheduleDate, m.marnumber, m.facilitytype, m.facilityname, f.to, f.from FROM repairschedule r, mar m, facilityreservation f WHERE r.mar = m.marnumber AND f.reservedUser = r.username AND m.facilityname = f.facilityname AND r.username = \""+ username +"\" AND m.marnumber = \""+idMarnum+"\"");
+		if(list.size()==0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 }

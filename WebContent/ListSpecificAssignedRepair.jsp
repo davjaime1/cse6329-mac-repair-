@@ -75,7 +75,7 @@
 </tr>
 </table>
 
-    <form name="Make Reservation" action="/mac_repair/RepairerReservationsController?action=searchFreeFacilities&id=${REPAIRERS.facilityname}&date=${REPAIRERS.assignedDate}" method="post">
+    <form name="Make Reservation" action="/mac_repair/RepairerReservationsController?action=searchFreeFacilities&id=${REPAIRERS.facilityname}&date=${REPAIRERS.assignedDate}&mar=${REPAIRERS.assignedmar}" method="post">
     <input name="action" value="searchFreeFacilities" type="hidden">
     <input type="submit" value="Make Reservation">
     </form>

@@ -52,9 +52,12 @@ public class RepairerReservationsController extends HttpServlet {
 		}
 		else*/ if (action.equalsIgnoreCase("searchFreeFacilities"))
         {
+			String username = (String)session.getAttribute("username");
+			if(RepairerViewReservedDAO.canMakeRes(request.getParameter("mar"), username))
+			{
 			//action=listSpecificCompany
 			ArrayList<FreeReservations> freeReservations = new ArrayList<FreeReservations>();
-			String username = (String)session.getAttribute("username");
+			
 			//Use a java class to make a list of possible reservations
 			freeListPoss = RepairerViewReservedDAO.makePossibleFreeList(request.getParameter("id"), request.getParameter("date"));
 			//Then Access the database to remove ones that are already in the database for that particualar date
@@ -64,6 +67,12 @@ public class RepairerReservationsController extends HttpServlet {
 			//Now using the radio button, add the selected reservation to database
 			session.setAttribute("FREEREPAIRERS", freeListPoss);
 			url="/SearchFreeFacilities.jsp";
+			}
+			else
+			{
+				//Stay on the page
+				url="/ListSpecificAssignedRepair.jsp";
+			}
         }
 		else if(action.equalsIgnoreCase("modifyReservations"))
 		{
