@@ -1,11 +1,13 @@
 package mac_repair.data;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import mac_repair.model.FM_MAR;
 import mac_repair.model.User;
 import mac_repair.model.UserModel;
 import mac_repair.util.SQLConnection;
@@ -72,7 +74,29 @@ public class UserModelDAO {
 		} catch (SQLException e) {}
 		return fetch_profile;
 	}
-	
+	public static void UpdateinDB (UserModel user) {
+		Statement stmt = null;
+		Connection conn = SQLConnection.getDBConnection();  
+		try {
+			stmt = conn.createStatement();
+			String insertmar = "UPDATE users SET firstname = '"+ user.getFirstName()
+					+ "',"+ "lastname = '"+ user.getLastName() 
+					+ "',"+ "password = '"+ user.getPassword() 
+					+ "',"+ "address = '"+ user.getAddress()
+					+ "',"+ "city = '"+ user.getCity()
+					+ "',"+ "state = '"+ user.getState() 
+					+ "', " + "zip = '"+ user.getZip() 
+					+ "', " + "phone = '"+ user.getPhone() 
+					+ "', " + "role = '"+ user.getRole()
+					+ "', " +" email = '"+ user.getEmail()  + "' WHERE username = '" + user.getUsername()+ "'";
+			stmt.executeUpdate(insertmar);	
+			conn.commit(); 
+		} catch (SQLException e) {}
+	}
+
+	public static void updatetUser(UserModel user) {  
+		UpdateinDB(user);
+	} 
 	
 	public static void insertUser(UserModel user) {  
 		StoreListinDB(user,"INSERT INTO users (username,id,firstname,lastname,password,role,address,city,state,zip,phone,email) ");

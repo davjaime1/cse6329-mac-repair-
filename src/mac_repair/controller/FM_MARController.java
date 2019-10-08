@@ -63,24 +63,7 @@ public class FM_MARController extends HttpServlet {
 //		int selectedCompanyIndex;
 		session.removeAttribute("errorMsgs");
 
-//		if (action.equalsIgnoreCase("saveCompany") ) {  
-//			getCompanyParam(request,company);
-//			company.validateCompany(action,company,CerrorMsgs);
-//			session.setAttribute("company", company);
-//			if (!CerrorMsgs.getErrorMsg().equals("")) {// if error messages
-//				getCompanyParam(request,company);
-//				session.setAttribute("errorMsgs", CerrorMsgs);
-//				url="/formCompany.jsp";
-//			}
-//			else {// if no error messages
-//				CompanyDAO.insertCompany(company);
-//				EmployeeErrorMsgs EemperrorMsgs = new EmployeeErrorMsgs();
-//				session.setAttribute("errorMsgs", EemperrorMsgs);
-//				url="/formEmployee.jsp";
-//			}
-//		}
-//
-//		else 
+
 		  if (action.equalsIgnoreCase("searchMAR") ) {
 	
 			String marNumber = request.getParameter("idmarnumber");   

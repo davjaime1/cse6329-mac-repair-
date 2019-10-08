@@ -67,7 +67,7 @@ public class UserController extends HttpServlet
             /* This action displays the user's home page based on their role. */
             String roleId = (String) session.getAttribute("LOGIN_ROLE"),
                     homePageUrl;
-            
+
             if (roleId.equalsIgnoreCase("U"))
             {
                 homePageUrl = "/UserHome.jsp";
@@ -106,7 +106,8 @@ public class UserController extends HttpServlet
         String action = request.getParameter("action");
         HttpSession session = request.getSession();
         session.removeAttribute("errorMsgs");
-        
+        session.removeAttribute("user");
+        session.removeAttribute("USERS");
         
         if (action.equalsIgnoreCase("registerProfile"))
         {
@@ -164,6 +165,56 @@ public class UserController extends HttpServlet
             
             session.setAttribute("USERS", currentUser);
             getServletContext().getRequestDispatcher("/ViewProfile.jsp").forward(request, response);
+        }
+        else if (action.equalsIgnoreCase("updateProfileView"))
+        {
+            String username = (String) session.getAttribute("username");
+          //  System.out.println(username);
+            
+            ArrayList<UserModel> fetch_profile = new ArrayList<UserModel>();
+            fetch_profile = UserModelDAO.returnProfile(username);
+            UserModel currentUser = new UserModel();
+            currentUser.setUser(
+                    fetch_profile.get(0).getUsername(),
+                    fetch_profile.get(0).getUtaId(),
+                    fetch_profile.get(0).getFirstName(),
+                    fetch_profile.get(0).getLastName(),
+                    fetch_profile.get(0).getPassword(),
+                    fetch_profile.get(0).getRole(),
+                    fetch_profile.get(0).getAddress(),
+                    fetch_profile.get(0).getState(),
+                    fetch_profile.get(0).getCity(),
+                    fetch_profile.get(0).getZip(),
+                    fetch_profile.get(0).getPhone(),
+                    fetch_profile.get(0).getEmail());
+            
+            session.setAttribute("user", currentUser);
+            ArrayList<State> stateInDB = new ArrayList<State>();
+
+            stateInDB = FM_UtilityDAO.listStates();
+            session.setAttribute("STATE", stateInDB);
+            getServletContext().getRequestDispatcher("/UpdateProfile.jsp").forward(request, response);
+        }
+        else if (action.equalsIgnoreCase("updateProfile"))
+        {
+            UserModel user = new UserModel();
+            UserErrorMsgs CerrorMsgs = new UserErrorMsgs();
+            userParam(request, user);
+            user.validateUser(action, CerrorMsgs);
+            session.setAttribute("user", user);
+            if (!CerrorMsgs.getErrorMsg().equals(""))
+            {
+                // if error messages
+                session.setAttribute("errorMsgs", CerrorMsgs);
+                getServletContext().getRequestDispatcher("/UpdateProfile.jsp").forward(request, response);
+            }
+            else
+            {
+                // if no error messages
+                UserModelDAO.updatetUser(user);
+				session.setAttribute("USERS", user);
+                getServletContext().getRequestDispatcher("/ViewProfile.jsp").forward(request, response);
+            }
         }
         
         else // (action == loginUser)
