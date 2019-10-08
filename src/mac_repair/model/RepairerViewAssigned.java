@@ -7,22 +7,26 @@ import mac_repair.data.RepairerViewAssignedDAO;
 public class RepairerViewAssigned implements Serializable{
 
 	private static final long serialVersionUID = 3L;
+	private String assignedmar;
 	private String facilitytype;
 	private String facilityname;
-	private String date;
-	private String marnum;
-	private String to;
-	private String from;
-	private String phone;
-	private String email;
+	private String urgency;
+	private String description;
+	private String reporteddate;
+	private String reportedby;
+	private String assignedDate;
+	private String estimateofrepair;
 	
-	public void setReserved (String date, String marnum, String facilitytype, String facilityname, String to, String from) {
+	public void setReserved (String assignedmar, String facilityname, String facilitytype, String urgency, String description, String reporteddate, String reportedby, String assignedDate, String estimateofrepair) {
 		setFacilitytype(facilitytype);
 		setFacilityname(facilityname);
-		setDate(date);
-		setMarnum(marnum);
-		setTo(to);
-		setFrom(from);
+		setAssignedmar(assignedmar);
+		setUrgency(urgency);
+		setDescription(description);
+		setReporteddate(reporteddate);
+		setReportedby(reportedby);
+		setAssignedDate(assignedDate);
+		setEstimateofrepair(estimateofrepair);
 	}
 	
 	public String getFacilitytype() {
@@ -39,47 +43,64 @@ public class RepairerViewAssigned implements Serializable{
 		this.facilityname = facilityname;
 	}
 	
-	public String getMarnum() {
-		return marnum;
+	public String getAssignedmar() {
+		return assignedmar;
 	}
-	public void setMarnum(String marnum) {
-		this.marnum = marnum;
-	}
-	
-	public String getTo() {
-		return to;
-	}
-	public void setTo(String to) {
-		this.to = to;
+	public void setAssignedmar(String assignedmar) {
+		this.assignedmar = assignedmar;
 	}
 	
-	public String getFrom() {
-		return from;
+	public String getUrgency() {
+		return urgency;
 	}
-	public void setFrom(String from) {
-		this.from = from;
-	}
-	
-	public String getDate() {
-		return date;
-	}
-	public void setDate(String date) {
-		this.date = date;
+	public void setUrgency(String urgency) {
+		this.urgency = urgency;
 	}
 	
-	public String getPhone() {
-		return phone;
+	public String getDescription() {
+		return description;
 	}
-	public void setPhone(String phone) {
-        this.phone = phone;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
-	public String getEmail() {
-		return email;
+	public String getReporteddate()
+	{
+		return reporteddate;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	
+	public void setReporteddate(String reporteddate) {
+		this.reporteddate = reporteddate;
 	}
+	
+	public String getReportedby() {
+		return reportedby;
+	}
+	
+	public void setReportedby(String reportedby)
+	{
+		this.reportedby = reportedby;
+	}
+	
+	public String getAssignedDate() {
+		return assignedDate;
+	}
+	
+	public void setAssignedDate(String assigneddate) {
+		this.assignedDate = assigneddate;
+	}
+	
+	public String getEstimateofrepair() {
+		return estimateofrepair;
+	}
+	
+	public void setEstimateofrepair(String estimateofrepair) {
+		this.estimateofrepair = estimateofrepair;
+	}
+	
+	
+	
+
 
 
 //	This section is for general purpose methods used internally in this class

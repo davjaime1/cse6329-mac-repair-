@@ -48,6 +48,7 @@
                 <td>MAR Number</td>
                 <td>Date</td>
                 <td>Facility Name</td>
+                <td>Urgency</td>
             </tr>
 
             <c:forEach items="${MARS}" var="item">
@@ -62,7 +63,10 @@
                         <c:out value="${item.facilityName}" />
                     </td>
                     <td>
-                        <a href="/mac_repair/MarController?action=ListSpecificMarAction&username=${item.marID}">View</a>
+                        <c:out value="${item.urgency}" />
+                    </td>
+                    <td>
+                        <a href="/mac_repair/MarController?action=ViewSpecificMar&marid=${item.marID}">View</a>
                     </td>
                 </tr>
             </c:forEach>
