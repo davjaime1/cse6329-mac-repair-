@@ -106,7 +106,7 @@ public class FM_MARDAO
     
     public static void insertMAR(FM_MAR mar)
     {
-        StoreListinDB(mar, "INSERT INTO mar (marnumber,assigneddate,facilitytype,facilityname,description,urgency,reportedby) ");
+        StoreListinDB(mar, "INSERT INTO mar (marnumber,reporteddate,facilitytype,facilityname,description,urgency,reportedby) ");
     }
     
     
