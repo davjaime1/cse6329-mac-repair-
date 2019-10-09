@@ -265,7 +265,7 @@ CREATE TABLE `repairschedule` (
   `scheduleDate` date NOT NULL,
   KEY `fk_rs_username_idx` (`username`),
   KEY `fk_rs_mar_idx` (`mar`),
-  CONSTRAINT `fk_rs_mar` FOREIGN KEY (`mar`) REFERENCES `assignedmar` (`assignedmar`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_rs_mar` FOREIGN KEY (`mar`) REFERENCES `mar` (`marnumber`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_rs_username` FOREIGN KEY (`username`) REFERENCES `users` (`username`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;

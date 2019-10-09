@@ -108,7 +108,8 @@ public class FM_AssignMARController extends HttpServlet {
 				repairschedule.setRepairSchedule(assignmar.getAssignedTo(), assignmar.getMarID(), assignmar.getAssignedDate());
 				FM_RepairScheduleDAO.insertRepairSchedule(repairschedule);
 				//FM_MARDAO.deleteMAR(assignmar.getMarID());
-				url="/FM_Home.jsp";
+				session.setAttribute("ASSIGNEDMARS", assignmar);
+				url="/FM_ViewSpecificAssignedMAR.jsp";	
 			}
 		}
 		else if(action.contains("modify")) {

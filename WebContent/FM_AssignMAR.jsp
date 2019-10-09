@@ -63,6 +63,8 @@
     <tr>
     <td> Description (*): </td>
     <td> <input name="iddescription" value="<c:out value='${MAR.description}'/>" type="text" maxlength="16"> </td>
+       	<td> <input name="assignedToIDerror"  value="<c:out value='${errorMsgs.descriptionErrorMsgs}'/>" type="text"  style ="background-color: white; color: red; border: none; width: 800px"  disabled="disabled" maxlength="60"> </td>
+   
     </tr>
 
 

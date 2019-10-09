@@ -19,7 +19,7 @@
             <li><a href="/mac_repair/MarController?action=NewMarAction">Create MAR</a></li>
             <li><a href="/mac_repair/MarController?action=ListMarsAction">View MARs</a></li>
             <li><a href="/mac_repair/UserController?action=viewProfile" target="_top"><span>View Profile</span></a></li>
-            <li><a href="/mac_repair/UserController?action=updateProfile" target="_top"><span>Update Profile</span></a></li>
+            <li><a href="/mac_repair/UserController?action=updateProfileView" target="_top"><span>Update Profile</span></a></li>
             <li><a href="/mac_repair/UserController?action=logOut" target="_top"><span>Log Out</span></a></li>
         </ul>
 

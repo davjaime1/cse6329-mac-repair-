@@ -34,7 +34,7 @@ public class FM_MARDAO
                 mar.setUrgency(marList.getString("urgency"));
                 mar.setDescription(marList.getString("description"));
                 mar.setReportedUser(marList.getString("reportedby"));
-                mar.setDate(marList.getString("assigneddate"));
+                mar.setDate(marList.getString("reporteddate"));
                 marListInDB.add(mar);
             }
         }
@@ -106,7 +106,7 @@ public class FM_MARDAO
     
     public static void insertMAR(FM_MAR mar)
     {
-        StoreListinDB(mar, "INSERT INTO mar (marnumber,assigneddate,facilitytype,facilityname,description,urgency,reportedby) ");
+        StoreListinDB(mar, "INSERT INTO mar (marnumber,reporteddate,facilitytype,facilityname,description,urgency,reportedby) ");
     }
     
     
@@ -136,7 +136,7 @@ public class FM_MARDAO
     
     public static ArrayList<FM_MAR> listMARs()
     {
-        return ReturnMatchingMARList(" SELECT * from mar WHERE assigneddate = CURDATE() ORDER BY marnumber");
+        return ReturnMatchingMARList(" SELECT * from mar WHERE assignedto IS NULL ORDER BY marnumber");
     }
     
     // search companies

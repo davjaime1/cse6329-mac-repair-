@@ -122,11 +122,14 @@ public class FM_MAR implements Serializable{
 		if (action.contains("saveassignedmar")) {
 			errorMsgs.setAssignedDatErrorMsgs(validateAssignedDate(this.getAssignedDate()));
 			errorMsgs.setAssignedToErrorMsgs(validateAssignedTo(this.getAssignedTo(),this.getAssignedDate()));
+			errorMsgs.setDescriptionErrorMsgs(validateDescription(this.getDescription()));
+
 			errorMsgs.setErrorMsg(action);
 		}
 		else if (action.contains("savemodifiedassignedmar")) {
 			errorMsgs.setAssignedDatErrorMsgs(validateAssignedDate(this.getAssignedDate()));
 			errorMsgs.setAssignedToErrorMsgs(validateAssignedTo(this.getAssignedTo(),this.getAssignedDate()));
+			errorMsgs.setDescriptionErrorMsgs(validateDescription(this.getDescription()));
 			errorMsgs.setErrorMsg(action);
 		}
 		else if (action.equals("searchMAR")) {
@@ -146,27 +149,28 @@ public class FM_MAR implements Serializable{
 
 	}
 	
-
+	
+	private String validateDescription (String description) {
+		String result="";
+		if (description.isEmpty()){
+			result= "Description should not be null";
+		}
+		return result;				
+	}
 	private String validateAssignedDate (String assignedDate) {
 		String result="";
-		Date date = new Date(System.currentTimeMillis());
-		Date assgnDate = FM_UtilityDAO.mysqlDate(assignedDate);
-		LocalDate  loccurDate = date.toLocalDate();
+		Date assgnDate = FM_UtilityDAO.mysqlDateassignmar(assignedDate);
+		LocalDate  loccurDate = LocalDate.now();
 		LocalDate  locassgnDate = assgnDate.toLocalDate();
-		if (loccurDate.compareTo(locassgnDate)>0){
+		if (locassgnDate.isBefore(loccurDate)){
 			result= "Assign Date Should be current of future";
 		}
-//		else
-//			if (!isTextAnInteger(marNumber))
-//				result="Your Employee ID must be a number";
-//			else
-//				if (!EmployeeDAO.uniqueEmpID(marNumber))
-//					result="Employee ID already in database";
+
 		return result;				
 	}
 	private String validateAssignedTo (String assignedTo, String assignedDate) {
 		String result="";
-		Date assgnDate = FM_UtilityDAO.mysqlDate(assignedDate);
+		Date assgnDate = FM_UtilityDAO.mysqlDateassignmar(assignedDate);
 		if (FM_RepairScheduleDAO.validRepairSchedule(assignedTo, assgnDate))
 			result= "Your Repair Schedule Overloaded";
 //		else

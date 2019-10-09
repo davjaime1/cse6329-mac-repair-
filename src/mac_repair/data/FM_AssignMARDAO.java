@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import mac_repair.util.SQLConnection;
-import mac_repair.model.FM_AssignMAR;
+//import mac_repair.model.FM_MAR;
 import mac_repair.model.FM_EstimateOfRepair;
 import mac_repair.model.FM_MAR;
 import mac_repair.model.FM_Repairers;
@@ -16,8 +16,8 @@ public class FM_AssignMARDAO {
 
 	static SQLConnection DBMgr = SQLConnection.getInstance();
 	
-	private static ArrayList<FM_AssignMAR> ReturnMatchingAssignedMARList (String queryString) {
-		ArrayList<FM_AssignMAR> assignedmarListInDB = new ArrayList<FM_AssignMAR>();
+	private static ArrayList<FM_MAR> ReturnMatchingAssignedMARList (String queryString) {
+		ArrayList<FM_MAR> assignedmarListInDB = new ArrayList<FM_MAR>();
 		
 		Statement stmt = null;
 		Connection conn = SQLConnection.getDBConnection();  
@@ -25,8 +25,8 @@ public class FM_AssignMARDAO {
 			stmt = conn.createStatement();
 			ResultSet assignedmarList = stmt.executeQuery(queryString);
 			while (assignedmarList.next()) {
-				FM_AssignMAR assignedmar = new FM_AssignMAR(); 
-				assignedmar.setMarID(assignedmarList.getString("assignedmar"));
+				FM_MAR assignedmar = new FM_MAR(); 
+				assignedmar.setMarID(assignedmarList.getString("marnumber"));
 				assignedmar.setDate(assignedmarList.getString("reporteddate"));
 				assignedmar.setFacilityType(assignedmarList.getString("facilitytype"));
 				assignedmar.setFacilityName(assignedmarList.getString("facilityname"));  
@@ -42,9 +42,9 @@ public class FM_AssignMARDAO {
 		return assignedmarListInDB;
 	}
 	
-	private static void StoreListinDB (FM_AssignMAR assignmar,String queryString) {
+	private static void StoreListinDB (FM_MAR assignmar,String queryString) {
 		Statement stmt = null;
-		Date assignedDate = FM_UtilityDAO.mysqlDate(assignmar.getAssignedDate());
+		Date assignedDate = FM_UtilityDAO.mysqlDateassignmar(assignmar.getAssignedDate());
 		Connection conn = SQLConnection.getDBConnection();  
 		try {
 			stmt = conn.createStatement();
@@ -66,47 +66,48 @@ public class FM_AssignMARDAO {
 	
 	
 
-	public static void UpdateinDB (FM_AssignMAR mar) {
+	public static void UpdateinDB (FM_MAR mar) {
 		Statement stmt = null;
-		Date assignedDate = FM_UtilityDAO.mysqlDate(mar.getAssignedDate());
+		Date assignedDate = FM_UtilityDAO.mysqlDateassignmar(mar.getAssignedDate());
 		Connection conn = SQLConnection.getDBConnection();  
 		try {
 			stmt = conn.createStatement();
-			String insertmar = "UPDATE assignedmar SET description = '"+ mar.getDescription()+ "',"
+			String insertmar = "UPDATE mar SET description = '"+ mar.getDescription()+ "',"
 					+ "urgency = '"+ mar.getUrgency() 
 					+ "', " + "assignedto = '"+ mar.getAssignedTo() 
 					+ "', " + "assignedDate = '"+ assignedDate.toString() 
-					+ "', " +" estimateofrepair = '"+ mar.getEstimateOfRepair()  + "' WHERE assignedmar = '" + mar.getMarID()+ "'";
+					+ "', " +" estimateofrepair = '"+ mar.getEstimateOfRepair()  + "' WHERE marnumber = '" + mar.getMarID()+ "'";
 			stmt.executeUpdate(insertmar);	
 			conn.commit(); 
 		} catch (SQLException e) {}
 	}
 
-	public static void insertAssignedMAR(FM_AssignMAR mar) {  
-		StoreListinDB(mar,"INSERT INTO assignedmar (assignedmar,reporteddate,facilitytype,facilityname,description,urgency,reportedby,assignedto,assignedDate,estimateofrepair) ");
+	public static void insertAssignedMAR(FM_MAR mar) {  
+		UpdateinDB(mar);
+		//StoreListinDB(mar,"INSERT INTO mar (marnumber,reporteddate,facilitytype,facilityname,description,urgency,reportedby,assignedto,assignedDate,estimateofrepair) ");
 	} 
 	
-	public static ArrayList<FM_AssignMAR>  listAssignedMARs() {  
-			return ReturnMatchingAssignedMARList(" SELECT * from assignedmar WHERE assigneddate >= CURDATE() ORDER BY assignedmar");
+	public static ArrayList<FM_MAR>  listAssignedMARs() {  
+			return ReturnMatchingAssignedMARList(" SELECT * from mar WHERE assignedto IS NOT NULL ORDER BY marnumber");
 	}
 	
 	//search companies
-	public static ArrayList<FM_AssignMAR>  searchMARByNumber(String marnumber)  {  
-			return ReturnMatchingAssignedMARList(" SELECT * from assignedmar WHERE assignedmar LIKE '%"+marnumber+"%' ORDER BY assignedmar");
+	public static ArrayList<FM_MAR>  searchMARByNumber(String marnumber)  {  
+			return ReturnMatchingAssignedMARList(" SELECT * from mar WHERE marnumber LIKE '%"+marnumber+"%' ORDER BY marnumber");
 	}
-	public static ArrayList<FM_AssignMAR>  searchMARByFacilityType(String facilitytype)  {  
-		return ReturnMatchingAssignedMARList(" SELECT * from assignedmar WHERE facilitytype LIKE '%"+facilitytype+"%' ORDER BY assignedmar");
+	public static ArrayList<FM_MAR>  searchMARByFacilityType(String facilitytype)  {  
+		return ReturnMatchingAssignedMARList(" SELECT * from mar WHERE facilitytype LIKE '%"+facilitytype+"%' ORDER BY marnumber");
 	}
-	public static ArrayList<FM_AssignMAR>  searchMARByFacilityName(String facilityName)  {  
-		return ReturnMatchingAssignedMARList(" SELECT * from assignedmar WHERE facilityname LIKE '%"+facilityName+"%' ORDER BY assignedmar");
+	public static ArrayList<FM_MAR>  searchMARByFacilityName(String facilityName)  {  
+		return ReturnMatchingAssignedMARList(" SELECT * from mar WHERE facilityname LIKE '%"+facilityName+"%' ORDER BY marnumber");
 	}
-	public static ArrayList<FM_AssignMAR>  listAssignedMARstoaRepairer(String username)  {  
-		return ReturnMatchingAssignedMARList(" SELECT * from assignedmar WHERE assignedto = '"+username+"' ORDER BY assignedmar");
+	public static ArrayList<FM_MAR>  listAssignedMARstoaRepairer(String username)  {  
+		return ReturnMatchingAssignedMARList(" SELECT * from mar WHERE assignedto = '"+username+"' ORDER BY marnumber");
 }
 	
 
 	//determine if companyID is unique
 	public static Boolean marIDunique(String marnumber)  {  
-			return (ReturnMatchingAssignedMARList(" SELECT * from assignedmar WHERE assignedmar = '"+marnumber+"' ORDER BY assignedmar").isEmpty());
+			return (ReturnMatchingAssignedMARList(" SELECT * from mar WHERE marnumber = '"+marnumber+"' ORDER BY assignedmar").isEmpty());
 	}
 }

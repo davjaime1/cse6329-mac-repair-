@@ -1,13 +1,13 @@
 package mac_repair.data;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.sql.Date;
 import mac_repair.model.FM_Duration;
 import mac_repair.model.FM_EstimateOfRepair;
 import mac_repair.model.FM_FacilityType;
@@ -37,6 +37,21 @@ public class FM_UtilityDAO {
 			}
 			return date;		
 	}
+	public static Date mysqlDateassignmar(String dateString) {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+		Date date = new Date(System.currentTimeMillis());
+		try {
+			java.util.Date utiDate = format.parse(dateString);
+			date = new java.sql.Date(utiDate.getTime());
+			//System.out.println(date);  
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return date;		
+}
+
 	private static ArrayList<FM_Repairers> ReturnMatchingRepaierList(String queryString) {
 		// TODO Auto-generated method stub
 		ArrayList<FM_Repairers> repairListInDB = new ArrayList<FM_Repairers>();
