@@ -34,7 +34,7 @@ public class FM_MARDAO
                 mar.setUrgency(marList.getString("urgency"));
                 mar.setDescription(marList.getString("description"));
                 mar.setReportedUser(marList.getString("reportedby"));
-                mar.setDate(marList.getString("assigneddate"));
+                mar.setDate(marList.getString("reporteddate"));
                 marListInDB.add(mar);
             }
         }
