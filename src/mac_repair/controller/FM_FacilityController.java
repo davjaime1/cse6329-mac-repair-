@@ -75,13 +75,8 @@ public class FM_FacilityController extends HttpServlet {
 			}
 			else {// if no error messages
 				FM_FacilityDAO.insertFacility(facility);
-				FM_FacilityErrorMsgs facerrorMsgs = new FM_FacilityErrorMsgs();
-				facerrorMsgs.setErrorMsg("Facility Added SucessFully");
-				facerrorMsgs.setFacilityNameError("");
-				facility.setFacilityName("");
-				session.setAttribute("facility", facility);
-				session.setAttribute("errorMsgs", facerrorMsgs);
-				url="/FM_AddFacility.jsp";
+				session.removeAttribute("errorMsgs");
+				url="/FM_ViewSpecificFacility.jsp";
 			}
 		}
 //

@@ -121,14 +121,15 @@ public class FM_MAR implements Serializable{
 	public void validateMAR (String action, FM_MARErrorMsgs errorMsgs) {
 		if (action.contains("saveassignedmar")) {
 			errorMsgs.setAssignedDatErrorMsgs(validateAssignedDate(this.getAssignedDate()));
-			errorMsgs.setDescriptionErrorMsgs(validateAssignedTo(this.getAssignedTo(),this.getAssignedDate()));
-			errorMsgs.setAssignedToErrorMsgs(validateDescription(this.getDescription()));
+			errorMsgs.setAssignedToErrorMsgs(validateAssignedTo(this.getAssignedTo(),this.getAssignedDate()));
+			errorMsgs.setDescriptionErrorMsgs(validateDescription(this.getDescription()));
 
 			errorMsgs.setErrorMsg(action);
 		}
 		else if (action.contains("savemodifiedassignedmar")) {
 			errorMsgs.setAssignedDatErrorMsgs(validateAssignedDate(this.getAssignedDate()));
 			errorMsgs.setAssignedToErrorMsgs(validateAssignedTo(this.getAssignedTo(),this.getAssignedDate()));
+			errorMsgs.setDescriptionErrorMsgs(validateDescription(this.getDescription()));
 			errorMsgs.setErrorMsg(action);
 		}
 		else if (action.equals("searchMAR")) {
@@ -161,15 +162,10 @@ public class FM_MAR implements Serializable{
 		Date assgnDate = FM_UtilityDAO.mysqlDateassignmar(assignedDate);
 		LocalDate  loccurDate = LocalDate.now();
 		LocalDate  locassgnDate = assgnDate.toLocalDate();
-		if (locassgnDate.isAfter(loccurDate)){
+		if (locassgnDate.isBefore(loccurDate)){
 			result= "Assign Date Should be current of future";
 		}
-//		else
-//			if (!isTextAnInteger(marNumber))
-//				result="Your Employee ID must be a number";
-//			else
-//				if (!EmployeeDAO.uniqueEmpID(marNumber))
-//					result="Employee ID already in database";
+
 		return result;				
 	}
 	private String validateAssignedTo (String assignedTo, String assignedDate) {

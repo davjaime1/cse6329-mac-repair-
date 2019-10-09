@@ -1,13 +1,13 @@
 package mac_repair.data;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.sql.Date;
 import mac_repair.model.FM_Duration;
 import mac_repair.model.FM_EstimateOfRepair;
 import mac_repair.model.FM_FacilityType;
@@ -38,7 +38,7 @@ public class FM_UtilityDAO {
 			return date;		
 	}
 	public static Date mysqlDateassignmar(String dateString) {
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
 		Date date = new Date(System.currentTimeMillis());
 		try {
