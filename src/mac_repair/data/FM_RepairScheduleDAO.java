@@ -43,7 +43,7 @@ public class FM_RepairScheduleDAO {
 	private static void StoreListinDB (FM_RepairSchedule repSchedule,String queryString) {
 		Statement stmt = null;
 		Connection conn = SQLConnection.getDBConnection();  
-		Date assignedDate = FM_UtilityDAO.mysqlDate(repSchedule.getScheduleDate());
+		Date assignedDate = FM_UtilityDAO.mysqlDateassignmar(repSchedule.getScheduleDate());
 		try {
 			stmt = conn.createStatement();
 			String insertmar = queryString + " VALUES ('"  

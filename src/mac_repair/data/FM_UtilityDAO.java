@@ -37,6 +37,21 @@ public class FM_UtilityDAO {
 			}
 			return date;		
 	}
+	public static Date mysqlDateassignmar(String dateString) {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
+
+		Date date = new Date(System.currentTimeMillis());
+		try {
+			java.util.Date utiDate = format.parse(dateString);
+			date = new java.sql.Date(utiDate.getTime());
+			//System.out.println(date);  
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return date;		
+}
+
 	private static ArrayList<FM_Repairers> ReturnMatchingRepaierList(String queryString) {
 		// TODO Auto-generated method stub
 		ArrayList<FM_Repairers> repairListInDB = new ArrayList<FM_Repairers>();

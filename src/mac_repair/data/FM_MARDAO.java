@@ -136,7 +136,7 @@ public class FM_MARDAO
     
     public static ArrayList<FM_MAR> listMARs()
     {
-        return ReturnMatchingMARList(" SELECT * from mar WHERE assigneddate = CURDATE() ORDER BY marnumber");
+        return ReturnMatchingMARList(" SELECT * from mar WHERE assignedto IS NULL ORDER BY marnumber");
     }
     
     // search companies

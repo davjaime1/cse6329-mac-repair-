@@ -121,7 +121,9 @@ public class FM_MAR implements Serializable{
 	public void validateMAR (String action, FM_MARErrorMsgs errorMsgs) {
 		if (action.contains("saveassignedmar")) {
 			errorMsgs.setAssignedDatErrorMsgs(validateAssignedDate(this.getAssignedDate()));
-			errorMsgs.setAssignedToErrorMsgs(validateAssignedTo(this.getAssignedTo(),this.getAssignedDate()));
+			errorMsgs.setDescriptionErrorMsgs(validateAssignedTo(this.getAssignedTo(),this.getAssignedDate()));
+			errorMsgs.setAssignedToErrorMsgs(validateDescription(this.getDescription()));
+
 			errorMsgs.setErrorMsg(action);
 		}
 		else if (action.contains("savemodifiedassignedmar")) {
@@ -146,14 +148,20 @@ public class FM_MAR implements Serializable{
 
 	}
 	
-
+	
+	private String validateDescription (String description) {
+		String result="";
+		if (description.isEmpty()){
+			result= "Description should not be null";
+		}
+		return result;				
+	}
 	private String validateAssignedDate (String assignedDate) {
 		String result="";
-		Date date = new Date(System.currentTimeMillis());
-		Date assgnDate = FM_UtilityDAO.mysqlDate(assignedDate);
-		LocalDate  loccurDate = date.toLocalDate();
+		Date assgnDate = FM_UtilityDAO.mysqlDateassignmar(assignedDate);
+		LocalDate  loccurDate = LocalDate.now();
 		LocalDate  locassgnDate = assgnDate.toLocalDate();
-		if (loccurDate.compareTo(locassgnDate)>0){
+		if (locassgnDate.isAfter(loccurDate)){
 			result= "Assign Date Should be current of future";
 		}
 //		else
@@ -166,7 +174,7 @@ public class FM_MAR implements Serializable{
 	}
 	private String validateAssignedTo (String assignedTo, String assignedDate) {
 		String result="";
-		Date assgnDate = FM_UtilityDAO.mysqlDate(assignedDate);
+		Date assgnDate = FM_UtilityDAO.mysqlDateassignmar(assignedDate);
 		if (FM_RepairScheduleDAO.validRepairSchedule(assignedTo, assgnDate))
 			result= "Your Repair Schedule Overloaded";
 //		else

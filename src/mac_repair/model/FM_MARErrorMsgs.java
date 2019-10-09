@@ -8,6 +8,7 @@ public class FM_MARErrorMsgs {
 		private String assignedDatErrorMsgs;
 		private String marNumberError;
 		private String facilityNameError;
+		private String descriptionErrorMsgs;
 		
 		public FM_MARErrorMsgs() {
 			this.errorMsg = "";
@@ -27,11 +28,11 @@ public class FM_MARErrorMsgs {
 		}
 		public void setErrorMsg(String action) {
 			if (action.contains("saveassignedmar")) {
-				if(!assignedToErrorMsgs.equals("") || !assignedDatErrorMsgs.equals("") 	)
+				if(!assignedToErrorMsgs.equals("") || !assignedDatErrorMsgs.equals("") || !descriptionErrorMsgs.equals("")	)
 					errorMsg = "Please correct the following errors";
 			}
 			else if (action.contains("savemodifiedassignedmar")) {
-				if(!assignedToErrorMsgs.equals("") || !assignedDatErrorMsgs.equals("") 	)
+				if(!assignedToErrorMsgs.equals("") || !assignedDatErrorMsgs.equals("") || !descriptionErrorMsgs.equals("")		)
 					errorMsg = "Please correct the following errors";
 			}
 			else {
@@ -74,6 +75,14 @@ public class FM_MARErrorMsgs {
 
 		public void setFacilityNameError(String facilityNameError) {
 			this.facilityNameError = facilityNameError;
+		}
+
+		public String getDescriptionErrorMsgs() {
+			return descriptionErrorMsgs;
+		}
+
+		public void setDescriptionErrorMsgs(String descriptionErrorMsgs) {
+			this.descriptionErrorMsgs = descriptionErrorMsgs;
 		}
 
 		
