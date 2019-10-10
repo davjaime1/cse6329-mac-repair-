@@ -75,7 +75,7 @@ public class FM_Facility implements Serializable{
 			}
 			else
 				if (action.equals("searchFacility")) {
-					if (this.facilityType.equals("") && this.venue.equals("")) 
+					if (this.facilityType.equals("") && this.facilityName.equals("")) 
 						errorMsgs.setFacilityNameError("Both Name and Type cannot be blank");
 
 					errorMsgs.setErrorMsg();				

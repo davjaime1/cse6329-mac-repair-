@@ -12,11 +12,13 @@ public class FM_FacilityErrorMsgs {
 	public FM_FacilityErrorMsgs() {
 		this.errorMsg = "";
 // Comment out the following to get PIT coverage even though it is not per Oracle
-/*		this.employeeIDerror = "";
-		this.firstNameError = "";
-		this.lastNameError = "";
-		this.companyBadgeError = "";
-*/	}
+		this.facilityTypeError = "";
+		this.facilityNameError = "";
+		this.venueError = "";
+		this.timeIntervalError = "";
+		this.durationError = "";
+
+	}
 
 	public String getErrorMsg() {
 		return errorMsg;

@@ -42,6 +42,8 @@ public class FM_FacilityController extends HttpServlet {
 		}
 		else if(action.equalsIgnoreCase("searchPage"))
 		{
+			session.removeAttribute("facility");
+
 			url="/FM_SearchFacility.jsp";
 			getServletContext().getRequestDispatcher(url).forward(request, response);
 		}
@@ -79,11 +81,18 @@ public class FM_FacilityController extends HttpServlet {
 				url="/FM_ViewSpecificFacility.jsp";
 			}
 		}
+		if(action.equalsIgnoreCase("viewSpecificFacility")) {
+			String selectedFacility = request.getParameter("id");
+			ArrayList<FM_Facility> 	facilityInDB=FM_FacilityDAO.searchFacilityByName(selectedFacility);
+			FM_Facility facility1 = facilityInDB.get(0);
+			session.setAttribute("facility", facility1);
+			url="/FM_ViewSpecificFacility.jsp";
+		}
 //
 //		else 
 		  if (action.equalsIgnoreCase("searchFacility") ) {
-	
-			String facilityName = request.getParameter("idname");   
+			session.removeAttribute("facility");
+			String facilityName = request.getParameter("idfacilityname");   
 			String facilityType = request.getParameter("idfacilitytype");
 
 			session.removeAttribute("errorMsgs");
@@ -98,7 +107,7 @@ public class FM_FacilityController extends HttpServlet {
 					facilityInDB=FM_FacilityDAO.searchFacilityType(facilityType);
 
 				session.setAttribute("FACILITIES", facilityInDB);
-				url="/FM_FacilityeSarchResults.jsp";
+				url="/FM_ListFacilities.jsp";
 			}
 			else {
 				session.setAttribute("facility", facility);

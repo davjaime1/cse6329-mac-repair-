@@ -14,18 +14,18 @@
 <table>
 <tr>
 	<td>
-	<form action="/mac_repair/FM_MARController?action=searchMAR" method="post">
+	<form action="/mac_repair/FM_FacilityController?action=searchFacility" method="post">
 	<table style="width: 1200px; ">
 	<tr>
 	<tr>
   	<td> Facility Name: </td>
- 	<td> <input name="idmarnumber" value="<c:out value='${facility.facilityName}'/>" type="text" maxlength="45">  </td>
+ 	<td> <input name="idfacilityname" value="<c:out value='${facility.facilityName}'/>" type="text" maxlength="45">  </td>
   	<td> <input name="marnumberError"  value="<c:out value='${errorMsgs.facilityNameError}'/>" type="text"  style ="background-color: white; color: red; border: none; width: 800px"   disabled="disabled" maxlength="60"> </td>
 	</tr>
  
     <tr>
     <td> Facility Type: </td>
-    <td> <input name="idfacilityname" value="<c:out value='${facility.facilityType}'/>" type="text" maxlength="16"> </td>
+    <td> <input name="idfacilitytype" value="<c:out value='${facility.facilityType}'/>" type="text" maxlength="16"> </td>
  	<td> <input name="facilityname"  value="<c:out value='${errorMsgs.facilityTypeError}'/>" type="text"  style ="background-color: white; color: red; border: none; width: 800px"   disabled="disabled" maxlength="60"> </td>
 
     </tr>

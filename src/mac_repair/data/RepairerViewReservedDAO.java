@@ -92,9 +92,9 @@ public class RepairerViewReservedDAO {
 			return ReturnReservedList("SELECT r.scheduleDate, m.marnumber, m.facilitytype, m.facilityname, f.to, f.from FROM repairschedule r, mar m, facilityreservation f WHERE r.mar = m.marnumber AND f.reservedUser = r.username AND m.facilityname = f.facilityname AND r.username = \""+ username +"\" AND m.marnumber = \""+idMarnum+"\"");
 	}
 	
-	public static ArrayList<FreeReservations> ReservedListInDB(String name, String date, String username)
+	public static ArrayList<FreeReservations> ReservedListInDB(String name, String date)
 	{
-		return ReturnFreeList("SELECT f.facilityname, f.facilitytype, f.date, f.to, f.from, f.reservationid FROM facilityreservation f WHERE f.reservedUser = \"" + username + "\" AND f.date = \"" + date +"\" AND f.facilityname = \"" + name + "\"");
+		return ReturnFreeList("SELECT f.facilityname, f.facilitytype, f.date, f.to, f.from, f.reservationid FROM facilityreservation f WHERE f.date = \"" + date +"\" AND f.facilityname = \"" + name + "\"");
 	}
 	
 	public static ArrayList<FreeReservations> IdDB(String name, String date, String username)

@@ -24,7 +24,8 @@
 
  		<c:forEach items="${FACILITIES}" var="item" varStatus="status">
 			<tr class="myTableRow">
-			<td class="myTableCell" style="padding-right: 20px; "><c:out value="${item.facilityName}" /></td>
+			
+			<td class="myTableCell" style="padding-right: 20px; "><a href="/mac_repair/FM_FacilityController?action=viewSpecificFacility&id=${item.facilityName}"><c:out value="${item.facilityName}" /></a></td>
 			<td class="myTableCell" style="padding-right: 35px; "><c:out value="${item.facilityType}" /></td>
 			<td class="myTableCell" style="padding-right: 20px; "><c:out value="${item.timeInterval}" /></td>
 			<td class="myTableCell" style="padding-right: 30px; "><c:out value="${item.duration}" /></td>

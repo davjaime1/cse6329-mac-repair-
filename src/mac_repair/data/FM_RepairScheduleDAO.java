@@ -74,7 +74,7 @@ public class FM_RepairScheduleDAO {
 	} 
 
 	public static ArrayList<FM_RepairSchedule>  listRepairSchedule() {  
-			return ReturnRepairScheduleList(" SELECT * from repairSchedule ORDER BY username");
+			return ReturnRepairScheduleList(" SELECT * from repairSchedule WHERE scheduleDate= CURDATE() ORDER BY username");
 	}
 	
 	//search companies
@@ -82,8 +82,8 @@ public class FM_RepairScheduleDAO {
 			return ReturnRepairScheduleList(" SELECT * from repairSchedule WHERE username LIKE '%"+username+"%' ORDER BY username");
 	}
 	
-	public static ArrayList<FM_RepairSchedule>  searchScheduleByMAR(String marnumber)  {  
-		return ReturnRepairScheduleList(" SELECT * from repairSchedule WHERE mar LIKE '%"+marnumber+"%' ORDER BY username");
+	public static ArrayList<FM_RepairSchedule>  searchScheduleDate(String date)  {  
+		return ReturnRepairScheduleList(" SELECT * from repairSchedule WHERE scheduleDate='"+date+"' ORDER BY username");
 }
 
 	public static boolean  validRepairSchedule(String username, Date assignedDate)  {  
