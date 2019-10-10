@@ -69,12 +69,7 @@ public class FM_RepairerScheduleController extends HttpServlet {
 			String dateVal = request.getParameter("iddateTimePicker");
 			Date assignedDate = FM_UtilityDAO.mysqlDate(dateVal);
 
-			//String marNumber = request.getParameter("idmarnumber");   
-			//String username = request.getParameter("idusername");
-
-//			session.removeAttribute("errorMsgs");
-//			repairschedule.setRepairSchedule(username, "", assignedDate.toString());
-//			repairschedule.validateRepairSchedule(action, CerrorMsgs);
+	
 
 			ArrayList<FM_RepairSchedule> repaierscheduleInDB = new ArrayList<FM_RepairSchedule>();
 //			if (CerrorMsgs.getErrorMsg().equals("")) {

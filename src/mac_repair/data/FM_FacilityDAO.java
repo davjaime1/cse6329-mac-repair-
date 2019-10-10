@@ -90,6 +90,9 @@ public class FM_FacilityDAO {
 	public static ArrayList<FM_Facility>  searchFacilityType(String facilitytype)  {  
 		return ReturnMatchingFacilityList(" SELECT * from facilities WHERE facilitytype LIKE '%"+facilitytype+"%' ORDER BY name");
 	}
+	public static ArrayList<FM_Facility>  getFacilities(String facilitytype)  {  
+		return ReturnMatchingFacilityList(" SELECT * from facilities WHERE facilitytype = '"+facilitytype+"' ORDER BY name");
+	}
 
 	//determine if companyID is unique
 	public static Boolean facilityNameunique(String name)  {  
@@ -100,4 +103,5 @@ public class FM_FacilityDAO {
 		return ReturnMatchingFacilityNames(" SELECT name, facilitytype from facilities");
 
 	}
+
 }
