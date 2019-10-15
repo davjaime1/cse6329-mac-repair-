@@ -126,12 +126,12 @@ public class FM_MAR implements Serializable{
 
 			errorMsgs.setErrorMsg(action);
 		}
-		else if (action.contains("savemodifiedassignedmar")) {
-			errorMsgs.setAssignedDatErrorMsgs(validateAssignedDate(this.getAssignedDate()));
-			errorMsgs.setAssignedToErrorMsgs(validateAssignedTo(this.getAssignedTo(),this.getAssignedDate()));
-			errorMsgs.setDescriptionErrorMsgs(validateDescription(this.getDescription()));
-			errorMsgs.setErrorMsg(action);
-		}
+//		else if (action.contains("savemodifiedassignedmar")) {
+//			errorMsgs.setAssignedDatErrorMsgs(validateAssignedDate(this.getAssignedDate()));
+//			errorMsgs.setAssignedToErrorMsgs(validateAssignedTo(this.getAssignedTo(),this.getAssignedDate()));
+//			errorMsgs.setDescriptionErrorMsgs(validateDescription(this.getDescription()));
+//			errorMsgs.setErrorMsg(action);
+//		}
 		else if (action.equals("searchMAR")) {
 			if (this.marID.equals("") && this.facilityName.equals("")) 
 				errorMsgs.setMarNumberError("Both MAR Number and Facility Name cannot be blank");
@@ -140,12 +140,12 @@ public class FM_MAR implements Serializable{
 		}
 
 		else
-			if (action.equals("searchAssignMAR")) {
+//			if (action.equals("searchAssignMAR")) {
 				if (this.marID.equals("") && this.facilityName.equals("")) 
 					errorMsgs.setMarNumberError("Both MAR Number and Facility Name cannot be blank");
 
 				errorMsgs.setErrorMsg(action);				
-			}
+	//		}
 
 	}
 	
@@ -173,39 +173,9 @@ public class FM_MAR implements Serializable{
 		Date assgnDate = FM_UtilityDAO.mysqlDateassignmar(assignedDate);
 		if (FM_RepairScheduleDAO.validRepairSchedule(assignedTo, assgnDate))
 			result= "Your Repair Schedule Overloaded";
-//		else
-//			if (Character.isLowerCase(name.charAt(0)))
-//				result="Your First Name must start with a capital letter";
 		return result;
 	}
 	
-
-//	private String validateBadgeNo (String badge) {
-//		String result="";
-//		if (!stringSize(badge,3,5))
-//			result= "Your Badge Number must between 3 and 5 digits";
-//		else
-//			if (!isTextAnInteger(badge))
-//				result="Your Badge number must be a number";
-//		return result;
-//	}
-//	
-	private boolean stringSize(String string, int min, int max) {
-		return string.length()>=min && string.length()<=max;
-	}
-//	private boolean isTextAnInteger (String string) {
-//        boolean result;
-//		try
-//        {
-//            Long.parseLong(string);
-//            result=true;
-//        } 
-//        catch (NumberFormatException e) 
-//        {
-//            result=false;
-//        }
-//		return result;
-//	}
 
 	public String getEstimateOfRepair() {
 		return estimateOfRepair;

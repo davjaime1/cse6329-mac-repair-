@@ -61,7 +61,6 @@
 </td>
 </tr>
 </table>
-<button onclick="window.location.href = '/mac_repair/FM_AssignMARController?action=modify&id=${MAR.marID}';" class="btn default">Modify MAR</button>
 
 </body>
 </html>

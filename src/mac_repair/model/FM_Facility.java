@@ -74,12 +74,12 @@ public class FM_Facility implements Serializable{
 				errorMsgs.setErrorMsg();
 			}
 			else
-				if (action.equals("searchFacility")) {
+		//		if (action.equals("searchFacility")) {
 					if (this.facilityType.equals("") && this.facilityName.equals("")) 
 						errorMsgs.setFacilityNameError("Both Name and Type cannot be blank");
 
 					errorMsgs.setErrorMsg();				
-				}
+//				}
 
 		}
 		
@@ -95,15 +95,15 @@ public class FM_Facility implements Serializable{
 			return result;
 		}
 		
-		private String validateFacilityType (String surname) {
-			String result="";
-			if (!stringSize(surname,1,45))
-				result= "Your Facility Type must between 1 and 45 character";
-//			else
-//				if (Character.isLowerCase(surname.charAt(0)))
-//					result="Your Last Name must start with a capital letter";
-			return result;
-		}
+//		private String validateFacilityType (String surname) {
+//			String result="";
+//			if (!stringSize(surname,1,45))
+//				result= "Your Facility Type must between 1 and 45 character";
+////			else
+////				if (Character.isLowerCase(surname.charAt(0)))
+////					result="Your Last Name must start with a capital letter";
+//			return result;
+//		}
 
 //		private String validateBadgeNo (String badge) {
 //			String result="";

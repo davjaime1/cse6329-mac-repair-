@@ -32,12 +32,12 @@ public class FM_FacilityController extends HttpServlet {
 //		List companies
 		String url= "";
 //		List companies
-		if(null == session.getAttribute("username"))
-		{
-			url="/login.jsp";
-			getServletContext().getRequestDispatcher(url).forward(request, response);
-		}
-		else if(action.equalsIgnoreCase("homepage"))
+//		if(null == session.getAttribute("username"))
+//		{
+//			url="/login.jsp";
+//			getServletContext().getRequestDispatcher(url).forward(request, response);
+//		}
+		if(action.equalsIgnoreCase("homepage"))
 		{
 			url="/FM_Home.jsp";
 			getServletContext().getRequestDispatcher(url).forward(request, response);
