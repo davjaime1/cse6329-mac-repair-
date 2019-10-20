@@ -12,11 +12,11 @@ import javax.servlet.http.HttpSession;
 
 import mac_repair.data.FM_UtilityDAO;
 import mac_repair.data.RoleDAO;
-import mac_repair.data.UserModelDAO;
+import mac_repair.data.UserDAO;
 import mac_repair.model.Role;
 import mac_repair.model.State;
+import mac_repair.model.User;
 import mac_repair.model.UserErrorMsgs;
-import mac_repair.model.UserModel;
 
 
 /**
@@ -27,7 +27,7 @@ public class UserController extends HttpServlet
 {
     private static final long serialVersionUID = 1L;
     
-    private void userParam(HttpServletRequest request, UserModel user)
+    private void userParam(HttpServletRequest request, User user)
     {
         user.setUser(
                 request.getParameter("idusername"),
@@ -67,7 +67,7 @@ public class UserController extends HttpServlet
             /* This action displays the user's home page based on their role. */
             String roleId = (String) session.getAttribute("LOGIN_ROLE"),
                     homePageUrl;
-
+            
             if (roleId.equalsIgnoreCase("U"))
             {
                 homePageUrl = "/UserHome.jsp";
@@ -121,7 +121,7 @@ public class UserController extends HttpServlet
         }
         else if (action.equalsIgnoreCase("registerUser"))
         {
-            UserModel user = new UserModel();
+            User user = new User();
             UserErrorMsgs CerrorMsgs = new UserErrorMsgs();
             userParam(request, user);
             user.validateUser(action, CerrorMsgs);
@@ -135,7 +135,7 @@ public class UserController extends HttpServlet
             else
             {
                 // if no error messages
-                UserModelDAO.insertUser(user);
+                UserDAO.insertUser(user);
                 UserErrorMsgs facerrorMsgs = new UserErrorMsgs();
                 facerrorMsgs.setErrorMsg("Facility Added SucessFully");
                 getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
@@ -146,12 +146,12 @@ public class UserController extends HttpServlet
             String username = (String) session.getAttribute("username");
             System.out.println(username);
             
-            ArrayList<UserModel> fetch_profile = new ArrayList<UserModel>();
-            fetch_profile = UserModelDAO.returnProfile(username);
-            UserModel currentUser = new UserModel();
+            ArrayList<User> fetch_profile = new ArrayList<User>();
+            fetch_profile = UserDAO.returnProfile(username);
+            User currentUser = new User();
             currentUser.setUser(
                     fetch_profile.get(0).getUsername(),
-                    fetch_profile.get(0).getUtaId(),
+                    fetch_profile.get(0).getId(),
                     fetch_profile.get(0).getFirstName(),
                     fetch_profile.get(0).getLastName(),
                     fetch_profile.get(0).getPassword(),
@@ -169,14 +169,13 @@ public class UserController extends HttpServlet
         else if (action.equalsIgnoreCase("updateProfileView"))
         {
             String username = (String) session.getAttribute("username");
-          //  System.out.println(username);
             
-            ArrayList<UserModel> fetch_profile = new ArrayList<UserModel>();
-            fetch_profile = UserModelDAO.returnProfile(username);
-            UserModel currentUser = new UserModel();
+            ArrayList<User> fetch_profile = new ArrayList<User>();
+            fetch_profile = UserDAO.returnProfile(username);
+            User currentUser = new User();
             currentUser.setUser(
                     fetch_profile.get(0).getUsername(),
-                    fetch_profile.get(0).getUtaId(),
+                    fetch_profile.get(0).getId(),
                     fetch_profile.get(0).getFirstName(),
                     fetch_profile.get(0).getLastName(),
                     fetch_profile.get(0).getPassword(),
@@ -190,14 +189,14 @@ public class UserController extends HttpServlet
             
             session.setAttribute("user", currentUser);
             ArrayList<State> stateInDB = new ArrayList<State>();
-
+            
             stateInDB = FM_UtilityDAO.listStates();
             session.setAttribute("STATE", stateInDB);
             getServletContext().getRequestDispatcher("/UpdateProfile.jsp").forward(request, response);
         }
         else if (action.equalsIgnoreCase("updateProfile"))
         {
-            UserModel user = new UserModel();
+            User user = new User();
             UserErrorMsgs CerrorMsgs = new UserErrorMsgs();
             userParam(request, user);
             user.validateUser(action, CerrorMsgs);
@@ -211,8 +210,8 @@ public class UserController extends HttpServlet
             else
             {
                 // if no error messages
-                UserModelDAO.updatetUser(user);
-				session.setAttribute("USERS", user);
+                UserDAO.updatetUser(user);
+                session.setAttribute("USERS", user);
                 getServletContext().getRequestDispatcher("/ViewProfile.jsp").forward(request, response);
             }
         }
@@ -222,15 +221,15 @@ public class UserController extends HttpServlet
             String username = request.getParameter("idusername");
             String password = request.getParameter("idpassword");
             
-            ArrayList<UserModel> fetch_profile = new ArrayList<UserModel>();
-            fetch_profile = UserModelDAO.returnProfile(username);
+            ArrayList<User> fetch_profile = new ArrayList<User>();
+            fetch_profile = UserDAO.returnProfile(username);
             UserErrorMsgs CerrorMsgs = new UserErrorMsgs();
-            UserModel currentUser = new UserModel();
+            User currentUser = new User();
             if (fetch_profile.size() != 0)
             {
                 currentUser.setUser(
                         fetch_profile.get(0).getUsername(),
-                        fetch_profile.get(0).getUtaId(),
+                        fetch_profile.get(0).getId(),
                         fetch_profile.get(0).getFirstName(),
                         fetch_profile.get(0).getLastName(),
                         fetch_profile.get(0).getPassword(),

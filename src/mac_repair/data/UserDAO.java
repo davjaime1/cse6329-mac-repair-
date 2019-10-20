@@ -11,7 +11,6 @@ import mac_repair.util.SQLConnection;
 
 public class UserDAO
 {
-    
     private static SQLConnection DBMgr = SQLConnection.getInstance();
     
     
@@ -30,8 +29,8 @@ public class UserDAO
                 User user = new User();
                 user.setUsername(userList.getString("username"));
                 user.setId(userList.getString("id"));
-                user.setFirstname(userList.getString("firstname"));
-                user.setLastname(userList.getString("lastname"));
+                user.setFirstName(userList.getString("firstname"));
+                user.setLastName(userList.getString("lastname"));
                 user.setPassword(userList.getString("password"));
                 user.setRole(userList.getString("role"));
                 user.setAddress(userList.getString("address"));
@@ -51,6 +50,118 @@ public class UserDAO
         
         return userListInDB;
     }
+    
+    
+    private static void StoreListinDB(User user, String queryString)
+    {
+        Statement stmt = null;
+        Connection conn = SQLConnection.getDBConnection();
+        try
+        {
+            stmt = conn.createStatement();
+            String insertmar = queryString + " VALUES ('"
+                    + user.getUsername() + "','"
+                    + user.getId() + "','"
+                    + user.getFirstName() + "','"
+                    + user.getLastName() + "','"
+                    + user.getPassword() + "','"
+                    + user.getRole() + "','"
+                    + user.getAddress() + "','"
+                    + user.getCity() + "','"
+                    + user.getState() + "','"
+                    + user.getZip() + "','"
+                    + user.getPhone() + "','"
+                    + user.getEmail() + "')";
+            stmt.executeUpdate(insertmar);
+            conn.commit();
+        }
+        catch (SQLException e)
+        {
+        }
+    }
+    
+    public static ArrayList<User> returnProfile(String username)
+    {
+        ArrayList<User> fetch_profile = new ArrayList<User>();
+        
+        User res = new User();
+        Statement stmt = null;
+        Connection conn = SQLConnection.getDBConnection();
+        
+        String queryString = "SELECT * from users where username = '" + username + "'";
+        
+        try
+        {
+            stmt = conn.createStatement();
+            ResultSet resultSet = stmt.executeQuery(queryString);
+            
+            while (resultSet.next())
+            {
+                
+                
+                res.setUsername(resultSet.getString("username"));
+                res.setId(resultSet.getString("id"));
+                res.setFirstName(resultSet.getString("firstname"));
+                res.setLastName(resultSet.getString("lastname"));
+                res.setPassword(resultSet.getString("password"));
+                res.setRole(resultSet.getString("role"));
+                res.setAddress(resultSet.getString("address"));
+                res.setState(resultSet.getString("state"));
+                res.setCity(resultSet.getString("city"));
+                res.setZip(resultSet.getString("zip"));
+                res.setPhone(resultSet.getString("phone"));
+                res.setEmail(resultSet.getString("email"));
+                fetch_profile.add(res);
+                
+                
+            }
+        }
+        catch (SQLException e)
+        {
+        }
+        return fetch_profile;
+    }
+    
+    public static void UpdateinDB(User user)
+    {
+        Statement stmt = null;
+        Connection conn = SQLConnection.getDBConnection();
+        try
+        {
+            stmt = conn.createStatement();
+            String insertmar = "UPDATE users SET firstname = '" + user.getFirstName()
+                    + "'," + "lastname = '" + user.getLastName()
+                    + "'," + "password = '" + user.getPassword()
+                    + "'," + "address = '" + user.getAddress()
+                    + "'," + "city = '" + user.getCity()
+                    + "'," + "state = '" + user.getState()
+                    + "', " + "zip = '" + user.getZip()
+                    + "', " + "phone = '" + user.getPhone()
+                    + "', " + "role = '" + user.getRole()
+                    + "', " + " email = '" + user.getEmail() + "' WHERE username = '" + user.getUsername() + "'";
+            stmt.executeUpdate(insertmar);
+            conn.commit();
+        }
+        catch (SQLException e)
+        {
+        }
+    }
+    
+    public static void updatetUser(User user)
+    {
+        UpdateinDB(user);
+    }
+    
+    public static void insertUser(User user)
+    {
+        StoreListinDB(user, "INSERT INTO users (username,id,firstname,lastname,password,role,address,city,state,zip,phone,email) ");
+    }
+    
+    public static Boolean userNameunique(String name)
+    {
+        return (returnProfile(name).isEmpty());
+    }
+    
     
     public static ArrayList<User> listAllUsers()
     {
@@ -95,8 +206,8 @@ public class UserDAO
                             + "email='%s' "
                             + "WHERE username='%s'",
                     u.getId(),
-                    u.getFirstname(),
-                    u.getLastname(),
+                    u.getFirstName(),
+                    u.getLastName(),
                     u.getPassword(),
                     u.getRole(),
                     u.getAddress(),
