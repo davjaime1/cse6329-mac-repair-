@@ -28,10 +28,10 @@
 
       <div class="menu_nav">
         <ul>
-          <li><a href="/mac_repair/FM_FacilityController?action=listfacilities" target="_top"><span>View Available Facilities</span></a></li>
+          <li><a href="/mac_repair/FM_FacilityController?action=listfacilities" target="_top"><span>View Facilities</span></a></li>
           <li><a href="/mac_repair/FM_FacilityController?action=searchPage"  target="_top"><span>Search Available Facilities</span></a></li>
           <li><a href="/mac_repair/FM_FacilityController?action=showaddfacility"  target="_top"><span>Add new Facility</span></a></li>
-          <li><a href="/mac_repair/FM_MARController?action=listmar"  target="_top"><span>List MARS</span></a></li>
+          <li><a href="/mac_repair/FM_MARController?action=listmar"  target="_top"><span>List Unassigned MARS</span></a></li>
           <li><a href="/mac_repair/FM_MARController?action=searchPage"  target="_top"><span>Search Requested MARs</span></a></li>
           <li><a href="/mac_repair/FM_AssignMARController?action=listassignedmar"   target="_top"><span>View Assigned MARs</span></a></li>
           <li><a href="/mac_repair/FM_AssignMARController?action=searchPage"  target="_top"><span>Search Assigned MARs</span></a></li>

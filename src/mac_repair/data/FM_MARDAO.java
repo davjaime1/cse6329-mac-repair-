@@ -145,10 +145,10 @@ public class FM_MARDAO
         return ReturnMatchingMARList(" SELECT * from mar WHERE marnumber LIKE '%" + marnumber + "%' ORDER BY marnumber");
     }
     
-    public static ArrayList<FM_MAR> searchMARByFacilityType(String facilitytype)
-    {
-        return ReturnMatchingMARList(" SELECT * from mar WHERE facilitytype LIKE '%" + facilitytype + "%' ORDER BY marnumber");
-    }
+//    public static ArrayList<FM_MAR> searchMARByFacilityType(String facilitytype)
+//    {
+//        return ReturnMatchingMARList(" SELECT * from mar WHERE facilitytype LIKE '%" + facilitytype + "%' ORDER BY marnumber");
+//    }
     
     public static ArrayList<FM_MAR> searchMARByFacilityName(String facilityName)
     {

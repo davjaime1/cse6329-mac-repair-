@@ -204,7 +204,7 @@ public class UserModel {
 //		result="Valid FirstName";
 		result="";
 	}else {
-		result="Invalid LastName";
+		result="Invalid First Name";
 	}
 	return result;
 	}
@@ -215,7 +215,7 @@ public class UserModel {
 		if(!lastName.equals("") && lastName.matches(regex)) {
 		result="";
 		}else {
-			result="Invalid LastName";
+			result="Invalid Last Name";
 		}
 		return result;
 		}
@@ -232,7 +232,7 @@ public class UserModel {
 	
 	private String validateAddress(String address) {
 		String result="";
-		if(address==null || username.equals("")) {
+		if(address==null || address.equals("")) {
 		result="Address is empty";
 	}
 	return result;

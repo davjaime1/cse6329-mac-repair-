@@ -4,6 +4,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+ <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+		var $datepicker = $('#datepicker');
+	    $datepicker.datepicker();
+	    $datepicker.datepicker('setDate', new Date());
+  } );
+  </script>
+
 <title>Facility List</title>
 <h1><a href="/mac_repair/FM_RepairerScheduleController?action=homepage"  target="_top"> Home Page </a></h1> 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -16,20 +30,18 @@
 	<td>
 	<form action="/mac_repair/FM_RepairerScheduleController?action=searchrepairschedule" method="post">
 	<table style="width: 1200px; ">
-	<tr>
-	<tr>
-  	<td> Repairer User Name: </td>
- 	<td> <input name="idusername" value="<c:out value='${repairschedule.username}'/>" type="text" maxlength="45">  </td>
-  	<td> <input name="marnumberError"  value="<c:out value='${errorMsgs.marNumberError}'/>" type="text"  style ="background-color: white; color: red; border: none; width: 800px"   disabled="disabled" maxlength="60"> </td>
-	</tr>
- 
-    <tr>
-    <td> MAR Number: </td>
-    <td> <input name="idmarnumber" value="<c:out value='${repairschedule.marID}'/>" type="text" maxlength="16"> </td>
- 	<td> <input name="facilityname"  value="<c:out value='${errorMsgs.usernameError}'/>" type="text"  style ="background-color: white; color: red; border: none; width: 800px"   disabled="disabled" maxlength="60"> </td>
-
+	
+  <tr>
+    <td> Search By Date (*): </td>
+    <td> 
+   <input type="text" name ="iddateTimePicker" id="datepicker">
+    </td>   
+    
     </tr>
-
+  
+  
+    
+  
 </table>
   <input type="submit" value="Submit">
 	</form>      

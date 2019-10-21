@@ -61,7 +61,7 @@ public class RepairerReservationsController extends HttpServlet {
 			//Use a java class to make a list of possible reservations
 			freeListPoss = RepairerViewReservedDAO.makePossibleFreeList(request.getParameter("id"), request.getParameter("date"));
 			//Then Access the database to remove ones that are already in the database for that particualar date
-			freeListInDB = RepairerViewReservedDAO.ReservedListInDB(request.getParameter("id"), request.getParameter("date"), username);
+			freeListInDB = RepairerViewReservedDAO.ReservedListInDB(request.getParameter("id"), request.getParameter("date"));
 			//Then display the free reservations like you normaly would
 			RepairerViewReservedDAO.getAvaliableReservations(freeListPoss, freeListInDB);
 			//Now using the radio button, add the selected reservation to database
@@ -82,7 +82,7 @@ public class RepairerReservationsController extends HttpServlet {
 			//Use a java class to make a list of possible reservations
 			freeListPoss = RepairerViewReservedDAO.makePossibleFreeList(request.getParameter("id"), request.getParameter("date"));
 			//Then Access the database to remove ones that are already in the database for that particualar date
-			freeListInDB = RepairerViewReservedDAO.ReservedListInDB(request.getParameter("id"), request.getParameter("date"), username);
+			freeListInDB = RepairerViewReservedDAO.ReservedListInDB(request.getParameter("id"), request.getParameter("date"));
 			//Then display the free reservations like you normaly would
 			RepairerViewReservedDAO.getAvaliableReservations(freeListPoss, freeListInDB);
 			//Now using the radio button, add the selected reservation to database
@@ -104,7 +104,7 @@ public class RepairerReservationsController extends HttpServlet {
 				
 				freeListPoss = RepairerViewReservedDAO.makePossibleFreeList(request.getParameter("id"), request.getParameter("date"));
 				//Then Access the database to remove ones that are already in the database for that particualar date
-				freeListInDB = RepairerViewReservedDAO.ReservedListInDB(request.getParameter("id"), request.getParameter("date"), username);
+				freeListInDB = RepairerViewReservedDAO.ReservedListInDB(request.getParameter("id"), request.getParameter("date"));
 				idDB = RepairerViewReservedDAO.IdDB(request.getParameter("id"), request.getParameter("date"), username);
 				String id = RepairerViewReservedDAO.getId(idDB);
 				//Then display the free reservations like you normaly would
