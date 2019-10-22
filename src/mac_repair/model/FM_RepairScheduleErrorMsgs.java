@@ -25,9 +25,6 @@ public class FM_RepairScheduleErrorMsgs {
 			errorMsg = "Please correct the following errors";
 	}
 
-
-
-
 	public String getMarNumberError() {
 		return marNumberError;
 	}

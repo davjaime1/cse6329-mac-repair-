@@ -2,6 +2,7 @@
 package mac_repair.controller;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import mac_repair.data.FM_FacilityDAO;
 import mac_repair.data.FM_UtilityDAO;
+import mac_repair.data.RepairerViewReservedDAO;
 import mac_repair.model.*;
 
 @WebServlet("/FM_FacilityController")
@@ -30,21 +32,17 @@ public class FM_FacilityController extends HttpServlet {
 //		List companies
 		String url= "";
 //		List companies
-		if(null == session.getAttribute("username"))
-		{
-			url="/login.jsp";
-			getServletContext().getRequestDispatcher(url).forward(request, response);
-		}
-		else if(action.equalsIgnoreCase("homepage"))
+//		if(null == session.getAttribute("username"))
+//		{
+//			url="/login.jsp";
+//			getServletContext().getRequestDispatcher(url).forward(request, response);
+//		}
+		if(action.equalsIgnoreCase("homepage"))
 		{
 			url="/FM_Home.jsp";
 			getServletContext().getRequestDispatcher(url).forward(request, response);
 		}
-		else if(action.equalsIgnoreCase("searchPage"))
-		{
-			url="/FM_SearchFacility.jsp";
-			getServletContext().getRequestDispatcher(url).forward(request, response);
-		}
+
 		else if (action.equalsIgnoreCase("listfacilities")) {
 			ArrayList<FM_Facility> facilityInDB = new ArrayList<FM_Facility>();
 			facilityInDB=FM_FacilityDAO.listFacilities();
@@ -63,7 +61,15 @@ public class FM_FacilityController extends HttpServlet {
 		FM_FacilityErrorMsgs CerrorMsgs = new FM_FacilityErrorMsgs();
 //		int selectedCompanyIndex;
 		session.removeAttribute("errorMsgs");
-
+		if(action.equalsIgnoreCase("searchPage"))
+		{
+			session.removeAttribute("facility");
+			ArrayList<FM_FacilityType> facilityTypeInDB = new ArrayList<FM_FacilityType>();	
+			facilityTypeInDB= FM_UtilityDAO.listFacilityTypes();	
+			session.setAttribute("FACILITYTYPE", facilityTypeInDB);
+			url="/FM_SearchFacility.jsp";
+			//getServletContext().getRequestDispatcher(url).forward(request, response);
+		}
 		if (action.equalsIgnoreCase("saveFacility") ) {  
 			facilityParam(request,facility);
 			facility.validateFacility(action, CerrorMsgs);
@@ -79,32 +85,67 @@ public class FM_FacilityController extends HttpServlet {
 				url="/FM_ViewSpecificFacility.jsp";
 			}
 		}
+		if(action.equalsIgnoreCase("viewSpecificFacility")) {
+			String selectedFacility = request.getParameter("id");
+			ArrayList<FM_Facility> 	facilityInDB=FM_FacilityDAO.searchFacilityByName(selectedFacility);
+			FM_Facility facility1 = facilityInDB.get(0);
+			session.setAttribute("facility", facility1);
+			url="/FM_ViewSpecificFacility.jsp";
+		}
 //
 //		else 
 		  if (action.equalsIgnoreCase("searchFacility") ) {
-	
-			String facilityName = request.getParameter("idname");   
-			String facilityType = request.getParameter("idfacilitytype");
+				String dateVal = request.getParameter("iddateTimePicker");
+				Date assignedDate = FM_UtilityDAO.mysqlDate(dateVal);
+				String facilityType = request.getParameter("idfacilitytype");
+				ArrayList<FreeReservations> freeListPoss = new ArrayList<FreeReservations>();
+				ArrayList<FreeReservations> freeListInDB = new ArrayList<FreeReservations>();
+				ArrayList<FM_Facility> facilityList = new ArrayList<FM_Facility>();
+				facilityList = FM_FacilityDAO.getFacilities(facilityType);
+				for(int i=0; i< facilityList.size();i++	) {
+					freeListPoss.addAll(RepairerViewReservedDAO.makePossibleFreeList(facilityList.get(i).getFacilityName(), assignedDate.toString()));
+					freeListInDB.addAll(RepairerViewReservedDAO.ReservedListInDB(facilityList.get(i).getFacilityName(), assignedDate.toString()));
 
-			session.removeAttribute("errorMsgs");
-			facility.setFacility(facilityName, facilityType, "", "", ""); 
-			facility.validateFacility(action, CerrorMsgs);
-
-			ArrayList<FM_Facility> facilityInDB = new ArrayList<FM_Facility>();
-			if (CerrorMsgs.getErrorMsg().equals("")) {
-				if (!facilityName.equals(""))
-					facilityInDB=FM_FacilityDAO.searchFacilityByName(facilityName);
-				else
-					facilityInDB=FM_FacilityDAO.searchFacilityType(facilityType);
-
-				session.setAttribute("FACILITIES", facilityInDB);
-				url="/FM_FacilityeSarchResults.jsp";
-			}
-			else {
-				session.setAttribute("facility", facility);
-				session.setAttribute("errorMsgs", CerrorMsgs);
-				url="/FM_SearchFacility.jsp";				
-			}
+				}
+				//Then Access the database to remove ones that are already in the database for that particualar date
+//				freeListInDB = RepairerViewReservedDAO.ReservedListInDB(request.getParameter("id"), request.getParameter("date"));
+//				idDB = RepairerViewReservedDAO.IdDB(request.getParameter("id"), request.getParameter("date"), username);
+//				String id = RepairerViewReservedDAO.getId(idDB);
+				//Then display the free reservations like you normaly would
+				RepairerViewReservedDAO.getAvaliableReservations(freeListPoss, freeListInDB);
+				
+				//Display Added Reservation
+			//	FreeReservations sel = new FreeReservations();
+			//	sel.setReserved(	freeListPoss.get(selResIndex).getFacilitytype(), freeListPoss.get(selResIndex).getFacilityname(), 
+				//		freeListPoss.get(selResIndex).getVenue(), freeListPoss.get(selResIndex).getDate(), freeListPoss.get(selResIndex).getTo(), freeListPoss.get(selResIndex).getFrom());
+				//Add the Reservation
+//				RepairerViewReservedDAO.addReservation(sel, id, username);
+				session.setAttribute("RESERVATION", freeListPoss);
+		
+				url="/ViewFacilityReservations.jsp";	
+//			session.removeAttribute("facility");
+//			String facilityName = request.getParameter("idfacilityname");   
+//			String facilityType = request.getParameter("idfacilitytype");
+//
+//			session.removeAttribute("errorMsgs");
+//			facility.setFacility(facilityName, facilityType, "", "", ""); 
+//			facility.validateFacility(action, CerrorMsgs);
+//
+//			ArrayList<FM_Facility> facilityInDB = new ArrayList<FM_Facility>();
+//			if (CerrorMsgs.getErrorMsg().equals("")) {
+//				if (!facilityName.equals(""))
+//					facilityInDB=FM_FacilityDAO.searchFacilityByName(facilityName);
+//				else
+//					facilityInDB=FM_FacilityDAO.searchFacilityType(facilityType);
+//
+//				session.setAttribute("FACILITIES", facilityInDB);
+//				url="/FM_ListFacilities.jsp";
+//			}
+//			else {
+//				session.setAttribute("facility", facility);
+//				session.setAttribute("errorMsgs", CerrorMsgs);
+//				url="/FM_SearchFacility.jsp";				
+//			}
 		}
 		  if (action.equalsIgnoreCase("showaddfacility") ) {
 				

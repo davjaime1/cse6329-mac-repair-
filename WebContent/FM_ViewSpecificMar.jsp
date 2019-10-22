@@ -48,8 +48,6 @@
 </td>
 </tr>
 </table>
-<button onclick="window.location.href = '/mac_repair/FM_MARController?action=modify&id=${MAR.marID}';" class="btn default">Modify MAR</button>
-<button onclick="window.location.href = '/mac_repair/FM_MARController?action=deletemar&id=${MAR.marID}';" class="btn default">Delete MAR</button>
 <button onclick="window.location.href = '/mac_repair/FM_MARController?action=assignmar&id=${MAR.marID}';" class="btn default">Assign MAR</button>
 </body>
 </html>

@@ -31,10 +31,10 @@ public class FM_MARErrorMsgs {
 				if(!assignedToErrorMsgs.equals("") || !assignedDatErrorMsgs.equals("") || !descriptionErrorMsgs.equals("")	)
 					errorMsg = "Please correct the following errors";
 			}
-			else if (action.contains("savemodifiedassignedmar")) {
-				if(!assignedToErrorMsgs.equals("") || !assignedDatErrorMsgs.equals("") || !descriptionErrorMsgs.equals("")		)
-					errorMsg = "Please correct the following errors";
-			}
+//			else if (action.contains("savemodifiedassignedmar")) {
+//				if(!assignedToErrorMsgs.equals("") || !assignedDatErrorMsgs.equals("") || !descriptionErrorMsgs.equals("")		)
+//					errorMsg = "Please correct the following errors";
+//			}
 			else {
 				if (!marNumberError.equals("") || !facilityNameError.equals(""))
 					errorMsg = "Please correct the following errors";
@@ -84,10 +84,6 @@ public class FM_MARErrorMsgs {
 		public void setDescriptionErrorMsgs(String descriptionErrorMsgs) {
 			this.descriptionErrorMsgs = descriptionErrorMsgs;
 		}
-
-		
-
-
 
 		
 }

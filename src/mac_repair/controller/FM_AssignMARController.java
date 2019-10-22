@@ -36,12 +36,12 @@ public class FM_AssignMARController extends HttpServlet {
 //		List companies
 		String url= "";
 //		List companies
-		if(null == session.getAttribute("username"))
-		{
-			url="/login.jsp";
-			getServletContext().getRequestDispatcher(url).forward(request, response);
-		}
-		else if(action.equalsIgnoreCase("homepage"))
+//		if(null == session.getAttribute("username"))
+//		{
+//			url="/login.jsp";
+//			getServletContext().getRequestDispatcher(url).forward(request, response);
+//		}
+		if(action.equalsIgnoreCase("homepage"))
 		{
 			url="/FM_Home.jsp";
 			getServletContext().getRequestDispatcher(url).forward(request, response);
@@ -112,61 +112,56 @@ public class FM_AssignMARController extends HttpServlet {
 				url="/FM_ViewSpecificAssignedMAR.jsp";	
 			}
 		}
-		else if(action.contains("modify")) {
-			ArrayList<FM_MAR> marInDB = new ArrayList<FM_MAR>();
-			FM_MAR selectedMAR = new FM_MAR();
-			String selectedMARNumber = request.getParameter("id");
-
-			marInDB=FM_AssignMARDAO.searchMARByNumber(selectedMARNumber);
-			selectedMAR.setAssignedMAR(marInDB.get(0).getMarID(), marInDB.get(0).getFacilityName(), marInDB.get(0).getFacilityType(), marInDB.get(0).getUrgency(), marInDB.get(0).getDescription(), marInDB.get(0).getReportedUser(), marInDB.get(0).getDate(),marInDB.get(0).getAssignedTo(),marInDB.get(0).getAssignedDate(),marInDB.get(0).getEstimateOfRepair());  
-							
-			session.setAttribute("ASSIGNEDMARS", selectedMAR);
-
-
-			ArrayList<FM_Urgency> urgencyInDB = new ArrayList<FM_Urgency>();
-			ArrayList<FM_Repairers> repairerInDB = new ArrayList<FM_Repairers>();
-			ArrayList<FM_EstimateOfRepair> estimateTimeInDB = new ArrayList<FM_EstimateOfRepair>();
-
-			urgencyInDB= FM_UtilityDAO.listUrgencies();				
-			session.setAttribute("URGENCY", urgencyInDB);
-			repairerInDB= FM_UtilityDAO.listRepairers();			
-			session.setAttribute("REPAIRLIST", repairerInDB);
-			estimateTimeInDB= FM_UtilityDAO.listEstimateTimes();				
-			session.setAttribute("ESTIMATEOFREPAIR", estimateTimeInDB);
-
-
-
-
-			url="/FM_ModifyAssignedMAR.jsp";	
-		}
-		else if(action.contains("savemodifiedassignedmar")) {
-			getAssignedParam(request,assignmar);
-			assignmar.validateMAR(action, CerrorMsgs); 
-			if (!CerrorMsgs.getErrorMsg().equals("")) {// if error messages
-				session.setAttribute("ASSIGNEDMARS", assignmar);
-				session.setAttribute("errorMsgs", CerrorMsgs);
-				url="/FM_ModifyAssignedMAR.jsp";
-			}
-			
-			else {// if no error messages
-//				getAssignedParam(request,assignmar);
-
-//				FM_MAR selectedMAR = new FM_MAR();
-//				selectedMAR.setMAR(request.getParameter("marid"), request.getParameter("facilityName"), request.getParameter("facilityType"), request.getParameter("idUrgency"), request.getParameter("iddescription"), request.getParameter("reportedUser"), request.getParameter("reporteddate"));
-
-				FM_AssignMARDAO.UpdateinDB(assignmar);				
-
-
-				FM_RepairSchedule repairschedule = new FM_RepairSchedule();	
-				repairschedule.setRepairSchedule(assignmar.getAssignedTo(), assignmar.getMarID(), assignmar.getAssignedDate());
-				FM_RepairScheduleDAO.deleteRepairSchedule(assignmar.getMarID());
-				FM_RepairScheduleDAO.insertRepairSchedule(repairschedule);
-//				FM_MARDAO.deleteMAR(assignmar.getMarID());
-				session.setAttribute("ASSIGNEDMARS", assignmar);
-				url="/FM_ViewSpecificAssignedMAR.jsp";	
-
-			}
-		}
+//		else if(action.contains("modify")) {
+//			ArrayList<FM_MAR> marInDB = new ArrayList<FM_MAR>();
+//			FM_MAR selectedMAR = new FM_MAR();
+//			String selectedMARNumber = request.getParameter("id");
+//
+//			marInDB=FM_AssignMARDAO.searchMARByNumber(selectedMARNumber);
+//			selectedMAR.setAssignedMAR(marInDB.get(0).getMarID(), marInDB.get(0).getFacilityName(), marInDB.get(0).getFacilityType(), marInDB.get(0).getUrgency(), marInDB.get(0).getDescription(), marInDB.get(0).getReportedUser(), marInDB.get(0).getDate(),marInDB.get(0).getAssignedTo(),marInDB.get(0).getAssignedDate(),marInDB.get(0).getEstimateOfRepair());  
+//							
+//			session.setAttribute("ASSIGNEDMARS", selectedMAR);
+//
+//
+//			ArrayList<FM_Urgency> urgencyInDB = new ArrayList<FM_Urgency>();
+//			ArrayList<FM_Repairers> repairerInDB = new ArrayList<FM_Repairers>();
+//			ArrayList<FM_EstimateOfRepair> estimateTimeInDB = new ArrayList<FM_EstimateOfRepair>();
+//
+//			urgencyInDB= FM_UtilityDAO.listUrgencies();				
+//			session.setAttribute("URGENCY", urgencyInDB);
+//			repairerInDB= FM_UtilityDAO.listRepairers();			
+//			session.setAttribute("REPAIRLIST", repairerInDB);
+//			estimateTimeInDB= FM_UtilityDAO.listEstimateTimes();				
+//			session.setAttribute("ESTIMATEOFREPAIR", estimateTimeInDB);
+//
+//
+//
+//
+//			url="/FM_ModifyAssignedMAR.jsp";	
+//		}
+//		else if(action.contains("savemodifiedassignedmar")) {
+//			getAssignedParam(request,assignmar);
+//			assignmar.validateMAR(action, CerrorMsgs); 
+//			if (!CerrorMsgs.getErrorMsg().equals("")) {// if error messages
+//				session.setAttribute("ASSIGNEDMARS", assignmar);
+//				session.setAttribute("errorMsgs", CerrorMsgs);
+//				url="/FM_ModifyAssignedMAR.jsp";
+//			}
+//			
+//			else {
+//				FM_AssignMARDAO.UpdateinDB(assignmar);				
+//
+//
+//				FM_RepairSchedule repairschedule = new FM_RepairSchedule();	
+//				repairschedule.setRepairSchedule(assignmar.getAssignedTo(), assignmar.getMarID(), assignmar.getAssignedDate());
+//				FM_RepairScheduleDAO.deleteRepairSchedule(assignmar.getMarID());
+//				FM_RepairScheduleDAO.insertRepairSchedule(repairschedule);
+////				FM_MARDAO.deleteMAR(assignmar.getMarID());
+//				session.setAttribute("ASSIGNEDMARS", assignmar);
+//				url="/FM_ViewSpecificAssignedMAR.jsp";	
+//
+//			}
+//		}
 		else { //action=listSpecificMAR
 			ArrayList<FM_MAR> marInDB = new ArrayList<FM_MAR>();
 			FM_MAR selectedMAR = new FM_MAR();

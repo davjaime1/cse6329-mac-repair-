@@ -1,6 +1,7 @@
 package mac_repair.controller;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,12 +30,12 @@ public class FM_RepairerScheduleController extends HttpServlet {
 		session.removeAttribute("errorMsgs");
 		String url= "";
 //		List companies
-		if(null == session.getAttribute("username"))
-		{
-			url="/login.jsp";
-			getServletContext().getRequestDispatcher(url).forward(request, response);
-		}
-		else if(action.equalsIgnoreCase("homepage"))
+//		if(null == session.getAttribute("username"))
+//		{
+//			url="/login.jsp";
+//			getServletContext().getRequestDispatcher(url).forward(request, response);
+//		}
+		if(action.equalsIgnoreCase("homepage"))
 		{
 			url="/FM_Home.jsp";
 			getServletContext().getRequestDispatcher(url).forward(request, response);
@@ -65,29 +66,26 @@ public class FM_RepairerScheduleController extends HttpServlet {
 
 
 		  if (action.equalsIgnoreCase("searchrepairschedule") ) {
-	
-			String marNumber = request.getParameter("idmarnumber");   
-			String username = request.getParameter("idusername");
+			String dateVal = request.getParameter("iddateTimePicker");
+			Date assignedDate = FM_UtilityDAO.mysqlDate(dateVal);
 
-			session.removeAttribute("errorMsgs");
-			repairschedule.setRepairSchedule(username, marNumber, "");
-			repairschedule.validateRepairSchedule(action, CerrorMsgs);
+	
 
 			ArrayList<FM_RepairSchedule> repaierscheduleInDB = new ArrayList<FM_RepairSchedule>();
-			if (CerrorMsgs.getErrorMsg().equals("")) {
-				if (!marNumber.equals(""))
-					repaierscheduleInDB=FM_RepairScheduleDAO.searchScheduleByMAR(marNumber);
-				else
-					repaierscheduleInDB=FM_RepairScheduleDAO.searchScheduleByUser(username);
+//			if (CerrorMsgs.getErrorMsg().equals("")) {
+//				if (!username.equals(""))
+					repaierscheduleInDB=FM_RepairScheduleDAO.searchScheduleDate(assignedDate.toString());
+//				else
+//					repaierscheduleInDB=FM_RepairScheduleDAO.searchScheduleByUser(username);
 
 				session.setAttribute("REPAIRSCHEDULE", repaierscheduleInDB);
 				url="/FM_RepairScheduleList.jsp";
-			}
-			else {
-				session.setAttribute("repairschedule", repairschedule);
-				session.setAttribute("errorMsgs", CerrorMsgs);
-				url="/FM_SearchRepairSchedule.jsp";				
-			}
+//			}
+//			else {
+//				session.setAttribute("repairschedule", repairschedule);
+//				session.setAttribute("errorMsgs", CerrorMsgs);
+//				url="/FM_SearchRepairSchedule.jsp";				
+//			}
 		}
 
 		getServletContext().getRequestDispatcher(url).forward(request, response);		
