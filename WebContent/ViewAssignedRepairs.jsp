@@ -38,19 +38,19 @@
 
  		<c:forEach items="${REPAIRERS}" var="item" varStatus="status">
 			<tr class="myTableRow">
-			<td class="myTableCell" style="padding-right: 20px; "><c:out value="${item.assignedmar}" /></td>
-			<td class="myTableCell" style="padding-right: 20px; "><c:out value="${item.facilityname}" /></td>
-			<td class="myTableCell" style="padding-right: 20px; "><c:out value="${item.facilitytype}" /></td>
+			<td class="myTableCell" style="padding-right: 20px; "><c:out value="${item.marID}" /></td>
+			<td class="myTableCell" style="padding-right: 20px; "><c:out value="${item.facilityName}" /></td>
+			<td class="myTableCell" style="padding-right: 20px; "><c:out value="${item.facilityType}" /></td>
 			<td class="myTableCell" style="padding-right: 20px; "><c:out value="${item.urgency}" /></td>
 			<td class="myTableCell" style="padding-right: 20px; "><c:out value="${item.description}" /></td>
-			<td class="myTableCell" style="padding-right: 20px; "><c:out value="${item.reporteddate}" /></td>
-			<td class="myTableCell" style="padding-right: 20px; "><c:out value="${item.reportedby}" /></td>
+			<td class="myTableCell" style="padding-right: 20px; "><c:out value="${item.date}" /></td>
+			<td class="myTableCell" style="padding-right: 20px; "><c:out value="${item.reportedUser}" /></td>
 			<td class="myTableCell" style="padding-right: 20px; "><c:out value="${item.assignedDate}" /></td>
-			<td class="myTableCell" style="padding-right: 20px; "><c:out value="${item.estimateofrepair}" /></td>
+			<td class="myTableCell" style="padding-right: 20px; "><c:out value="${item.estimateOfRepair}" /></td>
 
 
 			
-            <td> <a href="/mac_repair/RepairerViewAssignedController?action=listSpecificAssignedRepairs&id=${item.assignedmar}">View</a></td>
+            <td> <a href="/mac_repair/RepairerViewAssignedController?action=listSpecificAssignedRepairs&id=${item.marID}">View</a></td>
 			</tr>
 		</c:forEach>
  </table>

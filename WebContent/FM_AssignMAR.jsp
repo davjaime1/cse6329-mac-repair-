@@ -54,7 +54,7 @@
      <td> 
     <select name="idUrgency">
           <c:forEach items="${URGENCY}" var="item" varStatus="status">
-            <option value="${item.id}">${item.urgency}</option>
+            <option value="${item.id}">${item.value}</option>
           </c:forEach>
     </select>
     </td>
@@ -73,7 +73,7 @@
     <td> 
     <select name="idestimateofRepair">
           <c:forEach items="${ESTIMATEOFREPAIR}" var="item" varStatus="status">
-            <option value="${item.id}">${item.repairTime}</option>
+            <option value="${item.id}">${item.value}</option>
           </c:forEach>
     </select>
     </td>

@@ -20,21 +20,11 @@ public class FM_RepairerScheduleController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
        
-//	private void getCompanyParam (HttpServletRequest request, Company company) {
-//		company.setCompany(request.getParameter("idcompany"),request.getParameter("company_name"),request.getParameter("phone"),request.getParameter("email"));  
-//	}
-//	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String action = request.getParameter("action");
 		session.removeAttribute("errorMsgs");
 		String url= "";
-//		List companies
-//		if(null == session.getAttribute("username"))
-//		{
-//			url="/login.jsp";
-//			getServletContext().getRequestDispatcher(url).forward(request, response);
-//		}
 		if(action.equalsIgnoreCase("homepage"))
 		{
 			url="/FM_Home.jsp";
@@ -57,37 +47,15 @@ public class FM_RepairerScheduleController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String action = request.getParameter("action"), url="";
+		String url="";
 		HttpSession session = request.getSession();
-		RepairSchedule repairschedule = new RepairSchedule();
-		RepairScheduleErrorMsgs CerrorMsgs = new RepairScheduleErrorMsgs();
-//		int selectedCompanyIndex;
 		session.removeAttribute("errorMsgs");
-
-
-		  if (action.equalsIgnoreCase("searchrepairschedule") ) {
-			String dateVal = request.getParameter("iddateTimePicker");
-			Date assignedDate = UtilityDAO.mysqlDate(dateVal);
-
-	
-
-			ArrayList<RepairSchedule> repaierscheduleInDB = new ArrayList<RepairSchedule>();
-//			if (CerrorMsgs.getErrorMsg().equals("")) {
-//				if (!username.equals(""))
-					repaierscheduleInDB=RepairScheduleDAO.searchScheduleDate(assignedDate.toString());
-//				else
-//					repaierscheduleInDB=FM_RepairScheduleDAO.searchScheduleByUser(username);
-
-				session.setAttribute("REPAIRSCHEDULE", repaierscheduleInDB);
-				url="/FM_RepairScheduleList.jsp";
-//			}
-//			else {
-//				session.setAttribute("repairschedule", repairschedule);
-//				session.setAttribute("errorMsgs", CerrorMsgs);
-//				url="/FM_SearchRepairSchedule.jsp";				
-//			}
-		}
-
+		String dateVal = request.getParameter("iddateTimePicker");
+		Date assignedDate = UtilityDAO.mysqlDate(dateVal);
+		ArrayList<RepairSchedule> repaierscheduleInDB = new ArrayList<RepairSchedule>();
+		repaierscheduleInDB=RepairScheduleDAO.searchScheduleDate(assignedDate.toString());
+		session.setAttribute("REPAIRSCHEDULE", repaierscheduleInDB);
+		url="/FM_RepairScheduleList.jsp";
 		getServletContext().getRequestDispatcher(url).forward(request, response);		
 	}
 }

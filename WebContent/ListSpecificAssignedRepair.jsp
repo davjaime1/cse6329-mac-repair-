@@ -19,23 +19,23 @@
       </div>
   </div>
 <body>
-<table>
+<table>	
   <tr>
    <td>
          <table border="1" class="myTable"> 
     <tr>
     <td> Mar Number: </td>
-    <td> <c:out value="${REPAIRERS.assignedmar}" /> </td>
+    <td> <c:out value="${REPAIRERS.marID}" /> </td>
     </tr>
 
     <tr>
     <td> Facility Name: </td>
-    <td> <c:out value="${REPAIRERS.facilityname}" /> </td>
+    <td> <c:out value="${REPAIRERS.facilityName}" /> </td>
     </tr>
 
     <tr>
     <td> Facility Type: </td>
-    <td> <c:out value="${REPAIRERS.facilitytype}" /> </td>
+    <td> <c:out value="${REPAIRERS.facilityType}" /> </td>
     </tr>
     
     <tr>
@@ -50,12 +50,12 @@
     
     <tr>
     <td> Reported Date: </td>
-    <td> <c:out value="${REPAIRERS.reporteddate}"/> </td>
+    <td> <c:out value="${REPAIRERS.date}"/> </td>
     </tr>
     
     <tr>
     <td> Reported By: </td>
-    <td> <c:out value="${REPAIRERS.reportedby}"/> </td>
+    <td> <c:out value="${REPAIRERS.reportedUser}"/> </td>
     </tr>
     
     <tr>
@@ -65,7 +65,7 @@
     
     <tr>
     <td> Estimate of Repair: </td>
-    <td> <c:out value="${REPAIRERS.estimateofrepair}"/> </td>
+    <td> <c:out value="${REPAIRERS.estimateOfRepair}"/> </td>
     </tr>
 
     <tr>
@@ -75,7 +75,7 @@
 </tr>
 </table>
 
-    <form name="Make Reservation" action="/mac_repair/RepairerReservationsController?action=searchFreeFacilities&id=${REPAIRERS.facilityname}&date=${REPAIRERS.assignedDate}&mar=${REPAIRERS.assignedmar}" method="post">
+    <form name="Make Reservation" action="/mac_repair/RepairerReservationsController?action=searchFreeFacilities&id=${REPAIRERS.facilityName}&date=${REPAIRERS.assignedDate}&mar=${REPAIRERS.marID}" method="post">
     <input name="action" value="searchFreeFacilities" type="hidden">
     <input type="submit" value="Make Reservation">
     </form>

@@ -26,7 +26,7 @@ public class RepairerViewAssignedController extends HttpServlet {
 		//session.removeAttribute("errorMsgs");
 //		List companies
 		if (action.equalsIgnoreCase("listAssignedRepairers")) {
-			ArrayList<RepairerViewAssigned> reservedListInDB = new ArrayList<RepairerViewAssigned>();
+			ArrayList<MAR> reservedListInDB = new ArrayList<MAR>();
 			reservedListInDB=RepairerViewAssignedDAO.listAssignedRepairs(username);
 			session.setAttribute("REPAIRERS", reservedListInDB);				
 			getServletContext().getRequestDispatcher("/ViewAssignedRepairs.jsp").forward(request, response);
@@ -40,22 +40,22 @@ public class RepairerViewAssignedController extends HttpServlet {
 		String action = request.getParameter("action"), url="";
 		HttpSession session = request.getSession();
 		String username = (String)session.getAttribute("username");
-		RepairerViewAssigned res = new RepairerViewAssigned();
+		MAR res = new MAR();
 		int selectedReservedIndex;
 		session.removeAttribute("errorMsgs");
 
 		if (action.equalsIgnoreCase("listSpecificAssignedRepairs") )
 		{
 			//action=listSpecificCompany
-			ArrayList<RepairerViewAssigned> reservedListInDB = new ArrayList<RepairerViewAssigned>();
-			RepairerViewAssigned selectedReservation = new RepairerViewAssigned();
+			ArrayList<MAR> reservedListInDB = new ArrayList<MAR>();
+			MAR selectedReservation = new MAR();
 
 			//view button was used instead of radio button
 			reservedListInDB=RepairerViewAssignedDAO.searchAssignedRepair(request.getParameter("id"), username);
-			selectedReservation.setReserved(	reservedListInDB.get(0).getAssignedmar(), reservedListInDB.get(0).getFacilityname(), reservedListInDB.get(0).getFacilitytype(),
-												reservedListInDB.get(0).getUrgency(), reservedListInDB.get(0).getDescription(), reservedListInDB.get(0).getReporteddate(),
-												reservedListInDB.get(0).getReportedby(), reservedListInDB.get(0).getAssignedDate(),
-												reservedListInDB.get(0).getEstimateofrepair());
+			selectedReservation.setAssignedMAR(	reservedListInDB.get(0).getMarID(), reservedListInDB.get(0).getFacilityName(), reservedListInDB.get(0).getFacilityType(),
+												reservedListInDB.get(0).getUrgency(), reservedListInDB.get(0).getDescription(), reservedListInDB.get(0).getReportedUser(),
+												reservedListInDB.get(0).getDate(), reservedListInDB.get(0).getAssignedTo(),reservedListInDB.get(0).getAssignedDate(),
+												reservedListInDB.get(0).getEstimateOfRepair());
 			session.setAttribute("REPAIRERS", selectedReservation);
 			url="/ListSpecificAssignedRepair.jsp";					
 		}
