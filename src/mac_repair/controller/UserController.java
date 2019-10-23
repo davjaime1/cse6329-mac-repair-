@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import mac_repair.data.FM_UtilityDAO;
+import mac_repair.data.UtilityDAO;
 import mac_repair.data.RoleDAO;
 import mac_repair.data.UserDAO;
 import mac_repair.model.Role;
@@ -115,7 +115,7 @@ public class UserController extends HttpServlet
             ArrayList<State> stateInDB = new ArrayList<State>();
             roleInDB = RoleDAO.listRoles();
             session.setAttribute("ROLE", roleInDB);
-            stateInDB = FM_UtilityDAO.listStates();
+            stateInDB = UtilityDAO.listStates();
             session.setAttribute("STATE", stateInDB);
             getServletContext().getRequestDispatcher("/Register.jsp").forward(request, response);
         }
@@ -190,7 +190,7 @@ public class UserController extends HttpServlet
             session.setAttribute("user", currentUser);
             ArrayList<State> stateInDB = new ArrayList<State>();
             
-            stateInDB = FM_UtilityDAO.listStates();
+            stateInDB = UtilityDAO.listStates();
             session.setAttribute("STATE", stateInDB);
             getServletContext().getRequestDispatcher("/UpdateProfile.jsp").forward(request, response);
         }

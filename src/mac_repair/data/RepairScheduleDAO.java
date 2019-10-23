@@ -5,22 +5,17 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import mac_repair.util.SQLConnection;
-import mac_repair.model.FM_EstimateOfRepair;
-import mac_repair.model.FM_Facility;
-import mac_repair.model.FM_MAR;
-import mac_repair.model.FM_RepairSchedule;
-import mac_repair.model.FM_Repairers;
-public class FM_RepairScheduleDAO {
+import mac_repair.model.RepairSchedule;
+public class RepairScheduleDAO {
 
 
 
 	static SQLConnection DBMgr = SQLConnection.getInstance();
 	
-	private static ArrayList<FM_RepairSchedule> ReturnRepairScheduleList (String queryString) {
-		ArrayList<FM_RepairSchedule> repairScheduleInDB = new ArrayList<FM_RepairSchedule>();
+	private static ArrayList<RepairSchedule> ReturnRepairScheduleList (String queryString) {
+		ArrayList<RepairSchedule> repairScheduleInDB = new ArrayList<RepairSchedule>();
 		
 		Statement stmt = null;
 		Connection conn = SQLConnection.getDBConnection();  
@@ -28,7 +23,7 @@ public class FM_RepairScheduleDAO {
 			stmt = conn.createStatement();
 			ResultSet repairScheudleList = stmt.executeQuery(queryString);
 			while (repairScheudleList.next()) {
-				FM_RepairSchedule repairSchedule = new FM_RepairSchedule(); 
+				RepairSchedule repairSchedule = new RepairSchedule(); 
 				repairSchedule.setUsername(repairScheudleList.getString("username"));
 				repairSchedule.setMarID(repairScheudleList.getString("mar"));
 				repairSchedule.setScheduleDate(repairScheudleList.getString("scheduledate"));
@@ -40,10 +35,10 @@ public class FM_RepairScheduleDAO {
 	}
 	
 
-	private static void StoreListinDB (FM_RepairSchedule repSchedule,String queryString) {
+	private static void StoreListinDB (RepairSchedule repSchedule,String queryString) {
 		Statement stmt = null;
 		Connection conn = SQLConnection.getDBConnection();  
-		Date assignedDate = FM_UtilityDAO.mysqlDateassignmar(repSchedule.getScheduleDate());
+		Date assignedDate = UtilityDAO.mysqlDateassignmar(repSchedule.getScheduleDate());
 		try {
 			stmt = conn.createStatement();
 			String insertmar = queryString + " VALUES ('"  
@@ -69,20 +64,20 @@ public class FM_RepairScheduleDAO {
 	} 
 		
 	
-	public static void insertRepairSchedule(FM_RepairSchedule repSchedule) {  
+	public static void insertRepairSchedule(RepairSchedule repSchedule) {  
 		StoreListinDB(repSchedule,"INSERT INTO repairSchedule (username,mar,scheduleDate) ");
 	} 
 
-	public static ArrayList<FM_RepairSchedule>  listRepairSchedule() {  
+	public static ArrayList<RepairSchedule>  listRepairSchedule() {  
 			return ReturnRepairScheduleList(" SELECT * from repairSchedule WHERE scheduleDate= CURDATE() ORDER BY username");
 	}
 	
 	//search companies
-	public static ArrayList<FM_RepairSchedule>  searchScheduleByUser(String username)  {  
+	public static ArrayList<RepairSchedule>  searchScheduleByUser(String username)  {  
 			return ReturnRepairScheduleList(" SELECT * from repairSchedule WHERE username LIKE '%"+username+"%' ORDER BY username");
 	}
 	
-	public static ArrayList<FM_RepairSchedule>  searchScheduleDate(String date)  {  
+	public static ArrayList<RepairSchedule>  searchScheduleDate(String date)  {  
 		return ReturnRepairScheduleList(" SELECT * from repairSchedule WHERE scheduleDate='"+date+"' ORDER BY username");
 }
 
@@ -94,8 +89,8 @@ public class FM_RepairScheduleDAO {
 
 		String QueryString2 = "SELECT * FROM repairSchedule WHERE username = '"+username+ "' AND scheduleDate >= '" + assignedDateStr + "'  AND scheduleDate < '" + assignedEndDateStr+ "'"; 
 
-		ArrayList<FM_RepairSchedule> repairToday = ReturnRepairScheduleList(QueryString1);
-		ArrayList<FM_RepairSchedule> reapairweekly= ReturnRepairScheduleList(QueryString2);
+		ArrayList<RepairSchedule> repairToday = ReturnRepairScheduleList(QueryString1);
+		ArrayList<RepairSchedule> reapairweekly= ReturnRepairScheduleList(QueryString2);
 		if(repairToday.size()>=3) return true;
 		if(repairToday.size()>=7) return true;
 		return false;

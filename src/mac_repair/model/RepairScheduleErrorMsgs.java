@@ -1,12 +1,12 @@
 package mac_repair.model;
 
-public class FM_RepairScheduleErrorMsgs {
+public class RepairScheduleErrorMsgs {
 
 	private String errorMsg;
 	private String marNumberError;
 	private String usernameError;
 	
-	public FM_RepairScheduleErrorMsgs() {
+	public RepairScheduleErrorMsgs() {
 		this.errorMsg = "";
 		this.marNumberError = "";
 		this.usernameError = "";

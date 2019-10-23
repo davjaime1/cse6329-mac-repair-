@@ -3,9 +3,9 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.time.LocalDate;
 
-import mac_repair.data.FM_RepairScheduleDAO;
-import mac_repair.data.FM_UtilityDAO;
-public class FM_MAR implements Serializable{
+import mac_repair.data.RepairScheduleDAO;
+import mac_repair.data.UtilityDAO;
+public class MAR implements Serializable{
 
 	private static final long serialVersionUID = 3L;
 	private String marID;
@@ -118,7 +118,7 @@ public class FM_MAR implements Serializable{
 	public void setDate(String date) {
 		this.date = date;
 	}
-	public void validateMAR (String action, FM_MARErrorMsgs errorMsgs) {
+	public void validateMAR (String action, MARErrorMsgs errorMsgs) {
 		if (action.contains("saveassignedmar")) {
 			errorMsgs.setAssignedDatErrorMsgs(validateAssignedDate(this.getAssignedDate()));
 			errorMsgs.setAssignedToErrorMsgs(validateAssignedTo(this.getAssignedTo(),this.getAssignedDate()));
@@ -159,7 +159,7 @@ public class FM_MAR implements Serializable{
 	}
 	private String validateAssignedDate (String assignedDate) {
 		String result="";
-		Date assgnDate = FM_UtilityDAO.mysqlDateassignmar(assignedDate);
+		Date assgnDate = UtilityDAO.mysqlDateassignmar(assignedDate);
 		LocalDate  loccurDate = LocalDate.now();
 		LocalDate  locassgnDate = assgnDate.toLocalDate();
 		if (locassgnDate.isBefore(loccurDate)){
@@ -170,8 +170,8 @@ public class FM_MAR implements Serializable{
 	}
 	private String validateAssignedTo (String assignedTo, String assignedDate) {
 		String result="";
-		Date assgnDate = FM_UtilityDAO.mysqlDateassignmar(assignedDate);
-		if (FM_RepairScheduleDAO.validRepairSchedule(assignedTo, assgnDate))
+		Date assgnDate = UtilityDAO.mysqlDateassignmar(assignedDate);
+		if (RepairScheduleDAO.validRepairSchedule(assignedTo, assgnDate))
 			result= "Your Repair Schedule Overloaded";
 		return result;
 	}

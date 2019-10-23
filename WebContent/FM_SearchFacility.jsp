@@ -35,7 +35,7 @@
     <td> 
     <select name="idfacilitytype">
           <c:forEach items="${FACILITYTYPE}" var="item" varStatus="status">
-            <option value="${item.id}">${item.facilityType}</option>
+            <option value="${item.id}">${item.value}</option>
           </c:forEach>
     </select>
     </td>

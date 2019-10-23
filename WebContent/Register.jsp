@@ -21,7 +21,7 @@
     
 	<tr>
    <td> UTA ID (*): </td>
-    <td> <input name="idutaID" value="<c:out value='${user.utaId}'/>" type="text" maxlength="16"> </td>
+    <td> <input name="idutaID" value="<c:out value='${user.id}'/>" type="text" maxlength="16"> </td>
   	<td> <input name="userIDerror"  value="<c:out value='${errorMsgs.utaidError}'/>" type="text"  style ="background-color: white; color: red; border: none; width: 800px"  disabled="disabled" maxlength="60"> </td>
     </tr>
     

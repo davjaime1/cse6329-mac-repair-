@@ -8,18 +8,13 @@ import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import mac_repair.model.FM_Duration;
-import mac_repair.model.FM_EstimateOfRepair;
-import mac_repair.model.FM_FacilityType;
-import mac_repair.model.FM_Repairers;
-import mac_repair.model.FM_TimeInterval;
-import mac_repair.model.FM_Urgency;
-import mac_repair.model.FM_Venue;
+import mac_repair.model.Repairers;
+import mac_repair.model.UtilityModel;
 import mac_repair.util.SQLConnection;
 import mac_repair.model.State;
 
-public class FM_UtilityDAO {
-	public static ArrayList<FM_Repairers>  listRepairers()  {  
+public class UtilityDAO {
+	public static ArrayList<Repairers>  listRepairers()  {  
 		return ReturnMatchingRepaierList(" SELECT * from users WHERE role ='R' ORDER BY username");
 	}
 
@@ -52,9 +47,9 @@ public class FM_UtilityDAO {
 		return date;		
 }
 
-	private static ArrayList<FM_Repairers> ReturnMatchingRepaierList(String queryString) {
+	private static ArrayList<Repairers> ReturnMatchingRepaierList(String queryString) {
 		// TODO Auto-generated method stub
-		ArrayList<FM_Repairers> repairListInDB = new ArrayList<FM_Repairers>();
+		ArrayList<Repairers> repairListInDB = new ArrayList<Repairers>();
 		
 		Statement stmt = null;
 		Connection conn = SQLConnection.getDBConnection();  
@@ -62,21 +57,21 @@ public class FM_UtilityDAO {
 			stmt = conn.createStatement();
 			ResultSet repairList = stmt.executeQuery(queryString);
 			while (repairList.next()) {
-				FM_Repairers repairer = new FM_Repairers(); 
+				Repairers repairer = new Repairers(); 
 				repairer.setUsername(repairList.getString("username"));
 				repairListInDB.add(repairer);	
 			}
 		} catch (SQLException e) {}
 		return repairListInDB;
 	}
-	public static ArrayList<FM_EstimateOfRepair>  listEstimateTimes()  {  
+	public static ArrayList<UtilityModel>  listEstimateTimes()  {  
 		return ReturnMatchingEstimateTimeList(" SELECT * from estimateofrepair ORDER BY id");
 	}
 
 
-	private static ArrayList<FM_EstimateOfRepair> ReturnMatchingEstimateTimeList(String queryString) {
+	private static ArrayList<UtilityModel> ReturnMatchingEstimateTimeList(String queryString) {
 		// TODO Auto-generated method stub
-		ArrayList<FM_EstimateOfRepair> estimateRepairListInDB = new ArrayList<FM_EstimateOfRepair>();
+		ArrayList<UtilityModel> estimateRepairListInDB = new ArrayList<UtilityModel>();
 		
 		Statement stmt = null;
 		Connection conn = SQLConnection.getDBConnection();  
@@ -84,17 +79,17 @@ public class FM_UtilityDAO {
 			stmt = conn.createStatement();
 			ResultSet estimateTimeList = stmt.executeQuery(queryString);
 			while (estimateTimeList.next()) {
-				FM_EstimateOfRepair estimateTime = new FM_EstimateOfRepair(); 
+				UtilityModel estimateTime = new UtilityModel(); 
 				estimateTime.setId(estimateTimeList.getString("id"));
-				estimateTime.setRepairTime(estimateTimeList.getString("repairtime"));
+				estimateTime.setValue(estimateTimeList.getString("repairtime"));
 				estimateRepairListInDB.add(estimateTime);	
 			}
 		} catch (SQLException e) {}
 		return estimateRepairListInDB;
 	}
 	
-	private static ArrayList<FM_FacilityType> ReturnMatchingFacilityTypeList (String queryString) {
-		ArrayList<FM_FacilityType> facilityTypeListInDB = new ArrayList<FM_FacilityType>();
+	private static ArrayList<UtilityModel> ReturnMatchingFacilityTypeList (String queryString) {
+		ArrayList<UtilityModel> facilityTypeListInDB = new ArrayList<UtilityModel>();
 		
 		Statement stmt = null;
 		Connection conn = SQLConnection.getDBConnection();  
@@ -102,9 +97,9 @@ public class FM_UtilityDAO {
 			stmt = conn.createStatement();
 			ResultSet facilityTypeList = stmt.executeQuery(queryString);
 			while (facilityTypeList.next()) {
-				FM_FacilityType facilityType = new FM_FacilityType(); 
+				UtilityModel facilityType = new UtilityModel(); 
 				facilityType.setId(facilityTypeList.getString("id"));
-				facilityType.setFacilityType(facilityTypeList.getString("name"));
+				facilityType.setValue(facilityTypeList.getString("name"));
 
 				facilityTypeListInDB.add(facilityType);	
 			}
@@ -112,8 +107,8 @@ public class FM_UtilityDAO {
 		return facilityTypeListInDB;
 	}
 	
-	private static ArrayList<FM_TimeInterval> ReturnMatchingTimeIntervalList (String queryString) {
-		ArrayList<FM_TimeInterval> timeIntervalListInDB = new ArrayList<FM_TimeInterval>();
+	private static ArrayList<UtilityModel> ReturnMatchingTimeIntervalList (String queryString) {
+		ArrayList<UtilityModel> timeIntervalListInDB = new ArrayList<UtilityModel>();
 		
 		Statement stmt = null;
 		Connection conn = SQLConnection.getDBConnection();  
@@ -121,9 +116,9 @@ public class FM_UtilityDAO {
 			stmt = conn.createStatement();
 			ResultSet timeIntervalList = stmt.executeQuery(queryString);
 			while (timeIntervalList.next()) {
-				FM_TimeInterval timeInterval = new FM_TimeInterval(); 
+				UtilityModel timeInterval = new UtilityModel(); 
 				timeInterval.setId(timeIntervalList.getString("id"));
-				timeInterval.setTimeInterval(timeIntervalList.getString("name"));
+				timeInterval.setValue(timeIntervalList.getString("name"));
 
 				timeIntervalListInDB.add(timeInterval);	
 			}
@@ -131,8 +126,8 @@ public class FM_UtilityDAO {
 		return timeIntervalListInDB;
 	}
 	
-	private static ArrayList<FM_Venue> ReturnMatchingVenueList (String queryString) {
-		ArrayList<FM_Venue> venueListInDB = new ArrayList<FM_Venue>();
+	private static ArrayList<UtilityModel> ReturnMatchingVenueList (String queryString) {
+		ArrayList<UtilityModel> venueListInDB = new ArrayList<UtilityModel>();
 		
 		Statement stmt = null;
 		Connection conn = SQLConnection.getDBConnection();  
@@ -140,9 +135,9 @@ public class FM_UtilityDAO {
 			stmt = conn.createStatement();
 			ResultSet venueList = stmt.executeQuery(queryString);
 			while (venueList.next()) {
-				FM_Venue venue = new FM_Venue(); 
+				UtilityModel venue = new UtilityModel(); 
 				venue.setId(venueList.getString("id"));
-				venue.setVenue(venueList.getString("name"));
+				venue.setValue(venueList.getString("name"));
 
 				venueListInDB.add(venue);	
 			}
@@ -150,8 +145,8 @@ public class FM_UtilityDAO {
 		return venueListInDB;
 	}
 	
-	private static ArrayList<FM_Duration> ReturnMatchingDurationList (String queryString) {
-		ArrayList<FM_Duration> durationListInDB = new ArrayList<FM_Duration>();
+	private static ArrayList<UtilityModel> ReturnMatchingDurationList (String queryString) {
+		ArrayList<UtilityModel> durationListInDB = new ArrayList<UtilityModel>();
 		
 		Statement stmt = null;
 		Connection conn = SQLConnection.getDBConnection();  
@@ -159,9 +154,9 @@ public class FM_UtilityDAO {
 			stmt = conn.createStatement();
 			ResultSet durationList = stmt.executeQuery(queryString);
 			while (durationList.next()) {
-				FM_Duration duration = new FM_Duration(); 
+				UtilityModel duration = new UtilityModel(); 
 				duration.setId(durationList.getString("id"));
-				duration.setDuration(durationList.getString("name"));
+				duration.setValue(durationList.getString("name"));
 
 				durationListInDB.add(duration);	
 			}
@@ -169,27 +164,27 @@ public class FM_UtilityDAO {
 		return durationListInDB;
 	}
 	
-	public static ArrayList<FM_FacilityType>  listFacilityTypes()  {  
+	public static ArrayList<UtilityModel>  listFacilityTypes()  {  
 		return ReturnMatchingFacilityTypeList(" SELECT * from facilitytypes ORDER BY id");
 	}
 
-	public static ArrayList<FM_TimeInterval>  listTimeTimeIntervals()  {  
+	public static ArrayList<UtilityModel>  listTimeTimeIntervals()  {  
 		return ReturnMatchingTimeIntervalList(" SELECT * from intervals ORDER BY id");
 	}
-	public static ArrayList<FM_Duration>  listDuration()  {  
+	public static ArrayList<UtilityModel>  listDuration()  {  
 		return ReturnMatchingDurationList(" SELECT * from durations ORDER BY id");
 	}
-	public static ArrayList<FM_Venue>  listVenues()  {  
+	public static ArrayList<UtilityModel>  listVenues()  {  
 		return ReturnMatchingVenueList(" SELECT * from venues ORDER BY id");
 	}
-	public static ArrayList<FM_Urgency>  listUrgencies()  {  
+	public static ArrayList<UtilityModel>  listUrgencies()  {  
 		return ReturnMatchingUrgencyList(" SELECT * from urgency ORDER BY id");
 	}
 
 
-	private static ArrayList<FM_Urgency> ReturnMatchingUrgencyList(String queryString) {
+	private static ArrayList<UtilityModel> ReturnMatchingUrgencyList(String queryString) {
 		// TODO Auto-generated method stub
-		ArrayList<FM_Urgency> urgencyListInDB = new ArrayList<FM_Urgency>();
+		ArrayList<UtilityModel> urgencyListInDB = new ArrayList<UtilityModel>();
 		
 		Statement stmt = null;
 		Connection conn = SQLConnection.getDBConnection();  
@@ -197,9 +192,9 @@ public class FM_UtilityDAO {
 			stmt = conn.createStatement();
 			ResultSet urgencyList = stmt.executeQuery(queryString);
 			while ( urgencyList.next()) {
-				FM_Urgency urgency = new FM_Urgency(); 
+				UtilityModel urgency = new UtilityModel(); 
 				urgency.setId( urgencyList.getString("id"));
-				urgency.setUrgency( urgencyList.getString("urgency"));
+				urgency.setValue(urgencyList.getString("urgency"));
 
 				urgencyListInDB.add(urgency);	
 			}

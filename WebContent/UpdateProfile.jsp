@@ -24,7 +24,7 @@
 <table>
   <tr>
    <td>
-    <form name="companyForm" action="/mac_repair/UserController?updateProfile&idusername=${user.username}&idutaID=${user.utaId}&idrole=${user.role}" method="post">
+    <form name="companyForm" action="/mac_repair/UserController?updateProfile&idusername=${user.username}&idutaID=${user.id}&idrole=${user.role}" method="post">
     <table style="width: 1200px; ">
     
     <tr>
@@ -33,7 +33,7 @@
     </tr>
     <tr>
     <td> UTA ID: </td>
-    <td>  <c:out value="${user.utaId}"/> </td>
+    <td>  <c:out value="${user.id}"/> </td>
     </tr>
  
     <tr>

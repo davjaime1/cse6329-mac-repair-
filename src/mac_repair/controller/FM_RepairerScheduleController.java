@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import mac_repair.data.FM_MARDAO;
-import mac_repair.data.FM_RepairScheduleDAO;
-import mac_repair.data.FM_UtilityDAO;
+import mac_repair.data.MARDAO;
+import mac_repair.data.RepairScheduleDAO;
+import mac_repair.data.UtilityDAO;
 import mac_repair.model.*;
 
 @WebServlet("/FM_RepairerScheduleController")
@@ -46,8 +46,8 @@ public class FM_RepairerScheduleController extends HttpServlet {
 			getServletContext().getRequestDispatcher(url).forward(request, response);
 		}
 		else if (action.equalsIgnoreCase("listRepaierschedule")) {
-			ArrayList<FM_RepairSchedule> repairscheduleInDB = new ArrayList<FM_RepairSchedule>();
-			repairscheduleInDB=FM_RepairScheduleDAO.listRepairSchedule();
+			ArrayList<RepairSchedule> repairscheduleInDB = new ArrayList<RepairSchedule>();
+			repairscheduleInDB=RepairScheduleDAO.listRepairSchedule();
 			session.setAttribute("REPAIRSCHEDULE", repairscheduleInDB);				
 			getServletContext().getRequestDispatcher("/FM_RepairScheduleList.jsp").forward(request, response);
 		}
@@ -59,22 +59,22 @@ public class FM_RepairerScheduleController extends HttpServlet {
 
 		String action = request.getParameter("action"), url="";
 		HttpSession session = request.getSession();
-		FM_RepairSchedule repairschedule = new FM_RepairSchedule();
-		FM_RepairScheduleErrorMsgs CerrorMsgs = new FM_RepairScheduleErrorMsgs();
+		RepairSchedule repairschedule = new RepairSchedule();
+		RepairScheduleErrorMsgs CerrorMsgs = new RepairScheduleErrorMsgs();
 //		int selectedCompanyIndex;
 		session.removeAttribute("errorMsgs");
 
 
 		  if (action.equalsIgnoreCase("searchrepairschedule") ) {
 			String dateVal = request.getParameter("iddateTimePicker");
-			Date assignedDate = FM_UtilityDAO.mysqlDate(dateVal);
+			Date assignedDate = UtilityDAO.mysqlDate(dateVal);
 
 	
 
-			ArrayList<FM_RepairSchedule> repaierscheduleInDB = new ArrayList<FM_RepairSchedule>();
+			ArrayList<RepairSchedule> repaierscheduleInDB = new ArrayList<RepairSchedule>();
 //			if (CerrorMsgs.getErrorMsg().equals("")) {
 //				if (!username.equals(""))
-					repaierscheduleInDB=FM_RepairScheduleDAO.searchScheduleDate(assignedDate.toString());
+					repaierscheduleInDB=RepairScheduleDAO.searchScheduleDate(assignedDate.toString());
 //				else
 //					repaierscheduleInDB=FM_RepairScheduleDAO.searchScheduleByUser(username);
 

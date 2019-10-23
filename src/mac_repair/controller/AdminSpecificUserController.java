@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import mac_repair.data.FM_UtilityDAO;
+import mac_repair.data.UtilityDAO;
 import mac_repair.data.RoleDAO;
 import mac_repair.data.UserDAO;
 import mac_repair.model.Role;
@@ -77,7 +77,7 @@ public class AdminSpecificUserController extends HttpServlet
             ArrayList<Role> roleInDB = new ArrayList<Role>();
             roleInDB = RoleDAO.listRoles();
             session.setAttribute("ROLE", roleInDB);
-            stateInDB = FM_UtilityDAO.listStates();
+            stateInDB = UtilityDAO.listStates();
             session.setAttribute("STATE", stateInDB);
             
             getServletContext().getRequestDispatcher("/AdminUpdateProfile.jsp").forward(request, response);
@@ -111,7 +111,7 @@ public class AdminSpecificUserController extends HttpServlet
             {
                 // if error messages
                 session.setAttribute("errorMsgs", CerrorMsgs);
-                getServletContext().getRequestDispatcher("/UpdateProfile.jsp").forward(request, response);
+                getServletContext().getRequestDispatcher("/AdminUpdateProfile.jsp").forward(request, response);
             }
             else
             {
@@ -142,7 +142,7 @@ public class AdminSpecificUserController extends HttpServlet
                 ArrayList<Role> roleInDB = new ArrayList<Role>();
                 roleInDB = RoleDAO.listRoles();
                 session.setAttribute("ROLE", roleInDB);
-                stateInDB = FM_UtilityDAO.listStates();
+                stateInDB = UtilityDAO.listStates();
                 session.setAttribute("STATE", stateInDB);
                 session.removeAttribute("errorMsgs");
                 getServletContext().getRequestDispatcher("/AdminUpdateProfile.jsp").forward(request, response);

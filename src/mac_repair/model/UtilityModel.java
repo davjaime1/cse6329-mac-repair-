@@ -2,22 +2,22 @@ package mac_repair.model;
 
 import java.io.Serializable;
 
-public class FM_Venue  implements Serializable{
+public class UtilityModel  implements Serializable{
 
 	private static final long serialVersionUID = 3L;
 	private String id;
-	private String venue;
+	private String value;
 	public String getId() {
 		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getVenue() {
-		return venue;
+	public String getValue() {
+		return value;
 	}
-	public void setVenue(String venue) {
-		this.venue = venue;
+	public void setValue(String value) {
+		this.value = value;
 	}
 
 }

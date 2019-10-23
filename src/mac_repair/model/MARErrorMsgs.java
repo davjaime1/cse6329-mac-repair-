@@ -1,6 +1,6 @@
 package mac_repair.model;
 
-public class FM_MARErrorMsgs {
+public class MARErrorMsgs {
 
 
 		private String errorMsg;
@@ -10,7 +10,7 @@ public class FM_MARErrorMsgs {
 		private String facilityNameError;
 		private String descriptionErrorMsgs;
 		
-		public FM_MARErrorMsgs() {
+		public MARErrorMsgs() {
 			this.errorMsg = "";
 			this.marNumberError = "";
 			this.facilityNameError="";

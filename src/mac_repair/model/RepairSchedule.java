@@ -3,7 +3,7 @@ package mac_repair.model;
 
 import java.io.Serializable;
 
-public class FM_RepairSchedule  implements Serializable{
+public class RepairSchedule  implements Serializable{
 
 		private static final long serialVersionUID = 3L;
 		private String username;
@@ -34,7 +34,7 @@ public class FM_RepairSchedule  implements Serializable{
 		public void setMarID(String marID) {
 			this.marID = marID;
 		}
-		public void validateRepairSchedule (String action, FM_RepairScheduleErrorMsgs errorMsgs) {
+		public void validateRepairSchedule (String action, RepairScheduleErrorMsgs errorMsgs) {
 
 			//	if (action.equals("searchrepairschedule")) {
 					if (this.marID.equals("") && this.username.equals("")) 
