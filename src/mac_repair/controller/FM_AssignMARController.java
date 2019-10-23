@@ -12,9 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import mac_repair.data.FM_AssignMARDAO;
-import mac_repair.data.FacilityDAO;
-import mac_repair.data.MARDAO;
-import mac_repair.data.RepairScheduleDAO;
 import mac_repair.data.UtilityDAO;
 import mac_repair.model.*;
 
@@ -104,9 +101,9 @@ public class FM_AssignMARController extends HttpServlet {
 			else {// if no error messages
 
 				FM_AssignMARDAO.insertAssignedMAR(assignmar); 
-				RepairSchedule repairschedule = new RepairSchedule();	
-				repairschedule.setRepairSchedule(assignmar.getAssignedTo(), assignmar.getMarID(), assignmar.getAssignedDate());
-				RepairScheduleDAO.insertRepairSchedule(repairschedule);
+			//	RepairSchedule repairschedule = new RepairSchedule();	
+			//	repairschedule.setRepairSchedule(assignmar.getAssignedTo(), assignmar.getMarID(), assignmar.getAssignedDate());
+			//	RepairScheduleDAO.insertRepairSchedule(repairschedule);
 				//FM_MARDAO.deleteMAR(assignmar.getMarID());
 				session.setAttribute("ASSIGNEDMARS", assignmar);
 				url="/FM_ViewSpecificAssignedMAR.jsp";	

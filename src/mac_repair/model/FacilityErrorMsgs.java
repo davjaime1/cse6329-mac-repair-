@@ -20,10 +20,6 @@ public class FacilityErrorMsgs {
 			errorMsg = "Please correct the following errors";
 	}
 
-	public void setErrorMsg(String emsg) {
-		this.errorMsg = emsg;
-	}
-
 
 	public String getFacilityNameError() {
 		return facilityNameError;

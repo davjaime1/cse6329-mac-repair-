@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import mac_repair.data.MARDAO;
 import mac_repair.data.RepairScheduleDAO;
 import mac_repair.data.UtilityDAO;
 import mac_repair.model.*;
@@ -36,7 +35,7 @@ public class FM_RepairerScheduleController extends HttpServlet {
 			getServletContext().getRequestDispatcher(url).forward(request, response);
 		}
 		else if (action.equalsIgnoreCase("listRepaierschedule")) {
-			ArrayList<RepairSchedule> repairscheduleInDB = new ArrayList<RepairSchedule>();
+			ArrayList<MAR> repairscheduleInDB = new ArrayList<MAR>();
 			repairscheduleInDB=RepairScheduleDAO.listRepairSchedule();
 			session.setAttribute("REPAIRSCHEDULE", repairscheduleInDB);				
 			getServletContext().getRequestDispatcher("/FM_RepairScheduleList.jsp").forward(request, response);
@@ -52,7 +51,7 @@ public class FM_RepairerScheduleController extends HttpServlet {
 		session.removeAttribute("errorMsgs");
 		String dateVal = request.getParameter("iddateTimePicker");
 		Date assignedDate = UtilityDAO.mysqlDate(dateVal);
-		ArrayList<RepairSchedule> repaierscheduleInDB = new ArrayList<RepairSchedule>();
+		ArrayList<MAR> repaierscheduleInDB = new ArrayList<MAR>();
 		repaierscheduleInDB=RepairScheduleDAO.searchScheduleDate(assignedDate.toString());
 		session.setAttribute("REPAIRSCHEDULE", repaierscheduleInDB);
 		url="/FM_RepairScheduleList.jsp";

@@ -11,12 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import mac_repair.data.UtilityDAO;
-import mac_repair.data.RoleDAO;
 import mac_repair.data.UserDAO;
-import mac_repair.model.Role;
-import mac_repair.model.State;
 import mac_repair.model.User;
 import mac_repair.model.UserErrorMsgs;
+import mac_repair.model.UtilityModel;
 
 @WebServlet("/AdminSpecificUserController")
 public class AdminSpecificUserController extends HttpServlet
@@ -73,9 +71,9 @@ public class AdminSpecificUserController extends HttpServlet
             session.setAttribute("olduser", currentUser);
             session.setAttribute("user", currentUser);
             
-            ArrayList<State> stateInDB = new ArrayList<State>();
-            ArrayList<Role> roleInDB = new ArrayList<Role>();
-            roleInDB = RoleDAO.listRoles();
+            ArrayList<UtilityModel> stateInDB = new ArrayList<UtilityModel>();
+            ArrayList<UtilityModel> roleInDB = new ArrayList<UtilityModel>();
+            roleInDB = UtilityDAO.listRoles();
             session.setAttribute("ROLE", roleInDB);
             stateInDB = UtilityDAO.listStates();
             session.setAttribute("STATE", stateInDB);
@@ -138,9 +136,9 @@ public class AdminSpecificUserController extends HttpServlet
                 
                 session.setAttribute("olduser", currentUser);
                 
-                ArrayList<State> stateInDB = new ArrayList<State>();
-                ArrayList<Role> roleInDB = new ArrayList<Role>();
-                roleInDB = RoleDAO.listRoles();
+                ArrayList<UtilityModel> stateInDB = new ArrayList<UtilityModel>();
+                ArrayList<UtilityModel> roleInDB = new ArrayList<UtilityModel>();
+                roleInDB = UtilityDAO.listRoles();
                 session.setAttribute("ROLE", roleInDB);
                 stateInDB = UtilityDAO.listStates();
                 session.setAttribute("STATE", stateInDB);

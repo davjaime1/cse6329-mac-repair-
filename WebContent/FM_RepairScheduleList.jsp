@@ -17,9 +17,9 @@
 
  		<c:forEach items="${REPAIRSCHEDULE}" var="item" varStatus="status">
 			<tr class="myTableRow">
-			<td class="myTableCell" style="padding-right: 35px; "><c:out value="${item.username}" /></td>
+			<td class="myTableCell" style="padding-right: 35px; "><c:out value="${item.assignedTo}" /></td>
 			<td class="myTableCell" style="padding-right: 20px; "><c:out value="${item.marID}" /></td>
-			<td class="myTableCell" style="padding-right: 30px; "><c:out value="${item.scheduleDate}" /></td>
+			<td class="myTableCell" style="padding-right: 30px; "><c:out value="${item.assignedDate}" /></td>
 			</tr>
 		</c:forEach>
  </table>

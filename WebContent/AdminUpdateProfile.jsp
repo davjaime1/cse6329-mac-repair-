@@ -84,7 +84,7 @@
     <select name="idstate">
     
           <c:forEach items="${STATE}" var="item" varStatus="status">
-            <option value="${item.id}">${item.name}</option>
+            <option value="${item.id}">${item.value}</option>
           </c:forEach>
     </select>
     </td>
@@ -121,7 +121,7 @@
     <td> 
     <select name="idrole">
           <c:forEach items="${ROLE}" var="item" varStatus="status">
-            <option value="${item.id}">${item.name}</option>
+            <option value="${item.id}">${item.value}</option>
           </c:forEach>
     </select>
     </td>

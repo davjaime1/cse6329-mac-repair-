@@ -22,7 +22,7 @@
                     <select name="roleDropDown">
                         <option value="default">-- Select a Role --</option>
                         <c:forEach items="${ROLES}" var="role">
-                            <option value="${role.id}">${role.name}</option>
+                            <option value="${role.id}">${role.value}</option>
                         </c:forEach>
                     </select>
                 </td>

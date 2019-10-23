@@ -100,7 +100,7 @@ public class FM_MARController extends HttpServlet {
 			session.setAttribute("MAR", selectedMAR);
 
 			ArrayList<UtilityModel> urgencyInDB = new ArrayList<UtilityModel>();
-			ArrayList<Repairers> repairerInDB = new ArrayList<Repairers>();
+			ArrayList<User> repairerInDB = new ArrayList<User>();
 			ArrayList<UtilityModel> estimateTimeInDB = new ArrayList<UtilityModel>();
 
 			urgencyInDB= UtilityDAO.listUrgencies();				

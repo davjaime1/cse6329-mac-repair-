@@ -21,13 +21,7 @@ public class MAR implements Serializable{
 	
 	
 	public void setAssignedMAR (String marID, String facilityName,String facilityType, String urgency, String  description, String reportedUser, String date, String assignedTo, String assignedDate, String estimateOFRepair) {
-		setMarID(marID);
-		setFacilityName(facilityName);
-		setFacilityType(facilityType);
-		setUrgency(urgency);
-		setDescription(description);
-		setReportedUser(reportedUser);
-		setDate(date);	
+		setMAR(marID, facilityName, facilityType, urgency, description, reportedUser,date);
 		setAssignedTo(assignedTo);
 		setAssignedDate(assignedDate);
 		setEstimateOfRepair(estimateOFRepair);
@@ -126,26 +120,24 @@ public class MAR implements Serializable{
 
 			errorMsgs.setErrorMsg(action);
 		}
-//		else if (action.contains("savemodifiedassignedmar")) {
-//			errorMsgs.setAssignedDatErrorMsgs(validateAssignedDate(this.getAssignedDate()));
-//			errorMsgs.setAssignedToErrorMsgs(validateAssignedTo(this.getAssignedTo(),this.getAssignedDate()));
-//			errorMsgs.setDescriptionErrorMsgs(validateDescription(this.getDescription()));
-//			errorMsgs.setErrorMsg(action);
-//		}
 		else if (action.equals("searchMAR")) {
 			if (this.marID.equals("") && this.facilityName.equals("")) 
 				errorMsgs.setMarNumberError("Both MAR Number and Facility Name cannot be blank");
 
 			errorMsgs.setErrorMsg(action);				
 		}
+		else if (action.equals("savemar")) {
+			if (this.description.equals("")) 
+				errorMsgs.setDescriptionErrorMsgs("Description should not be null");
+
+			errorMsgs.setErrorMsg(action);				
+		}
 
 		else
-//			if (action.equals("searchAssignMAR")) {
 				if (this.marID.equals("") && this.facilityName.equals("")) 
 					errorMsgs.setMarNumberError("Both MAR Number and Facility Name cannot be blank");
 
 				errorMsgs.setErrorMsg(action);				
-	//		}
 
 	}
 	
@@ -171,6 +163,8 @@ public class MAR implements Serializable{
 	private String validateAssignedTo (String assignedTo, String assignedDate) {
 		String result="";
 		Date assgnDate = UtilityDAO.mysqlDateassignmar(assignedDate);
+		System.out.println(assignedDate);
+		System.out.println(assgnDate);
 		if (RepairScheduleDAO.validRepairSchedule(assignedTo, assgnDate))
 			result= "Your Repair Schedule Overloaded";
 		return result;

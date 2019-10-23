@@ -8,13 +8,12 @@ import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import mac_repair.model.Repairers;
 import mac_repair.model.UtilityModel;
 import mac_repair.util.SQLConnection;
-import mac_repair.model.State;
+import mac_repair.model.User;
 
 public class UtilityDAO {
-	public static ArrayList<Repairers>  listRepairers()  {  
+	public static ArrayList<User>  listRepairers()  {  
 		return ReturnMatchingRepaierList(" SELECT * from users WHERE role ='R' ORDER BY username");
 	}
 
@@ -47,19 +46,32 @@ public class UtilityDAO {
 		return date;		
 }
 
-	private static ArrayList<Repairers> ReturnMatchingRepaierList(String queryString) {
+	private static ArrayList<User> ReturnMatchingRepaierList(String queryString) {
 		// TODO Auto-generated method stub
-		ArrayList<Repairers> repairListInDB = new ArrayList<Repairers>();
+		ArrayList<User> repairListInDB = new ArrayList<User>();
 		
 		Statement stmt = null;
 		Connection conn = SQLConnection.getDBConnection();  
 		try {
 			stmt = conn.createStatement();
-			ResultSet repairList = stmt.executeQuery(queryString);
-			while (repairList.next()) {
-				Repairers repairer = new Repairers(); 
-				repairer.setUsername(repairList.getString("username"));
-				repairListInDB.add(repairer);	
+			ResultSet userList = stmt.executeQuery(queryString);
+			while (userList.next()) {
+	               User user = new User();
+	                user.setUsername(userList.getString("username"));
+	                user.setId(userList.getString("id"));
+	                user.setFirstName(userList.getString("firstname"));
+	                user.setLastName(userList.getString("lastname"));
+	                user.setPassword(userList.getString("password"));
+	                user.setRole(userList.getString("role"));
+	                user.setAddress(userList.getString("address"));
+	                user.setCity(userList.getString("city"));
+	                user.setState(userList.getString("state"));
+	                user.setZip(userList.getString("zip"));
+	                user.setPhone(userList.getString("phone"));
+	                user.setEmail(userList.getString("email"));
+	                
+	                //userListInDB.add(user);
+	 				repairListInDB.add(user);	
 			}
 		} catch (SQLException e) {}
 		return repairListInDB;
@@ -202,14 +214,14 @@ public class UtilityDAO {
 		return urgencyListInDB;
 	}
 	
-	public static ArrayList<State>  listStates()  {  
+	public static ArrayList<UtilityModel>  listStates()  {  
 		return ReturnMatchingStates(" SELECT * from states ORDER BY id");
 	}
 
 
-	private static ArrayList<State> ReturnMatchingStates(String queryString) {
+	private static ArrayList<UtilityModel> ReturnMatchingStates(String queryString) {
 		// TODO Auto-generated method stub
-		ArrayList<State> urgencyListInDB = new ArrayList<State>();
+		ArrayList<UtilityModel> urgencyListInDB = new ArrayList<UtilityModel>();
 		
 		Statement stmt = null;
 		Connection conn = SQLConnection.getDBConnection();  
@@ -217,13 +229,52 @@ public class UtilityDAO {
 			stmt = conn.createStatement();
 			ResultSet urgencyList = stmt.executeQuery(queryString);
 			while ( urgencyList.next()) {
-				State urgency = new State(); 
+				UtilityModel urgency = new UtilityModel(); 
 				urgency.setId( urgencyList.getString("id"));
-				urgency.setName( urgencyList.getString("name"));
+				urgency.setValue( urgencyList.getString("name"));
 
 				urgencyListInDB.add(urgency);	
 			}
 		} catch (SQLException e) {}
 		return urgencyListInDB;
 	}
+	   private static ArrayList<UtilityModel> getMatchingRoleList(String query)
+	    {
+	        ArrayList<UtilityModel> roleListInDB = new ArrayList<UtilityModel>();
+	        
+	        Statement stmt = null;
+	        Connection conn = SQLConnection.getDBConnection();
+	        try
+	        {
+	            stmt = conn.createStatement();
+	            ResultSet roleSet = stmt.executeQuery(query);
+	            while (roleSet.next())
+	            {
+	            	UtilityModel role = new UtilityModel();
+	                role.setId(roleSet.getString("id"));
+	                role.setValue(roleSet.getString("name"));
+	                
+	                roleListInDB.add(role);
+	            }
+	        }
+	        catch (SQLException e)
+	        {
+	            System.out.println("Error in RoleDAO\n" + e.getMessage());
+	        }
+	        
+	        return roleListInDB;
+	    }
+	    
+	    
+	    public static ArrayList<UtilityModel> listRoleWithId(String id)
+	    {
+	        return getMatchingRoleList(String.format(
+	                "SELECT * from roles WHERE id='%s'", id));
+	    }
+	    
+	    public static ArrayList<UtilityModel> listRoles()
+	    {
+	        return getMatchingRoleList("SELECT * from roles ORDER BY id");
+	    }
+
 }
