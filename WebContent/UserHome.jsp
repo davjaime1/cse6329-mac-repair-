@@ -10,19 +10,17 @@
 <body>
 
     <header>
-        <h2>User Home > ${username}</h2>
+        <h1>User Home > ${username}</h1>
     </header>
 
     <section>
-
         <ul>
             <li><a href="/mac_repair/MarController?action=NewMarAction">Create MAR</a></li>
             <li><a href="/mac_repair/MarController?action=ListMarsAction">View MARs</a></li>
-            <li><a href="/mac_repair/UserController?action=viewProfile" target="_top"><span>View Profile</span></a></li>
-            <li><a href="/mac_repair/UserController?action=updateProfileView" target="_top"><span>Update Profile</span></a></li>
-            <li><a href="/mac_repair/UserController?action=logOut" target="_top"><span>Log Out</span></a></li>
+            <li><a href="/mac_repair/UserController?action=viewProfile"><span>View Profile</span></a></li>
+            <li><a href="/mac_repair/UserController?action=updateProfileView"><span>Update Profile</span></a></li>
+            <li><a href="/mac_repair/UserController?action=logOut"><span>Log Out</span></a></li>
         </ul>
-
     </section>
 
 </body>

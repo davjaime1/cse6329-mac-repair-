@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import mac_repair.data.UtilityDAO;
 import mac_repair.data.UserDAO;
+import mac_repair.data.UtilityDAO;
 import mac_repair.model.User;
 import mac_repair.model.UserErrorMsgs;
 import mac_repair.model.UtilityModel;
@@ -120,22 +120,20 @@ public class UserController extends HttpServlet
         else if (action.equalsIgnoreCase("registerUser"))
         {
             User user = new User();
-            UserErrorMsgs CerrorMsgs = new UserErrorMsgs();
+            UserErrorMsgs errMsgs = new UserErrorMsgs();
             userParam(request, user);
-            user.validateUser(action, CerrorMsgs);
+            user.validateUser(user, errMsgs, true);
             session.setAttribute("user", user);
-            if (!CerrorMsgs.getErrorMsg().equals(""))
+            if (!errMsgs.getErrorMsg().isEmpty())
             {
                 // if error messages
-                session.setAttribute("errorMsgs", CerrorMsgs);
+                session.setAttribute("errorMsgs", errMsgs);
                 getServletContext().getRequestDispatcher("/Register.jsp").forward(request, response);
             }
             else
             {
                 // if no error messages
                 UserDAO.insertUser(user);
-                UserErrorMsgs facerrorMsgs = new UserErrorMsgs();
-                facerrorMsgs.setErrorMsg("Facility Added SucessFully");
                 getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
             }
         }
@@ -150,8 +148,8 @@ public class UserController extends HttpServlet
             currentUser.setUser(
                     fetch_profile.get(0).getUsername(),
                     fetch_profile.get(0).getId(),
-                    fetch_profile.get(0).getFirstName(),
-                    fetch_profile.get(0).getLastName(),
+                    fetch_profile.get(0).getFirstname(),
+                    fetch_profile.get(0).getLastname(),
                     fetch_profile.get(0).getPassword(),
                     fetch_profile.get(0).getRole(),
                     fetch_profile.get(0).getAddress(),
@@ -166,30 +164,10 @@ public class UserController extends HttpServlet
         }
         else if (action.equalsIgnoreCase("updateProfileView"))
         {
-            String username = (String) session.getAttribute("username");
+            session.setAttribute("user", UserDAO.returnProfile(
+                    (String) session.getAttribute("username")).get(0));
+            session.setAttribute("STATE", UtilityDAO.listStates());
             
-            ArrayList<User> fetch_profile = new ArrayList<User>();
-            fetch_profile = UserDAO.returnProfile(username);
-            User currentUser = new User();
-            currentUser.setUser(
-                    fetch_profile.get(0).getUsername(),
-                    fetch_profile.get(0).getId(),
-                    fetch_profile.get(0).getFirstName(),
-                    fetch_profile.get(0).getLastName(),
-                    fetch_profile.get(0).getPassword(),
-                    fetch_profile.get(0).getRole(),
-                    fetch_profile.get(0).getAddress(),
-                    fetch_profile.get(0).getState(),
-                    fetch_profile.get(0).getCity(),
-                    fetch_profile.get(0).getZip(),
-                    fetch_profile.get(0).getPhone(),
-                    fetch_profile.get(0).getEmail());
-            
-            session.setAttribute("user", currentUser);
-            ArrayList<UtilityModel> stateInDB = new ArrayList<UtilityModel>();
-            
-            stateInDB = UtilityDAO.listStates();
-            session.setAttribute("STATE", stateInDB);
             getServletContext().getRequestDispatcher("/UpdateProfile.jsp").forward(request, response);
         }
         else if (action.equalsIgnoreCase("updateProfile"))
@@ -197,7 +175,7 @@ public class UserController extends HttpServlet
             User user = new User();
             UserErrorMsgs CerrorMsgs = new UserErrorMsgs();
             userParam(request, user);
-            user.validateUser(action, CerrorMsgs);
+            user.validateUser(user, CerrorMsgs, false);
             session.setAttribute("user", user);
             if (!CerrorMsgs.getErrorMsg().equals(""))
             {
@@ -214,49 +192,32 @@ public class UserController extends HttpServlet
             }
         }
         
-        else // (action == loginUser)
+        // (action == loginUser)
+        else if (action.equalsIgnoreCase("loginUser"))
         {
-            String username = request.getParameter("idusername");
-            String password = request.getParameter("idpassword");
-            
-            ArrayList<User> fetch_profile = new ArrayList<User>();
-            fetch_profile = UserDAO.returnProfile(username);
-            UserErrorMsgs CerrorMsgs = new UserErrorMsgs();
             User currentUser = new User();
-            if (fetch_profile.size() != 0)
-            {
-                currentUser.setUser(
-                        fetch_profile.get(0).getUsername(),
-                        fetch_profile.get(0).getId(),
-                        fetch_profile.get(0).getFirstName(),
-                        fetch_profile.get(0).getLastName(),
-                        fetch_profile.get(0).getPassword(),
-                        fetch_profile.get(0).getRole(),
-                        fetch_profile.get(0).getAddress(),
-                        fetch_profile.get(0).getState(),
-                        fetch_profile.get(0).getCity(),
-                        fetch_profile.get(0).getZip(),
-                        fetch_profile.get(0).getPhone(),
-                        fetch_profile.get(0).getEmail());
-                currentUser.validateLogin(action, password, CerrorMsgs);
-            }
-            else
-            {
-                CerrorMsgs.setUserNameError("No user found");
-                CerrorMsgs.setErrorMsg(action);
-            }
+            currentUser.setUsername(request.getParameter("idusername"));
+            currentUser.setPassword(request.getParameter("idpassword"));
             
-            session.setAttribute("errorMsgs", CerrorMsgs);
-            if (!CerrorMsgs.getErrorMsg().equals(""))
+            ArrayList<User> userList = UserDAO.returnUserListWithCredentials(
+                    currentUser.getUsername(), currentUser.getPassword());
+            if (!userList.isEmpty())
             {
-                // if error messages
-                currentUser.setUsername(username);
-                currentUser.setPassword(password);
-                session.setAttribute("USERS", currentUser);
-                getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
-            }
-            else
-            {
+                // Successful login
+                currentUser.setUser(
+                        userList.get(0).getUsername(),
+                        userList.get(0).getId(),
+                        userList.get(0).getFirstname(),
+                        userList.get(0).getLastname(),
+                        userList.get(0).getPassword(),
+                        userList.get(0).getRole(),
+                        userList.get(0).getAddress(),
+                        userList.get(0).getState(),
+                        userList.get(0).getCity(),
+                        userList.get(0).getZip(),
+                        userList.get(0).getPhone(),
+                        userList.get(0).getEmail());
+                
                 /* Sets the role attribute for the user that just logged in
                  * so that other pages can use the role info. */
                 session.setAttribute("LOGIN_ROLE", currentUser.getRole());
@@ -280,11 +241,17 @@ public class UserController extends HttpServlet
                     url = "/Repairer_Home.jsp";
                 }
                 
-                session.setAttribute("username", username);
-                request.setAttribute("username", username);
+                session.setAttribute("username", currentUser.getUsername());
+                request.setAttribute("username", currentUser.getUsername());
                 request.getRequestDispatcher(url).forward(request, response);
             }
+            else
+            {
+                // Unsuccessful login
+                session.setAttribute("ERR_LOGIN", "BAD CREDENTIALS");
+                session.setAttribute("USERS", currentUser);
+                getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+            }
         }
-        
     }
 }

@@ -6,7 +6,8 @@ import mac_repair.data.UserDAO;
 
 public class User implements Serializable
 {
-    private static final long serialVersionUID = -4594567443904550524L;
+    private static final long serialVersionUID = 17594123062502750L;
+    
     
     private String username;
     private String id;
@@ -22,9 +23,26 @@ public class User implements Serializable
     private String email;
     
     
+    public User()
+    {
+        setUsername("");
+        setId("");
+        setFirstname("");
+        setLastname("");
+        setPassword("");
+        setRole("");
+        setAddress("");
+        setCity("");
+        setState("");
+        setZip("");
+        setPhone("");
+        setEmail("");
+    }
+    
+    
     public void setUser(
             String username,
-            String utaId,
+            String id,
             String firstName,
             String lastName,
             String password,
@@ -37,9 +55,9 @@ public class User implements Serializable
             String email)
     {
         setUsername(username);
-        setId(utaId);
-        setFirstName(firstName);
-        setLastName(lastName);
+        setId(id);
+        setFirstname(firstName);
+        setLastname(lastName);
         setPassword(password);
         setRole(role);
         setAddress(address);
@@ -51,205 +69,138 @@ public class User implements Serializable
     }
     
     
-    public void validateUser(String action, UserErrorMsgs errorMsgs)
+    public void validateUser(User u, UserErrorMsgs uem, boolean checkUnique)
     {
-        if (action.contains("updateProfile"))
+        uem.setUsernameError(validateUsername(u.getUsername(), checkUnique));
+        uem.setIdError(validateId(u.getId()));
+        uem.setFirstnameError(validateFirstName(u.getFirstname()));
+        uem.setLastnameError(validateLastName(u.getLastname()));
+        uem.setPasswordError(validatePassword(u.getPassword()));
+        uem.setAddressError(validateAddress(u.getAddress()));
+        uem.setCityError(validateCity(u.getCity()));
+        uem.setZipError(validateZip(u.getZip()));
+        uem.setPhoneError(validatePhone(u.getPhone()));
+        uem.setEmailError(validateEmail(u.getEmail()));
+        uem.setErrorMsg();
+    }
+    
+    private String validateUsername(String username, boolean checkUnique)
+    {
+        String result;
+        String regex = "^[a-zA-Z0-9]{3,16}$";
+        if (username.matches(regex))
         {
-            errorMsgs.setFirstnameError(validateFirstName(this.getFirstName()));
-            errorMsgs.setLastnameError(validateLastName(this.getLastName()));
-            errorMsgs.setPasswordError(validatePassword(this.getPassword()));
-            errorMsgs.setAddressError(validateAddress(this.getAddress()));
-            errorMsgs.setCityError(validateCity(this.getCity()));
-            errorMsgs.setZipError(validateZip(this.getZip()));
-            errorMsgs.setPhoneError(validatePhone(this.getPhone()));
-            errorMsgs.setEmailError(validateEmail(this.getEmail()));
-            errorMsgs.setErrorMsg(action);
+            if (checkUnique && !UserDAO.isUsernameUnique(username))
+            {
+                result = "Username is already in the database";
+            }
+            else
+            {
+                result = "";
+            }
         }
         else
         {
-            errorMsgs.setUserNameError(validateUsername(action, this.getUsername()));
-            errorMsgs.setUtaidError(validateUtaId(this.getId()));
-            errorMsgs.setFirstnameError(validateFirstName(this.getFirstName()));
-            errorMsgs.setLastnameError(validateLastName(this.getLastName()));
-            errorMsgs.setPasswordError(validatePassword(this.getPassword()));
-            errorMsgs.setAddressError(validateAddress(this.getAddress()));
-            errorMsgs.setCityError(validateCity(this.getCity()));
-            errorMsgs.setZipError(validateZip(this.getZip()));
-            errorMsgs.setPhoneError(validatePhone(this.getPhone()));
-            errorMsgs.setEmailError(validateEmail(this.getEmail()));
-            errorMsgs.setErrorMsg(action);
-        }
-    }
-    
-    public void validateLogin(String action, String pssd, UserErrorMsgs errorMsgs)
-    {
-        errorMsgs.setPasswordError(matchPassword(pssd));
-        errorMsgs.setErrorMsg(action);
-    }
-    
-    private String matchPassword(String psswd)
-    {
-        String result = "";
-        if (!password.equals(psswd))
-        {
-            
-            result = "Incorrect password";
-        }
-        else if (password == null || password.equals(""))
-        {
-            result = "Password is empty";
+            result = "Invalid username";
         }
         return result;
     }
     
-    private String validateUsername(String action, String username)
+    private String validateId(String id)
     {
-        String result = "";
-        if (username == null || username.equals("") && action.contains("registerUser"))
+        String result = "Incorrect ID";
+        String regex = "^[0-9]{10}$";
+        if (id.matches(regex))
         {
-            result = "Username is empty";
-        }
-        else if (!UserDAO.userNameunique(username) && action.contains("registerUser"))
-        {
-            result = "Username already exists";
-        }
-        else if (username == null || username.equals(""))
-        {
-            result = "No user Found";
-        }
-        
-        return result;
-    }
-    
-    
-    private String validateUtaId(String utaId)
-    {
-        String regex = "\\d{10}";
-        String result = "";
-        if (!utaId.equals("") && utaId.matches(regex))
-        {
-            
             result = "";
-        }
-        else
-        {
-            result = "Incorrect UTA ID";
         }
         return result;
     }
     
     private String validateFirstName(String firstName)
     {
-        String result = "";
-        String regex = "^[a-zA-Z]*$";
-        if (!firstName.equals("") && firstName.matches(regex))
+        String result = "Invalid first name";
+        String regex = "^[a-zA-Z]{1,45}$";
+        if (firstName.matches(regex))
         {
-            // result="Valid FirstName";
             result = "";
-        }
-        else
-        {
-            result = "Invalid LastName";
         }
         return result;
     }
     
     private String validateLastName(String lastName)
     {
-        String result = "";
-        String regex = "^[a-zA-Z]*$";
-        if (!lastName.equals("") && lastName.matches(regex))
+        String result = "Invalid last name";
+        String regex = "^[a-zA-Z]{1,45}$";
+        if (lastName.matches(regex))
         {
             result = "";
-        }
-        else
-        {
-            result = "Invalid LastName";
         }
         return result;
     }
     
     private String validatePassword(String password)
     {
-        String result = "";
-        if (!password.equals("") && password.length() > 6)
+        String result = "Invalid password";
+        String regex = "^.{6,120}$";
+        if (password.matches(regex))
         {
             result = "";
-        }
-        else
-        {
-            result = "Invalid Password";
         }
         return result;
     }
     
     private String validateAddress(String address)
     {
-        String result = "";
-        if (address == null || username.equals(""))
+        String result = "Invalid address";
+        String regex = "^[a-zA-Z0-9\\s]{1,120}$";
+        if (address.matches(regex))
         {
-            result = "Address is empty";
+            result = "";
         }
         return result;
     }
     
-    
     private String validateCity(String city)
     {
-        String result = "";
-        String regex = "^[a-zA-Z]*$";
-        if (!city.equals("") && city.matches(regex))
+        String result = "Invalid city";
+        String regex = "^[a-zA-Z]{1,45}$";
+        if (city.matches(regex))
         {
             result = "";
-        }
-        else
-        {
-            result = "Invalid City Name";
         }
         return result;
     }
     
     private String validateZip(String zip)
     {
-        String result = "";
+        String result = "Invalid zip";
         String regex = "\\d{5}";
-        if (!zip.equals("") && zip.matches(regex))
+        if (zip.matches(regex))
         {
             result = "";
-        }
-        else
-        {
-            result = "Invalid Zip";
         }
         return result;
     }
     
     private String validatePhone(String phone)
     {
-        String result = "";
+        String result = "Invalid phone";
         String regex = "\\d{10}";
-        if (!phone.equals("") && phone.matches(regex))
+        if (phone.matches(regex))
         {
             result = "";
-        }
-        else
-        {
-            result = "Invalid Phone";
         }
         return result;
     }
     
     private String validateEmail(String email)
     {
-        String result = "";
-        String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
-        if (!email.equals("") && email.matches(regex) && email.contains("uta.edu"))
+        String result = "Invalid email";
+        String regex = "^([a-zA-z]+[a-zA-Z0-9]*\\.?[a-zA-Z0-9]*)*[a-zA-Z]+\\@uta\\.edu$";
+        if (email.length() <= 45 && email.matches(regex))
         {
             result = "";
-        }
-        else
-        {
-            result = "Invalid Email";
         }
         return result;
     }
@@ -275,22 +226,22 @@ public class User implements Serializable
         this.username = username;
     }
     
-    public void setFirstName(String s)
+    public void setFirstname(String s)
     {
         firstname = s;
     }
     
-    public String getFirstName()
+    public String getFirstname()
     {
         return firstname;
     }
     
-    public void setLastName(String s)
+    public void setLastname(String s)
     {
         lastname = s;
     }
     
-    public String getLastName()
+    public String getLastname()
     {
         return lastname;
     }

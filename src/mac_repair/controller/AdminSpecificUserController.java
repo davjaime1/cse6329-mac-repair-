@@ -57,8 +57,8 @@ public class AdminSpecificUserController extends HttpServlet
             currentUser.setUser(
                     fetch_profile.get(0).getUsername(),
                     fetch_profile.get(0).getId(),
-                    fetch_profile.get(0).getFirstName(),
-                    fetch_profile.get(0).getLastName(),
+                    fetch_profile.get(0).getFirstname(),
+                    fetch_profile.get(0).getLastname(),
                     fetch_profile.get(0).getPassword(),
                     fetch_profile.get(0).getRole(),
                     fetch_profile.get(0).getAddress(),
@@ -103,7 +103,8 @@ public class AdminSpecificUserController extends HttpServlet
             User user = new User();
             UserErrorMsgs CerrorMsgs = new UserErrorMsgs();
             userParam(request, user);
-            user.validateUser(action, CerrorMsgs);
+//            user.validateUser(action, CerrorMsgs);
+            user.validateUser(user, CerrorMsgs, false);
             session.setAttribute("user", user);
             if (!CerrorMsgs.getErrorMsg().equals(""))
             {
@@ -123,8 +124,8 @@ public class AdminSpecificUserController extends HttpServlet
                 currentUser.setUser(
                         fetch_profile.get(0).getUsername(),
                         fetch_profile.get(0).getId(),
-                        fetch_profile.get(0).getFirstName(),
-                        fetch_profile.get(0).getLastName(),
+                        fetch_profile.get(0).getFirstname(),
+                        fetch_profile.get(0).getLastname(),
                         fetch_profile.get(0).getPassword(),
                         fetch_profile.get(0).getRole(),
                         fetch_profile.get(0).getAddress(),
