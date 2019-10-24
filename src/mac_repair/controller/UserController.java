@@ -122,7 +122,8 @@ public class UserController extends HttpServlet
             User user = new User();
             UserErrorMsgs CerrorMsgs = new UserErrorMsgs();
             userParam(request, user);
-            user.validateUser(action, CerrorMsgs);
+            // user.validateUser(action, CerrorMsgs);
+            user.validateUser(user, CerrorMsgs);
             session.setAttribute("user", user);
             if (!CerrorMsgs.getErrorMsg().equals(""))
             {
@@ -135,7 +136,7 @@ public class UserController extends HttpServlet
                 // if no error messages
                 UserDAO.insertUser(user);
                 UserErrorMsgs facerrorMsgs = new UserErrorMsgs();
-                facerrorMsgs.setErrorMsg("Facility Added SucessFully");
+                // facerrorMsgs.setErrorMsg("Facility Added SucessFully");
                 getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
             }
         }
@@ -150,8 +151,8 @@ public class UserController extends HttpServlet
             currentUser.setUser(
                     fetch_profile.get(0).getUsername(),
                     fetch_profile.get(0).getId(),
-                    fetch_profile.get(0).getFirstName(),
-                    fetch_profile.get(0).getLastName(),
+                    fetch_profile.get(0).getFirstname(),
+                    fetch_profile.get(0).getLastname(),
                     fetch_profile.get(0).getPassword(),
                     fetch_profile.get(0).getRole(),
                     fetch_profile.get(0).getAddress(),
@@ -174,8 +175,8 @@ public class UserController extends HttpServlet
             currentUser.setUser(
                     fetch_profile.get(0).getUsername(),
                     fetch_profile.get(0).getId(),
-                    fetch_profile.get(0).getFirstName(),
-                    fetch_profile.get(0).getLastName(),
+                    fetch_profile.get(0).getFirstname(),
+                    fetch_profile.get(0).getLastname(),
                     fetch_profile.get(0).getPassword(),
                     fetch_profile.get(0).getRole(),
                     fetch_profile.get(0).getAddress(),
@@ -197,7 +198,8 @@ public class UserController extends HttpServlet
             User user = new User();
             UserErrorMsgs CerrorMsgs = new UserErrorMsgs();
             userParam(request, user);
-            user.validateUser(action, CerrorMsgs);
+            // user.validateUser(action, CerrorMsgs);
+            user.validateUser(user, CerrorMsgs);
             session.setAttribute("user", user);
             if (!CerrorMsgs.getErrorMsg().equals(""))
             {
@@ -214,7 +216,8 @@ public class UserController extends HttpServlet
             }
         }
         
-        else // (action == loginUser)
+        // (action == loginUser)
+        else if (action.equalsIgnoreCase("loginUser"))
         {
             String username = request.getParameter("idusername");
             String password = request.getParameter("idpassword");
@@ -228,8 +231,8 @@ public class UserController extends HttpServlet
                 currentUser.setUser(
                         fetch_profile.get(0).getUsername(),
                         fetch_profile.get(0).getId(),
-                        fetch_profile.get(0).getFirstName(),
-                        fetch_profile.get(0).getLastName(),
+                        fetch_profile.get(0).getFirstname(),
+                        fetch_profile.get(0).getLastname(),
                         fetch_profile.get(0).getPassword(),
                         fetch_profile.get(0).getRole(),
                         fetch_profile.get(0).getAddress(),
@@ -238,12 +241,12 @@ public class UserController extends HttpServlet
                         fetch_profile.get(0).getZip(),
                         fetch_profile.get(0).getPhone(),
                         fetch_profile.get(0).getEmail());
-                currentUser.validateLogin(action, password, CerrorMsgs);
+                // currentUser.validateLogin(action, password, CerrorMsgs);
             }
             else
             {
-                CerrorMsgs.setUserNameError("No user found");
-                CerrorMsgs.setErrorMsg(action);
+                // CerrorMsgs.setUserNameError("No user found");
+                // CerrorMsgs.setErrorMsg(action);
             }
             
             session.setAttribute("errorMsgs", CerrorMsgs);
@@ -285,6 +288,5 @@ public class UserController extends HttpServlet
                 request.getRequestDispatcher(url).forward(request, response);
             }
         }
-        
     }
 }

@@ -3,34 +3,30 @@ package mac_repair.model;
 public class UserErrorMsgs
 {
     private String errorMsg;
-    private String utaidError;
+    private String usernameError;
+    private String idError;
     private String firstnameError;
     private String lastnameError;
     private String passwordError;
-    private String roleError;
     private String addressError;
-    private String stateError;
     private String cityError;
     private String zipError;
     private String phoneError;
     private String emailError;
-    private String userNameError;
     
     public UserErrorMsgs()
     {
-        this.setUserNameError("");
-        this.setUtaidError("");
+        this.setUsernameError("");
+        this.setIdError("");
         this.setFirstnameError("");
         this.setLastnameError("");
         this.setPasswordError("");
-        this.setRoleError("");
         this.setAddressError("");
-        this.setStateError("");
         this.setCityError("");
         this.setZipError("");
         this.setPhoneError("");
         this.setEmailError("");
-        this.setErrorMsg("");
+        this.setErrorMsg();
     }
     
     public String getErrorMsg()
@@ -38,59 +34,41 @@ public class UserErrorMsgs
         return errorMsg;
     }
     
-    
-    public void setErrorMsg(String action)
+    public void setErrorMsg()
     {
-        if (action.contains("registerUser"))
+        if (!usernameError.equals("")
+                || !idError.equals("")
+                || !firstnameError.equals("")
+                || !lastnameError.equals("")
+                || !passwordError.equals("")
+                || !addressError.equals("")
+                || !cityError.equals("")
+                || !zipError.equals("")
+                || !phoneError.equals("")
+                || !emailError.equals(""))
         {
-            if (!userNameError.equals("")
-                    || !utaidError.equals("")
-                    || !firstnameError.equals("")
-                    || !lastnameError.equals("")
-                    || !passwordError.equals("")
-                    || !roleError.equals("")
-                    || !addressError.equals("")
-                    || !stateError.equals("")
-                    || !cityError.equals("")
-                    || !zipError.equals("")
-                    || !phoneError.equals("")
-                    || !emailError.equals(""))
-            {
-                this.errorMsg = "Fields cannot be left empty ";
-                System.out.println("Inside setErrorMsg(): set errorMsg: " + this.errorMsg);
-            }
-            else
-            {
-                this.errorMsg = "";
-            }
+            this.errorMsg = "Fields have errors";
         }
         else
         {
-            if (!userNameError.equals("") || !passwordError.equals(""))
-            {
-                this.errorMsg = "Invalid Login";
-            }
-            else
-            {
-                this.errorMsg = "";
-            }
+            this.errorMsg = "";
         }
+        
     }
     
-    
-    public String getUtaidError()
+    public String getIdError()
     {
-        return utaidError;
+        return idError;
     }
     
     
-    public void setUtaidError(String utaidError)
+    public void setIdError(String utaidError)
     {
-        this.utaidError = utaidError;
+        this.idError = utaidError;
     }
     
     
-    public String getFirstnameError()
+    public String getFirstNameError()
     {
         return firstnameError;
     }
@@ -102,7 +80,7 @@ public class UserErrorMsgs
     }
     
     
-    public String getLastnameError()
+    public String getLastNameError()
     {
         return lastnameError;
     }
@@ -125,19 +103,6 @@ public class UserErrorMsgs
         this.passwordError = passwordError;
     }
     
-    
-    public String getRoleError()
-    {
-        return roleError;
-    }
-    
-    
-    public void setRoleError(String roleError)
-    {
-        this.roleError = roleError;
-    }
-    
-    
     public String getAddressError()
     {
         return addressError;
@@ -148,19 +113,6 @@ public class UserErrorMsgs
     {
         this.addressError = addressError;
     }
-    
-    
-    public String getStateError()
-    {
-        return stateError;
-    }
-    
-    
-    public void setStateError(String stateError)
-    {
-        this.stateError = stateError;
-    }
-    
     
     public String getCityError()
     {
@@ -210,14 +162,14 @@ public class UserErrorMsgs
     }
     
     
-    public String getUserNameError()
+    public String getUsernameError()
     {
-        return userNameError;
+        return usernameError;
     }
     
     
-    public void setUserNameError(String userNameError)
+    public void setUsernameError(String userNameError)
     {
-        this.userNameError = userNameError;
+        this.usernameError = userNameError;
     }
 }

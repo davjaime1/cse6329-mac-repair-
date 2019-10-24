@@ -59,8 +59,8 @@ public class UtilityDAO {
 	               User user = new User();
 	                user.setUsername(userList.getString("username"));
 	                user.setId(userList.getString("id"));
-	                user.setFirstName(userList.getString("firstname"));
-	                user.setLastName(userList.getString("lastname"));
+	                user.setFirstname(userList.getString("firstname"));
+	                user.setLastname(userList.getString("lastname"));
 	                user.setPassword(userList.getString("password"));
 	                user.setRole(userList.getString("role"));
 	                user.setAddress(userList.getString("address"));

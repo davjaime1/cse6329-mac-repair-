@@ -1,0 +1,44 @@
+1,aa3,1000000001,d,d,pass12,a,a,76017,1234567890,d@uta.edu,,,,,,,,,,,
+2,,1000000001,d,d,pass12,a,a,76017,1234567890,d@uta.edu,Fields have errors,Invalid username,,,,,,,,,
+3,a2,1000000001,d,d,pass12,a,a,76017,1234567890,d@uta.edu,Fields have errors,Invalid username,,,,,,,,,
+4,aaaaaaaaaaaaaa16,1000000001,d,d,pass12,a,a,76017,1234567890,d@uta.edu,,,,,,,,,,,
+5,aaaaaaaaaaaaaaa17,1000000001,d,d,pass12,a,a,76017,1234567890,d@uta.edu,Fields have errors,Invalid username,,,,,,,,,
+6,user1,1000000002,d,d,pass12,a,a,76017,1234567890,d@uta.edu,Fields have errors,Username is already in the database,,,,,,,,,
+7,aa3,100000000,d,d,pass12,a,a,76017,1234567890,d@uta.edu,Fields have errors,,Incorrect ID,,,,,,,,
+8,aa3,10000000011,d,d,pass12,a,a,76017,1234567890,d@uta.edu,Fields have errors,,Incorrect ID,,,,,,,,
+9,aa3,1000000001,,d,pass12,a,a,76017,1234567890,d@uta.edu,Fields have errors,,,Invalid first name,,,,,,,
+10,aa3,1000000001,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,d,pass12,a,a,76017,1234567890,d@uta.edu,,,,,,,,,,,
+11,aa3,1000000001,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,d,pass12,a,a,76017,1234567890,d@uta.edu,Fields have errors,,,Invalid first name,,,,,,,
+12,aa3,1000000001,#,d,pass12,a,a,76017,1234567890,d@uta.edu,Fields have errors,,,Invalid first name,,,,,,,
+13,aa3,1000000001,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa#,d,pass12,a,a,76017,1234567890,d@uta.edu,Fields have errors,,,Invalid first name,,,,,,,
+14,aa3,1000000001,d,,pass12,a,a,76017,1234567890,d@uta.edu,Fields have errors,,,,Invalid last name,,,,,,
+15,aa3,1000000001,d,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,pass12,a,a,76017,1234567890,d@uta.edu,,,,,,,,,,,
+16,aa3,1000000001,d,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,pass12,a,a,76017,1234567890,d@uta.edu,Fields have errors,,,,Invalid last name,,,,,,
+17,aa3,1000000001,d,#,pass12,a,a,76017,1234567890,d@uta.edu,Fields have errors,,,,Invalid last name,,,,,,
+18,aa3,1000000001,d,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa#,pass12,a,a,76017,1234567890,d@uta.edu,Fields have errors,,,,Invalid last name,,,,,,
+19,aa3,1000000001,d,d,a1234,a,a,76017,1234567890,d@uta.edu,Fields have errors,,,,,Invalid password,,,,,
+20,aa3,1000000001,d,d,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&,a,a,76017,1234567890,d@uta.edu,,,,,,,,,,,
+21,aa3,1000000001,d,d,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&*,a,a,76017,1234567890,d@uta.edu,Fields have errors,,,,,Invalid password,,,,,
+22,aa3,1000000001,d,d,pass12,11 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,a,76017,1234567890,d@uta.edu,,,,,,,,,,,
+23,aa3,1000000001,d,d,pass12,11 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,a,76017,1234567890,d@uta.edu,Fields have errors,,,,,,Invalid address,,,,
+24,aa3,1000000001,d,d,pass12,12 ##,a,76017,1234567890,d@uta.edu,Fields have errors,,,,,,Invalid address,,,,
+25,aa3,1000000001,d,d,pass12,a,,76017,1234567890,d@uta.edu,Fields have errors,,,,,,,Invalid city,,,
+26,aa3,1000000001,d,d,pass12,a,1a,76017,1234567890,d@uta.edu,Fields have errors,,,,,,,Invalid city,,,
+27,aa3,1000000001,d,d,pass12,a,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,76017,1234567890,d@uta.edu,,,,,,,,,,,
+28,aa3,1000000001,d,d,pass12,a,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,76017,1234567890,d@uta.edu,Fields have errors,,,,,,,Invalid city,,,
+29,aa3,1000000001,d,d,pass12,a,a,1234,1234567890,d@uta.edu,Fields have errors,,,,,,,,Invalid zip,,
+30,aa3,1000000001,d,d,pass12,a,a,123456,1234567890,d@uta.edu,Fields have errors,,,,,,,,Invalid zip,,
+31,aa3,1000000001,d,d,pass12,a,a,abcde,1234567890,d@uta.edu,Fields have errors,,,,,,,,Invalid zip,,
+32,aa3,1000000001,d,d,pass12,a,a,76017,123456789,d@uta.edu,Fields have errors,,,,,,,,,Invalid phone,
+33,aa3,1000000001,d,d,pass12,a,a,76017,12345678901,d@uta.edu,Fields have errors,,,,,,,,,Invalid phone,
+34,aa3,1000000001,d,d,pass12,a,a,76017,qwertyuiop,d@uta.edu,Fields have errors,,,,,,,,,Invalid phone,
+35,aa3,1000000001,d,d,pass12,a,a,76017,1234567890,@uta.edu,Fields have errors,,,,,,,,,,Invalid email
+36,aa3,1000000001,d,d,pass12,a,a,76017,1234567890,abuta.edu,Fields have errors,,,,,,,,,,Invalid email
+37,aa3,1000000001,d,d,pass12,a,a,76017,1234567890,d$@uta.edu,Fields have errors,,,,,,,,,,Invalid email
+38,aa3,1000000001,d,d,pass12,a,a,76017,1234567890,.dd@uta.edu,Fields have errors,,,,,,,,,,Invalid email
+39,aa3,1000000001,d,d,pass12,a,a,76017,1234567890,d.d@uta.edu,,,,,,,,,,,
+40,aa3,1000000001,d,d,pass12,a,a,76017,1234567890,dd.@uta.edu,Fields have errors,,,,,,,,,,Invalid email
+41,aa3,1000000001,d,d,pass12,a,a,76017,1234567890,1d@uta.edu,Fields have errors,,,,,,,,,,Invalid email
+42,aa3,1000000001,d,d,pass12,a,a,76017,1234567890,aaaaaaaaaa,Fields have errors,,,,,,,,,,Invalid email
+43,aa3,1000000001,d,d,pass12,a,a,76017,1234567890,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@uta.edu,,,,,,,,,,,
+44,aa3,1000000001,d,d,pass12,a,a,76017,1234567890,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab@uta.edu,Fields have errors,,,,,,,,,,Invalid email

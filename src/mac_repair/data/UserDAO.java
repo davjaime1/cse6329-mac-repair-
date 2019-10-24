@@ -29,8 +29,8 @@ public class UserDAO
                 User user = new User();
                 user.setUsername(userList.getString("username"));
                 user.setId(userList.getString("id"));
-                user.setFirstName(userList.getString("firstname"));
-                user.setLastName(userList.getString("lastname"));
+                user.setFirstname(userList.getString("firstname"));
+                user.setLastname(userList.getString("lastname"));
                 user.setPassword(userList.getString("password"));
                 user.setRole(userList.getString("role"));
                 user.setAddress(userList.getString("address"));
@@ -62,8 +62,8 @@ public class UserDAO
             String insertmar = queryString + " VALUES ('"
                     + user.getUsername() + "','"
                     + user.getId() + "','"
-                    + user.getFirstName() + "','"
-                    + user.getLastName() + "','"
+                    + user.getFirstname() + "','"
+                    + user.getLastname() + "','"
                     + user.getPassword() + "','"
                     + user.getRole() + "','"
                     + user.getAddress() + "','"
@@ -101,8 +101,8 @@ public class UserDAO
                 
                 res.setUsername(resultSet.getString("username"));
                 res.setId(resultSet.getString("id"));
-                res.setFirstName(resultSet.getString("firstname"));
-                res.setLastName(resultSet.getString("lastname"));
+                res.setFirstname(resultSet.getString("firstname"));
+                res.setLastname(resultSet.getString("lastname"));
                 res.setPassword(resultSet.getString("password"));
                 res.setRole(resultSet.getString("role"));
                 res.setAddress(resultSet.getString("address"));
@@ -129,8 +129,8 @@ public class UserDAO
         try
         {
             stmt = conn.createStatement();
-            String insertmar = "UPDATE users SET firstname = '" + user.getFirstName()
-                    + "'," + "lastname = '" + user.getLastName()
+            String insertmar = "UPDATE users SET firstname = '" + user.getFirstname()
+                    + "'," + "lastname = '" + user.getLastname()
                     + "'," + "password = '" + user.getPassword()
                     + "'," + "address = '" + user.getAddress()
                     + "'," + "city = '" + user.getCity()
@@ -157,7 +157,7 @@ public class UserDAO
         StoreListinDB(user, "INSERT INTO users (username,id,firstname,lastname,password,role,address,city,state,zip,phone,email) ");
     }
     
-    public static Boolean userNameunique(String name)
+    public static Boolean isUsernameUnique(String name)
     {
         return (returnProfile(name).isEmpty());
     }
@@ -206,8 +206,8 @@ public class UserDAO
                             + "email='%s' "
                             + "WHERE username='%s'",
                     u.getId(),
-                    u.getFirstName(),
-                    u.getLastName(),
+                    u.getFirstname(),
+                    u.getLastname(),
                     u.getPassword(),
                     u.getRole(),
                     u.getAddress(),
