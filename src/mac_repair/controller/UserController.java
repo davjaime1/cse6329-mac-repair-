@@ -219,47 +219,29 @@ public class UserController extends HttpServlet
         // (action == loginUser)
         else if (action.equalsIgnoreCase("loginUser"))
         {
-            String username = request.getParameter("idusername");
-            String password = request.getParameter("idpassword");
-            
-            ArrayList<User> fetch_profile = new ArrayList<User>();
-            fetch_profile = UserDAO.returnProfile(username);
-            UserErrorMsgs CerrorMsgs = new UserErrorMsgs();
             User currentUser = new User();
-            if (fetch_profile.size() != 0)
-            {
-                currentUser.setUser(
-                        fetch_profile.get(0).getUsername(),
-                        fetch_profile.get(0).getId(),
-                        fetch_profile.get(0).getFirstname(),
-                        fetch_profile.get(0).getLastname(),
-                        fetch_profile.get(0).getPassword(),
-                        fetch_profile.get(0).getRole(),
-                        fetch_profile.get(0).getAddress(),
-                        fetch_profile.get(0).getState(),
-                        fetch_profile.get(0).getCity(),
-                        fetch_profile.get(0).getZip(),
-                        fetch_profile.get(0).getPhone(),
-                        fetch_profile.get(0).getEmail());
-                // currentUser.validateLogin(action, password, CerrorMsgs);
-            }
-            else
-            {
-                // CerrorMsgs.setUserNameError("No user found");
-                // CerrorMsgs.setErrorMsg(action);
-            }
+            currentUser.setUsername(request.getParameter("idusername"));
+            currentUser.setPassword(request.getParameter("idpassword"));
             
-            session.setAttribute("errorMsgs", CerrorMsgs);
-            if (!CerrorMsgs.getErrorMsg().equals(""))
+            ArrayList<User> userList = UserDAO.returnUserListWithCredentials(
+                    currentUser.getUsername(), currentUser.getPassword());
+            if (!userList.isEmpty())
             {
-                // if error messages
-                currentUser.setUsername(username);
-                currentUser.setPassword(password);
-                session.setAttribute("USERS", currentUser);
-                getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
-            }
-            else
-            {
+                // Successful login
+                currentUser.setUser(
+                        userList.get(0).getUsername(),
+                        userList.get(0).getId(),
+                        userList.get(0).getFirstname(),
+                        userList.get(0).getLastname(),
+                        userList.get(0).getPassword(),
+                        userList.get(0).getRole(),
+                        userList.get(0).getAddress(),
+                        userList.get(0).getState(),
+                        userList.get(0).getCity(),
+                        userList.get(0).getZip(),
+                        userList.get(0).getPhone(),
+                        userList.get(0).getEmail());
+                
                 /* Sets the role attribute for the user that just logged in
                  * so that other pages can use the role info. */
                 session.setAttribute("LOGIN_ROLE", currentUser.getRole());
@@ -283,9 +265,16 @@ public class UserController extends HttpServlet
                     url = "/Repairer_Home.jsp";
                 }
                 
-                session.setAttribute("username", username);
-                request.setAttribute("username", username);
+                session.setAttribute("username", currentUser.getUsername());
+                request.setAttribute("username", currentUser.getUsername());
                 request.getRequestDispatcher(url).forward(request, response);
+            }
+            else
+            {
+                // Unsuccessful login
+                session.setAttribute("ERR_LOGIN", "BAD CREDENTIALS");
+                session.setAttribute("USERS", currentUser);
+                getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
             }
         }
     }

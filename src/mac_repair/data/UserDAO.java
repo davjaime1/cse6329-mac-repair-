@@ -80,6 +80,13 @@ public class UserDAO
         }
     }
     
+    public static ArrayList<User> returnUserListWithCredentials(String u, String p)
+    {
+        return getUserListFromQuery(String.format("SELECT * FROM users where "
+                + "username='%s' AND "
+                + "password='%s'", u, p));
+    }
+    
     public static ArrayList<User> returnProfile(String username)
     {
         ArrayList<User> fetch_profile = new ArrayList<User>();

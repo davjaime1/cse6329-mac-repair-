@@ -5,47 +5,42 @@
 <html>
 
 <head>
-    <title>Log In</title>
+    <title>Login</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
 
 <body>
 
-    <input name="errMsg" value="<c:out value='${errorMsgs.errorMsg}'/>" type="text"
-        style="background-color: white; color: red; border: none; width:800px" disabled="disabled">
-    <table>
-        <tr>
-            <td>
-                <form action="/mac_repair/UserController?action=loginUser" method="post">
-                    <table style="width: 1200px; ">
-                        <tr>
-                        <tr>
-                            <td> User name: </td>
-                            <td> <input name="idusername" value="<c:out value='${USERS.username}'/>" type="text"
-                                    maxlength="45"> </td>
-                            <td> <input name="marnumberError" value="<c:out value='${errorMsgs.userNameError}'/>"
-                                    type="text" style="background-color: white; color: red; border: none; width: 800px"
-                                    disabled="disabled" maxlength="60"> </td>
-                        </tr>
+    <h1>Login</h1>
 
-                        <tr>
-                            <td> Password: </td>
-                            <td> <input name="idpassword" value="<c:out value='${USERS.password}'/>" type="text"
-                                    maxlength="16"> </td>
-                            <td> <input name="facilityname" value="<c:out value='${errorMsgs.passwordError}'/>"
-                                    type="text" style="background-color: white; color: red; border: none; width: 800px"
-                                    disabled="disabled" maxlength="60"> </td>
+    <form action="/mac_repair/UserController?action=loginUser" method="post">
+        <p>
+            <table>
+                <tr>
+                    <td> Username: </td>
+                    <td> <input name="idusername" value="<c:out value='${USERS.username}'/>" type="text"> </td>
+                </tr>
+                <tr>
+                    <td> Password: </td>
+                    <td> <input name="idpassword" value="<c:out value='${USERS.password}'/>" type="password" /> </td>
+                </tr>
+            </table>
+        </p>
 
-                        </tr>
+        <p>
+            <input type="submit" value="Submit">
+            <font color="red">
+                <c:out value='${ERR_LOGIN}' />
+            </font>
+        </p>
+    </form>
 
-                    </table>
-                    <input type="submit" value="Submit">
-                </form>
-            </td>
-        <tr>
-            <td><a href="/mac_repair/UserController?action=registerProfile" target="_top">Register Here</a>
-        </tr>
-    </table>
+    <p>
+        <ul>
+            <li><a href="/mac_repair/UserController?action=registerProfile">Register</a></li>
+        </ul>
+    </p>
 
 </body>
 
