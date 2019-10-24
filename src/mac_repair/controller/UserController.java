@@ -122,7 +122,7 @@ public class UserController extends HttpServlet
             User user = new User();
             UserErrorMsgs errMsgs = new UserErrorMsgs();
             userParam(request, user);
-            user.validateUser(user, errMsgs);
+            user.validateUser(user, errMsgs, true);
             session.setAttribute("user", user);
             if (!errMsgs.getErrorMsg().isEmpty())
             {
@@ -164,30 +164,10 @@ public class UserController extends HttpServlet
         }
         else if (action.equalsIgnoreCase("updateProfileView"))
         {
-            String username = (String) session.getAttribute("username");
+            session.setAttribute("user", UserDAO.returnProfile(
+                    (String) session.getAttribute("username")).get(0));
+            session.setAttribute("STATE", UtilityDAO.listStates());
             
-            ArrayList<User> fetch_profile = new ArrayList<User>();
-            fetch_profile = UserDAO.returnProfile(username);
-            User currentUser = new User();
-            currentUser.setUser(
-                    fetch_profile.get(0).getUsername(),
-                    fetch_profile.get(0).getId(),
-                    fetch_profile.get(0).getFirstname(),
-                    fetch_profile.get(0).getLastname(),
-                    fetch_profile.get(0).getPassword(),
-                    fetch_profile.get(0).getRole(),
-                    fetch_profile.get(0).getAddress(),
-                    fetch_profile.get(0).getState(),
-                    fetch_profile.get(0).getCity(),
-                    fetch_profile.get(0).getZip(),
-                    fetch_profile.get(0).getPhone(),
-                    fetch_profile.get(0).getEmail());
-            
-            session.setAttribute("user", currentUser);
-            ArrayList<UtilityModel> stateInDB = new ArrayList<UtilityModel>();
-            
-            stateInDB = UtilityDAO.listStates();
-            session.setAttribute("STATE", stateInDB);
             getServletContext().getRequestDispatcher("/UpdateProfile.jsp").forward(request, response);
         }
         else if (action.equalsIgnoreCase("updateProfile"))
@@ -195,8 +175,7 @@ public class UserController extends HttpServlet
             User user = new User();
             UserErrorMsgs CerrorMsgs = new UserErrorMsgs();
             userParam(request, user);
-            // user.validateUser(action, CerrorMsgs);
-            user.validateUser(user, CerrorMsgs);
+            user.validateUser(user, CerrorMsgs, false);
             session.setAttribute("user", user);
             if (!CerrorMsgs.getErrorMsg().equals(""))
             {

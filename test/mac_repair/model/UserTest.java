@@ -27,6 +27,7 @@ public class UserTest
     public void test(
             int tNo,
             String username,
+            boolean checkUnique,
             String id,
             String firstName,
             String lastName,
@@ -49,7 +50,7 @@ public class UserTest
             String emailError)
     {
         u.setUser(username, id, firstName, lastName, password, "U", address, "TX", city, zip, phone, email);
-        u.validateUser(u, uem);
+        u.validateUser(u, uem, checkUnique);
         
         Assert.assertFalse(u.getRole().isEmpty());
         Assert.assertFalse(u.getState().isEmpty());

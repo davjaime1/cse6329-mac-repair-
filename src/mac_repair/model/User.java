@@ -69,9 +69,9 @@ public class User implements Serializable
     }
     
     
-    public void validateUser(User u, UserErrorMsgs uem)
+    public void validateUser(User u, UserErrorMsgs uem, boolean checkUnique)
     {
-        uem.setUsernameError(validateUsername(u.getUsername()));
+        uem.setUsernameError(validateUsername(u.getUsername(), checkUnique));
         uem.setIdError(validateId(u.getId()));
         uem.setFirstnameError(validateFirstName(u.getFirstname()));
         uem.setLastnameError(validateLastName(u.getLastname()));
@@ -84,13 +84,13 @@ public class User implements Serializable
         uem.setErrorMsg();
     }
     
-    private String validateUsername(String username)
+    private String validateUsername(String username, boolean checkUnique)
     {
         String result;
         String regex = "^[a-zA-Z0-9]{3,16}$";
         if (username.matches(regex))
         {
-            if (!UserDAO.isUsernameUnique(username))
+            if (checkUnique && !UserDAO.isUsernameUnique(username))
             {
                 result = "Username is already in the database";
             }
