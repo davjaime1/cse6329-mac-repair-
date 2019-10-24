@@ -28,7 +28,7 @@
                                           <tr>
                                                  <td> UTA ID: </td>
                                                  <td>
-                                                        <c:out value="${USERS.utaId}" />
+                                                        <c:out value="${USERS.id}" />
                                                  </td>
                                           </tr>
 

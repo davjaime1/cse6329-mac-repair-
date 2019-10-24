@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import mac_repair.util.SQLConnection;
 import mac_repair.model.RepairerViewReserved;
-import mac_repair.model.FM_MAR;
+import mac_repair.model.MAR;
 import mac_repair.model.FreeReservations;
 public class RepairerViewReservedDAO {
 

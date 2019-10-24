@@ -25,7 +25,7 @@
     <td> 
     <select name="idfacilitytype">
           <c:forEach items="${FACILITYTYPE}" var="item" varStatus="status">
-            <option value="${item.id}">${item.facilityType}</option>
+            <option value="${item.id}">${item.value}</option>
           </c:forEach>
     </select>
     </td>
@@ -36,7 +36,7 @@
      <td> 
     <select name="idtimeinterval">
           <c:forEach items="${TIMEINTERVAL}" var="item" varStatus="status">
-            <option value="${item.id}">${item.timeInterval}</option>
+            <option value="${item.id}">${item.value}</option>
           </c:forEach>
     </select>
     </td>
@@ -47,7 +47,7 @@
     <td> 
     <select name="idduration">
           <c:forEach items="${DURATION}" var="item" varStatus="status">
-            <option value="${item.id}">${item.duration}</option>
+            <option value="${item.id}">${item.value}</option>
           </c:forEach>
     </select>
     </td>
@@ -57,7 +57,7 @@
     <td> 
     <select name="idvenue">
           <c:forEach items="${VENUE}" var="item" varStatus="status">
-            <option value="${item.id}">${item.venue}</option>
+            <option value="${item.id}">${item.value}</option>
           </c:forEach>
     </select>
     </td>   </tr>

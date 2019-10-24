@@ -6,18 +6,18 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import mac_repair.model.FM_MAR;
+import mac_repair.model.MAR;
 import mac_repair.util.SQLConnection;
 
-public class FM_MARDAO
+public class MARDAO
 {
     
     
     static SQLConnection DBMgr = SQLConnection.getInstance();
     
-    private static ArrayList<FM_MAR> ReturnMatchingMARList(String queryString)
+    private static ArrayList<MAR> ReturnMatchingMARList(String queryString)
     {
-        ArrayList<FM_MAR> marListInDB = new ArrayList<FM_MAR>();
+        ArrayList<MAR> marListInDB = new ArrayList<MAR>();
         
         Statement stmt = null;
         Connection conn = SQLConnection.getDBConnection();
@@ -27,7 +27,7 @@ public class FM_MARDAO
             ResultSet marList = stmt.executeQuery(queryString);
             while (marList.next())
             {
-                FM_MAR mar = new FM_MAR();
+                MAR mar = new MAR();
                 mar.setMarID(marList.getString("marnumber"));
                 mar.setFacilityName(marList.getString("facilityname"));
                 mar.setFacilityType(marList.getString("facilitytype"));
@@ -44,7 +44,7 @@ public class FM_MARDAO
         return marListInDB;
     }
     
-    private static void StoreListinDB(FM_MAR mar, String queryString)
+    private static void StoreListinDB(MAR mar, String queryString)
     {
         Statement stmt = null;
         Connection conn = SQLConnection.getDBConnection();
@@ -70,7 +70,7 @@ public class FM_MARDAO
     }
     
     
-    public static void UpdateinDB(FM_MAR mar)
+    public static void UpdateinDB(MAR mar)
     {
         Statement stmt = null;
         Connection conn = SQLConnection.getDBConnection();
@@ -104,24 +104,24 @@ public class FM_MARDAO
         
     }
     
-    public static void insertMAR(FM_MAR mar)
+    public static void insertMAR(MAR mar)
     {
         StoreListinDB(mar, "INSERT INTO mar (marnumber,reporteddate,facilitytype,facilityname,description,urgency,reportedby) ");
     }
     
     
-    public static FM_MAR getSpecificMar(String marid)
+    public static MAR getSpecificMar(String marid)
     {
         return ReturnMatchingMARList(String.format(
                 "SELECT * FROM mar WHERE marnumber='%s'", marid)).get(0);
     }
     
-    public static ArrayList<FM_MAR> listMarsReportedBy(String userString)
+    public static ArrayList<MAR> listMarsReportedBy(String userString)
     {
         return ReturnMatchingMARList(String.format("SELECT * FROM mar WHERE reportedby='%s' ORDER BY marnumber", userString));
     }
     
-    public static ArrayList<FM_MAR> listMarsWithFacilityNameAndUsername(
+    public static ArrayList<MAR> listMarsWithFacilityNameAndUsername(
             String facilityName,
             String username)
     {
@@ -134,13 +134,13 @@ public class FM_MARDAO
                         username));
     }
     
-    public static ArrayList<FM_MAR> listMARs()
+    public static ArrayList<MAR> listMARs()
     {
         return ReturnMatchingMARList(" SELECT * from mar WHERE assignedto IS NULL ORDER BY marnumber");
     }
     
     // search companies
-    public static ArrayList<FM_MAR> searchMARByNumber(String marnumber)
+    public static ArrayList<MAR> searchMARByNumber(String marnumber)
     {
         return ReturnMatchingMARList(" SELECT * from mar WHERE marnumber LIKE '%" + marnumber + "%' ORDER BY marnumber");
     }
@@ -150,7 +150,7 @@ public class FM_MARDAO
 //        return ReturnMatchingMARList(" SELECT * from mar WHERE facilitytype LIKE '%" + facilitytype + "%' ORDER BY marnumber");
 //    }
     
-    public static ArrayList<FM_MAR> searchMARByFacilityName(String facilityName)
+    public static ArrayList<MAR> searchMARByFacilityName(String facilityName)
     {
         return ReturnMatchingMARList(" SELECT * from mar WHERE facilityname LIKE '%" + facilityName + "%' ORDER BY marnumber");
     }

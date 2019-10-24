@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import mac_repair.data.FM_UtilityDAO;
+import mac_repair.data.UtilityDAO;
 import mac_repair.data.RepairerViewAssignedDAO;
 import mac_repair.data.RepairerViewReservedDAO;
 //import cse6329.model.Repairer;
-import mac_repair.data.FM_FacilityDAO;
+import mac_repair.data.FacilityDAO;
 import mac_repair.model.*;
 
 @WebServlet("/RepairerReservationsController")

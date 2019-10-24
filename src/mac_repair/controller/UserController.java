@@ -10,13 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import mac_repair.data.FM_UtilityDAO;
-import mac_repair.data.RoleDAO;
+import mac_repair.data.UtilityDAO;
 import mac_repair.data.UserDAO;
-import mac_repair.model.Role;
-import mac_repair.model.State;
 import mac_repair.model.User;
 import mac_repair.model.UserErrorMsgs;
+import mac_repair.model.UtilityModel;
 
 
 /**
@@ -111,11 +109,11 @@ public class UserController extends HttpServlet
         
         if (action.equalsIgnoreCase("registerProfile"))
         {
-            ArrayList<Role> roleInDB = new ArrayList<Role>();
-            ArrayList<State> stateInDB = new ArrayList<State>();
-            roleInDB = RoleDAO.listRoles();
+            ArrayList<UtilityModel> roleInDB = new ArrayList<UtilityModel>();
+            ArrayList<UtilityModel> stateInDB = new ArrayList<UtilityModel>();
+            roleInDB = UtilityDAO.listRoles();
             session.setAttribute("ROLE", roleInDB);
-            stateInDB = FM_UtilityDAO.listStates();
+            stateInDB = UtilityDAO.listStates();
             session.setAttribute("STATE", stateInDB);
             getServletContext().getRequestDispatcher("/Register.jsp").forward(request, response);
         }
@@ -188,9 +186,9 @@ public class UserController extends HttpServlet
                     fetch_profile.get(0).getEmail());
             
             session.setAttribute("user", currentUser);
-            ArrayList<State> stateInDB = new ArrayList<State>();
+            ArrayList<UtilityModel> stateInDB = new ArrayList<UtilityModel>();
             
-            stateInDB = FM_UtilityDAO.listStates();
+            stateInDB = UtilityDAO.listStates();
             session.setAttribute("STATE", stateInDB);
             getServletContext().getRequestDispatcher("/UpdateProfile.jsp").forward(request, response);
         }

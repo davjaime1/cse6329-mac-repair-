@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import mac_repair.data.RoleDAO;
 import mac_repair.data.UserDAO;
+import mac_repair.data.UtilityDAO;
 import mac_repair.model.User;
 
 @WebServlet("/AdminController")
@@ -27,7 +27,7 @@ public class AdminController extends HttpServlet
         
         if (action.equalsIgnoreCase("SearchUsersAction"))
         {
-            session.setAttribute("ROLES", RoleDAO.listRoles());
+            session.setAttribute("ROLES", UtilityDAO.listRoles());
             getServletContext().getRequestDispatcher("/AdminSearchUsers.jsp").forward(request, response);
         }
         else if (action.equalsIgnoreCase("ListAllUsersAction"))

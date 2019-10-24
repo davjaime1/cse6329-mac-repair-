@@ -9,7 +9,6 @@
 </head>
 
 <body>
-
     <header>
         <h2>Create MAR</h2>
     </header>
@@ -22,8 +21,8 @@
                 <td>
                     <select name="facilityDropDown" required>
                         <c:forEach items="${FACILITIES}" var="facility">
-                            <option value="${facility.name}">
-                                <c:out value="${facility.name}" />
+                            <option value="${facility.facilityName}">
+                                <c:out value="${facility.facilityName}" />
                             </option>
                         </c:forEach>
                     </select>
@@ -35,8 +34,8 @@
                 <td>
                     <select name="urgencyDropDown" required>
                         <c:forEach items="${URGENCIES}" var="urgency">
-                            <option value="${urgency.urgency}">
-                                <c:out value="${urgency.urgency}" />
+                            <option value="${urgency.value}">
+                                <c:out value="${urgency.value}" />
                             </option>
                         </c:forEach>
                     </select>

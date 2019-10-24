@@ -12,12 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import mac_repair.data.FM_MARDAO;
 import mac_repair.data.FacilityDAO;
-import mac_repair.data.UrgencyDAO;
-import mac_repair.model.FM_MAR;
+import mac_repair.data.MARDAO;
+import mac_repair.data.UtilityDAO;
 import mac_repair.model.Facility;
-import mac_repair.model.Urgency;
+import mac_repair.model.MAR;
+import mac_repair.model.UtilityModel;
 import mac_repair.util.MarValidator;
 
 
@@ -43,8 +43,8 @@ public class MarController extends HttpServlet
             session.setAttribute("FACILITIES", facilitiesInDB);
             
             // Lists the available urgencies the user can select.
-            ArrayList<Urgency> urgenciesInDB = new ArrayList<Urgency>();
-            urgenciesInDB = UrgencyDAO.listUrgencies();
+            ArrayList<UtilityModel> urgenciesInDB = new ArrayList<UtilityModel>();
+            urgenciesInDB = UtilityDAO.listUrgencies();
             session.setAttribute("URGENCIES", urgenciesInDB);
             
             getServletContext().getRequestDispatcher("/CreateMar.jsp").forward(request, response);
@@ -53,7 +53,7 @@ public class MarController extends HttpServlet
         /* Shows a list of MARs created by the user. */
         else if (action.equalsIgnoreCase("ListMarsAction"))
         {
-            session.setAttribute("MARS", FM_MARDAO.listMarsReportedBy((String) session.getAttribute("username")));
+            session.setAttribute("MARS", MARDAO.listMarsReportedBy((String) session.getAttribute("username")));
             session.setAttribute("FACILITIES", FacilityDAO.listFacilities());
             session.getServletContext().getRequestDispatcher("/MarList.jsp").forward(request, response);
         }
@@ -61,7 +61,7 @@ public class MarController extends HttpServlet
         /* Show more details of the MAR selected by the user. */
         else if (action.equalsIgnoreCase("ViewSpecificMar"))
         {
-            FM_MAR mar = FM_MARDAO.getSpecificMar(request.getParameter("marid"));
+            MAR mar = MARDAO.getSpecificMar(request.getParameter("marid"));
             
             // Sets the values for the results page after the user has submitted a MAR.
             session.setAttribute("cmr_facilitytype", mar.getFacilityType());
@@ -109,18 +109,18 @@ public class MarController extends HttpServlet
                 String urgencyStr = request.getParameter("urgencyDropDown");
                 
                 Facility selectedFacility = new Facility();
-                Urgency selectedUrgency = new Urgency();
+                UtilityModel selectedUrgency = new UtilityModel();
                 for (Facility f : FacilityDAO.listFacilities())
                 {
-                    if (f.getName().equalsIgnoreCase(facilityName))
+                    if (f.getFacilityName().equalsIgnoreCase(facilityName))
                     {
                         selectedFacility = f;
                         break;
                     }
                 }
-                for (Urgency u : UrgencyDAO.listUrgencies())
+                for (UtilityModel u : UtilityDAO.listUrgencies())
                 {
-                    if (u.getUrgency().equalsIgnoreCase(urgencyStr))
+                    if (u.getValue().equalsIgnoreCase(urgencyStr))
                     {
                         selectedUrgency = u;
                         break;
@@ -134,26 +134,26 @@ public class MarController extends HttpServlet
                 String reportedByStr = (String) session.getAttribute("username");
                 
                 // Gets the current MAR number from the database.
-                int marNum = FM_MARDAO.getCurrentMarNumber();
+                int marNum = MARDAO.getCurrentMarNumber();
                 
                 // Creating the MAR object to insert into the database.
-                FM_MAR marObj = new FM_MAR();
+                MAR marObj = new MAR();
                 marObj.setMarID(Integer.toString(marNum));
-                marObj.setFacilityName(selectedFacility.getName());
-                marObj.setFacilityType(selectedFacility.getType());
+                marObj.setFacilityName(selectedFacility.getFacilityName());
+                marObj.setFacilityType(selectedFacility.getFacilityType());
                 marObj.setUrgency(selectedUrgency.getId());
                 marObj.setDescription(descriptionStr);
                 marObj.setReportedUser(reportedByStr);
                 marObj.setDate(dateStr);
                 
                 // Insert the MAR object into the database.
-                FM_MARDAO.insertMAR(marObj);
+                MARDAO.insertMAR(marObj);
                 
                 
                 // Sets the values for the results page after the user has submitted a MAR.
-                session.setAttribute("cmr_facilitytype", selectedFacility.getType());
-                session.setAttribute("cmr_facilityname", selectedFacility.getName());
-                session.setAttribute("cmr_urgency", selectedUrgency.getUrgency());
+                session.setAttribute("cmr_facilitytype", selectedFacility.getFacilityName());
+                session.setAttribute("cmr_facilityname", selectedFacility.getFacilityType());
+                session.setAttribute("cmr_urgency", selectedUrgency.getValue());
                 session.setAttribute("cmr_description", descriptionStr);
                 session.setAttribute("cmr_reportedby", reportedByStr);
                 session.setAttribute("cmr_date", dateStr);
@@ -178,7 +178,7 @@ public class MarController extends HttpServlet
             }
             else
             {
-                session.setAttribute("MARS", FM_MARDAO.listMarsWithFacilityNameAndUsername(
+                session.setAttribute("MARS", MARDAO.listMarsWithFacilityNameAndUsername(
                         facilityName,
                         (String) session.getAttribute("username")));
                 getServletContext().getRequestDispatcher("/MarList.jsp").forward(request, response);

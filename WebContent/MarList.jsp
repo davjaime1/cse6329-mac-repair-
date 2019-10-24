@@ -25,7 +25,7 @@
                         <select name="facilityNameDropDown">
                             <option value="default">-- Select a Facility Name</option>
                             <c:forEach items="${FACILITIES}" var="facility">
-                                <option value="${facility.name}">${facility.name}</option>
+                                <option value="${facility.facilityName}">${facility.facilityName}</option>
                             </c:forEach>
                         </select>
                     </td>

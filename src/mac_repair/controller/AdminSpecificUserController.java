@@ -10,13 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import mac_repair.data.FM_UtilityDAO;
-import mac_repair.data.RoleDAO;
+import mac_repair.data.UtilityDAO;
 import mac_repair.data.UserDAO;
-import mac_repair.model.Role;
-import mac_repair.model.State;
 import mac_repair.model.User;
 import mac_repair.model.UserErrorMsgs;
+import mac_repair.model.UtilityModel;
 
 @WebServlet("/AdminSpecificUserController")
 public class AdminSpecificUserController extends HttpServlet
@@ -73,11 +71,11 @@ public class AdminSpecificUserController extends HttpServlet
             session.setAttribute("olduser", currentUser);
             session.setAttribute("user", currentUser);
             
-            ArrayList<State> stateInDB = new ArrayList<State>();
-            ArrayList<Role> roleInDB = new ArrayList<Role>();
-            roleInDB = RoleDAO.listRoles();
+            ArrayList<UtilityModel> stateInDB = new ArrayList<UtilityModel>();
+            ArrayList<UtilityModel> roleInDB = new ArrayList<UtilityModel>();
+            roleInDB = UtilityDAO.listRoles();
             session.setAttribute("ROLE", roleInDB);
-            stateInDB = FM_UtilityDAO.listStates();
+            stateInDB = UtilityDAO.listStates();
             session.setAttribute("STATE", stateInDB);
             
             getServletContext().getRequestDispatcher("/AdminUpdateProfile.jsp").forward(request, response);
@@ -111,7 +109,7 @@ public class AdminSpecificUserController extends HttpServlet
             {
                 // if error messages
                 session.setAttribute("errorMsgs", CerrorMsgs);
-                getServletContext().getRequestDispatcher("/UpdateProfile.jsp").forward(request, response);
+                getServletContext().getRequestDispatcher("/AdminUpdateProfile.jsp").forward(request, response);
             }
             else
             {
@@ -138,11 +136,11 @@ public class AdminSpecificUserController extends HttpServlet
                 
                 session.setAttribute("olduser", currentUser);
                 
-                ArrayList<State> stateInDB = new ArrayList<State>();
-                ArrayList<Role> roleInDB = new ArrayList<Role>();
-                roleInDB = RoleDAO.listRoles();
+                ArrayList<UtilityModel> stateInDB = new ArrayList<UtilityModel>();
+                ArrayList<UtilityModel> roleInDB = new ArrayList<UtilityModel>();
+                roleInDB = UtilityDAO.listRoles();
                 session.setAttribute("ROLE", roleInDB);
-                stateInDB = FM_UtilityDAO.listStates();
+                stateInDB = UtilityDAO.listStates();
                 session.setAttribute("STATE", stateInDB);
                 session.removeAttribute("errorMsgs");
                 getServletContext().getRequestDispatcher("/AdminUpdateProfile.jsp").forward(request, response);

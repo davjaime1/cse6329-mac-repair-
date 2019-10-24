@@ -12,10 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import mac_repair.data.FM_AssignMARDAO;
-import mac_repair.data.FM_FacilityDAO;
-import mac_repair.data.FM_MARDAO;
-import mac_repair.data.FM_RepairScheduleDAO;
-import mac_repair.data.FM_UtilityDAO;
+import mac_repair.data.UtilityDAO;
 import mac_repair.model.*;
 
 @WebServlet("/FM_AssignMARController")
@@ -23,9 +20,9 @@ public class FM_AssignMARController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
        
-	private void getAssignedParam (HttpServletRequest request, FM_MAR assignmar) {
+	private void getAssignedParam (HttpServletRequest request, MAR assignmar) {
 		String dateVal = request.getParameter("iddateTimePicker");
-		Date assignedDate = FM_UtilityDAO.mysqlDate(dateVal);
+		Date assignedDate = UtilityDAO.mysqlDate(dateVal);
 		assignmar.setAssignedMAR(request.getParameter("marid"), request.getParameter("fname"), request.getParameter("ftype"), request.getParameter("idUrgency"), request.getParameter("iddescription"), request.getParameter("reportedUser"), request.getParameter("reporteddate"),  request.getParameter("idassignedTo"), assignedDate.toString(), request.getParameter("idestimateofRepair")); 
 	}
 	
@@ -52,7 +49,7 @@ public class FM_AssignMARController extends HttpServlet {
 			getServletContext().getRequestDispatcher(url).forward(request, response);
 		}
 		else if (action.equalsIgnoreCase("listassignedmar")) {
-			ArrayList<FM_MAR> assignedmarInDB = new ArrayList<FM_MAR>();
+			ArrayList<MAR> assignedmarInDB = new ArrayList<MAR>();
 			assignedmarInDB=FM_AssignMARDAO.listAssignedMARs();
 			session.setAttribute("ASSIGNEDMARS", assignedmarInDB);				
 			getServletContext().getRequestDispatcher("/FM_AssignedMARList.jsp").forward(request, response);
@@ -65,8 +62,8 @@ public class FM_AssignMARController extends HttpServlet {
 
 		String action = request.getParameter("action"), url="";
 		HttpSession session = request.getSession();
-		FM_MAR assignmar = new FM_MAR();
-		FM_MARErrorMsgs CerrorMsgs = new FM_MARErrorMsgs();
+		MAR assignmar = new MAR();
+		MARErrorMsgs CerrorMsgs = new MARErrorMsgs();
 
 		  if (action.equalsIgnoreCase("searchAssignedMAR") ) {
 				
@@ -77,7 +74,7 @@ public class FM_AssignMARController extends HttpServlet {
 			assignmar.setAssignedMAR(marNumber, facilityName, "", "", "", "", "","","",""); 
 			assignmar.validateMAR(action, CerrorMsgs);
 
-			ArrayList<FM_MAR> assignedmarInDB = new ArrayList<FM_MAR>();
+			ArrayList<MAR> assignedmarInDB = new ArrayList<MAR>();
 			if (CerrorMsgs.getErrorMsg().equals("")) {
 				if (!marNumber.equals(""))
 					assignedmarInDB=FM_AssignMARDAO.searchMARByNumber(marNumber);
@@ -104,9 +101,9 @@ public class FM_AssignMARController extends HttpServlet {
 			else {// if no error messages
 
 				FM_AssignMARDAO.insertAssignedMAR(assignmar); 
-				FM_RepairSchedule repairschedule = new FM_RepairSchedule();	
-				repairschedule.setRepairSchedule(assignmar.getAssignedTo(), assignmar.getMarID(), assignmar.getAssignedDate());
-				FM_RepairScheduleDAO.insertRepairSchedule(repairschedule);
+			//	RepairSchedule repairschedule = new RepairSchedule();	
+			//	repairschedule.setRepairSchedule(assignmar.getAssignedTo(), assignmar.getMarID(), assignmar.getAssignedDate());
+			//	RepairScheduleDAO.insertRepairSchedule(repairschedule);
 				//FM_MARDAO.deleteMAR(assignmar.getMarID());
 				session.setAttribute("ASSIGNEDMARS", assignmar);
 				url="/FM_ViewSpecificAssignedMAR.jsp";	
@@ -163,8 +160,8 @@ public class FM_AssignMARController extends HttpServlet {
 //			}
 //		}
 		else { //action=listSpecificMAR
-			ArrayList<FM_MAR> marInDB = new ArrayList<FM_MAR>();
-			FM_MAR selectedMAR = new FM_MAR();
+			ArrayList<MAR> marInDB = new ArrayList<MAR>();
+			MAR selectedMAR = new MAR();
 			String selectedMARNumber = request.getParameter("id");
 
 			marInDB=FM_AssignMARDAO.searchMARByNumber(selectedMARNumber);

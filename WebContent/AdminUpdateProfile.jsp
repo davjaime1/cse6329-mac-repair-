@@ -24,7 +24,7 @@
 <table>
   <tr>
    <td>
-    <form name="companyForm" action="/mac_repair/AdminSpecificUserController?updateProfile&ApplyNewValuesAction=&idusername=${user.username}&idutaID=${user.utaId}" method="post">
+    <form name="companyForm" action="/mac_repair/AdminSpecificUserController?updateProfile&ApplyNewValuesAction=&idusername=${user.username}&idutaID=${user.id}" method="post">
     <table style="width: 1200px; ">
     
     <tr>
@@ -33,7 +33,7 @@
     </tr>
     <tr>
     <td> UTA ID: </td>
-    <td>  <c:out value="${user.utaId}"/> </td>
+    <td>  <c:out value="${user.id}"/> </td>
     </tr>
  
     <tr>
@@ -84,7 +84,7 @@
     <select name="idstate">
     
           <c:forEach items="${STATE}" var="item" varStatus="status">
-            <option value="${item.id}">${item.name}</option>
+            <option value="${item.id}">${item.value}</option>
           </c:forEach>
     </select>
     </td>
@@ -121,7 +121,7 @@
     <td> 
     <select name="idrole">
           <c:forEach items="${ROLE}" var="item" varStatus="status">
-            <option value="${item.id}">${item.name}</option>
+            <option value="${item.id}">${item.value}</option>
           </c:forEach>
     </select>
     </td>

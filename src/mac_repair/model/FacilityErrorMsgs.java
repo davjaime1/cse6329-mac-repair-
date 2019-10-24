@@ -1,11 +1,11 @@
 package mac_repair.model;
 
-public class FM_FacilityErrorMsgs {
+public class FacilityErrorMsgs {
 
 	private String errorMsg;
 	private String facilityNameError;
 	
-	public FM_FacilityErrorMsgs() {
+	public FacilityErrorMsgs() {
 		this.errorMsg = "";
 // Comment out the following to get PIT coverage even though it is not per Oracle
 		this.facilityNameError = "";
@@ -18,10 +18,6 @@ public class FM_FacilityErrorMsgs {
 	public void setErrorMsg() {
 		if ( !facilityNameError.equals("")  )
 			errorMsg = "Please correct the following errors";
-	}
-
-	public void setErrorMsg(String emsg) {
-		this.errorMsg = emsg;
 	}
 
 

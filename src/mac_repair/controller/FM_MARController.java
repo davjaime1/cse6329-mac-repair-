@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import mac_repair.data.FM_MARDAO;
-import mac_repair.data.FM_UtilityDAO;
+import mac_repair.data.MARDAO;
+import mac_repair.data.UtilityDAO;
 import mac_repair.model.*;
 
 @WebServlet("/FM_MARController")
@@ -45,8 +45,8 @@ public class FM_MARController extends HttpServlet {
 			getServletContext().getRequestDispatcher(url).forward(request, response);
 		}
 		else if (action.equalsIgnoreCase("listmar")) {
-			ArrayList<FM_MAR> marInDB = new ArrayList<FM_MAR>();
-			marInDB=FM_MARDAO.listMARs();
+			ArrayList<MAR> marInDB = new ArrayList<MAR>();
+			marInDB=MARDAO.listMARs();
 			session.setAttribute("MARS", marInDB);				
 			getServletContext().getRequestDispatcher("/FM_Listmars.jsp").forward(request, response);
 		}
@@ -58,8 +58,8 @@ public class FM_MARController extends HttpServlet {
 
 		String action = request.getParameter("action"), url="";
 		HttpSession session = request.getSession();
-		FM_MAR mar = new FM_MAR();
-		FM_MARErrorMsgs CerrorMsgs = new FM_MARErrorMsgs();
+		MAR mar = new MAR();
+		MARErrorMsgs CerrorMsgs = new MARErrorMsgs();
 //		int selectedCompanyIndex;
 		session.removeAttribute("errorMsgs");
 
@@ -73,12 +73,12 @@ public class FM_MARController extends HttpServlet {
 			mar.setMAR(marNumber, facilityName, "", "", "", "", ""); 
 			mar.validateMAR(action, CerrorMsgs);
 
-			ArrayList<FM_MAR> marInDB = new ArrayList<FM_MAR>();
+			ArrayList<MAR> marInDB = new ArrayList<MAR>();
 			if (CerrorMsgs.getErrorMsg().equals("")) {
 				if (!marNumber.equals(""))
-					marInDB=FM_MARDAO.searchMARByNumber(marNumber);
+					marInDB=MARDAO.searchMARByNumber(marNumber);
 				else
-					marInDB=FM_MARDAO.searchMARByFacilityName(facilityName);
+					marInDB=MARDAO.searchMARByFacilityName(facilityName);
 
 				session.setAttribute("MARS", marInDB);
 				url="/FM_Listmars.jsp";
@@ -90,24 +90,24 @@ public class FM_MARController extends HttpServlet {
 			}
 		}
 		else if(action.contains("assignmar")) {
-			ArrayList<FM_MAR> marInDB = new ArrayList<FM_MAR>();
-			FM_MAR selectedMAR = new FM_MAR();
+			ArrayList<MAR> marInDB = new ArrayList<MAR>();
+			MAR selectedMAR = new MAR();
 			String selectedMARNumber = request.getParameter("id");
 
-			marInDB=FM_MARDAO.searchMARByNumber(selectedMARNumber);
+			marInDB=MARDAO.searchMARByNumber(selectedMARNumber);
 			selectedMAR.setMAR(marInDB.get(0).getMarID(), marInDB.get(0).getFacilityName(), marInDB.get(0).getFacilityType(), marInDB.get(0).getUrgency(), marInDB.get(0).getDescription(), marInDB.get(0).getReportedUser(), marInDB.get(0).getDate());  
 							
 			session.setAttribute("MAR", selectedMAR);
 
-			ArrayList<FM_Urgency> urgencyInDB = new ArrayList<FM_Urgency>();
-			ArrayList<FM_Repairers> repairerInDB = new ArrayList<FM_Repairers>();
-			ArrayList<FM_EstimateOfRepair> estimateTimeInDB = new ArrayList<FM_EstimateOfRepair>();
+			ArrayList<UtilityModel> urgencyInDB = new ArrayList<UtilityModel>();
+			ArrayList<User> repairerInDB = new ArrayList<User>();
+			ArrayList<UtilityModel> estimateTimeInDB = new ArrayList<UtilityModel>();
 
-			urgencyInDB= FM_UtilityDAO.listUrgencies();				
+			urgencyInDB= UtilityDAO.listUrgencies();				
 			session.setAttribute("URGENCY", urgencyInDB);
-			repairerInDB= FM_UtilityDAO.listRepairers();			
+			repairerInDB= UtilityDAO.listRepairers();			
 			session.setAttribute("REPAIRLIST", repairerInDB);
-			estimateTimeInDB= FM_UtilityDAO.listEstimateTimes();				
+			estimateTimeInDB= UtilityDAO.listEstimateTimes();				
 			session.setAttribute("ESTIMATEOFREPAIR", estimateTimeInDB);
 
 			url="/FM_AssignMAR.jsp";	
@@ -159,11 +159,11 @@ public class FM_MARController extends HttpServlet {
 //			url="/FM_Home.jsp";	
 //		}
 		else { //action=listSpecificMAR
-			ArrayList<FM_MAR> marInDB = new ArrayList<FM_MAR>();
-			FM_MAR selectedMAR = new FM_MAR();
+			ArrayList<MAR> marInDB = new ArrayList<MAR>();
+			MAR selectedMAR = new MAR();
 			String selectedMARNumber = request.getParameter("id");
 
-			marInDB=FM_MARDAO.searchMARByNumber(selectedMARNumber);
+			marInDB=MARDAO.searchMARByNumber(selectedMARNumber);
 			selectedMAR.setMAR(marInDB.get(0).getMarID(), marInDB.get(0).getFacilityName(), marInDB.get(0).getFacilityType(), marInDB.get(0).getUrgency(), marInDB.get(0).getDescription(), marInDB.get(0).getReportedUser(), marInDB.get(0).getDate());  
 							
 			session.setAttribute("MAR", selectedMAR);

@@ -7,13 +7,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import mac_repair.util.SQLConnection;
-import mac_repair.model.RepairerViewAssigned;
+import mac_repair.model.MAR;
 public class RepairerViewAssignedDAO {
 
 	static SQLConnection DBMgr = SQLConnection.getInstance();
 	
-	private static ArrayList<RepairerViewAssigned> ReturnReservedList (String queryString) {
-		ArrayList<RepairerViewAssigned> reservedListInDB = new ArrayList<RepairerViewAssigned>();
+	private static ArrayList<MAR> ReturnReservedList (String queryString) {
+		ArrayList<MAR> reservedListInDB = new ArrayList<MAR>();
 		
 		Statement stmt = null;
 		Connection conn = SQLConnection.getDBConnection();  
@@ -21,18 +21,18 @@ public class RepairerViewAssignedDAO {
 			stmt = conn.createStatement();
 			ResultSet reservedList = stmt.executeQuery(queryString);
 			while (reservedList.next()) {
-				RepairerViewAssigned res = new RepairerViewAssigned();
+				MAR res = new MAR();
 				//java.sql.Timestamp dbSqlTimestamp = reservedList.getTimestamp(1);
 				//res.setDate(dbSqlTimestamp);
-				res.setAssignedmar(reservedList.getString("marnumber"));
-				res.setFacilityname(reservedList.getString("facilityname"));
-				res.setFacilitytype(reservedList.getString("facilitytype"));
+				res.setMarID(reservedList.getString("marnumber"));
+				res.setFacilityName(reservedList.getString("facilityname"));
+				res.setFacilityType(reservedList.getString("facilitytype"));
 				res.setUrgency(reservedList.getString("urgency"));
 				res.setDescription(reservedList.getString("description"));
-				res.setReporteddate(reservedList.getString("reporteddate"));
-				res.setReportedby(reservedList.getString("reportedby"));
+				res.setDate(reservedList.getString("reporteddate"));
+				res.setReportedUser(reservedList.getString("reportedby"));
 				res.setAssignedDate(reservedList.getString("assignedDate"));
-				res.setEstimateofrepair(reservedList.getString("estimateofrepair"));
+				res.setEstimateOfRepair(reservedList.getString("estimateofrepair"));
 				//res.setPhone(reservedList.getString("phone"));
 				//res.setEmail(reservedList.getString("email"));  
 				reservedListInDB.add(res);	
@@ -43,14 +43,14 @@ public class RepairerViewAssignedDAO {
 	
 
 	//************************************************8
-	public static ArrayList<RepairerViewAssigned>  listAssignedRepairs(String username) { 
+	public static ArrayList<MAR>  listAssignedRepairs(String username) { 
 			return ReturnReservedList("SELECT a.marnumber, a.facilityname, a.facilitytype, a.urgency, a.description, a.reporteddate, a.reportedby, "
 					+ "a.assignedDate, a.estimateofrepair FROM mar a WHERE a.assignedTo = \"" + username + "\"");
 	}
 	
 	//search company with company ID
 	//***************************************************8
-	public static ArrayList<RepairerViewAssigned>   searchAssignedRepair (String idMarnum, String username)  {  
+	public static ArrayList<MAR>   searchAssignedRepair (String idMarnum, String username)  {  
 			return ReturnReservedList("SELECT a.marnumber, a.facilityname, a.facilitytype, a.urgency, a.description, a.reporteddate, a.reportedby,"
 					+ " a.assignedDate, a.estimateofrepair FROM mar a WHERE a.assignedTo = \"" + username + "\" AND a.marnumber = \""+idMarnum+"\"");
 	}

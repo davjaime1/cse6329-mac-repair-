@@ -1,19 +1,21 @@
 package mac_repair.model;
 
-public class FM_MARErrorMsgs {
+public class MARErrorMsgs {
 
 
 		private String errorMsg;
 		private String assignedToErrorMsgs;
 		private String assignedDatErrorMsgs;
 		private String marNumberError;
-		private String facilityNameError;
+//		private String facilityNameError;
 		private String descriptionErrorMsgs;
 		
-		public FM_MARErrorMsgs() {
+		public MARErrorMsgs() {
 			this.errorMsg = "";
 			this.marNumberError = "";
-			this.facilityNameError="";
+			this.assignedDatErrorMsgs="";
+			this.assignedToErrorMsgs="";
+			this.descriptionErrorMsgs="";
 
 
 	// Comment out the following to get PIT coverage even though it is not per Oracle
@@ -30,14 +32,20 @@ public class FM_MARErrorMsgs {
 			if (action.contains("saveassignedmar")) {
 				if(!assignedToErrorMsgs.equals("") || !assignedDatErrorMsgs.equals("") || !descriptionErrorMsgs.equals("")	)
 					errorMsg = "Please correct the following errors";
+				else
+					errorMsg = "";
 			}
-//			else if (action.contains("savemodifiedassignedmar")) {
-//				if(!assignedToErrorMsgs.equals("") || !assignedDatErrorMsgs.equals("") || !descriptionErrorMsgs.equals("")		)
-//					errorMsg = "Please correct the following errors";
-//			}
-			else {
-				if (!marNumberError.equals("") || !facilityNameError.equals(""))
+			else if (action.contains("savemar")) {
+				if(!descriptionErrorMsgs.equals("") )
 					errorMsg = "Please correct the following errors";
+				else
+					errorMsg = "";
+			}
+			else {
+				if (!marNumberError.equals(""))
+					errorMsg = "Please correct the following errors";
+				else
+					errorMsg = "";
 			}
 		}
 
@@ -59,8 +67,6 @@ public class FM_MARErrorMsgs {
 
 
 
-
-
 		public String getMarNumberError() {
 			return marNumberError;
 		}
@@ -69,13 +75,6 @@ public class FM_MARErrorMsgs {
 			this.marNumberError = marNumberError;
 		}
 
-		public String getFacilityNameError() {
-			return facilityNameError;
-		}
-
-		public void setFacilityNameError(String facilityNameError) {
-			this.facilityNameError = facilityNameError;
-		}
 
 		public String getDescriptionErrorMsgs() {
 			return descriptionErrorMsgs;
