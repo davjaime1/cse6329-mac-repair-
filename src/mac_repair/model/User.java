@@ -22,24 +22,6 @@ public class User implements Serializable
     private String phone;
     private String email;
     
-    
-    public User()
-    {
-        setUsername("");
-        setId("");
-        setFirstname("");
-        setLastname("");
-        setPassword("");
-        setRole("");
-        setAddress("");
-        setCity("");
-        setState("");
-        setZip("");
-        setPhone("");
-        setEmail("");
-    }
-    
-    
     public void setUser(
             String username,
             String id,
