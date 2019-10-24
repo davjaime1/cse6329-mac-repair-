@@ -1,7 +1,12 @@
 package mac_repair.model;
 
-public class UserErrorMsgs
+import java.io.Serializable;
+
+public class UserErrorMsgs implements Serializable
 {
+    private static final long serialVersionUID = -433281019234295890L;
+    
+    
     private String errorMsg;
     private String usernameError;
     private String idError;
@@ -68,7 +73,7 @@ public class UserErrorMsgs
     }
     
     
-    public String getFirstNameError()
+    public String getFirstnameError()
     {
         return firstnameError;
     }
@@ -80,7 +85,7 @@ public class UserErrorMsgs
     }
     
     
-    public String getLastNameError()
+    public String getLastnameError()
     {
         return lastnameError;
     }

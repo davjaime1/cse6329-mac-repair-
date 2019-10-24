@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import mac_repair.data.UtilityDAO;
 import mac_repair.data.UserDAO;
+import mac_repair.data.UtilityDAO;
 import mac_repair.model.User;
 import mac_repair.model.UserErrorMsgs;
 import mac_repair.model.UtilityModel;
@@ -120,23 +120,20 @@ public class UserController extends HttpServlet
         else if (action.equalsIgnoreCase("registerUser"))
         {
             User user = new User();
-            UserErrorMsgs CerrorMsgs = new UserErrorMsgs();
+            UserErrorMsgs errMsgs = new UserErrorMsgs();
             userParam(request, user);
-            // user.validateUser(action, CerrorMsgs);
-            user.validateUser(user, CerrorMsgs);
+            user.validateUser(user, errMsgs);
             session.setAttribute("user", user);
-            if (!CerrorMsgs.getErrorMsg().equals(""))
+            if (!errMsgs.getErrorMsg().isEmpty())
             {
                 // if error messages
-                session.setAttribute("errorMsgs", CerrorMsgs);
+                session.setAttribute("errorMsgs", errMsgs);
                 getServletContext().getRequestDispatcher("/Register.jsp").forward(request, response);
             }
             else
             {
                 // if no error messages
                 UserDAO.insertUser(user);
-                UserErrorMsgs facerrorMsgs = new UserErrorMsgs();
-                // facerrorMsgs.setErrorMsg("Facility Added SucessFully");
                 getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
             }
         }

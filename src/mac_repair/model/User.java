@@ -6,7 +6,8 @@ import mac_repair.data.UserDAO;
 
 public class User implements Serializable
 {
-    private static final long serialVersionUID = -4594567443904550524L;
+    private static final long serialVersionUID = 17594123062502750L;
+    
     
     private String username;
     private String id;

@@ -57,8 +57,8 @@ public class UserTest
         Assert.assertTrue(errorMsg.equals(uem.getErrorMsg()));
         Assert.assertTrue(usernameError.equals(uem.getUsernameError()));
         Assert.assertTrue(idError.equals(uem.getIdError()));
-        Assert.assertTrue(firstNameError.equals(uem.getFirstNameError()));
-        Assert.assertTrue(lastNameError.equals(uem.getLastNameError()));
+        Assert.assertTrue(firstNameError.equals(uem.getFirstnameError()));
+        Assert.assertTrue(lastNameError.equals(uem.getLastnameError()));
         Assert.assertTrue(passwordError.equals(uem.getPasswordError()));
         Assert.assertTrue(addressError.equals(uem.getAddressError()));
         Assert.assertTrue(cityError.equals(uem.getCityError()));
