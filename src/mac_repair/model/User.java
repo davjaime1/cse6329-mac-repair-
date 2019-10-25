@@ -72,9 +72,16 @@ public class User implements Serializable
         String regex = "^[a-zA-Z0-9]{3,16}$";
         if (username.matches(regex))
         {
-            if (checkUnique && !UserDAO.isUsernameUnique(username))
+            if (checkUnique)
             {
-                result = "Username is already in the database";
+                if (UserDAO.isUsernameUnique(username))
+                {
+                    result = "";
+                }
+                else
+                {
+                    result = "Username is already in the database";
+                }
             }
             else
             {
