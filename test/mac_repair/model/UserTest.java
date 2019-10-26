@@ -32,8 +32,10 @@ public class UserTest
             String firstName,
             String lastName,
             String password,
+            String role,
             String address,
             String city,
+            String state,
             String zip,
             String phone,
             String email,
@@ -49,11 +51,28 @@ public class UserTest
             String phoneError,
             String emailError)
     {
-        u.setUser(username, id, firstName, lastName, password, "U", address, "TX", city, zip, phone, email);
-        u.validateUser(u, uem, checkUnique);
+        u.setUser(username,
+                id,
+                firstName,
+                lastName,
+                password,
+                role,
+                address,
+                city,
+                state,
+                zip,
+                phone,
+                email);
+        Assert.assertTrue(u.getRole().equals(role));
+        Assert.assertTrue(u.getState().equals(state));
         
-        Assert.assertFalse(u.getRole().isEmpty());
-        Assert.assertFalse(u.getState().isEmpty());
+        // System.out.println(tNo);
+        // System.out.println("E: " + errorMsg);
+        // System.out.println("E: " + usernameError);
+        // System.out.println("A: " + uem.getErrorMsg());
+        // System.out.println("A: " + uem.getUsernameError());
+        
+        u.validateUser(u, uem, checkUnique);
         
         Assert.assertTrue(errorMsg.equals(uem.getErrorMsg()));
         Assert.assertTrue(usernameError.equals(uem.getUsernameError()));

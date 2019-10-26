@@ -30,8 +30,8 @@ public class User implements Serializable
             String password,
             String role,
             String address,
-            String state,
             String city,
+            String state,
             String zip,
             String phone,
             String email)
@@ -43,8 +43,8 @@ public class User implements Serializable
         setPassword(password);
         setRole(role);
         setAddress(address);
-        setState(state);
         setCity(city);
+        setState(state);
         setZip(zip);
         setPhone(phone);
         setEmail(email);
@@ -53,7 +53,10 @@ public class User implements Serializable
     
     public void validateUser(User u, UserErrorMsgs uem, boolean checkUnique)
     {
-        uem.setUsernameError(validateUsername(u.getUsername(), checkUnique));
+        uem.setUsernameError(validateUsername(u.getUsername()));
+        if(checkUnique)
+            this.validateUsernameUnique(uem);
+        
         uem.setIdError(validateId(u.getId()));
         uem.setFirstnameError(validateFirstName(u.getFirstname()));
         uem.setLastnameError(validateLastName(u.getLastname()));
@@ -66,33 +69,21 @@ public class User implements Serializable
         uem.setErrorMsg();
     }
     
-    private String validateUsername(String username, boolean checkUnique)
+    private String validateUsername(String username)
     {
-        String result;
+        String result = "Invalid username";
         String regex = "^[a-zA-Z0-9]{3,16}$";
         if (username.matches(regex))
         {
-            if (checkUnique)
-            {
-                if (UserDAO.isUsernameUnique(username))
-                {
-                    result = "";
-                }
-                else
-                {
-                    result = "Username is already in the database";
-                }
-            }
-            else
-            {
-                result = "";
-            }
-        }
-        else
-        {
-            result = "Invalid username";
+            result = "";
         }
         return result;
+    }
+    
+    private void validateUsernameUnique(UserErrorMsgs uem)
+    {
+        if(!UserDAO.isUsernameUnique(this.getUsername()))
+            uem.setUsernameError("Username already in database");
     }
     
     private String validateId(String id)

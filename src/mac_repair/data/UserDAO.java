@@ -104,8 +104,6 @@ public class UserDAO
             
             while (resultSet.next())
             {
-                
-                
                 res.setUsername(resultSet.getString("username"));
                 res.setId(resultSet.getString("id"));
                 res.setFirstname(resultSet.getString("firstname"));
@@ -119,8 +117,6 @@ public class UserDAO
                 res.setPhone(resultSet.getString("phone"));
                 res.setEmail(resultSet.getString("email"));
                 fetch_profile.add(res);
-                
-                
             }
         }
         catch (SQLException e)
@@ -164,9 +160,9 @@ public class UserDAO
         StoreListinDB(user, "INSERT INTO users (username,id,firstname,lastname,password,role,address,city,state,zip,phone,email) ");
     }
     
-    public static Boolean isUsernameUnique(String name)
+    public static boolean isUsernameUnique(String name)
     {
-        return (returnProfile(name).isEmpty());
+        return returnProfile(name).isEmpty();
     }
     
     
