@@ -66,11 +66,11 @@ public class UserTest
         Assert.assertTrue(u.getRole().equals(role));
         Assert.assertTrue(u.getState().equals(state));
         
-        // System.out.println(tNo);
-        // System.out.println("E: " + errorMsg);
-        // System.out.println("E: " + usernameError);
-        // System.out.println("A: " + uem.getErrorMsg());
-        // System.out.println("A: " + uem.getUsernameError());
+//         System.out.println(tNo);
+//         System.out.println("E: " + errorMsg);
+//         System.out.println("E: " + usernameError);
+//         System.out.println("A: " + uem.getErrorMsg());
+//         System.out.println("A: " + uem.getUsernameError());
         
         u.validateUser(u, uem, checkUnique);
         

@@ -54,8 +54,19 @@ public class User implements Serializable
     public void validateUser(User u, UserErrorMsgs uem, boolean checkUnique)
     {
         uem.setUsernameError(validateUsername(u.getUsername()));
-        if(checkUnique)
-            this.validateUsernameUnique(uem);
+        if (uem.getUsernameError().isEmpty())
+            if (checkUnique)
+            {
+                if (!UserDAO.isUsernameUnique(u.getUsername()))
+                {
+                    uem.setUsernameError("Username already in database");
+                }
+                else
+                {
+                    uem.setUsernameError("Excess unique check");
+                }
+            }
+        
         
         uem.setIdError(validateId(u.getId()));
         uem.setFirstnameError(validateFirstName(u.getFirstname()));
@@ -78,12 +89,6 @@ public class User implements Serializable
             result = "";
         }
         return result;
-    }
-    
-    private void validateUsernameUnique(UserErrorMsgs uem)
-    {
-        if(!UserDAO.isUsernameUnique(this.getUsername()))
-            uem.setUsernameError("Username already in database");
     }
     
     private String validateId(String id)

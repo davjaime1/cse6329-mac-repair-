@@ -1,44 +1,44 @@
-1,aa3,TRUE,1000000001,d,d,pass12,U,a,a,AK,76017,1234567890,d@uta.edu,,,,,,,,,,,
+1,aa3,FALSE,1000000001,d,d,pass12,U,a,a,AK,76017,1234567890,d@uta.edu,,,,,,,,,,,
 2,,TRUE,1000000001,d,d,pass12,A,a,a,CA,76017,1234567890,d@uta.edu,Fields have errors,Invalid username,,,,,,,,,
 3,a2,TRUE,1000000001,d,d,pass12,FM,a,a,OK,76017,1234567890,d@uta.edu,Fields have errors,Invalid username,,,,,,,,,
-5,aaaaaaaaaaaaaa16,FALSE,1000000001,d,d,pass12,R,a,a,WY,76017,1234567890,d@uta.edu,,,,,,,,,,,
+5,aaaaaaaaaaaaaa16,TRUE,1000000001,d,d,pass12,R,a,a,WY,76017,1234567890,d@uta.edu,Fields have errors,Excess unique check,,,,,,,,,
 6,aaaaaaaaaaaaaaa17,TRUE,1000000001,d,d,pass12,U,a,a,AK,76017,1234567890,d@uta.edu,Fields have errors,Invalid username,,,,,,,,,
 7,user1,TRUE,1000000001,d,d,pass12,U,a,a,AK,76017,1234567890,d@uta.edu,Fields have errors,Username already in database,,,,,,,,,
-8,aa3,TRUE,100000000,d,d,pass12,A,a,a,CA,76017,1234567890,d@uta.edu,Fields have errors,,Incorrect ID,,,,,,,,
-9,aa3,TRUE,10000000011,d,d,pass12,FM,a,a,OK,76017,1234567890,d@uta.edu,Fields have errors,,Incorrect ID,,,,,,,,
-10,aa3,TRUE,1000000001,,d,pass12,R,a,a,WY,76017,1234567890,d@uta.edu,Fields have errors,,,Invalid first name,,,,,,,
-11,aa3,TRUE,1000000001,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,d,pass12,U,a,a,AK,76017,1234567890,d@uta.edu,,,,,,,,,,,
-12,aa3,TRUE,1000000001,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,d,pass12,A,a,a,CA,76017,1234567890,d@uta.edu,Fields have errors,,,Invalid first name,,,,,,,
-13,aa3,TRUE,1000000001,#,d,pass12,FM,a,a,OK,76017,1234567890,d@uta.edu,Fields have errors,,,Invalid first name,,,,,,,
-14,aa3,TRUE,1000000001,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa#,d,pass12,R,a,a,WY,76017,1234567890,d@uta.edu,Fields have errors,,,Invalid first name,,,,,,,
-15,aa3,TRUE,1000000001,d,,pass12,U,a,a,AK,76017,1234567890,d@uta.edu,Fields have errors,,,,Invalid last name,,,,,,
-16,aa3,TRUE,1000000001,d,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,pass12,A,a,a,CA,76017,1234567890,d@uta.edu,,,,,,,,,,,
-17,aa3,TRUE,1000000001,d,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,pass12,FM,a,a,OK,76017,1234567890,d@uta.edu,Fields have errors,,,,Invalid last name,,,,,,
-18,aa3,TRUE,1000000001,d,#,pass12,R,a,a,WY,76017,1234567890,d@uta.edu,Fields have errors,,,,Invalid last name,,,,,,
-19,aa3,TRUE,1000000001,d,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa#,pass12,U,a,a,AK,76017,1234567890,d@uta.edu,Fields have errors,,,,Invalid last name,,,,,,
-20,aa3,TRUE,1000000001,d,d,a1234,A,a,a,CA,76017,1234567890,d@uta.edu,Fields have errors,,,,,Invalid password,,,,,
-21,aa3,TRUE,1000000001,d,d,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&,FM,a,a,OK,76017,1234567890,d@uta.edu,,,,,,,,,,,
-22,aa3,TRUE,1000000001,d,d,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&*,R,a,a,WY,76017,1234567890,d@uta.edu,Fields have errors,,,,,Invalid password,,,,,
-23,aa3,TRUE,1000000001,d,d,pass12,U,11 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,a,AK,76017,1234567890,d@uta.edu,,,,,,,,,,,
-24,aa3,TRUE,1000000001,d,d,pass12,A,11 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,a,CA,76017,1234567890,d@uta.edu,Fields have errors,,,,,,Invalid address,,,,
-25,aa3,TRUE,1000000001,d,d,pass12,FM,12 ##,a,OK,76017,1234567890,d@uta.edu,Fields have errors,,,,,,Invalid address,,,,
-26,aa3,TRUE,1000000001,d,d,pass12,R,a,,WY,76017,1234567890,d@uta.edu,Fields have errors,,,,,,,Invalid city,,,
-27,aa3,TRUE,1000000001,d,d,pass12,U,a,1a,AK,76017,1234567890,d@uta.edu,Fields have errors,,,,,,,Invalid city,,,
-28,aa3,TRUE,1000000001,d,d,pass12,A,a,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,CA,76017,1234567890,d@uta.edu,,,,,,,,,,,
-29,aa3,TRUE,1000000001,d,d,pass12,FM,a,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,OK,76017,1234567890,d@uta.edu,Fields have errors,,,,,,,Invalid city,,,
-30,aa3,TRUE,1000000001,d,d,pass12,R,a,a,WY,1234,1234567890,d@uta.edu,Fields have errors,,,,,,,,Invalid zip,,
-31,aa3,TRUE,1000000001,d,d,pass12,U,a,a,AK,123456,1234567890,d@uta.edu,Fields have errors,,,,,,,,Invalid zip,,
-32,aa3,TRUE,1000000001,d,d,pass12,A,a,a,CA,abcde,1234567890,d@uta.edu,Fields have errors,,,,,,,,Invalid zip,,
-33,aa3,TRUE,1000000001,d,d,pass12,FM,a,a,OK,76017,123456789,d@uta.edu,Fields have errors,,,,,,,,,Invalid phone,
-34,aa3,TRUE,1000000001,d,d,pass12,R,a,a,WY,76017,12345678901,d@uta.edu,Fields have errors,,,,,,,,,Invalid phone,
-35,aa3,TRUE,1000000001,d,d,pass12,U,a,a,AK,76017,qwertyuiop,d@uta.edu,Fields have errors,,,,,,,,,Invalid phone,
-36,aa3,TRUE,1000000001,d,d,pass12,A,a,a,CA,76017,1234567890,@uta.edu,Fields have errors,,,,,,,,,,Invalid email
-37,aa3,TRUE,1000000001,d,d,pass12,FM,a,a,OK,76017,1234567890,abuta.edu,Fields have errors,,,,,,,,,,Invalid email
-38,aa3,TRUE,1000000001,d,d,pass12,R,a,a,WY,76017,1234567890,d$@uta.edu,Fields have errors,,,,,,,,,,Invalid email
-39,aa3,TRUE,1000000001,d,d,pass12,U,a,a,AK,76017,1234567890,.dd@uta.edu,Fields have errors,,,,,,,,,,Invalid email
-40,aa3,TRUE,1000000001,d,d,pass12,A,a,a,CA,76017,1234567890,d.d@uta.edu,,,,,,,,,,,
-41,aa3,TRUE,1000000001,d,d,pass12,FM,a,a,OK,76017,1234567890,dd.@uta.edu,Fields have errors,,,,,,,,,,Invalid email
-42,aa3,TRUE,1000000001,d,d,pass12,R,a,a,WY,76017,1234567890,1d@uta.edu,Fields have errors,,,,,,,,,,Invalid email
-43,aa3,TRUE,1000000001,d,d,pass12,U,a,a,AK,76017,1234567890,aaaaaaaaaa,Fields have errors,,,,,,,,,,Invalid email
-44,aa3,TRUE,1000000001,d,d,pass12,A,a,a,CA,76017,1234567890,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@uta.edu,,,,,,,,,,,
-45,aa3,TRUE,1000000001,d,d,pass12,FM,a,a,OK,76017,1234567890,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab@uta.edu,Fields have errors,,,,,,,,,,Invalid email
+8,aa3,FALSE,100000000,d,d,pass12,A,a,a,CA,76017,1234567890,d@uta.edu,Fields have errors,,Incorrect ID,,,,,,,,
+9,aa3,FALSE,10000000011,d,d,pass12,FM,a,a,OK,76017,1234567890,d@uta.edu,Fields have errors,,Incorrect ID,,,,,,,,
+10,aa3,FALSE,1000000001,,d,pass12,R,a,a,WY,76017,1234567890,d@uta.edu,Fields have errors,,,Invalid first name,,,,,,,
+11,aa3,FALSE,1000000001,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,d,pass12,U,a,a,AK,76017,1234567890,d@uta.edu,,,,,,,,,,,
+12,aa3,FALSE,1000000001,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,d,pass12,A,a,a,CA,76017,1234567890,d@uta.edu,Fields have errors,,,Invalid first name,,,,,,,
+13,aa3,FALSE,1000000001,#,d,pass12,FM,a,a,OK,76017,1234567890,d@uta.edu,Fields have errors,,,Invalid first name,,,,,,,
+14,aa3,FALSE,1000000001,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa#,d,pass12,R,a,a,WY,76017,1234567890,d@uta.edu,Fields have errors,,,Invalid first name,,,,,,,
+15,aa3,FALSE,1000000001,d,,pass12,U,a,a,AK,76017,1234567890,d@uta.edu,Fields have errors,,,,Invalid last name,,,,,,
+16,aa3,FALSE,1000000001,d,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,pass12,A,a,a,CA,76017,1234567890,d@uta.edu,,,,,,,,,,,
+17,aa3,FALSE,1000000001,d,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,pass12,FM,a,a,OK,76017,1234567890,d@uta.edu,Fields have errors,,,,Invalid last name,,,,,,
+18,aa3,FALSE,1000000001,d,#,pass12,R,a,a,WY,76017,1234567890,d@uta.edu,Fields have errors,,,,Invalid last name,,,,,,
+19,aa3,FALSE,1000000001,d,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa#,pass12,U,a,a,AK,76017,1234567890,d@uta.edu,Fields have errors,,,,Invalid last name,,,,,,
+20,aa3,FALSE,1000000001,d,d,a1234,A,a,a,CA,76017,1234567890,d@uta.edu,Fields have errors,,,,,Invalid password,,,,,
+21,aa3,FALSE,1000000001,d,d,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&,FM,a,a,OK,76017,1234567890,d@uta.edu,,,,,,,,,,,
+22,aa3,FALSE,1000000001,d,d,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&*,R,a,a,WY,76017,1234567890,d@uta.edu,Fields have errors,,,,,Invalid password,,,,,
+23,aa3,FALSE,1000000001,d,d,pass12,U,11 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,a,AK,76017,1234567890,d@uta.edu,,,,,,,,,,,
+24,aa3,FALSE,1000000001,d,d,pass12,A,11 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,a,CA,76017,1234567890,d@uta.edu,Fields have errors,,,,,,Invalid address,,,,
+25,aa3,FALSE,1000000001,d,d,pass12,FM,12 ##,a,OK,76017,1234567890,d@uta.edu,Fields have errors,,,,,,Invalid address,,,,
+26,aa3,FALSE,1000000001,d,d,pass12,R,a,,WY,76017,1234567890,d@uta.edu,Fields have errors,,,,,,,Invalid city,,,
+27,aa3,FALSE,1000000001,d,d,pass12,U,a,1a,AK,76017,1234567890,d@uta.edu,Fields have errors,,,,,,,Invalid city,,,
+28,aa3,FALSE,1000000001,d,d,pass12,A,a,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,CA,76017,1234567890,d@uta.edu,,,,,,,,,,,
+29,aa3,FALSE,1000000001,d,d,pass12,FM,a,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,OK,76017,1234567890,d@uta.edu,Fields have errors,,,,,,,Invalid city,,,
+30,aa3,FALSE,1000000001,d,d,pass12,R,a,a,WY,1234,1234567890,d@uta.edu,Fields have errors,,,,,,,,Invalid zip,,
+31,aa3,FALSE,1000000001,d,d,pass12,U,a,a,AK,123456,1234567890,d@uta.edu,Fields have errors,,,,,,,,Invalid zip,,
+32,aa3,FALSE,1000000001,d,d,pass12,A,a,a,CA,abcde,1234567890,d@uta.edu,Fields have errors,,,,,,,,Invalid zip,,
+33,aa3,FALSE,1000000001,d,d,pass12,FM,a,a,OK,76017,123456789,d@uta.edu,Fields have errors,,,,,,,,,Invalid phone,
+34,aa3,FALSE,1000000001,d,d,pass12,R,a,a,WY,76017,12345678901,d@uta.edu,Fields have errors,,,,,,,,,Invalid phone,
+35,aa3,FALSE,1000000001,d,d,pass12,U,a,a,AK,76017,qwertyuiop,d@uta.edu,Fields have errors,,,,,,,,,Invalid phone,
+36,aa3,FALSE,1000000001,d,d,pass12,A,a,a,CA,76017,1234567890,@uta.edu,Fields have errors,,,,,,,,,,Invalid email
+37,aa3,FALSE,1000000001,d,d,pass12,FM,a,a,OK,76017,1234567890,abuta.edu,Fields have errors,,,,,,,,,,Invalid email
+38,aa3,FALSE,1000000001,d,d,pass12,R,a,a,WY,76017,1234567890,d$@uta.edu,Fields have errors,,,,,,,,,,Invalid email
+39,aa3,FALSE,1000000001,d,d,pass12,U,a,a,AK,76017,1234567890,.dd@uta.edu,Fields have errors,,,,,,,,,,Invalid email
+40,aa3,FALSE,1000000001,d,d,pass12,A,a,a,CA,76017,1234567890,d.d@uta.edu,,,,,,,,,,,
+41,aa3,FALSE,1000000001,d,d,pass12,FM,a,a,OK,76017,1234567890,dd.@uta.edu,Fields have errors,,,,,,,,,,Invalid email
+42,aa3,FALSE,1000000001,d,d,pass12,R,a,a,WY,76017,1234567890,1d@uta.edu,Fields have errors,,,,,,,,,,Invalid email
+43,aa3,FALSE,1000000001,d,d,pass12,U,a,a,AK,76017,1234567890,aaaaaaaaaa,Fields have errors,,,,,,,,,,Invalid email
+44,aa3,FALSE,1000000001,d,d,pass12,A,a,a,CA,76017,1234567890,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@uta.edu,,,,,,,,,,,
+45,aa3,FALSE,1000000001,d,d,pass12,FM,a,a,OK,76017,1234567890,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab@uta.edu,Fields have errors,,,,,,,,,,Invalid email
