@@ -1,0 +1,8 @@
+1,saveFacility,,BMC,1H,7D,I,Please correct the following errors,Your Facility Name must between 1 and 45 character
+2,saveFacility,BMDMDMDMDMDMDMDMDMDMDMDMDJGHGHGHGHGHGHGHSHGHGHA,BMC,1H,7D,I,Please correct the following errors,Your Facility Name must between 1 and 45 character
+3,saveFacility,BMC1,BMC,1H,7D,I,Please correct the following errors,Facility Name already Exists
+4,saveFacility,BMC17,BMC,1H,BMC,I,,
+5,saveFacility,B,BMC,1H,BMC,I,,
+6,saveFacility,BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB,BMC,1H,BMC,I,,
+7,saveFacility,BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB,BMC,1H,BMC,I,,
+8,saveFacility,BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB,BMC,1H,BMC,I,Please correct the following errors,Your Facility Name must between 1 and 45 character

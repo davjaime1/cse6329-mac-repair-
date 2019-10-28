@@ -117,28 +117,27 @@ public class MAR implements Serializable{
 			errorMsgs.setAssignedDatErrorMsgs(validateAssignedDate(this.getAssignedDate()));
 			errorMsgs.setAssignedToErrorMsgs(validateAssignedTo(this.getAssignedTo(),this.getAssignedDate()));
 			errorMsgs.setDescriptionErrorMsgs(validateDescription(this.getDescription()));
-
 			errorMsgs.setErrorMsg(action);
 		}
 		else if (action.equals("searchMAR")) {
-			if (this.marID.equals("") && this.facilityName.equals("")) 
+			if (this.marID.equals("") && this.facilityName.equals("")) {
 				errorMsgs.setMarNumberError("Both MAR Number and Facility Name cannot be blank");
-
-			errorMsgs.setErrorMsg(action);				
+				errorMsgs.setErrorMsg("Please correct the following errors");
+			}
 		}
 		else if (action.equals("savemar")) {
-			if (this.description.equals("")) 
+			if (this.description.equals("")) { 
 				errorMsgs.setDescriptionErrorMsgs("Description should not be null");
-
-			errorMsgs.setErrorMsg(action);				
+				errorMsgs.setErrorMsg("Please correct the following errors");
+			}
 		}
 
-		else
-				if (this.marID.equals("") && this.facilityName.equals("")) 
+		else {
+				if (this.marID.equals("") && this.facilityName.equals("")) {
 					errorMsgs.setMarNumberError("Both MAR Number and Facility Name cannot be blank");
-
-				errorMsgs.setErrorMsg(action);				
-
+					errorMsgs.setErrorMsg("Please correct the following errors");
+				}
+		}
 	}
 	
 	
@@ -163,8 +162,7 @@ public class MAR implements Serializable{
 	private String validateAssignedTo (String assignedTo, String assignedDate) {
 		String result="";
 		Date assgnDate = UtilityDAO.mysqlDateassignmar(assignedDate);
-		System.out.println(assignedDate);
-		System.out.println(assgnDate);
+
 		if (RepairScheduleDAO.validRepairSchedule(assignedTo, assgnDate))
 			result= "Your Repair Schedule Overloaded";
 		return result;

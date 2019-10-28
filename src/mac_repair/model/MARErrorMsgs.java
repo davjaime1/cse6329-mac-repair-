@@ -35,17 +35,8 @@ public class MARErrorMsgs {
 				else
 					errorMsg = "";
 			}
-			else if (action.contains("savemar")) {
-				if(!descriptionErrorMsgs.equals("") )
-					errorMsg = "Please correct the following errors";
-				else
-					errorMsg = "";
-			}
 			else {
-				if (!marNumberError.equals(""))
-					errorMsg = "Please correct the following errors";
-				else
-					errorMsg = "";
+				errorMsg = action;
 			}
 		}
 

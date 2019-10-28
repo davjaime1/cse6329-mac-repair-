@@ -6,9 +6,9 @@ public class FacilityErrorMsgs {
 	private String facilityNameError;
 	
 	public FacilityErrorMsgs() {
-		this.errorMsg = "";
+//		this.errorMsg = "";
 // Comment out the following to get PIT coverage even though it is not per Oracle
-		this.facilityNameError = "";
+	//	this.facilityNameError = "";
 
 	}
 
@@ -16,8 +16,10 @@ public class FacilityErrorMsgs {
 		return errorMsg;
 	}
 	public void setErrorMsg() {
-		if ( !facilityNameError.equals("")  )
+		if (!facilityNameError.equals(""))
 			errorMsg = "Please correct the following errors";
+		else
+			errorMsg = "";
 	}
 
 
