@@ -79,9 +79,10 @@ public class Facility implements Serializable{
 			String result="";
 			if (!stringSize(name,1,45))
 				result= "Your Facility Name must between 1 and 45 character";
-			else
-				if (!FacilityDAO.facilityNameunique(name))
+			else if(!FacilityDAO.facilityNameunique(name))
 					result = "Facility Name already Exists";
+			else 
+				result = "";
 			return result;
 		}
 		

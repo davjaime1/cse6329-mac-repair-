@@ -96,7 +96,7 @@ public class FacilityDAO {
 
 	//determine if companyID is unique
 	public static Boolean facilityNameunique(String name)  {  
-			return (ReturnMatchingFacilityList(" SELECT * from facilities WHERE name = '"+name+"' ORDER BY name").isEmpty());
+			return (ReturnMatchingFacilityList(" SELECT * from facilities WHERE name = '"+name+"' ORDER BY name").size())==0;
 	}
 	
 	public static ArrayList<Facility> listFacilitiesNames(){
