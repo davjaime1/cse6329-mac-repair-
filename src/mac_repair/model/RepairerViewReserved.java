@@ -13,8 +13,8 @@ public class RepairerViewReserved implements Serializable{
 	private String marnum;
 	private String to;
 	private String from;
-	private String phone;
-	private String email;
+	//private String phone;
+	//private String email;
 	
 	public void setReserved (String date, String marnum, String facilitytype, String facilityname, String to, String from) {
 		setFacilitytype(facilitytype);
@@ -67,7 +67,7 @@ public class RepairerViewReserved implements Serializable{
 		this.date = date;
 	}
 	
-	public String getPhone() {
+	/*public String getPhone() {
 		return phone;
 	}
 	public void setPhone(String phone) {
@@ -79,25 +79,5 @@ public class RepairerViewReserved implements Serializable{
 	}
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-
-//	This section is for general purpose methods used internally in this class
-	
-	private boolean stringSize(String string, int min, int max) {
-		return string.length()>=min && string.length()<=max;
-	}
-	private boolean isTextAnInteger (String string) {
-        boolean result;
-		try
-        {
-            Long.parseLong(string);
-            result=true;
-        } 
-        catch (NumberFormatException e) 
-        {
-            result=false;
-        }
-		return result;
-	}
+	}*/
 }

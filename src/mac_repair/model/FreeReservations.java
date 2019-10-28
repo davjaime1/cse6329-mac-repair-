@@ -75,25 +75,4 @@ public class FreeReservations implements Serializable{
 	public void setId(String id) {
 		this.id= id;
 	}
-	
-
-
-//	This section is for general purpose methods used internally in this class
-	
-	private boolean stringSize(String string, int min, int max) {
-		return string.length()>=min && string.length()<=max;
-	}
-	private boolean isTextAnInteger (String string) {
-        boolean result;
-		try
-        {
-            Long.parseLong(string);
-            result=true;
-        } 
-        catch (NumberFormatException e) 
-        {
-            result=false;
-        }
-		return result;
-	}
 }
