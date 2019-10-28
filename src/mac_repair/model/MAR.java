@@ -119,12 +119,6 @@ public class MAR implements Serializable{
 			errorMsgs.setDescriptionErrorMsgs(validateDescription(this.getDescription()));
 			errorMsgs.setErrorMsg(action);
 		}
-		else if (action.equals("searchMAR")) {
-			if (this.marID.equals("") && this.facilityName.equals("")) {
-				errorMsgs.setMarNumberError("Both MAR Number and Facility Name cannot be blank");
-				errorMsgs.setErrorMsg("Please correct the following errors");
-			}
-		}
 		else if (action.equals("savemar")) {
 			if (this.description.equals("")) { 
 				errorMsgs.setDescriptionErrorMsgs("Description should not be null");
