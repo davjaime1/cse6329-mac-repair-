@@ -123,6 +123,7 @@ public class UserController extends HttpServlet
             UserErrorMsgs errMsgs = new UserErrorMsgs();
             userParam(request, user);
             user.validateUser(user, errMsgs, true);
+            
             session.setAttribute("user", user);
             if (!errMsgs.getErrorMsg().isEmpty())
             {

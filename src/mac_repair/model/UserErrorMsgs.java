@@ -19,21 +19,6 @@ public class UserErrorMsgs implements Serializable
     private String phoneError;
     private String emailError;
     
-    public UserErrorMsgs()
-    {
-        this.setUsernameError("");
-        this.setIdError("");
-        this.setFirstnameError("");
-        this.setLastnameError("");
-        this.setPasswordError("");
-        this.setAddressError("");
-        this.setCityError("");
-        this.setZipError("");
-        this.setPhoneError("");
-        this.setEmailError("");
-        this.setErrorMsg();
-    }
-    
     public String getErrorMsg()
     {
         return errorMsg;
@@ -41,22 +26,22 @@ public class UserErrorMsgs implements Serializable
     
     public void setErrorMsg()
     {
-        if (!usernameError.equals("")
-                || !idError.equals("")
-                || !firstnameError.equals("")
-                || !lastnameError.equals("")
-                || !passwordError.equals("")
-                || !addressError.equals("")
-                || !cityError.equals("")
-                || !zipError.equals("")
-                || !phoneError.equals("")
-                || !emailError.equals(""))
+        if (usernameError.isEmpty()
+                && idError.isEmpty()
+                && firstnameError.isEmpty()
+                && lastnameError.isEmpty()
+                && passwordError.isEmpty()
+                && addressError.isEmpty()
+                && cityError.isEmpty()
+                && zipError.isEmpty()
+                && phoneError.isEmpty()
+                && emailError.isEmpty())
         {
-            this.errorMsg = "Fields have errors";
+            this.errorMsg = "";
         }
         else
         {
-            this.errorMsg = "";
+            this.errorMsg = "Fields have errors";
         }
         
     }

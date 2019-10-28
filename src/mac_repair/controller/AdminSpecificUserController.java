@@ -103,7 +103,6 @@ public class AdminSpecificUserController extends HttpServlet
             User user = new User();
             UserErrorMsgs CerrorMsgs = new UserErrorMsgs();
             userParam(request, user);
-//            user.validateUser(action, CerrorMsgs);
             user.validateUser(user, CerrorMsgs, false);
             session.setAttribute("user", user);
             if (!CerrorMsgs.getErrorMsg().equals(""))

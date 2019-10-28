@@ -22,24 +22,6 @@ public class User implements Serializable
     private String phone;
     private String email;
     
-    
-    public User()
-    {
-        setUsername("");
-        setId("");
-        setFirstname("");
-        setLastname("");
-        setPassword("");
-        setRole("");
-        setAddress("");
-        setCity("");
-        setState("");
-        setZip("");
-        setPhone("");
-        setEmail("");
-    }
-    
-    
     public void setUser(
             String username,
             String id,
@@ -48,8 +30,8 @@ public class User implements Serializable
             String password,
             String role,
             String address,
-            String state,
             String city,
+            String state,
             String zip,
             String phone,
             String email)
@@ -61,8 +43,8 @@ public class User implements Serializable
         setPassword(password);
         setRole(role);
         setAddress(address);
-        setState(state);
         setCity(city);
+        setState(state);
         setZip(zip);
         setPhone(phone);
         setEmail(email);
@@ -71,7 +53,21 @@ public class User implements Serializable
     
     public void validateUser(User u, UserErrorMsgs uem, boolean checkUnique)
     {
-        uem.setUsernameError(validateUsername(u.getUsername(), checkUnique));
+        uem.setUsernameError(validateUsername(u.getUsername()));
+        if (uem.getUsernameError().isEmpty())
+            if (checkUnique)
+            {
+                if (!UserDAO.isUsernameUnique(u.getUsername()))
+                {
+                    uem.setUsernameError("Username already in database");
+                }
+                else
+                {
+                    uem.setUsernameError("Excess unique check");
+                }
+            }
+        
+        
         uem.setIdError(validateId(u.getId()));
         uem.setFirstnameError(validateFirstName(u.getFirstname()));
         uem.setLastnameError(validateLastName(u.getLastname()));
@@ -84,24 +80,13 @@ public class User implements Serializable
         uem.setErrorMsg();
     }
     
-    private String validateUsername(String username, boolean checkUnique)
+    private String validateUsername(String username)
     {
-        String result;
+        String result = "Invalid username";
         String regex = "^[a-zA-Z0-9]{3,16}$";
         if (username.matches(regex))
         {
-            if (checkUnique && !UserDAO.isUsernameUnique(username))
-            {
-                result = "Username is already in the database";
-            }
-            else
-            {
-                result = "";
-            }
-        }
-        else
-        {
-            result = "Invalid username";
+            result = "";
         }
         return result;
     }
