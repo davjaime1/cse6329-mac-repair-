@@ -32,8 +32,6 @@ public class MARErrorMsgs {
 			if (action.contains("saveassignedmar")) {
 				if(!assignedToErrorMsgs.equals("") || !assignedDatErrorMsgs.equals("") || !descriptionErrorMsgs.equals("")	)
 					errorMsg = "Please correct the following errors";
-				else
-					errorMsg = "";
 			}
 			else {
 				errorMsg = action;
