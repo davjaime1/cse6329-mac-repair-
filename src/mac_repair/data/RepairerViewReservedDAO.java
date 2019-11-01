@@ -24,16 +24,13 @@ public class RepairerViewReservedDAO {
 			ResultSet reservedList = stmt.executeQuery(queryString);
 			while (reservedList.next()) {
 				RepairerViewReserved res = new RepairerViewReserved();
-				//java.sql.Timestamp dbSqlTimestamp = reservedList.getTimestamp(1);
-				//res.setDate(dbSqlTimestamp);
-				res.setDate(reservedList.getString("scheduleDate"));
-				res.setMarnum(reservedList.getString("marnumber"));
+
+				res.setDate(reservedList.getString("date"));
+				res.setMarnum(reservedList.getString("mar"));
 				res.setFacilitytype(reservedList.getString("facilitytype"));
 				res.setFacilityname(reservedList.getString("facilityname"));
 				res.setTo(reservedList.getString("to").substring(0,19));
-				res.setFrom(reservedList.getString("from").substring(0,19));
-				//res.setPhone(reservedList.getString("phone"));
-				//res.setEmail(reservedList.getString("email"));  
+				res.setFrom(reservedList.getString("from").substring(0,19)); 
 				reservedListInDB.add(res);	
 			}
 		} catch (SQLException e) {}
@@ -83,7 +80,7 @@ public class RepairerViewReservedDAO {
 
 	//************************************************8
 	public static ArrayList<RepairerViewReserved>  listReservedRepairs(String username) { 
-			return ReturnReservedList("SELECT r.scheduleDate, m.marnumber, m.facilitytype, m.facilityname, f.to, f.from FROM repairschedule r, mar m, facilityreservation f WHERE r.mar = m.marnumber AND f.reservedUser = r.username AND m.facilityname = f.facilityname AND r.username = \"" + username + "\"");
+			return ReturnReservedList("SELECT f.date, f.facilityname, f.facilitytype, f.date, f.to, f.from, r.mar FROM facilityreservation f, repairschedule r WHERE f.reservedUser = \"" + username + "\" AND r.username = \"" + username + "\" AND f.reservationid = r.mar");
 	}
 	
 	//search company with company ID
