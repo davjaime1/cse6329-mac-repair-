@@ -103,6 +103,18 @@ public class FM_AssignMARDAO {
 		return ReturnMatchingAssignedMARList(" SELECT * from mar WHERE assignedto = '"+username+"' ORDER BY marnumber");
 }
 	
+	public static void addRepairList(String mar, String date, String rep)
+	{
+		Statement stmt = null;
+		String queryString = "INSERT INTO `repairschedule` VALUES ('" + rep + "', '" + mar + "' , '" + date + "')";
+		Connection conn = SQLConnection.getDBConnection();  
+		try {
+			stmt = conn.createStatement();
+			stmt.executeUpdate(queryString);	
+			conn.commit(); 
+		} catch (SQLException e) {System.out.println("Could not add");}
+	}
+	
 
 	//determine if companyID is unique
 //	public static Boolean marIDunique(String marnumber)  {  
