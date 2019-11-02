@@ -88,6 +88,7 @@ public class RepairerReservationsController extends HttpServlet {
 			RepairerViewReservedDAO.getAvaliableReservations(freeListPoss, freeListInDB);
 			//Now using the radio button, add the selected reservation to database
 			session.setAttribute("FREEREPAIRERS", freeListPoss);
+			session.setAttribute("mar", request.getParameter("mar"));
 			url="/modifySearchFreeFacilities.jsp";
 		}
 		else if(action.equalsIgnoreCase("cancelReservations")) {
@@ -110,7 +111,12 @@ public class RepairerReservationsController extends HttpServlet {
 				String id = request.getParameter("");
 				//Then display the free reservations like you normaly would
 				RepairerViewReservedDAO.getAvaliableReservations(freeListPoss, freeListInDB);
-				
+				if(action.equalsIgnoreCase("cancelReservation"))
+				{
+					//Need to delete previous reservation
+					System.out.println("Cancel Reservation" + request.getParameter("mar"));
+					RepairerViewReservedDAO.cancelModReservation(request.getParameter("mar"));
+				}
 				//Display Added Reservation
 				FreeReservations sel = new FreeReservations();
 				sel.setReserved(	freeListPoss.get(selResIndex).getFacilitytype(), freeListPoss.get(selResIndex).getFacilityname(), 
@@ -118,11 +124,6 @@ public class RepairerReservationsController extends HttpServlet {
 				//Add the Reservation
 				RepairerViewReservedDAO.addReservation(sel, request.getParameter("mar"), username);
 				session.setAttribute("RESERVATION", sel);
-				if(action.equalsIgnoreCase("cancelReservation"))
-				{
-					//Need to delete previous reservation
-					RepairerViewReservedDAO.cancelReservation(request.getParameter("id"), request.getParameter("date"),  request.getParameter("from"),  request.getParameter("to"));
-				}
 				url="/AddNewReservation.jsp";					
 			}
 			else 

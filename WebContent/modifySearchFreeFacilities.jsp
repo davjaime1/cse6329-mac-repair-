@@ -22,7 +22,7 @@
      <div class="mainbar"><div class="submb"></div></div>
     
 <input name="errMsg"  value="<c:out value='${errorMsgs}'/>" type="text"  style ="background-color: white; color: red; border: none; width:800px" disabled="disabled"> 
- <form action="/mac_repair/RepairerReservationsController?action=cancelReservation&id=${REPAIRERS.facilityname}&date=${REPAIRERS.date}&from=${REPAIRERS.from}&to=${REPAIRERS.to}" method="post">          
+ <form action="/mac_repair/RepairerReservationsController?action=cancelReservation&id=${REPAIRERS.facilityname}&date=${REPAIRERS.date}&from=${REPAIRERS.from}&to=${REPAIRERS.to}&mar=${mar}" method="post">          
        <table border="1" class="myTable"> 
 			<tr class="myTableRow">
 				<th class="myTableHead" style="padding-right: 35px; text-align: left"></th> 			 

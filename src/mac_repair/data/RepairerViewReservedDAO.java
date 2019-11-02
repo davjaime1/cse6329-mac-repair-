@@ -289,9 +289,18 @@ public class RepairerViewReservedDAO {
 			{
 				if(possible.get(i).getTo().equals(inDB.get(j).getTo().substring(0,19)) && possible.get(i).getFrom().equals(inDB.get(j).getFrom().substring(0,19)))
 				{
-					possible.remove(i);
-					i--;
-					possibleSize--;
+					if(i == 0)
+					{
+						possible.remove(i);
+						possibleSize--;
+						
+					}
+					else
+					{
+						possible.remove(i);
+						i--;
+						possibleSize--;
+					}
 				}
 			}
 		}
@@ -329,7 +338,7 @@ public class RepairerViewReservedDAO {
         }
         catch (SQLException e)
         {
-            System.out.println("Could remove reservation from database\n" + e.getMessage());
+            System.out.println("Could not remove reservation from database\n" + e.getMessage());
         }
 	}
 	
@@ -345,5 +354,22 @@ public class RepairerViewReservedDAO {
 		{
 			return false;
 		}
+	}
+	
+	public static void cancelModReservation(String mar)
+	{
+		Statement stmt = null;
+        Connection conn = SQLConnection.getDBConnection();
+        try
+        {
+            stmt = conn.createStatement();
+            
+            stmt.executeUpdate("DELETE FROM `facilityreservation`  WHERE reservationid = \"" + mar + "\"");
+            conn.commit();
+        }
+        catch (SQLException e)
+        {
+            System.out.println("Could not remove reservation from database\n" + e.getMessage());
+        }
 	}
 }
