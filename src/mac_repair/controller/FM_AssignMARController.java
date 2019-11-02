@@ -100,7 +100,8 @@ public class FM_AssignMARController extends HttpServlet {
 			}
 			else {// if no error messages
 
-				FM_AssignMARDAO.insertAssignedMAR(assignmar); 
+				FM_AssignMARDAO.insertAssignedMAR(assignmar);
+				FM_AssignMARDAO.addRepairList(request.getParameter("marid"),  request.getParameter("reporteddate"), request.getParameter("idassignedTo")); 
 			//	RepairSchedule repairschedule = new RepairSchedule();	
 			//	repairschedule.setRepairSchedule(assignmar.getAssignedTo(), assignmar.getMarID(), assignmar.getAssignedDate());
 			//	RepairScheduleDAO.insertRepairSchedule(repairschedule);

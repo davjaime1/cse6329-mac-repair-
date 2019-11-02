@@ -64,7 +64,7 @@
     <input type="submit" value="Cancel Reservation">
     </form>
     <br />
-<form name="Modify Reservation" action="/mac_repair/RepairerReservationsController?action=modifyReservations&id=${REPAIRERS.facilityname}&date=${REPAIRERS.date}" method="post">
+<form name="Modify Reservation" action="/mac_repair/RepairerReservationsController?action=modifyReservations&id=${REPAIRERS.facilityname}&date=${REPAIRERS.date}&mar=${REPAIRERS.marnum}" method="post">
     <input name="action" value="modifyReservation" type="hidden">
     <input type="submit" value="Modify Reservation">
     </form>

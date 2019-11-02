@@ -41,6 +41,7 @@ public class RepairerReservationsController extends HttpServlet {
 		ArrayList<FreeReservations> freeListPoss = new ArrayList<FreeReservations>();
 		ArrayList<FreeReservations> freeListInDB = new ArrayList<FreeReservations>();
 		ArrayList<FreeReservations> idDB = new ArrayList<FreeReservations>();
+		
 
 		/*if (action.equalsIgnoreCase("searchOptions"))
 		{
@@ -55,18 +56,18 @@ public class RepairerReservationsController extends HttpServlet {
 			String username = (String)session.getAttribute("username");
 			if(RepairerViewReservedDAO.canMakeRes(request.getParameter("mar"), username))
 			{
-			//action=listSpecificCompany
-			ArrayList<FreeReservations> freeReservations = new ArrayList<FreeReservations>();
-			
-			//Use a java class to make a list of possible reservations
-			freeListPoss = RepairerViewReservedDAO.makePossibleFreeList(request.getParameter("id"), request.getParameter("date"));
-			//Then Access the database to remove ones that are already in the database for that particualar date
-			freeListInDB = RepairerViewReservedDAO.ReservedListInDB(request.getParameter("id"), request.getParameter("date"));
-			//Then display the free reservations like you normaly would
-			RepairerViewReservedDAO.getAvaliableReservations(freeListPoss, freeListInDB);
-			//Now using the radio button, add the selected reservation to database
-			session.setAttribute("FREEREPAIRERS", freeListPoss);
-			url="/SearchFreeFacilities.jsp";
+				//action=listSpecificCompany
+				ArrayList<FreeReservations> freeReservations = new ArrayList<FreeReservations>();
+				//Use a java class to make a list of possible reservations
+				freeListPoss = RepairerViewReservedDAO.makePossibleFreeList(request.getParameter("id"), request.getParameter("date"));
+				//Then Access the database to remove ones that are already in the database for that particualar date
+				freeListInDB = RepairerViewReservedDAO.ReservedListInDB(request.getParameter("id"), request.getParameter("date"));
+				//Then display the free reservations like you normaly would
+				RepairerViewReservedDAO.getAvaliableReservations(freeListPoss, freeListInDB);
+				//Now using the radio button, add the selected reservation to database
+				session.setAttribute("FREEREPAIRERS", freeListPoss);
+				session.setAttribute("mar", request.getParameter("mar"));
+				url="/SearchFreeFacilities.jsp";
 			}
 			else
 			{
@@ -87,6 +88,7 @@ public class RepairerReservationsController extends HttpServlet {
 			RepairerViewReservedDAO.getAvaliableReservations(freeListPoss, freeListInDB);
 			//Now using the radio button, add the selected reservation to database
 			session.setAttribute("FREEREPAIRERS", freeListPoss);
+			session.setAttribute("mar", request.getParameter("mar"));
 			url="/modifySearchFreeFacilities.jsp";
 		}
 		else if(action.equalsIgnoreCase("cancelReservations")) {
@@ -106,22 +108,22 @@ public class RepairerReservationsController extends HttpServlet {
 				//Then Access the database to remove ones that are already in the database for that particualar date
 				freeListInDB = RepairerViewReservedDAO.ReservedListInDB(request.getParameter("id"), request.getParameter("date"));
 				idDB = RepairerViewReservedDAO.IdDB(request.getParameter("id"), request.getParameter("date"), username);
-				String id = RepairerViewReservedDAO.getId(idDB);
+				String id = request.getParameter("");
 				//Then display the free reservations like you normaly would
 				RepairerViewReservedDAO.getAvaliableReservations(freeListPoss, freeListInDB);
-				
+				if(action.equalsIgnoreCase("cancelReservation"))
+				{
+					//Need to delete previous reservation
+					System.out.println("Cancel Reservation" + request.getParameter("mar"));
+					RepairerViewReservedDAO.cancelModReservation(request.getParameter("mar"));
+				}
 				//Display Added Reservation
 				FreeReservations sel = new FreeReservations();
 				sel.setReserved(	freeListPoss.get(selResIndex).getFacilitytype(), freeListPoss.get(selResIndex).getFacilityname(), 
 						freeListPoss.get(selResIndex).getVenue(), freeListPoss.get(selResIndex).getDate(), freeListPoss.get(selResIndex).getTo(), freeListPoss.get(selResIndex).getFrom());
 				//Add the Reservation
-				RepairerViewReservedDAO.addReservation(sel, id, username);
+				RepairerViewReservedDAO.addReservation(sel, request.getParameter("mar"), username);
 				session.setAttribute("RESERVATION", sel);
-				if(action.equalsIgnoreCase("cancelReservation"))
-				{
-					//Need to delete previous reservation
-					RepairerViewReservedDAO.cancelReservation(request.getParameter("id"), request.getParameter("date"),  request.getParameter("from"),  request.getParameter("to"));
-				}
 				url="/AddNewReservation.jsp";					
 			}
 			else 

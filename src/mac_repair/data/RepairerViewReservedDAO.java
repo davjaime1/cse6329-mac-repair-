@@ -24,16 +24,13 @@ public class RepairerViewReservedDAO {
 			ResultSet reservedList = stmt.executeQuery(queryString);
 			while (reservedList.next()) {
 				RepairerViewReserved res = new RepairerViewReserved();
-				//java.sql.Timestamp dbSqlTimestamp = reservedList.getTimestamp(1);
-				//res.setDate(dbSqlTimestamp);
-				res.setDate(reservedList.getString("scheduleDate"));
-				res.setMarnum(reservedList.getString("marnumber"));
+
+				res.setDate(reservedList.getString("date"));
+				res.setMarnum(reservedList.getString("mar"));
 				res.setFacilitytype(reservedList.getString("facilitytype"));
 				res.setFacilityname(reservedList.getString("facilityname"));
 				res.setTo(reservedList.getString("to").substring(0,19));
-				res.setFrom(reservedList.getString("from").substring(0,19));
-				//res.setPhone(reservedList.getString("phone"));
-				//res.setEmail(reservedList.getString("email"));  
+				res.setFrom(reservedList.getString("from").substring(0,19)); 
 				reservedListInDB.add(res);	
 			}
 		} catch (SQLException e) {}
@@ -83,13 +80,13 @@ public class RepairerViewReservedDAO {
 
 	//************************************************8
 	public static ArrayList<RepairerViewReserved>  listReservedRepairs(String username) { 
-			return ReturnReservedList("SELECT r.scheduleDate, m.marnumber, m.facilitytype, m.facilityname, f.to, f.from FROM repairschedule r, mar m, facilityreservation f WHERE r.mar = m.marnumber AND f.reservedUser = r.username AND m.facilityname = f.facilityname AND r.username = \"" + username + "\"");
+			return ReturnReservedList("SELECT f.date, f.facilityname, f.facilitytype, f.date, f.to, f.from, r.mar FROM facilityreservation f, repairschedule r WHERE f.reservedUser = \"" + username + "\" AND r.username = \"" + username + "\" AND f.reservationid = r.mar");
 	}
 	
 	//search company with company ID
 	//***************************************************
-	public static ArrayList<RepairerViewReserved>   searchReservedRepair (String idMarnum, String username)  {  
-			return ReturnReservedList("SELECT r.scheduleDate, m.marnumber, m.facilitytype, m.facilityname, f.to, f.from FROM repairschedule r, mar m, facilityreservation f WHERE r.mar = m.marnumber AND f.reservedUser = r.username AND m.facilityname = f.facilityname AND r.username = \""+ username +"\" AND m.marnumber = \""+idMarnum+"\"");
+	public static ArrayList<RepairerViewReserved>   searchReservedRepair (String mar, String username)  {  
+			return ReturnReservedList("SELECT f.date, f.facilityname, f.facilitytype, f.date, f.to, f.from, r.mar FROM facilityreservation f, repairschedule r WHERE f.reservedUser = \"" + username + "\" AND r.username = \"" + username + "\" AND f.reservationid = \"" + mar + "\" AND r.mar = \"" + mar+ "\"");
 	}
 	
 	public static ArrayList<FreeReservations> ReservedListInDB(String name, String date)
@@ -292,9 +289,18 @@ public class RepairerViewReservedDAO {
 			{
 				if(possible.get(i).getTo().equals(inDB.get(j).getTo().substring(0,19)) && possible.get(i).getFrom().equals(inDB.get(j).getFrom().substring(0,19)))
 				{
-					possible.remove(i);
-					i--;
-					possibleSize--;
+					if(i == 0)
+					{
+						possible.remove(i);
+						possibleSize--;
+						
+					}
+					else
+					{
+						possible.remove(i);
+						i--;
+						possibleSize--;
+					}
 				}
 			}
 		}
@@ -332,14 +338,14 @@ public class RepairerViewReservedDAO {
         }
         catch (SQLException e)
         {
-            System.out.println("Could remove reservation from database\n" + e.getMessage());
+            System.out.println("Could not remove reservation from database\n" + e.getMessage());
         }
 	}
 	
-	public static boolean canMakeRes(String idMarnum, String username)
+	public static boolean canMakeRes(String mar, String username)
 	{
 		ArrayList<RepairerViewReserved> list = new ArrayList<RepairerViewReserved>();
-		list = ReturnReservedList("SELECT r.scheduleDate, m.marnumber, m.facilitytype, m.facilityname, f.to, f.from FROM repairschedule r, mar m, facilityreservation f WHERE r.mar = m.marnumber AND f.reservedUser = r.username AND m.facilityname = f.facilityname AND r.username = \""+ username +"\" AND m.marnumber = \""+idMarnum+"\"");
+		list = ReturnReservedList("SELECT f.date, f.facilityname, f.facilitytype, f.date, f.to, f.from, r.mar FROM facilityreservation f, repairschedule r WHERE f.reservedUser = \"" + username + "\" AND r.username = \"" + username + "\" AND f.reservationid = \"" + mar + "\" AND r.mar = \"" + mar+ "\"");
 		if(list.size()==0)
 		{
 			return true;
@@ -348,5 +354,22 @@ public class RepairerViewReservedDAO {
 		{
 			return false;
 		}
+	}
+	
+	public static void cancelModReservation(String mar)
+	{
+		Statement stmt = null;
+        Connection conn = SQLConnection.getDBConnection();
+        try
+        {
+            stmt = conn.createStatement();
+            
+            stmt.executeUpdate("DELETE FROM `facilityreservation`  WHERE reservationid = \"" + mar + "\"");
+            conn.commit();
+        }
+        catch (SQLException e)
+        {
+            System.out.println("Could not remove reservation from database\n" + e.getMessage());
+        }
 	}
 }
