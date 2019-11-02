@@ -85,8 +85,8 @@ public class RepairerViewReservedDAO {
 	
 	//search company with company ID
 	//***************************************************
-	public static ArrayList<RepairerViewReserved>   searchReservedRepair (String idMarnum, String username)  {  
-			return ReturnReservedList("SELECT r.scheduleDate, m.marnumber, m.facilitytype, m.facilityname, f.to, f.from FROM repairschedule r, mar m, facilityreservation f WHERE r.mar = m.marnumber AND f.reservedUser = r.username AND m.facilityname = f.facilityname AND r.username = \""+ username +"\" AND m.marnumber = \""+idMarnum+"\"");
+	public static ArrayList<RepairerViewReserved>   searchReservedRepair (String mar, String username)  {  
+			return ReturnReservedList("SELECT f.date, f.facilityname, f.facilitytype, f.date, f.to, f.from, r.mar FROM facilityreservation f, repairschedule r WHERE f.reservedUser = \"" + username + "\" AND r.username = \"" + username + "\" AND f.reservationid = \"" + mar + "\" AND r.mar = \"" + mar+ "\"");
 	}
 	
 	public static ArrayList<FreeReservations> ReservedListInDB(String name, String date)

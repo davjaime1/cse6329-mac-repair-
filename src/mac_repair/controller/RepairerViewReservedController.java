@@ -49,7 +49,6 @@ public class RepairerViewReservedController extends HttpServlet {
 			//action=listSpecificCompany
 			ArrayList<RepairerViewReserved> reservedListInDB = new ArrayList<RepairerViewReserved>();
 			RepairerViewReserved selectedReservation = new RepairerViewReserved();
-
 			//view button was used instead of radio button
 			reservedListInDB=RepairerViewReservedDAO.searchReservedRepair(request.getParameter("id"), username);
 			selectedReservation.setReserved(	reservedListInDB.get(0).getDate(), reservedListInDB.get(0).getMarnum(), reservedListInDB.get(0).getFacilitytype(), reservedListInDB.get(0).getFacilityname(),
