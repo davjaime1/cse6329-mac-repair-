@@ -342,10 +342,10 @@ public class RepairerViewReservedDAO {
         }
 	}
 	
-	public static boolean canMakeRes(String idMarnum, String username)
+	public static boolean canMakeRes(String mar, String username)
 	{
 		ArrayList<RepairerViewReserved> list = new ArrayList<RepairerViewReserved>();
-		list = ReturnReservedList("SELECT r.scheduleDate, m.marnumber, m.facilitytype, m.facilityname, f.to, f.from FROM repairschedule r, mar m, facilityreservation f WHERE r.mar = m.marnumber AND f.reservedUser = r.username AND m.facilityname = f.facilityname AND r.username = \""+ username +"\" AND m.marnumber = \""+idMarnum+"\"");
+		list = ReturnReservedList("SELECT f.date, f.facilityname, f.facilitytype, f.date, f.to, f.from, r.mar FROM facilityreservation f, repairschedule r WHERE f.reservedUser = \"" + username + "\" AND r.username = \"" + username + "\" AND f.reservationid = \"" + mar + "\" AND r.mar = \"" + mar+ "\"");
 		if(list.size()==0)
 		{
 			return true;
