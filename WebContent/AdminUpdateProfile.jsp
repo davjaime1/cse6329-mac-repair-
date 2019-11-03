@@ -38,17 +38,17 @@
  
     <tr>
     <td> First Name (*): </td>
-    <td>  <c:out value="${olduser.firstName}"/> </td>
-    <td> <input name="idfirstname" value="<c:out value='${user.firstName}'/>" type="text" maxlength="16"> </td>
+    <td>  <c:out value="${olduser.firstname}"/> </td>
+    <td> <input name="idfirstname" value="<c:out value='${user.firstname}'/>" type="text" maxlength="16"> </td>
   	<td> <input name="userIDerror"  value="<c:out value='${errorMsgs.firstnameError}'/>" type="text"  style ="background-color: white; color: red; border: none; width: 800px"  disabled="disabled" maxlength="60"> </td>
     </tr>
     
     
     <tr>
     <td> Last Name (*): </td>
-    <td>  <c:out value="${olduser.lastName}"/> </td>
+    <td>  <c:out value="${olduser.lastname}"/> </td>
     
-    <td> <input name="idlastname" value="<c:out value='${user.lastName}'/>" type="text" maxlength="16"> </td>
+    <td> <input name="idlastname" value="<c:out value='${user.lastname}'/>" type="text" maxlength="16"> </td>
   	<td> <input name="userIDerror"  value="<c:out value='${errorMsgs.lastnameError}'/>" type="text"  style ="background-color: white; color: red; border: none; width: 800px"  disabled="disabled" maxlength="60"> </td>
     </tr>
     

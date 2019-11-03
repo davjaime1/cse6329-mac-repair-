@@ -31,10 +31,10 @@
                     <c:out value="${user.id}" />
                 </td>
                 <td>
-                    <c:out value="${user.firstName}" />
+                    <c:out value="${user.firstname}" />
                 </td>
                 <td>
-                    <c:out value="${user.lastName}" />
+                    <c:out value="${user.lastname}" />
                 </td>
                 <td>
                     <c:out value="${user.role}" />
