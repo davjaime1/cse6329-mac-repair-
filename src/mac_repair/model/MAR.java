@@ -198,8 +198,11 @@ public class MAR implements Serializable
     {
         String result = "";
         Date assgnDate = UtilityDAO.mysqlDateassignmar(assignedDate);
+        int taskInADay = RepairScheduleDAO.numberOfTaskInDay(assignedTo, assgnDate);
+        int taskInAWeek = RepairScheduleDAO.numberOfTaskInMonth(assignedTo, assgnDate);
         
-        if (RepairScheduleDAO.validRepairSchedule(assignedTo, assgnDate))
+        if(taskInADay>=5 || taskInAWeek>=10)
+//        if (RepairScheduleDAO.validRepairSchedule(assignedTo, assgnDate))
             result = "Your Repair Schedule Overloaded";
         return result;
     }
