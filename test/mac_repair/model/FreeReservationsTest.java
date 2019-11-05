@@ -1,5 +1,7 @@
 package mac_repair.model;
 
+import java.util.ArrayList;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -7,6 +9,7 @@ import org.junit.runner.RunWith;
 
 import junitparams.FileParameters;
 import junitparams.JUnitParamsRunner;
+import mac_repair.data.RepairerViewReservedDAO;
 
 @RunWith(JUnitParamsRunner.class)
 public class FreeReservationsTest
@@ -22,19 +25,25 @@ public class FreeReservationsTest
     
     @Test
     @FileParameters("test/FreeReservations_test_cases.csv")
-    public void test(String testNum, String facilitytype, String facilityname, String date, String to, String from, String venue, String id)
+    public void test(String testNum, String facilitytype, String facilityname, String date, String from, String to, String venue, String id,
+    		         String expfacilitytype, String expfacilityname, String expdate, String expfrom, String expto, String expvenue, String expid)
     {
         ob.setReserved(facilitytype, facilityname, venue, date, to, from);
         ob.setId(id);
+        ArrayList<FreeReservations> possible = new ArrayList<FreeReservations>();
+        possible = RepairerViewReservedDAO.makePossibleFreeList(facilityname, date);
+        ArrayList<FreeReservations> inDB = new ArrayList<FreeReservations>();
+       
+        inDB = RepairerViewReservedDAO.ReservedListInDB(facilityname, date);
+        FreeReservations.getAvaliableReservations(possible, inDB);
         
-        Assert.assertTrue(facilitytype.equals(ob.getFacilitytype()));
-        Assert.assertTrue(facilityname.equals(ob.getFacilityname()));
-        Assert.assertTrue(date.equals(ob.getDate()));
-        Assert.assertTrue(to.equals(ob.getTo()));
-        Assert.assertTrue(from.equals(ob.getFrom()));
-        Assert.assertTrue(venue.equals(ob.getVenue()));
-        Assert.assertTrue(id.equals(ob.getId()));
-
-    }
+        Assert.assertTrue(expfacilitytype.equals(ob.getFacilitytype()));
+        Assert.assertTrue(expfacilityname.equals(ob.getFacilityname()));
+        Assert.assertTrue(expdate.equals(ob.getDate()));
+        Assert.assertTrue(expto.equals(ob.getTo()));
+        Assert.assertTrue(expfrom.equals(ob.getFrom()));
+        Assert.assertTrue(expvenue.equals(ob.getVenue()));
+        Assert.assertTrue(expid.equals(ob.getId()));
+     }
     
 }

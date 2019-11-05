@@ -2,6 +2,7 @@ package mac_repair.model;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class RepairerViewReserved implements Serializable
 {
@@ -13,8 +14,7 @@ public class RepairerViewReserved implements Serializable
     private String marnum;
     private String to;
     private String from;
-    // private String phone;
-    // private String email;
+    private String user;
     
     public void setReserved(String date, String marnum, String facilitytype, String facilityname, String to,
             String from)
@@ -87,19 +87,26 @@ public class RepairerViewReserved implements Serializable
         this.date = date;
     }
     
-    /*
-     * public String getPhone() {
-     * return phone;
-     * }
-     * public void setPhone(String phone) {
-     * this.phone = phone;
-     * }
-     * 
-     * public String getEmail() {
-     * return email;
-     * }
-     * public void setEmail(String email) {
-     * this.email = email;
-     * }
-     */
+    public void setUser(String user)
+    {
+    	this.user = user;
+    }
+    
+    public String getUser()
+    {
+    	return user;
+    }
+    
+    public static String userReserve(ArrayList<RepairerViewReserved> reservedListInDB, String currentUser)
+    {
+    	String ret = "TRUE";
+    	for(int i = 0; i < reservedListInDB.size(); i++)
+    	{
+    		if(reservedListInDB.get(i).getUser().equals(currentUser))
+    		{
+    			ret = "FALSE";
+    		}
+    	}
+    	return ret;
+    }
 }

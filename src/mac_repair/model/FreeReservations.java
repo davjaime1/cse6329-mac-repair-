@@ -2,6 +2,7 @@ package mac_repair.model;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class FreeReservations implements Serializable
 {
@@ -93,5 +94,33 @@ public class FreeReservations implements Serializable
     public void setId(String id)
     {
         this.id = id;
+    }
+    
+    public static ArrayList<FreeReservations> getAvaliableReservations(ArrayList<FreeReservations> possible, ArrayList<FreeReservations> inDB)
+    {
+		int possibleSize = possible.size();
+		int inDBSize = inDB.size();
+		for(int i = 0; i < possibleSize; i++)
+		{
+			for(int j = 0; j < inDBSize; j++)
+			{
+				if(possible.get(i).getTo().equals(inDB.get(j).getTo().substring(0,19)) && possible.get(i).getFrom().equals(inDB.get(j).getFrom().substring(0,19)))
+				{
+					if(i == 0)
+					{
+						possible.remove(i);
+						possibleSize--;
+						
+					}
+					else
+					{
+						possible.remove(i);
+						i--;
+						possibleSize--;
+					}
+				}
+			}
+		}
+		return possible; 
     }
 }

@@ -6,6 +6,7 @@ INSERT INTO users VALUE ("rep1","1001526202","SM","SM","password","R","1121 UTA"
 INSERT INTO users VALUE ("rep2","1001526202","SM","SM","password","R","1121 UTA","Arlington","TX","76010","1001526202","sm@uta.edu");
 INSERT INTO users VALUE ("rep3","1001526202","SM","SM","password","R","1121 UTA","Arlington","TX","76010","1001526202","sm@uta.edu");
 INSERT INTO users VALUE ("rep4","1001526202","SM","SM","password","R","1121 UTA","Arlington","TX","76010","1001526202","sm@uta.edu");
+INSERT INTO users VALUE ("rep","1001526202","SM","SM","password","R","1121 UTA","Arlington","TX","76010","1001526202","sm@uta.edu");
 
 INSERT INTO mar VALUE ("1",curdate(),"BMC","BMC1","des","Ma","usr1","rep2",curdate(),"1D"); 
 INSERT INTO mar VALUE ("2",curdate(),"BMC","BMC1","des","Ma","usr1","rep2",curdate(),"1D"); 
@@ -23,4 +24,7 @@ INSERT INTO mar VALUE ("21",CURDATE() - INTERVAL 1 DAY,"BMC","BMC1","des","Ma","
 INSERT INTO mar VALUE ("22",CURDATE() - INTERVAL 1 DAY,"BMC","BMC1","des","Ma","usr1","rep4",CURDATE() - INTERVAL 1 DAY,"1D"); 
 INSERT INTO mar VALUE ("23",CURDATE() - INTERVAL 1 DAY,"BMC","BMC1","des","Ma","usr1","rep4",CURDATE() - INTERVAL 1 DAY,"1D"); 
 INSERT INTO mar VALUE ("24",CURDATE() - INTERVAL 1 DAY,"BMC","BMC1","des","Ma","usr1","rep4",CURDATE() - INTERVAL 1 DAY,"1D"); 
-INSERT INTO mar VALUE ("25",CURDATE() - INTERVAL 1 DAY,"BMC","BMC1","des","Ma","usr1","rep4",CURDATE() - INTERVAL 1 DAY,"1D"); 
+INSERT INTO mar VALUE ("25",CURDATE() - INTERVAL 1 DAY,"BMC","BMC1","des","Ma","usr1","rep4",CURDATE() - INTERVAL 1 DAY,"1D");
+
+INSERT INTO facilityreservation VALUE("27", "BMC1", "BMC", "I", "rep", "2019-10-25", "2019-10-25 06:29:59", "2019-10-25 06:00:00");
+INSERT INTO facilityreservation VALUE("30", "BMC1", "BMC", "I", "rep", "2019-10-25", "2019-10-25 12:59:59", "2019-10-25 12:30:00");

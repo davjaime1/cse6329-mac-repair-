@@ -1,5 +1,7 @@
 package mac_repair.model;
 
+import java.util.ArrayList;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,17 +24,24 @@ public class RepairerViewReservedTest
     
     @Test
     @FileParameters("test/RepairerViewReserved_test_cases.csv")
-    public void test(String testNum, String facilitytype, String facilityname, String date, String to, String from, String marnum)
+    public void test(String testNum, String facilitytype, String facilityname, String date, String to, String from, String marnum, String user, String user2, 
+    		         String expfacilitytype, String expfacilityname, String expdate, String expto, String expfrom, String expmarnum, String expuser, String expbool)
     {
         ob.setReserved(date, marnum, facilitytype, facilityname, to, from);
+        ob.setUser(user);
         
-        Assert.assertTrue(facilitytype.equals(ob.getFacilitytype()));
-        Assert.assertTrue(facilityname.equals(ob.getFacilityname()));
-        Assert.assertTrue(date.equals(ob.getDate()));
-        Assert.assertTrue(to.equals(ob.getTo()));
-        Assert.assertTrue(from.equals(ob.getFrom()));
-        Assert.assertTrue(marnum.equals(ob.getMarnum()));
-
+        Assert.assertTrue(expfacilitytype.equals(ob.getFacilitytype()));
+        Assert.assertTrue(expfacilityname.equals(ob.getFacilityname()));
+        Assert.assertTrue(expdate.equals(ob.getDate()));
+        Assert.assertTrue(expto.equals(ob.getTo()));
+        Assert.assertTrue(expfrom.equals(ob.getFrom()));
+        Assert.assertTrue(expmarnum.equals(ob.getMarnum()));
+        Assert.assertTrue(expuser.equals(ob.getUser()));
+        
+        ArrayList<RepairerViewReserved> possible = new ArrayList<RepairerViewReserved>();
+        possible.add(ob);
+        Assert.assertEquals(RepairerViewReserved.userReserve(possible, user2), expbool);
+        
     }
     
 }
