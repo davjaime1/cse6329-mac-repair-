@@ -22,7 +22,7 @@ public class UtilityModelTest
     }
     
     @Test
-    @FileParameters("test/UtilityModel_test_cases.csv")
+    @FileParameters("test/mac_repair/model/UtilityModel_test_cases.csv")
     public void test(int tNo,
             String id,
             String value,

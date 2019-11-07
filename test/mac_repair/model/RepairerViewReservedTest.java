@@ -23,7 +23,7 @@ public class RepairerViewReservedTest
     }
     
     @Test
-    @FileParameters("test/RepairerViewReserved_test_cases.csv")
+    @FileParameters("test/mac_repair/model/RepairerViewReserved_test_cases.csv")
     public void test(String testNum, String facilitytype, String facilityname, String date, String to, String from, String marnum, String user, String user2, 
     		         String expfacilitytype, String expfacilityname, String expdate, String expto, String expfrom, String expmarnum, String expuser, String expbool)
     {

@@ -24,7 +24,7 @@ public class FacilityTest
     }
     
     @Test
-    @FileParameters("test/facilityTest.csv")
+    @FileParameters("test/mac_repair/model/facilityTest.csv")
     public void test(int testcaseNo, String action, String facilityName, String facilityType, String timeInterval,
             String duration, String venue, String errorMsg,
             String facilityNameError)
