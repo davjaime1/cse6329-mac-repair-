@@ -54,19 +54,21 @@ public class RepairScheduleDAO {
 		return ReturnRepairScheduleList(" SELECT * from mar WHERE assignedto IS NOT NULL AND assignedDate ='"+date+"' ORDER BY assignedto");
 	}
 
-	public static boolean  validRepairSchedule(String username, Date assignedDate)  {  
+	public static int  numberOfTaskInDay(String username, Date assignedDate)  {  
+		String assignedDateStr = assignedDate.toString();
+		String QueryString1 = "SELECT * FROM mar WHERE assignedto IS NOT NULL AND assignedto = '"+username+ "' AND assignedDate = '" + assignedDateStr+"'";
+		ArrayList<MAR> repairToday = ReturnRepairScheduleList(QueryString1);
+		return repairToday.size();
+	}
+
+	public static int  numberOfTaskInMonth(String username, Date assignedDate)  {  
 		String assignedDateStr = assignedDate.toString();
 		Date assignedEndDate= new Date( assignedDate.getTime() + 7*24*60*60*1000);
 		String assignedEndDateStr = assignedEndDate.toString();
-		String QueryString1 = "SELECT * FROM mar WHERE assignedto IS NOT NULL AND assignedto = '"+username+ "' AND assignedDate = '" + assignedDateStr+"'";
 
 		String QueryString2 = "SELECT * FROM mar WHERE assignedto IS NOT NULL AND assignedto = '"+username+ "' AND assignedDate >= '" + assignedDateStr + "'  AND assignedDate < '" + assignedEndDateStr+ "'"; 
-
-		ArrayList<MAR> repairToday = ReturnRepairScheduleList(QueryString1);
 		ArrayList<MAR> reapairweekly= ReturnRepairScheduleList(QueryString2);
-		if(repairToday.size()>=5) return true;
-		if(reapairweekly.size()>=7) return true;
-		return false;
+		return reapairweekly.size();
 	}
 
 

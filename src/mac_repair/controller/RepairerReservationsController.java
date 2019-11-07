@@ -63,7 +63,7 @@ public class RepairerReservationsController extends HttpServlet {
 				//Then Access the database to remove ones that are already in the database for that particualar date
 				freeListInDB = RepairerViewReservedDAO.ReservedListInDB(request.getParameter("id"), request.getParameter("date"));
 				//Then display the free reservations like you normaly would
-				RepairerViewReservedDAO.getAvaliableReservations(freeListPoss, freeListInDB);
+				FreeReservations.getAvaliableReservations(freeListPoss, freeListInDB);
 				//Now using the radio button, add the selected reservation to database
 				session.setAttribute("FREEREPAIRERS", freeListPoss);
 				session.setAttribute("mar", request.getParameter("mar"));
@@ -85,7 +85,7 @@ public class RepairerReservationsController extends HttpServlet {
 			//Then Access the database to remove ones that are already in the database for that particualar date
 			freeListInDB = RepairerViewReservedDAO.ReservedListInDB(request.getParameter("id"), request.getParameter("date"));
 			//Then display the free reservations like you normaly would
-			RepairerViewReservedDAO.getAvaliableReservations(freeListPoss, freeListInDB);
+			FreeReservations.getAvaliableReservations(freeListPoss, freeListInDB);
 			//Now using the radio button, add the selected reservation to database
 			session.setAttribute("FREEREPAIRERS", freeListPoss);
 			session.setAttribute("mar", request.getParameter("mar"));

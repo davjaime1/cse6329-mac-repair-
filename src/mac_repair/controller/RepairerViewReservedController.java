@@ -51,6 +51,7 @@ public class RepairerViewReservedController extends HttpServlet {
 			RepairerViewReserved selectedReservation = new RepairerViewReserved();
 			//view button was used instead of radio button
 			reservedListInDB=RepairerViewReservedDAO.searchReservedRepair(request.getParameter("id"), username);
+			RepairerViewReserved.userReserve(reservedListInDB, username);
 			selectedReservation.setReserved(	reservedListInDB.get(0).getDate(), reservedListInDB.get(0).getMarnum(), reservedListInDB.get(0).getFacilitytype(), reservedListInDB.get(0).getFacilityname(),
 												reservedListInDB.get(0).getTo(), reservedListInDB.get(0).getFrom());
 			session.setAttribute("REPAIRERS", selectedReservation);

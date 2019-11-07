@@ -37,6 +37,30 @@ public class RepairerViewReservedDAO {
 		return reservedListInDB;
 	}
 	
+	private static ArrayList<RepairerViewReserved> ReturnReservedList2 (String queryString) {
+		ArrayList<RepairerViewReserved> reservedListInDB = new ArrayList<RepairerViewReserved>();
+		
+		Statement stmt = null;
+		Connection conn = SQLConnection.getDBConnection();  
+		try {
+			stmt = conn.createStatement();
+			ResultSet reservedList = stmt.executeQuery(queryString);
+			while (reservedList.next()) {
+				RepairerViewReserved res = new RepairerViewReserved();
+
+				res.setDate(reservedList.getString("date"));
+				res.setMarnum(reservedList.getString("mar"));
+				res.setFacilitytype(reservedList.getString("facilitytype"));
+				res.setFacilityname(reservedList.getString("facilityname"));
+				res.setTo(reservedList.getString("to").substring(0,19));
+				res.setFrom(reservedList.getString("from").substring(0,19)); 
+				res.setUser(reservedList.getString("reservedUser"));
+				reservedListInDB.add(res);	
+			}
+		} catch (SQLException e) {}
+		return reservedListInDB;
+	}
+	
 	private static ArrayList<FreeReservations> ReturnFreeList (String queryString) {
 		ArrayList<FreeReservations> ReservedListInDB = new ArrayList<FreeReservations>();
 		
@@ -86,7 +110,7 @@ public class RepairerViewReservedDAO {
 	//search company with company ID
 	//***************************************************
 	public static ArrayList<RepairerViewReserved>   searchReservedRepair (String mar, String username)  {  
-			return ReturnReservedList("SELECT f.date, f.facilityname, f.facilitytype, f.date, f.to, f.from, r.mar FROM facilityreservation f, repairschedule r WHERE f.reservedUser = \"" + username + "\" AND r.username = \"" + username + "\" AND f.reservationid = \"" + mar + "\" AND r.mar = \"" + mar+ "\"");
+			return ReturnReservedList2("SELECT f.date, f.facilityname, f.facilitytype, f.date, f.to, f.from, r.mar, f.reservedUser FROM facilityreservation f, repairschedule r WHERE f.reservedUser = \"" + username + "\" AND r.username = \"" + username + "\" AND f.reservationid = \"" + mar + "\" AND r.mar = \"" + mar+ "\"");
 	}
 	
 	public static ArrayList<FreeReservations> ReservedListInDB(String name, String date)
