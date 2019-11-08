@@ -24,7 +24,7 @@ public class MARTest
     }
     
     @Test
-    @FileParameters("test/marTest.csv")
+    @FileParameters("test/mac_repair/model/marTest.csv")
     public void test(int testcaseNo, String action, String marID, String facilityName, String facilityType,
             String urgency, String description, String reportedUser, String date, String assignedTo,
             String assignedDate, String estimateOFRepair, String errorMsg,

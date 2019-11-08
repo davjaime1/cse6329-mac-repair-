@@ -24,7 +24,7 @@ public class FreeReservationsTest
     }
     
     @Test
-    @FileParameters("test/FreeReservations_test_cases.csv")
+    @FileParameters("test/mac_repair/model/FreeReservations_test_cases.csv")
     public void test(String testNum, String facilitytype, String facilityname, String date, String from, String to, String venue, String id,
     		         String expfacilitytype, String expfacilityname, String expdate, String expfrom, String expto, String expvenue, String expid)
     {
