@@ -55,17 +55,25 @@ public class User implements Serializable
     {
         uem.setUsernameError(validateUsername(u.getUsername()));
         if (uem.getUsernameError().isEmpty())
+        {
+            String err;
             if (checkUnique)
             {
-                if (!UserDAO.isUsernameUnique(u.getUsername()))
+                if (UserDAO.isUsernameUnique(u.getUsername()))
                 {
-                    uem.setUsernameError("Username already in database");
+                    err = "";
                 }
                 else
                 {
-                    uem.setUsernameError("Excess unique check");
+                    err = "Username already in database";
                 }
             }
+            else
+            {
+                err = "";
+            }
+            uem.setUsernameError(err);
+        }
         
         
         uem.setIdError(validateId(u.getId()));
