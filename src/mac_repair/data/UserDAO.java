@@ -56,22 +56,22 @@ public class UserDAO
     {
         Statement stmt = null;
         Connection conn = SQLConnection.getDBConnection();
+        String insertmar = queryString + " VALUES ('"
+                + user.getUsername() + "','"
+                + user.getId() + "','"
+                + user.getFirstname() + "','"
+                + user.getLastname() + "','"
+                + user.getPassword() + "','"
+                + user.getRole() + "','"
+                + user.getAddress() + "','"
+                + user.getState() + "','"
+                + user.getCity() + "','"
+                + user.getZip() + "','"
+                + user.getPhone() + "','"
+                + user.getEmail() + "')";   
         try
         {
             stmt = conn.createStatement();
-            String insertmar = queryString + " VALUES ('"
-                    + user.getUsername() + "','"
-                    + user.getId() + "','"
-                    + user.getFirstname() + "','"
-                    + user.getLastname() + "','"
-                    + user.getPassword() + "','"
-                    + user.getRole() + "','"
-                    + user.getAddress() + "','"
-                    + user.getCity() + "','"
-                    + user.getState() + "','"
-                    + user.getZip() + "','"
-                    + user.getPhone() + "','"
-                    + user.getEmail() + "')";
             stmt.executeUpdate(insertmar);
             conn.commit();
         }
@@ -157,7 +157,7 @@ public class UserDAO
     
     public static void insertUser(User user)
     {
-        StoreListinDB(user, "INSERT INTO users (username,id,firstname,lastname,password,role,address,city,state,zip,phone,email) ");
+        StoreListinDB(user, "INSERT INTO `users` (username,id,firstname,lastname,password,role,address,city,state,zip,phone,email) ");
     }
     
     public static boolean isUsernameUnique(String name)
