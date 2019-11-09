@@ -5,7 +5,9 @@ import java.util.Properties;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 //@SuppressWarnings("unused")
 public class MRFunctions {
@@ -31,6 +33,9 @@ public class MRFunctions {
 	
 	public void MR_Login (WebDriver driver, String sUserName, String sPassword)
 	{
+		WebDriverWait wait = new WebDriverWait(driver , 10);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(prop.getProperty("Txt_Login_Username"))));
+		
 		// Provide user name.
 		driver.findElement(By.xpath(prop.getProperty("Txt_Login_Username"))).clear();
 		driver.findElement(By.xpath(prop.getProperty("Txt_Login_Username"))).sendKeys(sUserName);
@@ -42,12 +47,7 @@ public class MRFunctions {
 		 // Click on Login button.
 		driver.findElement(By.xpath(prop.getProperty("Btn_Login_Login"))).click();
 
-		try
-		{
-//			  Change the delay value to 1_000 to insert a 1 second delay after 
-//			  each screenshot
-			  Thread.sleep(0);
-		} catch (InterruptedException e) {}
+		try{ Thread.sleep(3000);}catch (InterruptedException e) {}
 		// We will put the verification of the Welcome message in the JUnit test file instead of here
 	}
 	
@@ -93,5 +93,31 @@ public class MRFunctions {
 		roledrop.selectByValue(role);
 		
 		driver.findElement(By.xpath(prop.getProperty("Btn_Register_Register"))).click();
+	}
+	
+	public void Repairer_View_Assigned (WebDriver driver)
+	{
+		WebDriverWait wait = new WebDriverWait(driver , 10);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(prop.getProperty("Lnk_Repairer_ViewAssignedRepairs"))));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty("Lnk_Repairer_ViewAssignedRepairs"))));
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty("Lnk_Repairer_ViewAssignedRepairs"))));
+		//Click on the View Assigned Repairs Link
+		//wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("page_loader")));
+		driver.findElement(By.xpath(prop.getProperty("Lnk_Repairer_ViewAssignedRepairs"))).click();	
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(prop.getProperty("Lnk_ViewAssigned_Homepage"))));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty("Lnk_ViewAssigned_Homepage"))));
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty("Lnk_ViewAssigned_Homepage"))));
+		driver.findElement(By.xpath(prop.getProperty("Lnk_ViewAssigned_Homepage"))).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(prop.getProperty("Lnk_Repairer_Logout"))));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty("Lnk_Repairer_Logout"))));
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty("Lnk_Repairer_Logout"))));
+		driver.findElement(By.xpath(prop.getProperty("Lnk_Repairer_Logout"))).click();
+		try
+		{
+//			  Change the delay value to 1_000 to insert a 1 second delay after 
+//			  each screenshot
+			  Thread.sleep(2000);
+		} catch (InterruptedException e) {}
+		// We will put the verification of the Welcome message in the JUnit test file instead of here
 	}
 }
