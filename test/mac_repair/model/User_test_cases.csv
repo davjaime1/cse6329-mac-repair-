@@ -1,7 +1,7 @@
 1,aa3,FALSE,1000000001,d,d,pass12,U,a,a,AK,76017,1234567890,d@uta.edu,,,,,,,,,,,
 2,,TRUE,1000000001,d,d,pass12,A,a,a,CA,76017,1234567890,d@uta.edu,Fields have errors,Invalid username,,,,,,,,,
 3,a2,TRUE,1000000001,d,d,pass12,FM,a,a,OK,76017,1234567890,d@uta.edu,Fields have errors,Invalid username,,,,,,,,,
-4,aaaaaaaaaaaaaa16,TRUE,1000000001,d,d,pass12,R,a,a,WY,76017,1234567890,d@uta.edu,Fields have errors,Excess unique check,,,,,,,,,
+4,aaaaaaaaaaaaaa16,TRUE,1000000001,d,d,pass12,R,a,a,WY,76017,1234567890,d@uta.edu,,,,,,,,,,,
 5,aaaaaaaaaaaaaaa17,TRUE,1000000001,d,d,pass12,U,a,a,AK,76017,1234567890,d@uta.edu,Fields have errors,Invalid username,,,,,,,,,
 6,user1,TRUE,1000000001,d,d,pass12,U,a,a,AK,76017,1234567890,d@uta.edu,Fields have errors,Username already in database,,,,,,,,,
 7,aa3,FALSE,100000000,d,d,pass12,A,a,a,CA,76017,1234567890,d@uta.edu,Fields have errors,,Incorrect ID,,,,,,,,
