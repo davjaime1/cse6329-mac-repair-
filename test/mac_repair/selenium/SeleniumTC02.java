@@ -12,7 +12,10 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import junitparams.FileParameters;
 import junitparams.JUnitParamsRunner;
@@ -51,12 +54,14 @@ public class SeleniumTC02 extends MRFunctions {
   
   @Test
   @FileParameters("test/mac_repair/selenium/TC02b_test_cases.csv")
-  public void TC02b(int testCaseNumber, String username, String utaID, String first, String last, String password, 
-			String address, String city, String zip, String state, String phone, String email, String role) throws Exception
+  public void TC02b(int testCaseNumber, String username, String password) throws Exception
   {
 	  driver.get(sAppURL);
 	  MR_Login(driver, username, password);
 	  Repairer_View_Assigned(driver);
+	  Repairer_View_Specific_Assigned(driver);
+	  Repairer_Homepage(driver);
+	  Repairer_Logout(driver);
   }
   
   @After

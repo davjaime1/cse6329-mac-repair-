@@ -93,6 +93,7 @@ public class MRFunctions {
 		roledrop.selectByValue(role);
 		
 		driver.findElement(By.xpath(prop.getProperty("Btn_Register_Register"))).click();
+		try{ Thread.sleep(3000);}catch (InterruptedException e) {}
 	}
 	
 	public void Repairer_View_Assigned (WebDriver driver)
@@ -104,20 +105,36 @@ public class MRFunctions {
 		//Click on the View Assigned Repairs Link
 		//wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("page_loader")));
 		driver.findElement(By.xpath(prop.getProperty("Lnk_Repairer_ViewAssignedRepairs"))).click();	
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(prop.getProperty("Lnk_ViewAssigned_Homepage"))));
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty("Lnk_ViewAssigned_Homepage"))));
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty("Lnk_ViewAssigned_Homepage"))));
-		driver.findElement(By.xpath(prop.getProperty("Lnk_ViewAssigned_Homepage"))).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(prop.getProperty("Lnk_Repairer_Logout"))));
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty("Lnk_Repairer_Logout"))));
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty("Lnk_Repairer_Logout"))));
-		driver.findElement(By.xpath(prop.getProperty("Lnk_Repairer_Logout"))).click();
-		try
-		{
-//			  Change the delay value to 1_000 to insert a 1 second delay after 
-//			  each screenshot
-			  Thread.sleep(2000);
-		} catch (InterruptedException e) {}
-		// We will put the verification of the Welcome message in the JUnit test file instead of here
+		try{ Thread.sleep(3000);}catch (InterruptedException e) {}
+	}
+	
+	public void Repairer_View_Specific_Assigned (WebDriver driver)
+	{
+		  WebDriverWait wait = new WebDriverWait(driver , 10);
+		  wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(prop.getProperty("Lnk_ViewAssigned_ViewSpecific"))));
+		  wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty("Lnk_ViewAssigned_ViewSpecific"))));
+		  wait.until(ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty("Lnk_ViewAssigned_ViewSpecific"))));
+		  driver.findElement(By.xpath(prop.getProperty("Lnk_ViewAssigned_ViewSpecific"))).click();
+		  try{ Thread.sleep(3000);}catch (InterruptedException e) {}
+	}
+	
+	public void Repairer_Homepage (WebDriver driver)
+	{
+		WebDriverWait wait = new WebDriverWait(driver , 10);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(prop.getProperty("Lnk_ViewSpecificAssigned_Homepage"))));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty("Lnk_ViewSpecificAssigned_Homepage"))));
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty("Lnk_ViewSpecificAssigned_Homepage"))));
+		driver.findElement(By.xpath(prop.getProperty("Lnk_ViewSpecificAssigned_Homepage"))).click();
+		try{ Thread.sleep(3000);}catch (InterruptedException e) {}
+	}
+	
+	public void Repairer_Logout (WebDriver driver)
+	{
+		  WebDriverWait wait = new WebDriverWait(driver , 10);
+		  wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(prop.getProperty("Lnk_Repairer_Logout"))));
+		  wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty("Lnk_Repairer_Logout"))));
+		  wait.until(ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty("Lnk_Repairer_Logout"))));
+		  driver.findElement(By.xpath(prop.getProperty("Lnk_Repairer_Logout"))).click();
+		  try{ Thread.sleep(3000);}catch (InterruptedException e) {}
 	}
 }
