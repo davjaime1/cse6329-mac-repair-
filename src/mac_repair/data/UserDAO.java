@@ -55,23 +55,23 @@ public class UserDAO
     private static void StoreListinDB(User user, String queryString)
     {
         Statement stmt = null;
-        Connection conn = SQLConnection.getDBConnection();
-        String insertmar = queryString + " VALUES ('"
-                + user.getUsername() + "','"
-                + user.getId() + "','"
-                + user.getFirstname() + "','"
-                + user.getLastname() + "','"
-                + user.getPassword() + "','"
-                + user.getRole() + "','"
-                + user.getAddress() + "','"
-                + user.getState() + "','"
-                + user.getCity() + "','"
-                + user.getZip() + "','"
-                + user.getPhone() + "','"
-                + user.getEmail() + "')";   
+        Connection conn = SQLConnection.getDBConnection();  
         try
         {
             stmt = conn.createStatement();
+            String insertmar = queryString + " VALUES ('"
+                    + user.getUsername() + "','"
+                    + user.getId() + "','"
+                    + user.getFirstname() + "','"
+                    + user.getLastname() + "','"
+                    + user.getPassword() + "','"
+                    + user.getRole() + "','"
+                    + user.getAddress() + "','"
+                    + user.getCity() + "','"
+                    + user.getState() + "','"
+                    + user.getZip() + "','"
+                    + user.getPhone() + "','"
+                    + user.getEmail() + "')"; 
             stmt.executeUpdate(insertmar);
             conn.commit();
         }
