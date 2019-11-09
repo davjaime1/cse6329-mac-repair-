@@ -29,6 +29,14 @@ public class UserSeleniumTests extends MRFunctions
     private StringBuffer verificationErrors = new StringBuffer();
     public String sAppURL, sSharedUIMapPath, testDelay;
     
+    /**
+     * Helper function for naming snapshots.
+     */
+    private void snapshot(String methodName, int tNo)
+    {
+        takeScreenShot(driver, UserSeleniumTests.class.getSimpleName() + "_" + methodName + "_" + tNo);
+    }
+    
     @Before
     public void setUp() throws Exception
     {
@@ -115,6 +123,9 @@ public class UserSeleniumTests extends MRFunctions
             assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_Error_Phone"))).getText().equalsIgnoreCase(phoneError));
             assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_Error_Email"))).getText().equalsIgnoreCase(emailError));
         }
+        
+        // Snapshot the expected results.
+        snapshot(new Throwable().getStackTrace()[0].getMethodName(), tNo);
     }
     
     /**
@@ -139,6 +150,9 @@ public class UserSeleniumTests extends MRFunctions
         {
             assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_Login_BadCreditenials"))).getText().equalsIgnoreCase(loginError));
         }
+        
+        // Snapshot the expected results.
+        snapshot(new Throwable().getStackTrace()[0].getMethodName(), tNo);
     }
     
     
