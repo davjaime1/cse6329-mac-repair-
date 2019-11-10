@@ -35,8 +35,8 @@ public class UserController extends HttpServlet
                 request.getParameter("idpassword"),
                 request.getParameter("idrole"),
                 request.getParameter("idaddress"),
-                request.getParameter("idstate"),
                 request.getParameter("idcity"),
+                request.getParameter("idstate"),                
                 request.getParameter("idzip"),
                 request.getParameter("idphone"),
                 request.getParameter("idemail"));
