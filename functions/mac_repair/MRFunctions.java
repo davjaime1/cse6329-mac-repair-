@@ -24,11 +24,11 @@ public class MRFunctions {
 	public void takeScreenShot (WebDriver driver, String snapShotName)
 	{
 		snap.takeScreenshot(driver, snapShotName);
-		try
-		{
-//			    Change the thread value to run test files with delay
-				Thread.sleep(0);
-		} catch (InterruptedException e) {}
+	}
+	
+	public void sleepyTime()
+	{
+		try{ Thread.sleep(1000);}catch (InterruptedException e) {}
 	}
 	
 	public void MR_Login (WebDriver driver, String sUserName, String sPassword)
@@ -47,7 +47,7 @@ public class MRFunctions {
 		 // Click on Login button.
 		driver.findElement(By.xpath(prop.getProperty("Btn_Login_Login"))).click();
 
-		try{ Thread.sleep(3000);}catch (InterruptedException e) {}
+		sleepyTime();
 		// We will put the verification of the Welcome message in the JUnit test file instead of here
 	}
 	
@@ -93,7 +93,7 @@ public class MRFunctions {
 		roledrop.selectByValue(role);
 		
 		driver.findElement(By.xpath(prop.getProperty("Btn_Register_Register"))).click();
-		try{ Thread.sleep(3000);}catch (InterruptedException e) {}
+		sleepyTime();
 	}
 	
 	public void Repairer_View_Assigned (WebDriver driver)
@@ -105,7 +105,7 @@ public class MRFunctions {
 		//Click on the View Assigned Repairs Link
 		//wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("page_loader")));
 		driver.findElement(By.xpath(prop.getProperty("Lnk_Repairer_ViewAssignedRepairs"))).click();	
-		try{ Thread.sleep(3000);}catch (InterruptedException e) {}
+		sleepyTime();
 	}
 	
 	public void Repairer_View_Specific_Assigned (WebDriver driver)
@@ -115,7 +115,7 @@ public class MRFunctions {
 		  wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty("Lnk_ViewAssigned_ViewSpecific"))));
 		  wait.until(ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty("Lnk_ViewAssigned_ViewSpecific"))));
 		  driver.findElement(By.xpath(prop.getProperty("Lnk_ViewAssigned_ViewSpecific"))).click();
-		  try{ Thread.sleep(3000);}catch (InterruptedException e) {}
+		  sleepyTime();
 	}
 	
 	public void Repairer_Homepage (WebDriver driver)
@@ -125,7 +125,7 @@ public class MRFunctions {
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty("Lnk_ViewSpecificAssigned_Homepage"))));
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty("Lnk_ViewSpecificAssigned_Homepage"))));
 		driver.findElement(By.xpath(prop.getProperty("Lnk_ViewSpecificAssigned_Homepage"))).click();
-		try{ Thread.sleep(3000);}catch (InterruptedException e) {}
+		sleepyTime();
 	}
 	
 	public void Repairer_Logout (WebDriver driver)
@@ -135,6 +135,6 @@ public class MRFunctions {
 		  wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty("Lnk_Repairer_Logout"))));
 		  wait.until(ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty("Lnk_Repairer_Logout"))));
 		  driver.findElement(By.xpath(prop.getProperty("Lnk_Repairer_Logout"))).click();
-		  try{ Thread.sleep(3000);}catch (InterruptedException e) {}
+		  sleepyTime();
 	}
 }

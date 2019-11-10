@@ -173,7 +173,7 @@ public class SeleniumTC02 extends MRFunctions {
 	  assertEquals(ExpLink3,driver.findElement(By.xpath(prop.getProperty("Lnk_Repairer_ViewProfile"))).getText());
 	  assertEquals(ExpLink4,driver.findElement(By.xpath(prop.getProperty("Lnk_Repairer_UpdateProfile"))).getText());
 	  assertEquals(ExpLink5,driver.findElement(By.xpath(prop.getProperty("Lnk_Repairer_Logout"))).getText());
-	  takeScreenShot(driver, "TCO2b_RepairerHomePage_1");
+	  takeScreenShot(driver, "TCO2b_VerifyRepairerHomePageHeaderValues_1");
 	  Repairer_Logout(driver);
   }
   
@@ -198,7 +198,7 @@ public class SeleniumTC02 extends MRFunctions {
 	  assertEquals(ExpCol7,driver.findElement(By.xpath(prop.getProperty("Txt_ViewAssigned_ReportedBy"))).getText());
 	  assertEquals(ExpCol8,driver.findElement(By.xpath(prop.getProperty("Txt_ViewAssigned_AssignedDate"))).getText());
 	  assertEquals(ExpCol9,driver.findElement(By.xpath(prop.getProperty("Txt_ViewAssigned_EstimateOfRepair"))).getText());
-	  takeScreenShot(driver, "TC02_ViewAssignedRepairsHeaders_1");
+	  takeScreenShot(driver, "TC02d_VerifyAssignedRepairsHeaderValues_1");
 	  Repairer_Homepage(driver);
 	  Repairer_Logout(driver);
   }
@@ -218,7 +218,7 @@ public class SeleniumTC02 extends MRFunctions {
 	  assertEquals(expMar2, driver.findElement(By.xpath("html/body/form/table/tbody/tr[3]/td[1]")).getText());
 	  assertEquals(expName2,driver.findElement(By.xpath("html/body/form/table/tbody/tr[3]/td[2]")).getText());
 	  assertEquals(expDate2, driver.findElement(By.xpath("html/body/form/table/tbody/tr[3]/td[8]")).getText());
-	  takeScreenShot(driver, "TC02_VerifyViewAssignedRepairs_1");
+	  takeScreenShot(driver, "TC02c_VerifyViewAssignedRepairsValues_1");
 	  Repairer_Homepage(driver);
 	  Repairer_Logout(driver);
   }
@@ -244,7 +244,7 @@ public class SeleniumTC02 extends MRFunctions {
 	  assertEquals(ExpReportedBy,driver.findElement(By.xpath(prop.getProperty("Txt_ViewSpecificAssigned_ReportedByHeader"))).getText());
 	  assertEquals(ExpAssignedDate,driver.findElement(By.xpath(prop.getProperty("Txt_ViewSpecificAssigned_AssignedDateHeader"))).getText());
 	  assertEquals(ExpEstimate,driver.findElement(By.xpath(prop.getProperty("Txt_ViewSpecificAssigned_EestimateHeader"))).getText());
-	  takeScreenShot(driver, "TC02_ViewSpecificAssignedRepairHeaders_1");
+	  takeScreenShot(driver, "TC02e_VerifySpecificAssignHeaderValues_1");
 	  Repairer_Homepage(driver);
 	  Repairer_Logout(driver);
   }
@@ -270,7 +270,7 @@ public class SeleniumTC02 extends MRFunctions {
 	  assertEquals(ExpReportedBy,driver.findElement(By.xpath(prop.getProperty("Txt_ViewSpecificAssigned_ReportedBy"))).getText());
 	  assertEquals(ExpAssignedDate,driver.findElement(By.xpath(prop.getProperty("Txt_ViewSpecificAssigned_AssignedDate"))).getText());
 	  assertEquals(ExpEstimate,driver.findElement(By.xpath(prop.getProperty("Txt_ViewSpecificAssigned_Eestimate"))).getText());
-	  takeScreenShot(driver, "TC02_ViewSpecificAssignedRepair_1");
+	  takeScreenShot(driver, "TC02f_VerifySpecificAssignValues_1");
 	  Repairer_Homepage(driver);
 	  Repairer_Logout(driver);
   }
@@ -286,7 +286,8 @@ public class SeleniumTC02 extends MRFunctions {
 	  Repairer_View_Specific_Assigned(driver);
 	  Repairer_Homepage(driver);
 	  Repairer_Logout(driver);
-	  takeScreenShot(driver, "TC02_EntireScenario_1");
+	  //Just gonna take a screenshot of the login page (where the full scenario ends)
+	  takeScreenShot(driver, "TC02g_EntireScenario_1");
   }
   
 
