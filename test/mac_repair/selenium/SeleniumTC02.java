@@ -4,6 +4,9 @@ import static org.junit.Assert.fail;
 import static org.junit.Assert.*;
 
 import java.io.FileInputStream;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
@@ -69,7 +72,81 @@ public class SeleniumTC02 extends MRFunctions {
 		  System.out.println();
 	  }
   }
-    
+  
+  /*public String formatInsert(String insert)
+  {
+	  insert = insert.replace("\"\"", "\"");
+	  insert = insert.replace("#",",");
+	  
+	  return insert;
+  }
+  
+  public void insertMarData(String insert1, String insert2)
+  {
+      Statement stmt = null;
+	  insert1 = formatInsert(insert1);
+	  insert2 = formatInsert(insert2);
+	  
+
+      Connection conn = SQLConnection.getDBConnection();
+      try
+      {
+          stmt = conn.createStatement();
+          stmt.executeUpdate(insert1);
+          conn.commit();
+          stmt = conn.createStatement();
+          stmt.executeUpdate(insert2);
+          conn.commit();
+      }
+      catch (SQLException e)
+      {
+          System.out.println("Could not insert MAR into database\n" + e.getMessage());
+      }
+  }
+  
+  public void insertRepairScheduleData(String insert3, String insert4)
+  {
+		Statement stmt = null;
+		  insert3 = formatInsert(insert3);
+		  insert4 = formatInsert(insert4);
+		  System.out.println(insert3);
+		  System.out.println(insert4);
+		Connection conn = SQLConnection.getDBConnection();  
+		try {
+			stmt = conn.createStatement();
+			stmt.executeUpdate(insert3);	
+			conn.commit(); 
+			stmt = conn.createStatement();
+			stmt.executeUpdate(insert4);	
+			conn.commit(); 
+		} catch (SQLException e) {System.out.println("Could not add");}
+  }
+  
+  public void insertFacilityReservationData(String insert5, String insert6)
+  {
+	  
+      Statement stmt = null;
+	  insert5 = formatInsert(insert5);
+	  insert6 = formatInsert(insert6);
+      Connection conn = SQLConnection.getDBConnection();
+      try
+      {
+          stmt = conn.createStatement();
+          stmt.executeUpdate(insert5);
+          conn.commit();
+          stmt = conn.createStatement();
+          stmt.executeUpdate(insert6);
+          conn.commit();
+      }
+      catch (SQLException e)
+      {
+          System.out.println("Could not insert MAR into database\n" + e.getMessage());
+      }
+  }
+  */
+  
+
+  //Register a new repairer and then login
   @Test
   @FileParameters("test/mac_repair/selenium/TC02_test_cases.csv")
   public void TC02(int testCaseNumber, String username, String utaID, String first, String last, String password, 
@@ -78,8 +155,11 @@ public class SeleniumTC02 extends MRFunctions {
 	  driver.get(sAppURL);
 	  //Commented Out for now
 	  MR_Register(driver, username, utaID, first, last, password, address, city, zip, state, phone, email, role);
+	  MR_Login(driver, username, password);
+	  takeScreenShot(driver, "TC02_Register_1");
   }
   
+  //Login and test headers on Mac Repair page
   @Test
   @FileParameters("test/mac_repair/selenium/TC02b_test_cases.csv")
   public void TC02b(int testCaseNumber, String username, String password, String ExpHeader, String ExpLink1, String ExpLink2, String ExpLink3, String ExpLink4, String ExpLink5) throws Exception
@@ -93,22 +173,11 @@ public class SeleniumTC02 extends MRFunctions {
 	  assertEquals(ExpLink3,driver.findElement(By.xpath(prop.getProperty("Lnk_Repairer_ViewProfile"))).getText());
 	  assertEquals(ExpLink4,driver.findElement(By.xpath(prop.getProperty("Lnk_Repairer_UpdateProfile"))).getText());
 	  assertEquals(ExpLink5,driver.findElement(By.xpath(prop.getProperty("Lnk_Repairer_Logout"))).getText());
+	  takeScreenShot(driver, "TCO2b_RepairerHomePage_1");
 	  Repairer_Logout(driver);
   }
   
-  @Test
-  @FileParameters("test/mac_repair/selenium/TC02c_test_cases.csv")
-  public void TC02c(int testCaseNumber, String username, String password) throws Exception
-  {
-	  driver.get(sAppURL);
-	  MR_Login(driver, username, password);
-	  Repairer_View_Assigned(driver);
-	  printAssignedMAR(driver);
-	  Repairer_View_Specific_Assigned(driver);
-	  Repairer_Homepage(driver);
-	  Repairer_Logout(driver);
-  }
-  
+  //Test to check View Assigned Repair List Headers
   @Test
   @FileParameters("test/mac_repair/selenium/TC02d_test_cases.csv")
   public void TC02d(int testCaseNumber, String username, String password, String ExpHeader, String ExpCol1, String ExpCol2, String ExpCol3, 
@@ -129,10 +198,98 @@ public class SeleniumTC02 extends MRFunctions {
 	  assertEquals(ExpCol7,driver.findElement(By.xpath(prop.getProperty("Txt_ViewAssigned_ReportedBy"))).getText());
 	  assertEquals(ExpCol8,driver.findElement(By.xpath(prop.getProperty("Txt_ViewAssigned_AssignedDate"))).getText());
 	  assertEquals(ExpCol9,driver.findElement(By.xpath(prop.getProperty("Txt_ViewAssigned_EstimateOfRepair"))).getText());
-	  
+	  takeScreenShot(driver, "TC02_ViewAssignedRepairsHeaders_1");
 	  Repairer_Homepage(driver);
 	  Repairer_Logout(driver);
   }
+  
+  //Verify View Assigned List
+  @Test
+  @FileParameters("test/mac_repair/selenium/TC02c_test_cases.csv")
+  public void TC02c(int testCaseNumber, String username, String password, String expMar1, String expMar2, String expName1, String expName2, String expDate1, String expDate2) throws Exception
+  {
+	  driver.get(sAppURL);
+	  MR_Login(driver, username, password);
+	  Repairer_View_Assigned(driver);
+	  printAssignedMAR(driver);
+	  assertEquals(expMar1, driver.findElement(By.xpath("html/body/form/table/tbody/tr[2]/td[1]")).getText());
+	  assertEquals(expName1,driver.findElement(By.xpath("html/body/form/table/tbody/tr[2]/td[2]")).getText());
+	  assertEquals(expDate1, driver.findElement(By.xpath("html/body/form/table/tbody/tr[2]/td[8]")).getText());
+	  assertEquals(expMar2, driver.findElement(By.xpath("html/body/form/table/tbody/tr[3]/td[1]")).getText());
+	  assertEquals(expName2,driver.findElement(By.xpath("html/body/form/table/tbody/tr[3]/td[2]")).getText());
+	  assertEquals(expDate2, driver.findElement(By.xpath("html/body/form/table/tbody/tr[3]/td[8]")).getText());
+	  takeScreenShot(driver, "TC02_VerifyViewAssignedRepairs_1");
+	  Repairer_Homepage(driver);
+	  Repairer_Logout(driver);
+  }
+  
+  //Verify View Specific Details Headers
+  @Test
+  @FileParameters("test/mac_repair/selenium/TC02e_test_cases.csv")
+  public void TC02e(int testCaseNumber, String username, String password, String ExpMarNum, String ExpFacilityName, 
+		  			String ExpFacilityType, String ExpUrgency, String ExpDescription, String ExpReportedDate, 
+		  			String ExpReportedBy, String ExpAssignedDate, String ExpEstimate) throws Exception
+  {
+	  driver.get(sAppURL);
+	  MR_Login(driver, username, password);
+	  Repairer_View_Assigned(driver);
+	  Repairer_View_Specific_Assigned(driver);
+	  //Verify View Specific Assigned Headers
+	  assertEquals(ExpMarNum,driver.findElement(By.xpath(prop.getProperty("Txt_ViewSpecificAssigned_MarNumHeader"))).getText());
+	  assertEquals(ExpFacilityName,driver.findElement(By.xpath(prop.getProperty("Txt_ViewSpecificAssigned_FacilityNameHeader"))).getText());
+	  assertEquals(ExpFacilityType,driver.findElement(By.xpath(prop.getProperty("Txt_ViewSpecificAssigned_FacilityTypeHeader"))).getText());
+	  assertEquals(ExpUrgency,driver.findElement(By.xpath(prop.getProperty("Txt_ViewSpecificAssigned_UrgencyHeader"))).getText());
+	  assertEquals(ExpDescription,driver.findElement(By.xpath(prop.getProperty("Txt_ViewSpecificAssigned_DescriptionHeader"))).getText());
+	  assertEquals(ExpReportedDate,driver.findElement(By.xpath(prop.getProperty("Txt_ViewSpecificAssigned_ReportedDateHeader"))).getText());
+	  assertEquals(ExpReportedBy,driver.findElement(By.xpath(prop.getProperty("Txt_ViewSpecificAssigned_ReportedByHeader"))).getText());
+	  assertEquals(ExpAssignedDate,driver.findElement(By.xpath(prop.getProperty("Txt_ViewSpecificAssigned_AssignedDateHeader"))).getText());
+	  assertEquals(ExpEstimate,driver.findElement(By.xpath(prop.getProperty("Txt_ViewSpecificAssigned_EestimateHeader"))).getText());
+	  takeScreenShot(driver, "TC02_ViewSpecificAssignedRepairHeaders_1");
+	  Repairer_Homepage(driver);
+	  Repairer_Logout(driver);
+  }
+  
+  //Verify View Specific Details Values
+  @Test
+  @FileParameters("test/mac_repair/selenium/TC02f_test_cases.csv")
+  public void TC02f(int testCaseNumber, String username, String password, String ExpMarNum, String ExpFacilityName, 
+		  			String ExpFacilityType, String ExpUrgency, String ExpDescription, String ExpReportedDate, 
+		  			String ExpReportedBy, String ExpAssignedDate, String ExpEstimate) throws Exception
+  {
+	  driver.get(sAppURL);
+	  MR_Login(driver, username, password);
+	  Repairer_View_Assigned(driver);
+	  Repairer_View_Specific_Assigned(driver);
+	  //Verify View Specific Assigned Headers
+	  assertEquals(ExpMarNum,driver.findElement(By.xpath(prop.getProperty("Txt_ViewSpecificAssigned_MarNum"))).getText());
+	  assertEquals(ExpFacilityName,driver.findElement(By.xpath(prop.getProperty("Txt_ViewSpecificAssigned_FacilityName"))).getText());
+	  assertEquals(ExpFacilityType,driver.findElement(By.xpath(prop.getProperty("Txt_ViewSpecificAssigned_FacilityType"))).getText());
+	  assertEquals(ExpUrgency,driver.findElement(By.xpath(prop.getProperty("Txt_ViewSpecificAssigned_Urgency"))).getText());
+	  assertEquals(ExpDescription,driver.findElement(By.xpath(prop.getProperty("Txt_ViewSpecificAssigned_Description"))).getText());
+	  assertEquals(ExpReportedDate,driver.findElement(By.xpath(prop.getProperty("Txt_ViewSpecificAssigned_ReportedDate"))).getText());
+	  assertEquals(ExpReportedBy,driver.findElement(By.xpath(prop.getProperty("Txt_ViewSpecificAssigned_ReportedBy"))).getText());
+	  assertEquals(ExpAssignedDate,driver.findElement(By.xpath(prop.getProperty("Txt_ViewSpecificAssigned_AssignedDate"))).getText());
+	  assertEquals(ExpEstimate,driver.findElement(By.xpath(prop.getProperty("Txt_ViewSpecificAssigned_Eestimate"))).getText());
+	  takeScreenShot(driver, "TC02_ViewSpecificAssignedRepair_1");
+	  Repairer_Homepage(driver);
+	  Repairer_Logout(driver);
+  }
+  
+  //View Assigned Repairs and View Specific Repair Scenarios, also prints out repair list
+  @Test
+  @FileParameters("test/mac_repair/selenium/TC02g_test_cases.csv")
+  public void TC02g(int testCaseNumber, String username, String password) throws Exception
+  {
+	  driver.get(sAppURL);
+	  MR_Login(driver, username, password);
+	  Repairer_View_Assigned(driver);
+	  Repairer_View_Specific_Assigned(driver);
+	  Repairer_Homepage(driver);
+	  Repairer_Logout(driver);
+	  takeScreenShot(driver, "TC02_EntireScenario_1");
+  }
+  
+
   
   @After
   public void tearDown() throws Exception {
