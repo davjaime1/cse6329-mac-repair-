@@ -142,7 +142,7 @@ public class MARDAO
     // search companies
     public static ArrayList<MAR> searchMARByNumber(String marnumber)
     {
-        return ReturnMatchingMARList(" SELECT * from mar WHERE marnumber LIKE '%" + marnumber + "%' ORDER BY marnumber");
+        return ReturnMatchingMARList(" SELECT * from mar WHERE marnumber LIKE '%" + marnumber + "%' AND assignedto IS NULL ORDER BY marnumber");
     }
     
 //    public static ArrayList<FM_MAR> searchMARByFacilityType(String facilitytype)
@@ -152,7 +152,7 @@ public class MARDAO
     
     public static ArrayList<MAR> searchMARByFacilityName(String facilityName)
     {
-        return ReturnMatchingMARList(" SELECT * from mar WHERE facilityname LIKE '%" + facilityName + "%' ORDER BY marnumber");
+        return ReturnMatchingMARList(" SELECT * from mar WHERE facilityname LIKE '%" + facilityName + "%' AND assignedto IS NULL ORDER BY marnumber");
     }
     
     
