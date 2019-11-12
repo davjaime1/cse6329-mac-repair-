@@ -151,8 +151,8 @@ public class MarController extends HttpServlet
                 
                 
                 // Sets the values for the results page after the user has submitted a MAR.
-                session.setAttribute("cmr_facilitytype", selectedFacility.getFacilityName());
-                session.setAttribute("cmr_facilityname", selectedFacility.getFacilityType());
+                session.setAttribute("cmr_facilitytype", selectedFacility.getFacilityType());
+                session.setAttribute("cmr_facilityname", selectedFacility.getFacilityName());
                 session.setAttribute("cmr_urgency", selectedUrgency.getValue());
                 session.setAttribute("cmr_description", descriptionStr);
                 session.setAttribute("cmr_reportedby", reportedByStr);

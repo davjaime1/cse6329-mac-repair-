@@ -4,6 +4,8 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.FileInputStream;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -17,6 +19,7 @@ import org.openqa.selenium.By;
 
 import junitparams.FileParameters;
 import junitparams.JUnitParamsRunner;
+import mac_repair.LogOutFlag;
 import mac_repair.MRFunctions;
 import mac_repair.util.SQLConnection;
 
@@ -53,7 +56,7 @@ public class UserSeleniumTests extends MRFunctions
     /**
      * Testing registration and validataion of a user.
      */
-    @Test
+    // @Test
     @FileParameters("test/mac_repair/selenium/UserTC01TestCases.csv")
     public void userTC01(
             int tNo,
@@ -111,17 +114,17 @@ public class UserSeleniumTests extends MRFunctions
          * takes us back to the login due to a successful registration and breaks this test. */
         if (driver.getTitle().equals("Register"))
         {
-            assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_Error_Fields"))).getText().equalsIgnoreCase(fieldError));
-            assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_Error_Username"))).getText().equalsIgnoreCase(usernameError));
-            assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_Error_ID"))).getText().equalsIgnoreCase(idError));
-            assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_Error_Firstname"))).getText().equalsIgnoreCase(firstnameError));
-            assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_Error_Lastname"))).getText().equalsIgnoreCase(lastnameError));
-            assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_Error_Password"))).getText().equalsIgnoreCase(passwordError));
-            assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_Error_Address"))).getText().equalsIgnoreCase(addressError));
-            assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_Error_City"))).getText().equalsIgnoreCase(cityError));
-            assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_Error_Zip"))).getText().equalsIgnoreCase(zipError));
-            assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_Error_Phone"))).getText().equalsIgnoreCase(phoneError));
-            assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_Error_Email"))).getText().equalsIgnoreCase(emailError));
+            assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_Register_Error_Fields"))).getText().equalsIgnoreCase(fieldError));
+            assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_Register_Error_Username"))).getText().equalsIgnoreCase(usernameError));
+            assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_Register_Error_ID"))).getText().equalsIgnoreCase(idError));
+            assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_Register_Error_Firstname"))).getText().equalsIgnoreCase(firstnameError));
+            assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_Register_Error_Lastname"))).getText().equalsIgnoreCase(lastnameError));
+            assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_Register_Error_Password"))).getText().equalsIgnoreCase(passwordError));
+            assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_Register_Error_Address"))).getText().equalsIgnoreCase(addressError));
+            assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_Register_Error_City"))).getText().equalsIgnoreCase(cityError));
+            assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_Register_Error_Zip"))).getText().equalsIgnoreCase(zipError));
+            assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_Register_Error_Phone"))).getText().equalsIgnoreCase(phoneError));
+            assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_Register_Error_Email"))).getText().equalsIgnoreCase(emailError));
         }
         
         // Snapshot the expected results.
@@ -131,7 +134,7 @@ public class UserSeleniumTests extends MRFunctions
     /**
      * Testing the login and validation of a user.
      */
-    @Test
+    // @Test
     @FileParameters("test/mac_repair/selenium/UserTC02TestCases.csv")
     public void userTC02(
             int tNo,
@@ -155,6 +158,61 @@ public class UserSeleniumTests extends MRFunctions
         snapshot(new Throwable().getStackTrace()[0].getMethodName(), tNo);
     }
     
+    /**
+     * Creating a MAR, show validations, and logging out.
+     */
+    @Test
+    @FileParameters("test/mac_repair/selenium/UserTC03TestCases.csv")
+    public void userTC03(
+            int tNo,
+            String username,
+            String password,
+            String facility,
+            String urgency,
+            String description,
+            String errorMsg,
+            String facilityType)
+    {
+        // Go to web page.
+        driver.get(sAppURL);
+        
+        // Login.
+        MR_Login(driver, username, password);
+        
+        // Create a MAR.
+        MR_CreateMar(facility, urgency, description);
+        
+        
+        if (driver.getTitle().equals("Create MAR"))
+        {
+            // If an error occurred.
+            assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_CreateMar_Error"))).getText().equals(errorMsg));
+            
+            // Snapshot the expected results.
+            snapshot(new Throwable().getStackTrace()[0].getMethodName(), tNo);
+            
+            // Logout.
+            MR_Logout(LogOutFlag.USER_CREATE_MAR);
+        }
+        else
+        {
+            // No errors, we have proceeded to the results pages.
+            // Verify the table data.
+            assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_MarDetails_Date"))).getText().equals(
+                    LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"))));
+            assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_MarDetails_FacilityType"))).getText().equals(facilityType));
+            assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_MarDetails_FacilityName"))).getText().equals(facility));
+            assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_MarDetails_Urgency"))).getText().equals(urgency));
+            assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_MarDetails_ReportedBy"))).getText().equals(username));
+            assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_MarDetails_Description"))).getText().equals(description));
+            
+            // Snapshot the expected results.
+            snapshot(new Throwable().getStackTrace()[0].getMethodName(), tNo);
+            
+            // Logout.
+            MR_Logout(LogOutFlag.USER_MAR_DETAILS);
+        }
+    }
     
     @After
     public void tearDown() throws Exception

@@ -172,6 +172,24 @@ public class MRFunctions
     }
     
     
+    public void MR_CreateMar(
+            String facility,
+            String urgency,
+            String description)
+    {
+        // Got to create mar page.
+        driver.findElement(By.xpath(prop.getProperty("Lnk_User_CreateMAR"))).click();
+        
+        // Enter in MAR info.
+        new Select(driver.findElement(By.xpath(prop.getProperty("Sel_CreateMar_Facility")))).selectByValue(facility);
+        new Select(driver.findElement(By.xpath(prop.getProperty("Sel_CreateMar_Urgency")))).selectByValue(urgency);
+        driver.findElement(By.xpath(prop.getProperty("Txt_CreateMar_Description"))).sendKeys(description);
+        
+        // Press the submit button.
+        driver.findElement(By.xpath(prop.getProperty("Btn_CreateMar_Submit"))).click();
+    }
+    
+    
     public void Repairer_View_Assigned(WebDriver driver)
     {
         WebDriverWait wait = new WebDriverWait(driver, 10);
@@ -212,5 +230,22 @@ public class MRFunctions
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty("Lnk_Repairer_Logout"))));
         driver.findElement(By.xpath(prop.getProperty("Lnk_Repairer_Logout"))).click();
         sleepyTime();
+    }
+    
+    /**
+     * Helper function to deal with logging out from different pages.
+     */
+    public void MR_Logout(LogOutFlag flag)
+    {
+        if (flag == LogOutFlag.USER_CREATE_MAR)
+        {
+            driver.findElement(By.xpath(prop.getProperty("Lnk_CreateMar_Home"))).click();
+            driver.findElement(By.xpath(prop.getProperty("Lnk_User_Logout"))).click();
+        }
+        else if(flag == LogOutFlag.USER_MAR_DETAILS)
+        {
+            driver.findElement(By.xpath(prop.getProperty("Lnk_MarDetails_Home"))).click();
+            driver.findElement(By.xpath(prop.getProperty("Lnk_User_Logout"))).click();
+        }
     }
 }
