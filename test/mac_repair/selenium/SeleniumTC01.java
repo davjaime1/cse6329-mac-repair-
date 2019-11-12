@@ -43,7 +43,8 @@ public class SeleniumTC01 extends MRFunctions {
 	u = new User();
 	error = new UserTest();
   }
-    
+  
+  //Login Validations
   @Test
   @FileParameters("test/mac_repair/selenium/TC01_test_cases.csv")
   public void TC01(int testCaseNumber, String username, String password, String errorMessage ) throws Exception
@@ -54,6 +55,7 @@ public class SeleniumTC01 extends MRFunctions {
 	  //assertTrue(errorMessage.equals())
   }
   
+  //Register Validations
   @Test
   @FileParameters("test/mac_repair/selenium/TC01b_test_cases.csv")
   public void TC01b(int testCaseNumber, String username, String utaID, String first, String last, String password, 

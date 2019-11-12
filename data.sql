@@ -55,3 +55,12 @@ INSERT INTO mar VALUE ("140",curdate(),"BMC","BMC1","des","Ma","usr1","rep5",CUR
 
 INSERT INTO facilityreservation VALUE("27", "BMC1", "BMC", "I", "rep", "2019-10-25", "2019-10-25 06:29:59", "2019-10-25 06:00:00");
 INSERT INTO facilityreservation VALUE("30", "BMC1", "BMC", "I", "rep", "2019-10-25", "2019-10-25 12:59:59", "2019-10-25 12:30:00");
+
+
+INSERT INTO users VALUE ("repTest","1001526202","SM","SM","password","R","1121 UTA","Arlington","TX","76010","1001526202","sm@uta.edu");
+INSERT INTO mar VALUE ("50","2019-10-24","BMC","BMC1","des","Ma","usr1","repTest","2019-10-25","1D");
+INSERT INTO mar VALUE ("51","2019-10-24","BMC","BMC1","des","Ma","usr1","repTest","2019-10-25","1D");
+INSERT INTO repairschedule VALUE ("repTest","50","2019-10-24");
+INSERT INTO repairschedule VALUE ("repTest","51","2019-10-24");
+INSERT INTO facilityreservation VALUE("50", "BMC1", "BMC", "I", "repTest", "2019-10-25", "2019-10-25 06:29:59", "2019-10-25 06:00:00");
+INSERT INTO facilityreservation VALUE("51", "BMC1", "BMC", "I", "repTest", "2019-10-25", "2019-10-25 12:59:59", "2019-10-25 12:30:00");
