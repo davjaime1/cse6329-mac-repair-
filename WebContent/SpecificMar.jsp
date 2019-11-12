@@ -5,12 +5,12 @@
 
 <head>
     <meta charset="ISO-8859-1">
-    <title>MAR #<c:out value="${cmr_marnumber}" /></title>
+    <title>MAR Details</title>
 </head>
 
 <body>
 
-    <h1>MAR Details</h1>
+    <h1>MAR #<c:out value="${cmr_marnumber}"/> Details</h1>
 
     <table border="1">
         <tr>
