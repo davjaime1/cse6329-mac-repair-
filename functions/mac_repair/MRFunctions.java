@@ -19,7 +19,7 @@ public class MRFunctions
     
     public WebDriver invokeCorrectBrowser()
     {
-        System.setProperty("webdriver.chrome.driver", "C:/ChromeDriver/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "D:/Program Files/ChromeDriver/chromedriver.exe");
         return new ChromeDriver();
     }
     
@@ -186,6 +186,7 @@ public class MRFunctions
         driver.findElement(By.xpath(prop.getProperty("Txt_CreateMar_Description"))).sendKeys(description);
         
         // Press the submit button.
+        sleepyTime();
         driver.findElement(By.xpath(prop.getProperty("Btn_CreateMar_Submit"))).click();
     }
     
@@ -237,7 +238,11 @@ public class MRFunctions
      */
     public void MR_Logout(LogOutFlag flag)
     {
-        if (flag == LogOutFlag.USER_CREATE_MAR)
+    	if (flag == LogOutFlag.USER_HOME)
+    	{
+    		driver.findElement(By.xpath(prop.getProperty("Lnk_User_Logout")));
+    	}
+    	else if (flag == LogOutFlag.USER_CREATE_MAR)
         {
             driver.findElement(By.xpath(prop.getProperty("Lnk_CreateMar_Home"))).click();
             driver.findElement(By.xpath(prop.getProperty("Lnk_User_Logout"))).click();
@@ -246,6 +251,10 @@ public class MRFunctions
         {
             driver.findElement(By.xpath(prop.getProperty("Lnk_MarDetails_Home"))).click();
             driver.findElement(By.xpath(prop.getProperty("Lnk_User_Logout"))).click();
+        }
+        else if(flag == LogOutFlag.REGISTRATION)
+        {
+        	driver.findElement(By.xpath(prop.getProperty("Lnk_Register_BackToLogin"))).click();
         }
     }
 }

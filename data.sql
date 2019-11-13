@@ -10,6 +10,41 @@ INSERT INTO users VALUE ("rep","1001526202","SM","SM","password","R","1121 UTA",
 INSERT INTO users VALUE ("rep5","1001526202","SM","SM","password","R","1121 UTA","Arlington","TX","76010","1001526202","sm@uta.edu");
 
 
+
+INSERT INTO mar VALUE ("1",curdate(),"BMC","BMC1","des","Ma","usr1","rep2",curdate(),"1D"); 
+INSERT INTO mar VALUE ("2",curdate(),"BMC","BMC1","des","Ma","usr1","rep2",curdate(),"1D"); 
+INSERT INTO mar VALUE ("3",curdate(),"BMC","BMC1","des","Ma","usr1","rep2",curdate(),"1D"); 
+INSERT INTO mar VALUE ("4",curdate(),"BMC","BMC1","des","Ma","usr1","rep2",curdate(),"1D"); 
+INSERT INTO mar VALUE ("5",curdate(),"BMC","BMC1","des","Ma","usr1","rep2",curdate(),"1D"); 
+USE `database`;
+INSERT INTO users VALUE ("user1","1001526202","SM","SM","password","U","1121 UTA","Arlington","TX","76010","1001526202","sm@uta.edu");
+INSERT INTO users VALUE ("usr1","1001526202","SM","SM","password","U","1121 UTA","Arlington","TX","76010","1001526202","sm@uta.edu");
+INSERT INTO users VALUE ("rep1","1001526202","SM","SM","password","R","1121 UTA","Arlington","TX","76010","1001526202","sm@uta.edu");
+INSERT INTO users VALUE ("rep2","1001526202","SM","SM","password","R","1121 UTA","Arlington","TX","76010","1001526202","sm@uta.edu");
+INSERT INTO users VALUE ("rep3","1001526202","SM","SM","password","R","1121 UTA","Arlington","TX","76010","1001526202","sm@uta.edu");
+INSERT INTO users VALUE ("rep4","1001526202","SM","SM","password","R","1121 UTA","Arlington","TX","76010","1001526202","sm@uta.edu");
+INSERT INTO users VALUE ("rep","1001526202","SM","SM","password","R","1121 UTA","Arlington","TX","76010","1001526202","sm@uta.edu");
+INSERT INTO users VALUE ("rep5","1001526202","SM","SM","password","R","1121 UTA","Arlington","TX","76010","1001526202","sm@uta.edu");
+
+
+INSERT INTO mar VALUE ("71",curdate(),"BMC","BMC1","des","Ma","usr1",null ,null ,null); 
+INSERT INTO mar VALUE ("72",curdate(),"BMC","BMC3","des","Ma","usr1",null,null,null); 
+INSERT INTO mar VALUE ("73",curdate(),"BMC","BMC4","des","Ma","usr1",null,null,null); 
+INSERT INTO mar VALUE ("74",curdate(),"BMC","BMC4","des","Ma","usr1",null,null,null); 
+INSERT INTO mar VALUE ("75",curdate(),"BMC","BMC4","des","Ma","usr1",null,null,null); 
+
+
+USE `database`;
+INSERT INTO users VALUE ("user1","1001526202","SM","SM","password","U","1121 UTA","Arlington","TX","76010","1001526202","sm@uta.edu");
+INSERT INTO users VALUE ("usr1","1001526202","SM","SM","password","U","1121 UTA","Arlington","TX","76010","1001526202","sm@uta.edu");
+INSERT INTO users VALUE ("rep1","1001526202","SM","SM","password","R","1121 UTA","Arlington","TX","76010","1001526202","sm@uta.edu");
+INSERT INTO users VALUE ("rep2","1001526202","SM","SM","password","R","1121 UTA","Arlington","TX","76010","1001526202","sm@uta.edu");
+INSERT INTO users VALUE ("rep3","1001526202","SM","SM","password","R","1121 UTA","Arlington","TX","76010","1001526202","sm@uta.edu");
+INSERT INTO users VALUE ("rep4","1001526202","SM","SM","password","R","1121 UTA","Arlington","TX","76010","1001526202","sm@uta.edu");
+INSERT INTO users VALUE ("rep","1001526202","SM","SM","password","R","1121 UTA","Arlington","TX","76010","1001526202","sm@uta.edu");
+INSERT INTO users VALUE ("rep5","1001526202","SM","SM","password","R","1121 UTA","Arlington","TX","76010","1001526202","sm@uta.edu");
+
+
 INSERT INTO mar VALUE ("71",curdate(),"BMC","BMC1","des","Ma","usr1",null ,null ,null); 
 INSERT INTO mar VALUE ("72",curdate(),"BMC","BMC3","des","Ma","usr1",null,null,null); 
 INSERT INTO mar VALUE ("73",curdate(),"BMC","BMC4","des","Ma","usr1",null,null,null); 
