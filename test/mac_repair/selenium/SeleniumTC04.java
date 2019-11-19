@@ -73,12 +73,12 @@ public void PrintUserTableContents() {
   }
 }
 
-  
+//  
   @Test
   public void TC04a() throws Exception
   {
 	  driver.get(sAppURL);
-	  MR_Register(driver, "admin1", "1001526202", "John", "Smith", "password", "address", "Arlington", "76019", "TX", "1231231234", "email@uta.edu", "FM");
+	  MR_Register(driver, "admin3", "1001526202", "John", "Smith", "password", "address", "Arlington", "76019", "TX", "1231231234", "email@uta.edu", "A");
 	  try{ Thread.sleep(3000);}catch (InterruptedException e) {}
 	  snap.takeScreenshot(driver, "Admin_Register");
 	  driver.quit();

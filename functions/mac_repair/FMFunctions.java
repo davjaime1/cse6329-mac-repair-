@@ -98,7 +98,7 @@ public class FMFunctions {
 	public void MR_ListMAR (WebDriver driver)
 	{
 	
-	 	driver.findElement(By.xpath(prop.getProperty("Txt_UnassignedMAR_List"))).click();
+	 	driver.findElement(By.xpath(prop.getProperty("Txt_UnassignedMAR_List_FM"))).click();
 
 //		try
 //		{
@@ -111,27 +111,27 @@ public class FMFunctions {
 	
 	public void MR_AssignMAR(WebDriver driver, String description, String assignedTo, String assignedDate)
 	{
-	 	driver.findElement(By.xpath(prop.getProperty("Txt_UnassignedMAR_List"))).click();
+	 	driver.findElement(By.xpath(prop.getProperty("Txt_UnassignedMAR_List_FM"))).click();
 
-	 	driver.findElement(By.xpath(prop.getProperty("Txt_Select_MAR_ID"))).click();
-	 	driver.findElement(By.xpath(prop.getProperty("Txt_MAR_View_Button"))).click();
-
-	 	
-	 	driver.findElement(By.name(prop.getProperty("Txt_MAR_Description"))).click();
-	 	driver.findElement(By.name(prop.getProperty("Txt_MAR_Description"))).clear();
-	 	driver.findElement(By.name(prop.getProperty("Txt_MAR_Description"))).sendKeys(description);
+	 	driver.findElement(By.xpath(prop.getProperty("Txt_Select_MAR_ID_FM"))).click();
+	 	driver.findElement(By.xpath(prop.getProperty("Txt_MAR_View_Button_FM"))).click();
 
 	 	
-	 	driver.findElement(By.name(prop.getProperty("Txt_MAR_AssignedTo"))).click();
-	    new Select(driver.findElement(By.name(prop.getProperty("Txt_MAR_AssignedTo")))).selectByVisibleText(assignedTo);
-	 	driver.findElement(By.name(prop.getProperty("Txt_MAR_AssignedTo"))).click();
+	 	driver.findElement(By.name(prop.getProperty("Txt_MAR_Description_FM"))).click();
+	 	driver.findElement(By.name(prop.getProperty("Txt_MAR_Description_FM"))).clear();
+	 	driver.findElement(By.name(prop.getProperty("Txt_MAR_Description_FM"))).sendKeys(description);
 
-	    driver.findElement(By.id(prop.getProperty("Txt_MAR_DateTime"))).click();
+	 	
+	 	driver.findElement(By.name(prop.getProperty("Txt_MAR_AssignedTo_FM"))).click();
+	    new Select(driver.findElement(By.name(prop.getProperty("Txt_MAR_AssignedTo_FM")))).selectByVisibleText(assignedTo);
+	 	driver.findElement(By.name(prop.getProperty("Txt_MAR_AssignedTo_FM"))).click();
+
+	    driver.findElement(By.id(prop.getProperty("Txt_MAR_DateTime_FM"))).click();
 	    int getDate = Integer.parseInt(assignedDate.split("-")[2]);
 	    
 	    driver.findElement(By.linkText(Integer.toString(getDate))).click();
-	    driver.findElement(By.id(prop.getProperty("Txt_MAR_DateTime"))).click();
-	 	driver.findElement(By.xpath(prop.getProperty("Txt_AssignMAR_Button"))).click();
+	    driver.findElement(By.id(prop.getProperty("Txt_MAR_DateTime_FM"))).click();
+	 	driver.findElement(By.xpath(prop.getProperty("Txt_AssignMAR_Button_FM"))).click();
 
 	    
 	}
@@ -140,17 +140,17 @@ public class FMFunctions {
 	
 	public void MR_Search_MAR (WebDriver driver, String facilityName, String marID)
 	{
-		 	driver.findElement(By.xpath(prop.getProperty("Txt_UnassignedMAR_Search"))).click();
-		    driver.findElement(By.name(prop.getProperty("Txt_Search_Facility"))).click();
-		    driver.findElement(By.name(prop.getProperty("Txt_Search_Facility"))).clear();
-		    driver.findElement(By.name(prop.getProperty("Txt_Search_Facility"))).sendKeys(facilityName);
+		 	driver.findElement(By.xpath(prop.getProperty("Txt_UnassignedMAR_Search_FM"))).click();
+		    driver.findElement(By.name(prop.getProperty("Txt_Search_Facility_FM"))).click();
+		    driver.findElement(By.name(prop.getProperty("Txt_Search_Facility_FM"))).clear();
+		    driver.findElement(By.name(prop.getProperty("Txt_Search_Facility_FM"))).sendKeys(facilityName);
 		    
 
-		    driver.findElement(By.name(prop.getProperty("Txt_Search_MAR_Number"))).click();
-		    driver.findElement(By.name(prop.getProperty("Txt_Search_MAR_Number"))).clear();
-		    driver.findElement(By.name(prop.getProperty("Txt_Search_MAR_Number"))).sendKeys(marID);
+		    driver.findElement(By.name(prop.getProperty("Txt_Search_MAR_Number_FM"))).click();
+		    driver.findElement(By.name(prop.getProperty("Txt_Search_MAR_Number_FM"))).clear();
+		    driver.findElement(By.name(prop.getProperty("Txt_Search_MAR_Number_FM"))).sendKeys(marID);
 		    
-		    driver.findElement(By.xpath(prop.getProperty("Txt_Search_Button"))).click();
+		    driver.findElement(By.xpath(prop.getProperty("Txt_Search_Button_FM"))).click();
 
 		    
 		 

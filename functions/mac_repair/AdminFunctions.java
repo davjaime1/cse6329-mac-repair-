@@ -102,7 +102,7 @@ public class AdminFunctions {
 	    driver.findElement(By.name(prop.getProperty("Txt_RoleDropDown_Admin"))).click();
 	    new Select(driver.findElement(By.name(prop.getProperty("Txt_RoleDropDown_Admin")))).selectByVisibleText(filterName);
 	    driver.findElement(By.name(prop.getProperty("Txt_RoleDropDown_Admin"))).click();
-	    driver.findElement(By.xpath(prop.getProperty("Txt_Update_User_Admin"))).click();
+	    driver.findElement(By.xpath(prop.getProperty("Txt_UserList_Submit_Admin"))).click();
 
 //		tryTxt_UserList_Submit_Admin
 //		{

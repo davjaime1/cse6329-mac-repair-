@@ -124,11 +124,11 @@ public void PrintMARTableContents() {
 	  MR_Search_MAR(driver, "","");
 	  Thread.sleep(2000);
 	  snap.takeScreenshot(driver, "Facility_Manager_Failed_Search");
-	  System.out.println(driver.findElement(By.name(prop.getProperty("Txt_Search_MAR_Number_Error"))).getAttribute("value"));
-	  System.out.println(driver.findElement(By.name(prop.getProperty("Txt_Error_Msgs"))).getAttribute("value"));
+	  System.out.println(driver.findElement(By.name(prop.getProperty("Txt_Search_MAR_Number_Error_FM"))).getAttribute("value"));
+	  System.out.println(driver.findElement(By.name(prop.getProperty("Txt_Error_Msgs_FM"))).getAttribute("value"));
 
-	  assertEquals(driver.findElement(By.name(prop.getProperty("Txt_Search_MAR_Number_Error"))).getAttribute("value"),"Both MAR Number and Facility Name cannot be blank");
-	  assertEquals(driver.findElement(By.name(prop.getProperty("Txt_Error_Msgs"))).getAttribute("value"),"Please correct the following errors");
+	  assertEquals(driver.findElement(By.name(prop.getProperty("Txt_Search_MAR_Number_Error_FM"))).getAttribute("value"),"Both MAR Number and Facility Name cannot be blank");
+	  assertEquals(driver.findElement(By.name(prop.getProperty("Txt_Error_Msgs_FM"))).getAttribute("value"),"Please correct the following errors");
 
 	  Thread.sleep(2000);
 	  driver.quit();
@@ -166,10 +166,10 @@ public void PrintMARTableContents() {
 	  snap.takeScreenshot(driver, "UnsuccessFul Assign Mar" + Integer.toString(testCaseNumber));
 	  
 	  
-	  assertEquals(driver.findElement(By.name(prop.getProperty("Txt_MAR_Description_Error"))).getAttribute("value"),descriptionError);
-	  assertEquals(driver.findElement(By.name(prop.getProperty("Txt_MAR_AssignTo_Error"))).getAttribute("value"),assignedToError);
-	  assertEquals(driver.findElement(By.name(prop.getProperty("Txt_MAR_AssignDate_Error"))).getAttribute("value"),assignedDateError);
-	  assertEquals(driver.findElement(By.name(prop.getProperty("Txt_Error_Msgs"))).getAttribute("value"),"Please correct the following errors");
+	  assertEquals(driver.findElement(By.name(prop.getProperty("Txt_MAR_Description_Error_FM"))).getAttribute("value"),descriptionError);
+	  assertEquals(driver.findElement(By.name(prop.getProperty("Txt_MAR_AssignTo_Error_FM"))).getAttribute("value"),assignedToError);
+	  assertEquals(driver.findElement(By.name(prop.getProperty("Txt_MAR_AssignDate_Error_FM"))).getAttribute("value"),assignedDateError);
+	  assertEquals(driver.findElement(By.name(prop.getProperty("Txt_Error_Msgs_FM"))).getAttribute("value"),"Please correct the following errors");
 	  driver.quit();
 	  //Need to pull login error message from get method, but it doesn't exist anymore after the clean
 	  //assertTrue(errorMessage.equals())
@@ -186,9 +186,9 @@ public void PrintMARTableContents() {
 	  Thread.sleep(2000);
 	  snap.takeScreenshot(driver, "SuccessFul Assign Mar");
 	  assertEquals(driver.getTitle(),"View Specific Assigned MAR");
-	  assertEquals(driver.findElement(By.xpath(prop.getProperty("Txt_AMAR_View_AssignedTo"))).getText(),assignedTo);
-	  assertEquals(driver.findElement(By.xpath(prop.getProperty("Txt_AMAR_View_Description"))).getText(),description);
-	  assertEquals(driver.findElement(By.xpath(prop.getProperty("Txt_AMAR_View_AssignedDate"))).getText(),assignedDate);
+	  assertEquals(driver.findElement(By.xpath(prop.getProperty("Txt_AMAR_View_AssignedTo_FM"))).getText(),assignedTo);
+	  assertEquals(driver.findElement(By.xpath(prop.getProperty("Txt_AMAR_View_Description_FM"))).getText(),description);
+	  assertEquals(driver.findElement(By.xpath(prop.getProperty("Txt_AMAR_View_AssignedDate_FM"))).getText(),assignedDate);
 
 
 	  //Need to pull login error message from get method, but it doesn't exist anymore after the clean

@@ -56,7 +56,7 @@ public class UserSeleniumTests extends MRFunctions
     /**
      * Testing registration and validataion of a user.
      */
-    // @Test
+     @Test
     @FileParameters("test/mac_repair/selenium/UserTC01TestCases.csv")
     public void userTC01(
             int tNo,
@@ -107,6 +107,7 @@ public class UserSeleniumTests extends MRFunctions
         assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_Register_Role"))).getAttribute("value").equals(role));
         
         // Click register button.
+        sleepyTime();
         MR_Register_Click_Register_Button();
         
         /* Verify error messages.
@@ -125,16 +126,26 @@ public class UserSeleniumTests extends MRFunctions
             assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_Register_Error_Zip"))).getText().equalsIgnoreCase(zipError));
             assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_Register_Error_Phone"))).getText().equalsIgnoreCase(phoneError));
             assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_Register_Error_Email"))).getText().equalsIgnoreCase(emailError));
+            
+            // Snapshot the expected results.
+            snapshot(new Throwable().getStackTrace()[0].getMethodName(), tNo);
+            
+            MR_Logout(LogOutFlag.REGISTRATION);
         }
-        
-        // Snapshot the expected results.
-        snapshot(new Throwable().getStackTrace()[0].getMethodName(), tNo);
+        else 
+        {
+        	// A good registration will go to back to the login.
+            // Snapshot the expected results.
+            snapshot(new Throwable().getStackTrace()[0].getMethodName(), tNo);
+        }
+
+        sleepyTime();
     }
     
     /**
      * Testing the login and validation of a user.
      */
-    // @Test
+     @Test
     @FileParameters("test/mac_repair/selenium/UserTC02TestCases.csv")
     public void userTC02(
             int tNo,
@@ -152,10 +163,20 @@ public class UserSeleniumTests extends MRFunctions
         if (driver.getTitle().equals("Login"))
         {
             assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_Login_BadCreditenials"))).getText().equalsIgnoreCase(loginError));
+            
+            // Snapshot the expected results.
+            snapshot(new Throwable().getStackTrace()[0].getMethodName(), tNo);
+        }
+        else 
+        {
+        	// Snapshot the expected results.
+            snapshot(new Throwable().getStackTrace()[0].getMethodName(), tNo);
+        	
+        	// On a good login, we get into the user home page.
+        	MR_Logout(LogOutFlag.USER_HOME);
         }
         
-        // Snapshot the expected results.
-        snapshot(new Throwable().getStackTrace()[0].getMethodName(), tNo);
+        sleepyTime();
     }
     
     /**
@@ -192,6 +213,7 @@ public class UserSeleniumTests extends MRFunctions
             snapshot(new Throwable().getStackTrace()[0].getMethodName(), tNo);
             
             // Logout.
+            sleepyTime();
             MR_Logout(LogOutFlag.USER_CREATE_MAR);
         }
         else
@@ -210,6 +232,7 @@ public class UserSeleniumTests extends MRFunctions
             snapshot(new Throwable().getStackTrace()[0].getMethodName(), tNo);
             
             // Logout.
+            sleepyTime();
             MR_Logout(LogOutFlag.USER_MAR_DETAILS);
         }
     }
