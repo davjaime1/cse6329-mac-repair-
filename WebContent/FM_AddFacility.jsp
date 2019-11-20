@@ -16,8 +16,8 @@
     <table style="width: 1200px; ">
     <tr>
     <td> Facility Name (*): </td>
-    <td> <input name="idfacilityname" value="<c:out value='${facility.facilityName}'/>" type="text" maxlength="16"> </td>
-  	<td> <input name="companyIDerror"  value="<c:out value='${errorMsgs.facilityNameError}'/>" type="text"  style ="background-color: white; color: red; border: none; width: 800px"  disabled="disabled" maxlength="60"> </td>
+    <td> <input name="idfacilityname" value="<c:out value='${facility.facilityName}'/>" type="text" maxlength="100"> </td>
+  	<td> <input name="idfacilityNameError"  value="<c:out value='${errorMsgs.facilityNameError}'/>" type="text"  style ="background-color: white; color: red; border: none; width: 800px"  disabled="disabled" maxlength="60"> </td>
     </tr>
 
     <tr>

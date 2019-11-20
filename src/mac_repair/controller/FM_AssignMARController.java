@@ -74,6 +74,7 @@ public class FM_AssignMARController extends HttpServlet {
 			assignmar.setAssignedMAR(marNumber, facilityName, "", "", "", "", "","","",""); 
 			assignmar.validateMAR(action, CerrorMsgs);
 
+			
 			ArrayList<MAR> assignedmarInDB = new ArrayList<MAR>();
 			if (CerrorMsgs.getErrorMsg().equals("")) {
 				if (!marNumber.equals(""))
