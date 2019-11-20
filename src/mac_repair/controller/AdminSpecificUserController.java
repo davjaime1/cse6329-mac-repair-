@@ -31,8 +31,8 @@ public class AdminSpecificUserController extends HttpServlet
                 request.getParameter("idpassword"),
                 request.getParameter("idrole"),
                 request.getParameter("idaddress"),
-                request.getParameter("idstate"),
                 request.getParameter("idcity"),
+                request.getParameter("idstate"),
                 request.getParameter("idzip"),
                 request.getParameter("idphone"),
                 request.getParameter("idemail"));
@@ -45,10 +45,9 @@ public class AdminSpecificUserController extends HttpServlet
             throws ServletException, IOException
     {
         HttpSession session = request.getSession();
-        String action = request.getParameter("action");
+       
         
-        if (action.equalsIgnoreCase("ListSpecificUserAction"))
-        {
+    
             String usernameStr = request.getParameter("username");
             
             ArrayList<User> fetch_profile = new ArrayList<User>();
@@ -62,8 +61,8 @@ public class AdminSpecificUserController extends HttpServlet
                     fetch_profile.get(0).getPassword(),
                     fetch_profile.get(0).getRole(),
                     fetch_profile.get(0).getAddress(),
-                    fetch_profile.get(0).getState(),
                     fetch_profile.get(0).getCity(),
+                    fetch_profile.get(0).getState(),
                     fetch_profile.get(0).getZip(),
                     fetch_profile.get(0).getPhone(),
                     fetch_profile.get(0).getEmail());
@@ -79,12 +78,7 @@ public class AdminSpecificUserController extends HttpServlet
             session.setAttribute("STATE", stateInDB);
             
             getServletContext().getRequestDispatcher("/AdminUpdateProfile.jsp").forward(request, response);
-        }
-        else
-        {
-            System.out.println("ERROR: AdminSpecificUserController: INCORRECT ACTION at doGet()");
-            response.getWriter().append("Served at: ").append(request.getContextPath());
-        }
+      
     }
     
     @Override
@@ -94,10 +88,9 @@ public class AdminSpecificUserController extends HttpServlet
             throws ServletException, IOException
     {
         HttpSession session = request.getSession();
-        String action = request.getParameter("action");
+      
         
-        if (action.equalsIgnoreCase("ApplyNewValuesAction"))
-        {
+      
             session.removeAttribute("user");
             session.removeAttribute("errorMsgs");
             User user = new User();
@@ -128,8 +121,8 @@ public class AdminSpecificUserController extends HttpServlet
                         fetch_profile.get(0).getPassword(),
                         fetch_profile.get(0).getRole(),
                         fetch_profile.get(0).getAddress(),
-                        fetch_profile.get(0).getState(),
                         fetch_profile.get(0).getCity(),
+                        fetch_profile.get(0).getState(),
                         fetch_profile.get(0).getZip(),
                         fetch_profile.get(0).getPhone(),
                         fetch_profile.get(0).getEmail());
@@ -147,11 +140,6 @@ public class AdminSpecificUserController extends HttpServlet
                 
             }
             
-        }
-        else
-        {
-            System.out.println("ERROR: AdminSpecificUserController: INCORRECT ACTION at doPost()");
-            response.getWriter().append("Served at: ").append(request.getContextPath());
-        }
+   
     }
 }
