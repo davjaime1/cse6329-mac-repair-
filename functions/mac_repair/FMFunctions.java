@@ -220,4 +220,31 @@ public class FMFunctions {
 		
 		driver.findElement(By.xpath(prop.getProperty("Txt_Add_Facility_Submit"))).click();
 	}
+	public void MR_View_Facility_Free_Time(WebDriver driver, String facilityType, String date) {
+		
+		driver.findElement(By.xpath(prop.getProperty("Txt_SFFT_FM"))).click();
+		
+	    driver.findElement(By.id(prop.getProperty("Txt_SFT_DatePicker_FM"))).click();
+	    int getDate = Integer.parseInt(date.split("-")[2]);
+	    
+	    driver.findElement(By.linkText(Integer.toString(getDate))).click();
+	    driver.findElement(By.id(prop.getProperty("Txt_SFT_DatePicker_FM"))).click();
+			
+		
+		driver.findElement(By.name(prop.getProperty("Txt_SFT_FacType_FM"))).click();
+		new Select(driver.findElement(By.name(prop.getProperty("Txt_SFT_FacType_FM")))).selectByVisibleText(facilityType);
+		driver.findElement(By.name(prop.getProperty("Txt_SFT_FacType_FM"))).click();
+		
+		
+		driver.findElement(By.xpath(prop.getProperty("Txt_SFT_Submit_FM"))).click();
+	}
+	public void MR_View_Specific_Assign_MAR(WebDriver driver) {
+		
+		driver.findElement(By.xpath(prop.getProperty("Txt_View_Specific_AMAR_FM"))).click();
+	}
+	public void MR_Specific_Facility(WebDriver driver) {
+		
+		driver.findElement(By.xpath(prop.getProperty("Txt_View_Specific_Facility"))).click();
+		
+	}
 }

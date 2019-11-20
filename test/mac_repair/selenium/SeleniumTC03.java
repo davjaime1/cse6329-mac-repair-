@@ -141,6 +141,29 @@ public void PrintFacilityContents() {
 	  }
 	}
 
+public void PrintFacilityFreeTimeContents()  {
+	  //Get all rows
+	  List<WebElement> rows= driver.findElement(By.xpath("/html/body/table/tbody")).findElements(By.tagName("tr"));
+	  System.out.println(rows.size());
+	  //print out header row
+	  for (int i=1;i<7;i++)
+		  System.out.print(driver.findElement(By.xpath("/html/body/table/tbody/tr[1]/th["+i+"]")).getText()+"\t");
+	  System. out.println();
+	 
+	  //Output data from each row
+	  for (int i=2;i<=rows.size();i++) {
+		  System.out.print(driver.findElement(By.xpath("/html/body/table/tbody/tr["+i+"]/td[1]")).getText()+"\t");
+		  System.out.print(driver.findElement(By.xpath("/html/body/table/tbody/tr["+i+"]/td[2]")).getText()+"\t");
+		  System.out.print(driver.findElement(By.xpath("/html/body/table/tbody/tr["+i+"]/td[3]")).getText()+"\t");
+		  System.out.print(driver.findElement(By.xpath("/html/body/table/tbody/tr["+i+"]/td[4]")).getText()+"\t");
+		  System.out.print(driver.findElement(By.xpath("/html/body/table/tbody/tr["+i+"]/td[5]")).getText()+"\t");
+	//	  System.out.print(driver.findElement(By.xpath("/html/body/table/tbody/tr["+i+"]/td[6]")).getText()+"\t");
+
+		  System. out.println();
+
+	  }
+	}
+
   @Test
   public void TC03a() throws Exception
   {
@@ -163,6 +186,7 @@ public void PrintFacilityContents() {
 	  //assertTrue(errorMessage.equals())
   }
  
+
   @Test
   public void TC03c() throws Exception
   {
@@ -174,10 +198,14 @@ public void PrintFacilityContents() {
 	  
 	  assertEquals(driver.getTitle(),"MAR List");
 	  PrintMARTableContents();
+	  
 	  Thread.sleep(2000);
+	  driver.findElement(By.xpath(prop.getProperty("Txt_HomePage_FM"))).click();
+	  driver.findElement(By.xpath(prop.getProperty("Txt_Log_Out_FM"))).click();
 	  driver.quit();
 	  //Need to pull login error message from get method, but it doesn't exist anymore after the clean
 	  //assertTrue(errorMessage.equals())
+	  
   }
 
   @Test
@@ -214,6 +242,8 @@ public void PrintFacilityContents() {
 	  assertEquals(driver.getTitle(),"MAR List");
 	  PrintMARTableContents();
 	  Thread.sleep(2000);
+	  driver.findElement(By.xpath(prop.getProperty("Txt_HomePage_FM"))).click();
+	  driver.findElement(By.xpath(prop.getProperty("Txt_Log_Out_FM"))).click();
 	  driver.quit();
 	  //Need to pull login error message from get method, but it doesn't exist anymore after the clean
 	  //assertTrue(errorMessage.equals())
@@ -235,6 +265,7 @@ public void PrintFacilityContents() {
 	  assertEquals(driver.findElement(By.name(prop.getProperty("Txt_MAR_AssignTo_Error_FM"))).getAttribute("value"),assignedToError);
 	  assertEquals(driver.findElement(By.name(prop.getProperty("Txt_MAR_AssignDate_Error_FM"))).getAttribute("value"),assignedDateError);
 	  assertEquals(driver.findElement(By.name(prop.getProperty("Txt_Error_Msgs_FM"))).getAttribute("value"),"Please correct the following errors");
+	  
 	  driver.quit();
 	  //Need to pull login error message from get method, but it doesn't exist anymore after the clean
 	  //assertTrue(errorMessage.equals())
@@ -255,7 +286,9 @@ public void PrintFacilityContents() {
 	  assertEquals(driver.findElement(By.xpath(prop.getProperty("Txt_AMAR_View_Description_FM"))).getText(),description);
 	  assertEquals(driver.findElement(By.xpath(prop.getProperty("Txt_AMAR_View_AssignedDate_FM"))).getText(),assignedDate);
 
-
+	  driver.findElement(By.xpath(prop.getProperty("Txt_HomePage_FM"))).click();
+	  driver.findElement(By.xpath(prop.getProperty("Txt_Log_Out_FM"))).click();
+	  driver.quit();
 	  //Need to pull login error message from get method, but it doesn't exist anymore after the clean
 	  //assertTrue(errorMessage.equals())
   }
@@ -270,7 +303,11 @@ public void TC03f() throws Exception
 	  
 	  assertEquals(driver.getTitle(),"Assigned MAR List");
 	  PrintAssignMARTableContents();
-	  Thread.sleep(4000);
+	  MR_View_Specific_Assign_MAR(driver);
+	  snap.takeScreenshot(driver, "Facility_Manager_Specific_Assigned_MARS");
+	  Thread.sleep(2000);
+	  driver.findElement(By.xpath(prop.getProperty("Txt_HomePage_FM"))).click();
+	  driver.findElement(By.xpath(prop.getProperty("Txt_Log_Out_FM"))).click();
 	  driver.quit();
 	  //Need to pull login error message from get method, but it doesn't exist anymore after the clean
 	  //assertTrue(errorMessage.equals())
@@ -327,6 +364,8 @@ public void TC03h() throws Exception
 	  assertEquals(driver.getTitle(),"Repairer Schedule List");
 	  PrintRepairScheduleContents();
 	  Thread.sleep(2000);
+	  driver.findElement(By.xpath(prop.getProperty("Txt_HomePage_FM"))).click();
+	  driver.findElement(By.xpath(prop.getProperty("Txt_Log_Out_FM"))).click();
 	  driver.quit();
 	  //Need to pull login error message from get method, but it doesn't exist anymore after the clean
 	  //assertTrue(errorMessage.equals())
@@ -361,7 +400,11 @@ public void TC03j() throws Exception
 	  
 	  assertEquals(driver.getTitle(),"Facilities List");
 	  PrintFacilityContents();
+	  MR_Specific_Facility(driver);
+	  snap.takeScreenshot(driver, "Facility_Manager_Specific_Assigned_MARS");
 	  Thread.sleep(2000);
+	  driver.findElement(By.xpath(prop.getProperty("Txt_HomePage_FM"))).click();
+	  driver.findElement(By.xpath(prop.getProperty("Txt_Log_Out_FM"))).click();
 	  driver.quit();
 	  //Need to pull login error message from get method, but it doesn't exist anymore after the clean
 	  //assertTrue(errorMessage.equals())
@@ -407,7 +450,23 @@ public void TC03k2(int testCaseNumber, String facilityName, String facilityType,
   //Need to pull login error message from get method, but it doesn't exist anymore after the clean
   //assertTrue(errorMessage.equals())
 }
-
+@Test
+@FileParameters("test/mac_repair/selenium/TC03l_test_cases.csv")
+public void TC03l(int testCaseNumber, String facilityType, String date) throws Exception
+{
+	  driver.get(sAppURL);
+	  MR_Login(driver, "fm2", "password");
+	  Thread.sleep(2000);
+	  MR_View_Facility_Free_Time(driver,facilityType, date);
+	  snap.takeScreenshot(driver, "Facility_Manager_Search_Free_Time"+ Integer.toString(testCaseNumber));
+	  
+	  assertEquals(driver.getTitle(),"View Free Time");
+	  PrintFacilityFreeTimeContents();
+	  Thread.sleep(2000);
+	  driver.quit();
+	  //Need to pull login error message from get method, but it doesn't exist anymore after the clean
+	  //assertTrue(errorMessage.equals())
+}
   @After
   public void tearDown() throws Exception {
     driver.quit();

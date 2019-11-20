@@ -69,41 +69,7 @@ public class MARDAO
         }
     }
     
-    
-    public static void UpdateinDB(MAR mar)
-    {
-        Statement stmt = null;
-        Connection conn = SQLConnection.getDBConnection();
-        try
-        {
-            stmt = conn.createStatement();
-            String insertmar = "UPDATE mar SET description = '" + mar.getDescription() + "',"
-                    + "urgency = '" + mar.getUrgency() + "' WHERE marnumber = '" + mar.getMarID() + "'";
-            stmt.executeUpdate(insertmar);
-            conn.commit();
-        }
-        catch (SQLException e)
-        {
-        }
-    }
-    
-    public static void deleteMAR(String marID)
-    {
-        String queryString = "DELETE FROM mar WHERE marnumber = '" + marID + "'";
-        Statement stmt = null;
-        Connection conn = SQLConnection.getDBConnection();
-        try
-        {
-            stmt = conn.createStatement();
-            stmt.executeUpdate(queryString);
-            conn.commit();
-        }
-        catch (SQLException e)
-        {
-        }
-        
-    }
-    
+       
     public static void insertMAR(MAR mar)
     {
         StoreListinDB(mar, "INSERT INTO mar (marnumber,reporteddate,facilitytype,facilityname,description,urgency,reportedby) ");
@@ -145,10 +111,7 @@ public class MARDAO
         return ReturnMatchingMARList(" SELECT * from mar WHERE marnumber LIKE '%" + marnumber + "%' AND assignedto IS NULL ORDER BY marnumber");
     }
     
-//    public static ArrayList<FM_MAR> searchMARByFacilityType(String facilitytype)
-//    {
-//        return ReturnMatchingMARList(" SELECT * from mar WHERE facilitytype LIKE '%" + facilitytype + "%' ORDER BY marnumber");
-//    }
+
     
     public static ArrayList<MAR> searchMARByFacilityName(String facilityName)
     {
@@ -157,11 +120,11 @@ public class MARDAO
     
     
     // determine if companyID is unique
-    public static Boolean marIDunique(String marnumber)
-    {
-        return (ReturnMatchingMARList(" SELECT * from mar WHERE marnumber = '" + marnumber + "' ORDER BY marnumber").isEmpty());
-    }
-    
+//    public static Boolean marIDunique(String marnumber)
+//    {
+//        return (ReturnMatchingMARList(" SELECT * from mar WHERE marnumber = '" + marnumber + "' ORDER BY marnumber").isEmpty());
+//    }
+//    
     
     /**
      * Gets the current unused MAR number.
