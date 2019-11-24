@@ -19,7 +19,7 @@ public class MRFunctions
     
     public WebDriver invokeCorrectBrowser()
     {
-        System.setProperty("webdriver.chrome.driver", "D:/Program Files/ChromeDriver/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "C:/ChromeDriver/chromedriver.exe");
         return new ChromeDriver();
     }
     
@@ -177,7 +177,7 @@ public class MRFunctions
             String urgency,
             String description)
     {
-        // Got to create mar page.
+        // Go to create mar page.
         driver.findElement(By.xpath(prop.getProperty("Lnk_User_CreateMAR"))).click();
         
         // Enter in MAR info.
@@ -188,6 +188,45 @@ public class MRFunctions
         // Press the submit button.
         sleepyTime();
         driver.findElement(By.xpath(prop.getProperty("Btn_CreateMar_Submit"))).click();
+    }
+    
+    
+    public void MR_UserUpdateProfile(WebDriver driver,
+            String first,
+            String last,
+            String password,
+            String address,
+            String city,
+            String zip,
+            String state,
+            String phone,
+            String email)
+    {
+        // Go to update page
+        driver.findElement(By.xpath(prop.getProperty("Lnk_User_UpdateProfile"))).click();
+        
+        // Enter in the test data
+        driver.findElement(By.xpath(prop.getProperty("Txt_UserUpdate_Firstname"))).clear();
+        driver.findElement(By.xpath(prop.getProperty("Txt_UserUpdate_Firstname"))).sendKeys(first);
+        driver.findElement(By.xpath(prop.getProperty("Txt_UserUpdate_Lastname"))).clear();
+        driver.findElement(By.xpath(prop.getProperty("Txt_UserUpdate_Lastname"))).sendKeys(last);
+        driver.findElement(By.xpath(prop.getProperty("Txt_UserUpdate_Password"))).clear();
+        driver.findElement(By.xpath(prop.getProperty("Txt_UserUpdate_Password"))).sendKeys(password);
+        driver.findElement(By.xpath(prop.getProperty("Txt_UserUpdate_Address"))).clear();
+        driver.findElement(By.xpath(prop.getProperty("Txt_UserUpdate_Address"))).sendKeys(address);
+        driver.findElement(By.xpath(prop.getProperty("Txt_UserUpdate_City"))).clear();
+        driver.findElement(By.xpath(prop.getProperty("Txt_UserUpdate_City"))).sendKeys(city);
+        new Select(driver.findElement(By.xpath(prop.getProperty("Sel_UserUpdate_State")))).selectByValue(state);
+        driver.findElement(By.xpath(prop.getProperty("Txt_UserUpdate_Zip"))).clear();
+        driver.findElement(By.xpath(prop.getProperty("Txt_UserUpdate_Zip"))).sendKeys(zip);
+        driver.findElement(By.xpath(prop.getProperty("Txt_UserUpdate_Phone"))).clear();
+        driver.findElement(By.xpath(prop.getProperty("Txt_UserUpdate_Phone"))).sendKeys(phone);
+        driver.findElement(By.xpath(prop.getProperty("Txt_UserUpdate_Email"))).clear();
+        driver.findElement(By.xpath(prop.getProperty("Txt_UserUpdate_Email"))).sendKeys(email);
+        
+        // Press the submit button
+        driver.findElement(By.xpath(prop.getProperty("Btn_UserUpdate_Submit"))).click();
+        sleepyTime();
     }
     
     
@@ -238,23 +277,37 @@ public class MRFunctions
      */
     public void MR_Logout(LogOutFlag flag)
     {
-    	if (flag == LogOutFlag.USER_HOME)
-    	{
-    		driver.findElement(By.xpath(prop.getProperty("Lnk_User_Logout")));
-    	}
-    	else if (flag == LogOutFlag.USER_CREATE_MAR)
+        if (flag == LogOutFlag.USER_HOME)
+        {
+            driver.findElement(By.xpath(prop.getProperty("Lnk_User_Logout")));
+        }
+        else if (flag == LogOutFlag.USER_CREATE_MAR)
         {
             driver.findElement(By.xpath(prop.getProperty("Lnk_CreateMar_Home"))).click();
             driver.findElement(By.xpath(prop.getProperty("Lnk_User_Logout"))).click();
         }
-        else if(flag == LogOutFlag.USER_MAR_DETAILS)
+        else if (flag == LogOutFlag.USER_MAR_DETAILS)
         {
             driver.findElement(By.xpath(prop.getProperty("Lnk_MarDetails_Home"))).click();
             driver.findElement(By.xpath(prop.getProperty("Lnk_User_Logout"))).click();
         }
-        else if(flag == LogOutFlag.REGISTRATION)
+        else if (flag == LogOutFlag.USER_UPDATE)
         {
-        	driver.findElement(By.xpath(prop.getProperty("Lnk_Register_BackToLogin"))).click();
+            driver.findElement(By.xpath(prop.getProperty("Lnk_UserUpdate_Home"))).click();
+            sleepyTime();
+            driver.findElement(By.xpath(prop.getProperty("Lnk_User_Logout"))).click();
+            sleepyTime();
+        }
+        else if (flag == LogOutFlag.VIEW_PROFILE)
+        {
+            driver.findElement(By.xpath(prop.getProperty("Lnk_ViewProfile_Home"))).click();
+            sleepyTime();
+            driver.findElement(By.xpath(prop.getProperty("Lnk_User_Logout"))).click();
+            sleepyTime();
+        }
+        else if (flag == LogOutFlag.REGISTRATION)
+        {
+            driver.findElement(By.xpath(prop.getProperty("Lnk_Register_BackToLogin"))).click();
         }
     }
 }

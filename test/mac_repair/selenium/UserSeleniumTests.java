@@ -56,7 +56,7 @@ public class UserSeleniumTests extends MRFunctions
     /**
      * Testing registration and validataion of a user.
      */
-     @Test
+    @Test
     @FileParameters("test/mac_repair/selenium/UserTC01TestCases.csv")
     public void userTC01(
             int tNo,
@@ -132,20 +132,20 @@ public class UserSeleniumTests extends MRFunctions
             
             MR_Logout(LogOutFlag.REGISTRATION);
         }
-        else 
+        else
         {
-        	// A good registration will go to back to the login.
+            // A good registration will go to back to the login.
             // Snapshot the expected results.
             snapshot(new Throwable().getStackTrace()[0].getMethodName(), tNo);
         }
-
+        
         sleepyTime();
     }
     
     /**
      * Testing the login and validation of a user.
      */
-     @Test
+    @Test
     @FileParameters("test/mac_repair/selenium/UserTC02TestCases.csv")
     public void userTC02(
             int tNo,
@@ -167,13 +167,13 @@ public class UserSeleniumTests extends MRFunctions
             // Snapshot the expected results.
             snapshot(new Throwable().getStackTrace()[0].getMethodName(), tNo);
         }
-        else 
+        else
         {
-        	// Snapshot the expected results.
+            // Snapshot the expected results.
             snapshot(new Throwable().getStackTrace()[0].getMethodName(), tNo);
-        	
-        	// On a good login, we get into the user home page.
-        	MR_Logout(LogOutFlag.USER_HOME);
+            
+            // On a good login, we get into the user home page.
+            MR_Logout(LogOutFlag.USER_HOME);
         }
         
         sleepyTime();
@@ -236,6 +236,92 @@ public class UserSeleniumTests extends MRFunctions
             MR_Logout(LogOutFlag.USER_MAR_DETAILS);
         }
     }
+    
+    /**
+     * Login and update the user profile.
+     */
+    @Test
+    @FileParameters("test/mac_repair/selenium/UserTC04TestCases.csv")
+    public void userTC04(
+            int tNo,
+            String loginUser,
+            String loginPass,
+            String first,
+            String last,
+            String password,
+            String address,
+            String city,
+            String zip,
+            String state,
+            String phone,
+            String email,
+            String fieldError,
+            String firstnameError,
+            String lastnameError,
+            String passwordError,
+            String addressError,
+            String cityError,
+            String zipError,
+            String phoneError,
+            String emailError)
+    {
+        // Go to web page.
+        driver.get(sAppURL);
+        
+        // Login
+        MR_Login(driver, loginUser, loginPass);
+        sleepyTime();
+        
+        // Update Profile
+        MR_UserUpdateProfile(driver,
+                first,
+                last,
+                password,
+                address,
+                city,
+                zip,
+                state,
+                phone,
+                email);
+        
+        // Snapshot the results.
+        snapshot(new Throwable().getStackTrace()[0].getMethodName(), tNo);
+        
+        // Check the current page and verify the information accordingly.
+        if (driver.getTitle().equals("Update Profile"))
+        {
+            // This means we have an error during update. Verify the
+            // error messages.
+            assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_UserUpdate_Error_Fields"))).getText().equalsIgnoreCase(fieldError));
+            assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_UserUpdate_Error_Firstname"))).getText().equalsIgnoreCase(firstnameError));
+            assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_UserUpdate_Error_Lastname"))).getText().equalsIgnoreCase(lastnameError));
+            assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_UserUpdate_Error_Password"))).getText().equalsIgnoreCase(passwordError));
+            assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_UserUpdate_Error_Address"))).getText().equalsIgnoreCase(addressError));
+            assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_UserUpdate_Error_City"))).getText().equalsIgnoreCase(cityError));
+            assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_UserUpdate_Error_Zip"))).getText().equalsIgnoreCase(zipError));
+            assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_UserUpdate_Error_Phone"))).getText().equalsIgnoreCase(phoneError));
+            assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_UserUpdate_Error_Email"))).getText().equalsIgnoreCase(emailError));
+            
+            MR_Logout(LogOutFlag.USER_UPDATE);
+        }
+        else
+        {
+            // On a successful update, the view profile page should be shown.
+            // Verify the table info matches the input.
+            assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_ViewProfile_Firstname"))).getText().equalsIgnoreCase(first));
+            assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_ViewProfile_Lastname"))).getText().equalsIgnoreCase(last));
+            assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_ViewProfile_Password"))).getText().equalsIgnoreCase(password));
+            assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_ViewProfile_Address"))).getText().equalsIgnoreCase(address));
+            assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_ViewProfile_City"))).getText().equalsIgnoreCase(city));
+            assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_ViewProfile_State"))).getText().equalsIgnoreCase(state));
+            assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_ViewProfile_Zip"))).getText().equalsIgnoreCase(zip));
+            assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_ViewProfile_Phone"))).getText().equalsIgnoreCase(phone));
+            assertTrue(driver.findElement(By.xpath(prop.getProperty("Txt_ViewProfile_Email"))).getText().equalsIgnoreCase(email));
+            
+            MR_Logout(LogOutFlag.VIEW_PROFILE);
+        }
+    }
+    
     
     @After
     public void tearDown() throws Exception
