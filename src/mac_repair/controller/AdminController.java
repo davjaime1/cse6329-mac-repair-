@@ -30,7 +30,7 @@ public class AdminController extends HttpServlet
             session.setAttribute("ROLES", UtilityDAO.listRoles());
             getServletContext().getRequestDispatcher("/AdminSearchUsers.jsp").forward(request, response);
         }
-        else if (action.equalsIgnoreCase("ListAllUsersAction"))
+        else 
         {
             ArrayList<User> usersInDB = UserDAO.listAllUsers();
             
@@ -41,11 +41,7 @@ public class AdminController extends HttpServlet
             session.setAttribute("USERS", usersInDB);
             getServletContext().getRequestDispatcher("/AdminUserList.jsp").forward(request, response);
         }
-        else
-        {
-            System.out.println("ERROR: AdminController: INCORRECT ACTION at doGet()");
-            response.getWriter().append("Served at: ").append(request.getContextPath());
-        }
+  
     }
     
     @Override
@@ -57,28 +53,16 @@ public class AdminController extends HttpServlet
         final String ERROR_ATTR = "ERR_MSG";
         HttpSession session = request.getSession();
         session.removeAttribute(ERROR_ATTR);
-        String action = request.getParameter("action");
+     
         
         
-        if (action.equalsIgnoreCase("FilterUsersAction"))
-        {
+      
             String roleIdStr = request.getParameter("roleDropDown");
-            if (roleIdStr.equalsIgnoreCase("default"))
-            {
-                session.setAttribute(ERROR_ATTR, "Errors on page.");
-                getServletContext().getRequestDispatcher("/AdminSearchUsers.jsp").forward(request, response);
-            }
-            else
-            {
+ 
                 ArrayList<User> usersInDB = UserDAO.listUsersWithRole(roleIdStr);
                 session.setAttribute("USERS", usersInDB);
                 getServletContext().getRequestDispatcher("/AdminUserList.jsp").forward(request, response);
-            }
-        }
-        else
-        {
-            System.out.println("ERROR: AdminController: INCORRECT ACTION at doPost()");
-            response.getWriter().append("Served at: ").append(request.getContextPath());
-        }
-    }
+      }
+  
+    
 }

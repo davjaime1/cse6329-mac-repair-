@@ -15,7 +15,7 @@ public class AdminFunctions {
 	public Properties prop;	  
 	public WebDriver invokeCorrectBrowser ()
 	{
-		System.setProperty("webdriver.chrome.driver", "D:/Program Files/ChromeDriver/chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "C:/ChromeDriver/chromedriver.exe");
 		return new ChromeDriver();
 	}
 
@@ -120,6 +120,43 @@ public class AdminFunctions {
 	    driver.findElement(By.xpath(prop.getProperty("Txt_User_Role_Dropdown_Admin"))).click();
 		  Thread.sleep(2000);
 	    new Select(driver.findElement(By.xpath(prop.getProperty("Txt_User_Role_Dropdown_Admin")))).selectByVisibleText(role);
+		  Thread.sleep(2000);
+	    driver.findElement(By.xpath(prop.getProperty("Txt_User_Role_Dropdown_Admin"))).click();
+	    driver.findElement(By.xpath(prop.getProperty("Txt_Update_User_Admin"))).click();
+	    
+	}
+	
+	public void MR_Update_User(WebDriver driver, String first, String last, String password, String address, String city, String zip,
+	          String state, String phone, String email, String role) throws InterruptedException
+	{
+		driver.findElement(By.xpath(prop.getProperty("Txt_List_User_Home_Admin"))).click();
+		driver.findElement(By.xpath(prop.getProperty("Txt_Click_First_User_Admin"))).click();
+	   
+		Thread.sleep(2000);
+		driver.findElement(By.xpath(prop.getProperty("Txt_User_FN_Dropdown_Admin"))).clear();
+		driver.findElement(By.xpath(prop.getProperty("Txt_User_FN_Dropdown_Admin"))).sendKeys(first);
+		driver.findElement(By.xpath(prop.getProperty("Txt_User_LN_Dropdown_Admin"))).clear();
+		driver.findElement(By.xpath(prop.getProperty("Txt_User_LN_Dropdown_Admin"))).sendKeys(last);
+		driver.findElement(By.xpath(prop.getProperty("Txt_User_PW_Dropdown_Admin"))).clear();
+		driver.findElement(By.xpath(prop.getProperty("Txt_User_PW_Dropdown_Admin"))).sendKeys(password);
+		driver.findElement(By.xpath(prop.getProperty("Txt_User_AD_Dropdown_Admin"))).clear();
+		driver.findElement(By.xpath(prop.getProperty("Txt_User_AD_Dropdown_Admin"))).sendKeys(address);
+		driver.findElement(By.xpath(prop.getProperty("Txt_User_CT_Dropdown_Admin"))).clear();
+		driver.findElement(By.xpath(prop.getProperty("Txt_User_CT_Dropdown_Admin"))).sendKeys(city);
+		driver.findElement(By.xpath(prop.getProperty("Txt_User_PH_Dropdown_Admin"))).clear();
+		driver.findElement(By.xpath(prop.getProperty("Txt_User_PH_Dropdown_Admin"))).sendKeys(phone);
+		driver.findElement(By.xpath(prop.getProperty("Txt_User_ZP_Dropdown_Admin"))).clear();
+		driver.findElement(By.xpath(prop.getProperty("Txt_User_ZP_Dropdown_Admin"))).sendKeys(zip);
+		driver.findElement(By.xpath(prop.getProperty("Txt_User_EM_Dropdown_Admin"))).clear();
+		driver.findElement(By.xpath(prop.getProperty("Txt_User_EM_Dropdown_Admin"))).sendKeys(email);
+
+		driver.findElement(By.xpath(prop.getProperty("Txt_User_ST_Dropdown_Admin"))).click();
+		new Select(driver.findElement(By.xpath(prop.getProperty("Txt_User_ST_Dropdown_Admin")))).selectByVisibleText(state);
+		driver.findElement(By.xpath(prop.getProperty("Txt_User_ST_Dropdown_Admin"))).click();
+		
+		driver.findElement(By.xpath(prop.getProperty("Txt_User_Role_Dropdown_Admin"))).click();
+	    new Select(driver.findElement(By.xpath(prop.getProperty("Txt_User_Role_Dropdown_Admin")))).selectByVisibleText(role);
+	    driver.findElement(By.xpath(prop.getProperty("Txt_User_Role_Dropdown_Admin"))).click();
 		  Thread.sleep(2000);
 	    driver.findElement(By.xpath(prop.getProperty("Txt_User_Role_Dropdown_Admin"))).click();
 	    driver.findElement(By.xpath(prop.getProperty("Txt_Update_User_Admin"))).click();

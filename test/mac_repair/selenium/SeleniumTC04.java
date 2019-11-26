@@ -107,6 +107,8 @@ public void PrintUserTableContents() {
 	  snap.takeScreenshot(driver, "Admin_List_User" + Integer.toString(TestCase));
 	  assertEquals(driver.getTitle(),"User List");
 	  PrintUserTableContents();
+	  driver.findElement(By.xpath(prop.getProperty("Txt_Admin_Home_List"))).click();
+	  driver.findElement(By.xpath(prop.getProperty("Txt_Admin_Logout"))).click();
 	  Thread.sleep(2000);
 	  driver.quit();
 	  //Need to pull login error message from get method, but it doesn't exist anymore after the clean
@@ -133,6 +135,68 @@ public void PrintUserTableContents() {
 	  //assertTrue(errorMessage.equals())
   }
 
+  @Test
+  @FileParameters("test/mac_repair/selenium/TC04e1_test_cases.csv")
+  public void TC04e1( int tNo, String first, String last, String password, String address, String city, String zip,
+          String state, String phone, String email, String role, String fieldError, String firstnameError,
+          String lastnameError, String passwordError, String addressError,String cityError, String zipError, String phoneError, String emailError) throws Exception
+  {
+      // Go to web page.
+	  driver.get(sAppURL);
+	  MR_Login(driver, "admin3", "password");
+	  Thread.sleep(2000);
+      
+      // Attempt registration.
+	  MR_Update_User(driver, first, last,password, address,city,zip,state,phone,email,role);
+	  Thread.sleep(2000);
+	  snap.takeScreenshot(driver, "Change_User_Attribute");
+	  Thread.sleep(2000);
+	  assertEquals(driver.findElement(By.xpath(prop.getProperty("Txt_Error_User_FN_Admin"))).getAttribute("value"),firstnameError);
+	  assertEquals(driver.findElement(By.xpath(prop.getProperty("Txt_Error_User_LN_Admin"))).getAttribute("value"),lastnameError);
+	  assertEquals(driver.findElement(By.xpath(prop.getProperty("Txt_Error_User_PW_Admin"))).getAttribute("value"),passwordError);
+	  assertEquals(driver.findElement(By.xpath(prop.getProperty("Txt_Error_User_AD_Admin"))).getAttribute("value"),addressError);
+//	  assertEquals(driver.findElement(By.xpath(prop.getProperty("Txt_Error_User_CT_Admin"))).getAttribute("value"),cityError);
+	  assertEquals(driver.findElement(By.xpath(prop.getProperty("Txt_Error_User_ZP_Admin"))).getAttribute("value"),zipError);
+	  assertEquals(driver.findElement(By.xpath(prop.getProperty("Txt_Error_User_PH_Admin"))).getAttribute("value"),phoneError);
+	  assertEquals(driver.findElement(By.xpath(prop.getProperty("Txt_Error_User_EM_Admin"))).getAttribute("value"),emailError);
+	  driver.findElement(By.xpath(prop.getProperty("Txt_Admin_Home_List"))).click();
+	  driver.findElement(By.xpath(prop.getProperty("Txt_Admin_Logout"))).click();
+
+	  //Need to pull login error message from get method, but it doesn't exist anymore after the clean
+	  //assertTrue(errorMessage.equals())
+  }
+
+  @Test
+  @FileParameters("test/mac_repair/selenium/TC04e2_test_cases.csv")
+  public void TC04e2( int tNo, String first, String last, String password, String address, String city, String zip,
+          String stateVisible, String state, String phone, String email, String roleVisible, String role) throws Exception
+  {
+      // Go to web page.
+	  driver.get(sAppURL);
+	  MR_Login(driver, "admin3", "password");
+	  Thread.sleep(2000);
+      
+      // Attempt registration.
+	  MR_Update_User(driver, first, last,password, address,city,zip,stateVisible,phone,email,roleVisible);
+	  Thread.sleep(2000);
+	  snap.takeScreenshot(driver, "Change_User_Attribute");
+	  Thread.sleep(2000);
+	  assertEquals(driver.findElement(By.xpath(prop.getProperty("Txt_Changed_User_Role_Admin"))).getText(),role);
+	  assertEquals(driver.findElement(By.xpath(prop.getProperty("Txt_Changed_User_FN_Admin"))).getText(),first);
+	  assertEquals(driver.findElement(By.xpath(prop.getProperty("Txt_Changed_User_LN_Admin"))).getText(),last);
+	  assertEquals(driver.findElement(By.xpath(prop.getProperty("Txt_Changed_User_PW_Admin"))).getText(),password);
+	  assertEquals(driver.findElement(By.xpath(prop.getProperty("Txt_Changed_User_AD_Admin"))).getText(),address);
+	  assertEquals(driver.findElement(By.xpath(prop.getProperty("Txt_Changed_User_CT_Admin"))).getText(),city);
+	  assertEquals(driver.findElement(By.xpath(prop.getProperty("Txt_Changed_User_ST_Admin"))).getText(),state);
+	  assertEquals(driver.findElement(By.xpath(prop.getProperty("Txt_Changed_User_ZP_Admin"))).getText(),zip);
+	  assertEquals(driver.findElement(By.xpath(prop.getProperty("Txt_Changed_User_PH_Admin"))).getText(),phone);
+	  assertEquals(driver.findElement(By.xpath(prop.getProperty("Txt_Changed_User_EM_Admin"))).getText(),email);
+
+
+	  //Need to pull login error message from get method, but it doesn't exist anymore after the clean
+	  //assertTrue(errorMessage.equals())
+  }
+  
   @After
   public void tearDown() throws Exception {
     driver.quit();

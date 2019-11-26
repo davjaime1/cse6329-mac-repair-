@@ -34,14 +34,13 @@ public class FM_RepairerScheduleController extends HttpServlet {
 			url="/FM_SearchRepairSchedule.jsp";
 			getServletContext().getRequestDispatcher(url).forward(request, response);
 		}
-		else if (action.equalsIgnoreCase("listRepaierschedule")) {
+		else{
 			ArrayList<MAR> repairscheduleInDB = new ArrayList<MAR>();
 			repairscheduleInDB=RepairScheduleDAO.listRepairSchedule();
 			session.setAttribute("REPAIRSCHEDULE", repairscheduleInDB);				
 			getServletContext().getRequestDispatcher("/FM_RepairScheduleList.jsp").forward(request, response);
 		}
-		else // redirect all other gets to post
-			doPost(request,response);
+	
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -35,24 +35,7 @@ public class FacilityDAO {
 		return facilityListInDB;
 	}
 	
-	private static ArrayList<Facility> ReturnMatchingFacilityNames (String queryString) {
-		ArrayList<Facility> facilityNamesInDB = new ArrayList<Facility>();
-		
-		Statement stmt = null;
-		Connection conn = SQLConnection.getDBConnection();  
-		try {
-			stmt = conn.createStatement();
-			ResultSet facilityNames = stmt.executeQuery(queryString);
-			while (facilityNames.next()) {
-				Facility facility = new Facility(); 
-				facility.setFacilityName(facilityNames.getString("name"));
-				facility.setFacilityType(facilityNames.getString("facilitytype"));
-				facilityNamesInDB.add(facility);
-			}
-		} catch (SQLException e) {}
-		return facilityNamesInDB;
-	}
-	
+
 	
 
 	private static void StoreListinDB (Facility mar,String queryString) {
@@ -87,9 +70,7 @@ public class FacilityDAO {
 			return ReturnMatchingFacilityList(" SELECT * from facilities WHERE name LIKE '%"+name+"%' ORDER BY name");
 	}
 
-	public static ArrayList<Facility>  searchFacilityType(String facilitytype)  {  
-		return ReturnMatchingFacilityList(" SELECT * from facilities WHERE facilitytype LIKE '%"+facilitytype+"%' ORDER BY name");
-	}
+
 	public static ArrayList<Facility>  getFacilities(String facilitytype)  {  
 		return ReturnMatchingFacilityList(" SELECT * from facilities WHERE facilitytype = '"+facilitytype+"' ORDER BY name");
 	}
@@ -99,9 +80,5 @@ public class FacilityDAO {
 			return (ReturnMatchingFacilityList(" SELECT * from facilities WHERE name = '"+name+"' ORDER BY name").size())==0;
 	}
 	
-	public static ArrayList<Facility> listFacilitiesNames(){
-		return ReturnMatchingFacilityNames(" SELECT name, facilitytype from facilities");
-
-	}
 
 }

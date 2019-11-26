@@ -40,29 +40,6 @@ public class FM_AssignMARDAO {
 		return assignedmarListInDB;
 	}
 	
-//	private static void StoreListinDB (FM_MAR assignmar,String queryString) {
-//		Statement stmt = null;
-//		Date assignedDate = FM_UtilityDAO.mysqlDateassignmar(assignmar.getAssignedDate());
-//		Connection conn = SQLConnection.getDBConnection();  
-//		try {
-//			stmt = conn.createStatement();
-//			String insertmar = queryString + " VALUES ('"  
-//					+ assignmar.getMarID()  + "','"	
-//					+ assignmar.getDate()  + "','"	
-//					+ assignmar.getFacilityType()  + "','"	
-//					+ assignmar.getFacilityName()  + "','"	
-//					+ assignmar.getDescription()  + "','"	
-//					+ assignmar.getUrgency()  + "','"	
-//					+ assignmar.getReportedUser()  + "','"	
-//					+ assignmar.getAssignedTo()  + "','"	
-//					+ assignedDate.toString()  + "','"	
-//					+ assignmar.getEstimateOfRepair() + "')";
-//			stmt.executeUpdate(insertmar);	
-//			conn.commit(); 
-//		} catch (SQLException e) {}
-//	}
-//	
-//	
 
 	public static void UpdateinDB (MAR mar) {
 		Statement stmt = null;
@@ -99,9 +76,7 @@ public class FM_AssignMARDAO {
 	public static ArrayList<MAR>  searchMARByFacilityName(String facilityName)  {  
 		return ReturnMatchingAssignedMARList(" SELECT * from mar WHERE facilityname LIKE '%"+facilityName+"%' ORDER BY marnumber");
 	}
-	public static ArrayList<MAR>  listAssignedMARstoaRepairer(String username)  {  
-		return ReturnMatchingAssignedMARList(" SELECT * from mar WHERE assignedto = '"+username+"' ORDER BY marnumber");
-}
+
 	
 	public static void addRepairList(String mar, String date, String rep)
 	{
