@@ -36,7 +36,7 @@ public class UserController extends HttpServlet
                 request.getParameter("idrole"),
                 request.getParameter("idaddress"),
                 request.getParameter("idcity"),
-                request.getParameter("idstate"),                
+                request.getParameter("idstate"),
                 request.getParameter("idzip"),
                 request.getParameter("idphone"),
                 request.getParameter("idemail"));
@@ -49,12 +49,7 @@ public class UserController extends HttpServlet
         session.removeAttribute("errorMsgs");
         String url = "";
         
-        if (action.equalsIgnoreCase("loginProfile"))
-        {
-            url = "/index.jsp";
-            getServletContext().getRequestDispatcher(url).forward(request, response);
-        }
-        else if (action.equalsIgnoreCase("logOut"))
+        if (action.equalsIgnoreCase("logOut"))
         {
             session.invalidate();
             url = "/index.jsp";
@@ -194,7 +189,8 @@ public class UserController extends HttpServlet
         }
         
         // (action == loginUser)
-        else if (action.equalsIgnoreCase("loginUser"))
+        // else if (action.equalsIgnoreCase("loginUser"))
+        else
         {
             User currentUser = new User();
             currentUser.setUsername(request.getParameter("idusername"));

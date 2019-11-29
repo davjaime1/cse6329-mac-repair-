@@ -1,2 +1,9 @@
-1,us2,pass12,,,pass1,,,1234,AK,123456789,email@gmail.com,Fields have errors,Invalid first name,Invalid last name,Invalid password,Invalid address,Invalid city,Invalid zip,Invalid phone,Invalid email
-2,us2,pass12,E,F,pass12,5,A,12345,TX,1234567890,email@uta.edu,Fields have errors,Invalid first name,Invalid last name,Invalid password,Invalid address,Invalid city,Invalid zip,Invalid phone,Invalid email
+1,us2,pass12,,F,pass12,5,A,12345,TX,1234567890,email@uta.edu,Fields have errors,Invalid first name,,,,,,,
+2,us2,pass12,E,,pass12,5,A,12345,TX,1234567890,email@uta.edu,Fields have errors,,Invalid last name,,,,,,
+3,us2,pass12,E,F,pass1,5,A,12345,TX,1234567890,email@uta.edu,Fields have errors,,,Invalid password,,,,,
+4,us2,pass12,E,F,pass12,,A,12345,TX,1234567890,email@uta.edu,Fields have errors,,,,Invalid address,,,,
+5,us2,pass12,E,F,pass12,5,,12345,TX,1234567890,email@uta.edu,Fields have errors,,,,,Invalid city,,,
+6,us2,pass12,E,F,pass12,5,A,1234,TX,1234567890,email@uta.edu,Fields have errors,,,,,,Invalid zip,,
+7,us2,pass12,E,F,pass12,5,A,12345,TX,123456789,email@uta.edu,Fields have errors,,,,,,,Invalid phone,
+8,us2,pass12,E,F,pass12,5,A,12345,TX,1234567890,email@gmail.com,Fields have errors,,,,,,,,Invalid email
+9,us2,pass12,E,F,pass12,5,A,12345,TX,1234567890,email@uta.edu,,,,,,,,,

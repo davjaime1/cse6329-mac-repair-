@@ -322,6 +322,38 @@ public class UserSeleniumTests extends MRFunctions
         }
     }
     
+    /**
+     * Other needed tests to get full coverage for user controller.
+     * 
+     * @param tNo
+     * @param loginUser
+     * @param loginPass
+     */
+    @Test
+    @FileParameters("test/mac_repair/selenium/UserTC05TestCases.csv")
+    public void userTC05(
+            int tNo,
+            String loginUser,
+            String loginPass)
+    {
+        // Go to web page.
+        driver.get(sAppURL);
+        
+        // Login
+        MR_Login(driver, loginUser, loginPass);
+        sleepyTime();
+        
+        // View the user profile and take snapshot.
+        MR_ViewUserProfile();
+        snapshot(new Throwable().getStackTrace()[0].getMethodName(), tNo);
+        
+        // Verify on correct page.
+        assertTrue(driver.getTitle().equals("View Profile"));
+        
+        // Logout
+        MR_Logout(LogOutFlag.VIEW_PROFILE);
+    }
+    
     
     @After
     public void tearDown() throws Exception

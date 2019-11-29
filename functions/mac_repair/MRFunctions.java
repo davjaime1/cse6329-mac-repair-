@@ -171,6 +171,11 @@ public class MRFunctions
         sleepyTime();
     }
     
+    public void MR_ViewUserProfile()
+    {
+        driver.findElement(By.xpath(prop.getProperty("Lnk_User_ViewProfile"))).click();
+        sleepyTime();
+    }
     
     public void MR_CreateMar(
             String facility,
