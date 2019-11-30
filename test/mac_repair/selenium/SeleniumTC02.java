@@ -145,6 +145,8 @@ public class SeleniumTC02 extends MRFunctions {
   }
   */
   
+  //====================================AO5 Tests ===========================================
+
 
   //Register a new repairer and then login
   @Test
@@ -290,7 +292,155 @@ public class SeleniumTC02 extends MRFunctions {
 	  takeScreenShot(driver, "TC02g_EntireScenario_1");
   }
   
-
+  //====================================AO6 Tests ===========================================
+ 
+  //Verify make a reservation headers and data values and make a reservation
+  @Test
+  @FileParameters("test/mac_repair/selenium/TC02h_test_cases.csv")
+  public void TC02h(int testCaseNumber, String username, String password, String expfacilityname, String expfacilitytype, String expdate, String expfrom, String expto, String tag) throws Exception
+  {
+	  driver.get(sAppURL);
+	  MR_Login(driver, username, password);
+	  Repairer_View_Assigned(driver);
+	  Repairer_View_Specific_Assigned(driver);
+	  Repairer_ViewMakeReservation(driver);
+	  int i = 2;
+	  assertEquals(expfacilityname, driver.findElement(By.xpath(prop.getProperty("Txt_MakeReservation_Xpaths") + testCaseNumber + "]/" + tag + "["+ i++ +"]")).getText());
+	  assertEquals(expfacilitytype, driver.findElement(By.xpath(prop.getProperty("Txt_MakeReservation_Xpaths") + testCaseNumber + "]/" + tag + "["+ i++ +"]")).getText());
+	  assertEquals(expdate, driver.findElement(By.xpath(prop.getProperty("Txt_MakeReservation_Xpaths") + testCaseNumber + "]/" + tag + "["+ i++ +"]")).getText());
+	  assertEquals(expfrom, driver.findElement(By.xpath(prop.getProperty("Txt_MakeReservation_Xpaths") + testCaseNumber + "]/" + tag + "["+ i++ +"]")).getText());
+	  assertEquals(expto, driver.findElement(By.xpath(prop.getProperty("Txt_MakeReservation_Xpaths") + testCaseNumber + "]/" + tag + "["+ i++ +"]")).getText());
+	  
+	  if(tag.equals("td"))
+	  {
+		  Repairer_MakeReservation(driver);
+	  }
+	  
+	  Repairer_Homepage(driver);
+	  Repairer_Logout(driver);
+	  //Just gonna take a screenshot of the login page (where the full scenario ends)
+	  takeScreenShot(driver, "TC02g_EntireScenario_1");
+  }
+  
+  
+  //Verify view my reservations headers and values
+  @Test
+  @FileParameters("test/mac_repair/selenium/TC02i_test_cases.csv")
+  public void TC02i(int testCaseNumber, String username, String password, String expDate, String expMarnum, String expFacilitytype, String expFacilityname, String expFrom, String expTo, String tag) throws Exception
+  {
+	  driver.get(sAppURL);
+	  MR_Login(driver, username, password);
+	  Repairer_ViewReserved(driver);
+	  
+	  int i = 1;
+	  assertEquals(expDate, driver.findElement(By.xpath(prop.getProperty("Txt_ViewReservation_Xpaths") + testCaseNumber + "]/" + tag + "["+ i++ +"]")).getText());
+	  assertEquals(expMarnum, driver.findElement(By.xpath(prop.getProperty("Txt_ViewReservation_Xpaths") + testCaseNumber + "]/" + tag + "["+ i++ +"]")).getText());
+	  assertEquals(expFacilitytype, driver.findElement(By.xpath(prop.getProperty("Txt_ViewReservation_Xpaths") + testCaseNumber + "]/" + tag + "["+ i++ +"]")).getText());
+	  assertEquals(expFacilityname, driver.findElement(By.xpath(prop.getProperty("Txt_ViewReservation_Xpaths") + testCaseNumber + "]/" + tag + "["+ i++ +"]")).getText());
+	  assertEquals(expFrom, driver.findElement(By.xpath(prop.getProperty("Txt_ViewReservation_Xpaths") + testCaseNumber + "]/" + tag + "["+ i++ +"]")).getText());
+	  assertEquals(expTo, driver.findElement(By.xpath(prop.getProperty("Txt_ViewReservation_Xpaths") + testCaseNumber + "]/" + tag + "["+ i++ +"]")).getText());
+	  
+	  Repairer_Homepage(driver);
+	  Repairer_Logout(driver);
+	  //Just gonna take a screenshot of the login page (where the full scenario ends)
+	  takeScreenShot(driver, "TC02g_EntireScenario_1");
+  }
+  
+  
+  //Verify specific reservation header and values
+  @Test
+  @FileParameters("test/mac_repair/selenium/TC02j_test_cases.csv")
+  public void TC02j(int testCaseNumber, String username, String password, String expDate, String expMarnum, String expFacilitytype, String expFacilityname, String expFrom, String expTo) throws Exception
+  {
+	  driver.get(sAppURL);
+	  MR_Login(driver, username, password);
+	  Repairer_ViewReserved(driver);
+	  Repairer_ViewSpecificReserved(driver);
+	  
+	  int i = 1;
+	  assertEquals(expDate, driver.findElement(By.xpath(prop.getProperty("Txt_ViewSpecificReserved_Xpath") + i++ + "]/td[" + testCaseNumber + "]")).getText());
+	  assertEquals(expMarnum, driver.findElement(By.xpath(prop.getProperty("Txt_ViewSpecificReserved_Xpath") + i++ + "]/td[" + testCaseNumber + "]")).getText());
+	  assertEquals(expFacilitytype, driver.findElement(By.xpath(prop.getProperty("Txt_ViewSpecificReserved_Xpath") + i++ + "]/td[" + testCaseNumber + "]")).getText());
+	  assertEquals(expFacilityname, driver.findElement(By.xpath(prop.getProperty("Txt_ViewSpecificReserved_Xpath") + i++ + "]/td[" + testCaseNumber + "]")).getText());
+	  assertEquals(expFrom, driver.findElement(By.xpath(prop.getProperty("Txt_ViewSpecificReserved_Xpath") + i++ + "]/td[" + testCaseNumber + "]")).getText());
+	  assertEquals(expTo, driver.findElement(By.xpath(prop.getProperty("Txt_ViewSpecificReserved_Xpath") + i++ + "]/td[" + testCaseNumber + "]")).getText());
+	  
+	  Repairer_Homepage(driver);
+	  Repairer_Logout(driver);
+	  //Just gonna take a screenshot of the login page (where the full scenario ends)
+	  takeScreenShot(driver, "TC02g_EntireScenario_1");
+  }
+  
+  
+  //Verify modify reservations header and values
+  @Test
+  @FileParameters("test/mac_repair/selenium/TC02k_test_cases.csv")
+  public void TC02k(int testCaseNumber, String username, String password, String expFacilityname, String expFacilitytype, String expDate, String expFrom, String expTo, String tag) throws Exception
+  {
+	  driver.get(sAppURL);
+	  MR_Login(driver, username, password);
+	  Repairer_ViewReserved(driver);
+	  Repairer_ViewSpecificReserved(driver);
+	  Repairer_ViewModifyReservation(driver);
+	  
+	  int i = 2;
+	  assertEquals(expFacilityname, driver.findElement(By.xpath(prop.getProperty("Txt_ModifyReservation_Xpath") + testCaseNumber + "]/" + tag + "["+ i++ +"]")).getText());
+	  assertEquals(expFacilitytype, driver.findElement(By.xpath(prop.getProperty("Txt_ModifyReservation_Xpath") + testCaseNumber + "]/" + tag + "["+ i++ +"]")).getText());
+	  assertEquals(expDate, driver.findElement(By.xpath(prop.getProperty("Txt_ModifyReservation_Xpath") + testCaseNumber + "]/" + tag + "["+ i++ +"]")).getText());
+	  assertEquals(expFrom, driver.findElement(By.xpath(prop.getProperty("Txt_ModifyReservation_Xpath") + testCaseNumber + "]/" + tag + "["+ i++ +"]")).getText());
+	  assertEquals(expTo, driver.findElement(By.xpath(prop.getProperty("Txt_ModifyReservation_Xpath") + testCaseNumber + "]/" + tag + "["+ i++ +"]")).getText());
+	  
+	  if(tag.equals("td"))
+	  {
+		  Repairer_ModifyReservation(driver);
+	  }
+	  Repairer_Homepage(driver);
+	  Repairer_Logout(driver);
+	  //Just gonna take a screenshot of the login page (where the full scenario ends)
+	  takeScreenShot(driver, "TC02g_EntireScenario_1");
+  }
+  
+  
+  //Verify cancel request
+  @Test
+  @FileParameters("test/mac_repair/selenium/TC02l_test_cases.csv")
+  public void TC02l(int testCaseNumber, String username, String password, String expDate, String expMarnum, String expFacilitytype, String expFacilityname, String expFrom, String expTo) throws Exception
+  {
+	  driver.get(sAppURL);
+	  MR_Login(driver, username, password);
+	  Repairer_ViewReserved(driver);
+	  Repairer_ViewSpecificReserved(driver);
+	  Repairer_CancelReservation(driver);
+	  Repairer_ViewReserved(driver);
+	  
+	  assertEquals(expDate, driver.findElement(By.xpath(prop.getProperty("Txt_ViewReservation_CancelChecks") + "1]")).getText());
+	  assertEquals(expMarnum, driver.findElement(By.xpath(prop.getProperty("Txt_ViewReservation_CancelChecks") + "2]")).getText());
+	  assertEquals(expFacilitytype, driver.findElement(By.xpath(prop.getProperty("Txt_ViewReservation_CancelChecks") + "3]")).getText());
+	  assertEquals(expFacilityname, driver.findElement(By.xpath(prop.getProperty("Txt_ViewReservation_CancelChecks") + "4]")).getText());
+	  assertEquals(expFrom, driver.findElement(By.xpath(prop.getProperty("Txt_ViewReservation_CancelChecks") + "5]")).getText());
+	  assertEquals(expTo, driver.findElement(By.xpath(prop.getProperty("Txt_ViewReservation_CancelChecks") + "6]")).getText());
+	  Repairer_Homepage(driver);
+	  Repairer_Logout(driver);
+	  //Just gonna take a screenshot of the login page (where the full scenario ends)
+	  takeScreenShot(driver, "TC02g_EntireScenario_1");
+  }
+  
+  /*
+  //Full Scenario run through, no verifications
+  @Test
+  @FileParameters("test/mac_repair/selenium/TC02g_test_cases.csv")
+  public void TC02m(int testCaseNumber, String username, String password) throws Exception
+  {
+	  driver.get(sAppURL);
+	  MR_Login(driver, username, password);
+	  Repairer_View_Assigned(driver);
+	  Repairer_View_Specific_Assigned(driver);
+	  Repairer_Homepage(driver);
+	  Repairer_Logout(driver);
+	  //Just gonna take a screenshot of the login page (where the full scenario ends)
+	  takeScreenShot(driver, "TC02g_EntireScenario_1");
+  }
+*/
   
   @After
   public void tearDown() throws Exception {

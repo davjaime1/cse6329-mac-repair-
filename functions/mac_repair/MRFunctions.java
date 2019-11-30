@@ -19,7 +19,7 @@ public class MRFunctions
     
     public WebDriver invokeCorrectBrowser()
     {
-        System.setProperty("webdriver.chrome.driver", "C:/ChromeDriver/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "D:/Program Files/ChromeDriver/chromedriver.exe");
         return new ChromeDriver();
     }
     
@@ -269,6 +269,78 @@ public class MRFunctions
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty("Lnk_Repairer_Logout"))));
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty("Lnk_Repairer_Logout"))));
         driver.findElement(By.xpath(prop.getProperty("Lnk_Repairer_Logout"))).click();
+        sleepyTime();
+    }
+    
+    public void Repairer_ViewMakeReservation(WebDriver driver)
+    {
+    	WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(prop.getProperty("Btn_ViewSpecificAssigned_MakeReservation"))));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty("Btn_ViewSpecificAssigned_MakeReservation"))));
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty("Btn_ViewSpecificAssigned_MakeReservation"))));
+        driver.findElement(By.xpath(prop.getProperty("Btn_ViewSpecificAssigned_MakeReservation"))).click();
+        sleepyTime();
+    }
+    
+    public void Repairer_MakeReservation(WebDriver driver)
+    {
+    	WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(prop.getProperty("Rad_MakeReservation_Index1"))));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty("Rad_MakeReservation_Index1"))));
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty("Rad_MakeReservation_Index1"))));
+        driver.findElement(By.xpath(prop.getProperty("Rad_MakeReservation_Index1"))).click();
+  	    driver.findElement(By.xpath(prop.getProperty("Btn_MakeReservation_Submit"))).click();
+        sleepyTime();
+    }
+    
+    public void Repairer_ViewReserved(WebDriver driver)
+    {
+    	WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(prop.getProperty("Lnk_Repairer_ViewReservedRepairs"))));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty("Lnk_Repairer_ViewReservedRepairs"))));
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty("Lnk_Repairer_ViewReservedRepairs"))));
+        driver.findElement(By.xpath(prop.getProperty("Lnk_Repairer_ViewReservedRepairs"))).click();
+        sleepyTime();
+    }
+    
+    public void Repairer_ViewSpecificReserved(WebDriver driver)
+    {
+    	WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(prop.getProperty("Lnk_ViewReserved_ViewSpecificReservation"))));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty("Lnk_ViewReserved_ViewSpecificReservation"))));
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty("Lnk_ViewReserved_ViewSpecificReservation"))));
+        driver.findElement(By.xpath(prop.getProperty("Lnk_ViewReserved_ViewSpecificReservation"))).click();
+        sleepyTime();
+    }
+    
+    public void Repairer_ViewModifyReservation(WebDriver driver)
+    {
+    	WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(prop.getProperty("Btn_ViewSpecificReserved_Modify"))));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty("Btn_ViewSpecificReserved_Modify"))));
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty("Btn_ViewSpecificReserved_Modify"))));
+        driver.findElement(By.xpath(prop.getProperty("Btn_ViewSpecificReserved_Modify"))).click();
+        sleepyTime();
+    }
+    
+    public void Repairer_ModifyReservation(WebDriver driver)
+    {
+    	WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(prop.getProperty("Rad_ModifyReservation_Select"))));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty("Rad_ModifyReservation_Select"))));
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty("Rad_ModifyReservation_Select"))));
+        driver.findElement(By.xpath(prop.getProperty("Rad_ModifyReservation_Select"))).click();
+        driver.findElement(By.xpath(prop.getProperty("Btn_ModifyReservation_Submit"))).click();
+        sleepyTime();
+    }
+    
+    public void Repairer_CancelReservation(WebDriver driver)
+    {
+    	WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(prop.getProperty("Btn_ViewSpecificReserved_Cancel"))));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty("Btn_ViewSpecificReserved_Cancel"))));
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty("Btn_ViewSpecificReserved_Cancel"))));
+        driver.findElement(By.xpath(prop.getProperty("Btn_ViewSpecificReserved_Cancel"))).click();
         sleepyTime();
     }
     
