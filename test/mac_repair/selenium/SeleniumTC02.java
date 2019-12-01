@@ -213,12 +213,12 @@ public class SeleniumTC02 extends MRFunctions {
 	  MR_Login(driver, username, password);
 	  Repairer_View_Assigned(driver);
 	  printAssignedMAR(driver);
-	  assertEquals(expMar1, driver.findElement(By.xpath("html/body/form/table/tbody/tr[2]/td[1]")).getText());
-	  assertEquals(expName1,driver.findElement(By.xpath("html/body/form/table/tbody/tr[2]/td[2]")).getText());
-	  assertEquals(expDate1, driver.findElement(By.xpath("html/body/form/table/tbody/tr[2]/td[8]")).getText());
-	  assertEquals(expMar2, driver.findElement(By.xpath("html/body/form/table/tbody/tr[3]/td[1]")).getText());
-	  assertEquals(expName2,driver.findElement(By.xpath("html/body/form/table/tbody/tr[3]/td[2]")).getText());
-	  assertEquals(expDate2, driver.findElement(By.xpath("html/body/form/table/tbody/tr[3]/td[8]")).getText());
+	  assertEquals(expMar1, driver.findElement(By.xpath("Txt_ViewAssigned_Mar1Value")).getText());
+	  assertEquals(expName1,driver.findElement(By.xpath("Txt_ViewAssigned_Name1Value")).getText());
+	  assertEquals(expDate1, driver.findElement(By.xpath("Txt_ViewAssigned_Date1Value")).getText());
+	  assertEquals(expMar2, driver.findElement(By.xpath("Txt_ViewAssigned_Mar2Value")).getText());
+	  assertEquals(expName2,driver.findElement(By.xpath("Txt_ViewAssigned_Name2Value")).getText());
+	  assertEquals(expDate2, driver.findElement(By.xpath("Txt_ViewAssigned_Date2Value")).getText());
 	  takeScreenShot(driver, "TC02c_VerifyViewAssignedRepairsValues_1");
 	  Repairer_Homepage(driver);
 	  Repairer_Logout(driver);
@@ -309,7 +309,7 @@ public class SeleniumTC02 extends MRFunctions {
 	  assertEquals(expdate, driver.findElement(By.xpath(prop.getProperty("Txt_MakeReservation_Xpaths") + testCaseNumber + "]/" + tag + "["+ i++ +"]")).getText());
 	  assertEquals(expfrom, driver.findElement(By.xpath(prop.getProperty("Txt_MakeReservation_Xpaths") + testCaseNumber + "]/" + tag + "["+ i++ +"]")).getText());
 	  assertEquals(expto, driver.findElement(By.xpath(prop.getProperty("Txt_MakeReservation_Xpaths") + testCaseNumber + "]/" + tag + "["+ i++ +"]")).getText());
-	  
+	  takeScreenShot(driver, "TC02h_Validate_MakeReservation");
 	  if(tag.equals("td"))
 	  {
 		  Repairer_MakeReservation(driver);
@@ -330,7 +330,7 @@ public class SeleniumTC02 extends MRFunctions {
 	  driver.get(sAppURL);
 	  MR_Login(driver, username, password);
 	  Repairer_ViewReserved(driver);
-	  
+	  takeScreenShot(driver, "TC02i_Validate_My_Reservations");
 	  int i = 1;
 	  assertEquals(expDate, driver.findElement(By.xpath(prop.getProperty("Txt_ViewReservation_Xpaths") + testCaseNumber + "]/" + tag + "["+ i++ +"]")).getText());
 	  assertEquals(expMarnum, driver.findElement(By.xpath(prop.getProperty("Txt_ViewReservation_Xpaths") + testCaseNumber + "]/" + tag + "["+ i++ +"]")).getText());
@@ -342,7 +342,6 @@ public class SeleniumTC02 extends MRFunctions {
 	  Repairer_Homepage(driver);
 	  Repairer_Logout(driver);
 	  //Just gonna take a screenshot of the login page (where the full scenario ends)
-	  takeScreenShot(driver, "TC02g_EntireScenario_1");
   }
   
   
@@ -355,7 +354,7 @@ public class SeleniumTC02 extends MRFunctions {
 	  MR_Login(driver, username, password);
 	  Repairer_ViewReserved(driver);
 	  Repairer_ViewSpecificReserved(driver);
-	  
+	  takeScreenShot(driver, "TC02j_Validate_ViewSpecifcReservations");
 	  int i = 1;
 	  assertEquals(expDate, driver.findElement(By.xpath(prop.getProperty("Txt_ViewSpecificReserved_Xpath") + i++ + "]/td[" + testCaseNumber + "]")).getText());
 	  assertEquals(expMarnum, driver.findElement(By.xpath(prop.getProperty("Txt_ViewSpecificReserved_Xpath") + i++ + "]/td[" + testCaseNumber + "]")).getText());
@@ -367,7 +366,6 @@ public class SeleniumTC02 extends MRFunctions {
 	  Repairer_Homepage(driver);
 	  Repairer_Logout(driver);
 	  //Just gonna take a screenshot of the login page (where the full scenario ends)
-	  takeScreenShot(driver, "TC02g_EntireScenario_1");
   }
   
 
@@ -381,7 +379,7 @@ public class SeleniumTC02 extends MRFunctions {
 	  Repairer_ViewReserved(driver);
 	  Repairer_ViewSpecificReserved(driver);
 	  Repairer_ViewModifyReservation(driver);
-	  
+	  takeScreenShot(driver, "TC02k_Validate_ModifyReservations");
 	  int i = 2;
 	  assertEquals(expFacilityname, driver.findElement(By.xpath(prop.getProperty("Txt_ModifyReservation_Xpath") + testCaseNumber + "]/" + tag + "["+ i++ +"]")).getText());
 	  assertEquals(expFacilitytype, driver.findElement(By.xpath(prop.getProperty("Txt_ModifyReservation_Xpath") + testCaseNumber + "]/" + tag + "["+ i++ +"]")).getText());
@@ -396,7 +394,6 @@ public class SeleniumTC02 extends MRFunctions {
 	  Repairer_Homepage(driver);
 	  Repairer_Logout(driver);
 	  //Just gonna take a screenshot of the login page (where the full scenario ends)
-	  takeScreenShot(driver, "TC02g_EntireScenario_1");
   }
   
   
@@ -411,7 +408,7 @@ public class SeleniumTC02 extends MRFunctions {
 	  Repairer_ViewSpecificReserved(driver);
 	  Repairer_CancelReservation(driver);
 	  Repairer_ViewReserved(driver);
-	  
+	  takeScreenShot(driver, "TC02l_Validate_CancelReservation");
 	  assertEquals(expDate, driver.findElement(By.xpath(prop.getProperty("Txt_ViewReservation_CancelChecks") + "1]")).getText());
 	  assertEquals(expMarnum, driver.findElement(By.xpath(prop.getProperty("Txt_ViewReservation_CancelChecks") + "2]")).getText());
 	  assertEquals(expFacilitytype, driver.findElement(By.xpath(prop.getProperty("Txt_ViewReservation_CancelChecks") + "3]")).getText());
@@ -421,7 +418,6 @@ public class SeleniumTC02 extends MRFunctions {
 	  Repairer_Homepage(driver);
 	  Repairer_Logout(driver);
 	  //Just gonna take a screenshot of the login page (where the full scenario ends)
-	  takeScreenShot(driver, "TC02g_EntireScenario_1");
   }
   
   
@@ -436,10 +432,10 @@ public class SeleniumTC02 extends MRFunctions {
 	  Repairer_View_Specific_Assigned(driver);
 	  Repairer_ViewMakeReservation(driver);
 	  Repairer_RadioSubmit(driver);
+	  takeScreenShot(driver, "TC02g_Validate_NoRadioSubmit");
 	  Repairer_Homepage(driver);
 	  Repairer_Logout(driver);
 	  //Just gonna take a screenshot of the login page (where the full scenario ends)
-	  takeScreenShot(driver, "TC02g_EntireScenario_1");
   }
   
   //Making a reservation with different facility types
@@ -452,10 +448,10 @@ public class SeleniumTC02 extends MRFunctions {
 	  Repairer_View_Assigned(driver);
 	  Repairer_FacilityChecks(driver, xpath);
 	  Repairer_ViewMakeReservation(driver);
+	  takeScreenShot(driver, "TC02n_Validate_DifferentTypes");
 	  Repairer_Homepage(driver);
 	  Repairer_Logout(driver);
 	  //Just gonna take a screenshot of the login page (where the full scenario ends)
-	  takeScreenShot(driver, "TC02g_EntireScenario_1");
   }
 
   
