@@ -115,7 +115,6 @@ public class RepairerViewReservedDAO {
 	
 	public static ArrayList<FreeReservations> ReservedListInDB(String name, String date)
 	{
-		System.out.println("SELECT f.facilityname, f.facilitytype, f.date, f.to, f.from, f.reservationid FROM facilityreservation f WHERE f.date = \"" + date +"\" AND f.facilityname = \"" + name + "\"");
 		return ReturnFreeList("SELECT f.facilityname, f.facilitytype, f.date, f.to, f.from, f.reservationid FROM facilityreservation f WHERE f.date = \"" + date +"\" AND f.facilityname = \"" + name + "\"");
 	}
 	

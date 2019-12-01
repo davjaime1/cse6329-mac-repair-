@@ -213,12 +213,12 @@ public class SeleniumTC02 extends MRFunctions {
 	  MR_Login(driver, username, password);
 	  Repairer_View_Assigned(driver);
 	  printAssignedMAR(driver);
-	  assertEquals(expMar1, driver.findElement(By.xpath("Txt_ViewAssigned_Mar1Value")).getText());
-	  assertEquals(expName1,driver.findElement(By.xpath("Txt_ViewAssigned_Name1Value")).getText());
-	  assertEquals(expDate1, driver.findElement(By.xpath("Txt_ViewAssigned_Date1Value")).getText());
-	  assertEquals(expMar2, driver.findElement(By.xpath("Txt_ViewAssigned_Mar2Value")).getText());
-	  assertEquals(expName2,driver.findElement(By.xpath("Txt_ViewAssigned_Name2Value")).getText());
-	  assertEquals(expDate2, driver.findElement(By.xpath("Txt_ViewAssigned_Date2Value")).getText());
+	  assertEquals(expMar1, driver.findElement(By.xpath(prop.getProperty("Txt_ViewAssigned_Mar1Value"))).getText());
+	  assertEquals(expName1,driver.findElement(By.xpath(prop.getProperty("Txt_ViewAssigned_Name1Value"))).getText());
+	  assertEquals(expDate1, driver.findElement(By.xpath(prop.getProperty("Txt_ViewAssigned_Date1Value"))).getText());
+	  assertEquals(expMar2, driver.findElement(By.xpath(prop.getProperty("Txt_ViewAssigned_Mar2Value"))).getText());
+	  assertEquals(expName2,driver.findElement(By.xpath(prop.getProperty("Txt_ViewAssigned_Name2Value"))).getText());
+	  assertEquals(expDate2, driver.findElement(By.xpath(prop.getProperty("Txt_ViewAssigned_Date2Value"))).getText());
 	  takeScreenShot(driver, "TC02c_VerifyViewAssignedRepairsValues_1");
 	  Repairer_Homepage(driver);
 	  Repairer_Logout(driver);
