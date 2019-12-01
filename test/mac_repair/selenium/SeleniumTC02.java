@@ -441,6 +441,22 @@ public class SeleniumTC02 extends MRFunctions {
 	  //Just gonna take a screenshot of the login page (where the full scenario ends)
 	  takeScreenShot(driver, "TC02g_EntireScenario_1");
   }
+  
+  //Making a reservation with different facility types
+  @Test
+  @FileParameters("test/mac_repair/selenium/TC02n_test_cases.csv")
+  public void TC02n(int testCaseNumber, String username, String password, String xpath) throws Exception
+  {
+	  driver.get(sAppURL);
+	  MR_Login(driver, username, password);
+	  Repairer_View_Assigned(driver);
+	  Repairer_FacilityChecks(driver, xpath);
+	  Repairer_ViewMakeReservation(driver);
+	  Repairer_Homepage(driver);
+	  Repairer_Logout(driver);
+	  //Just gonna take a screenshot of the login page (where the full scenario ends)
+	  takeScreenShot(driver, "TC02g_EntireScenario_1");
+  }
 
   
   @After

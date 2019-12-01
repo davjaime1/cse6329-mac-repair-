@@ -354,6 +354,16 @@ public class MRFunctions
         sleepyTime();
     }
     
+    public void Repairer_FacilityChecks(WebDriver driver, String path)
+    {
+    	WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(path)));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(path)));
+        wait.until(ExpectedConditions.elementToBeClickable((By.xpath(path))));
+  	    driver.findElement(By.xpath(path)).click();
+        sleepyTime();
+    }
+    
     /**
      * Helper function to deal with logging out from different pages.
      */
