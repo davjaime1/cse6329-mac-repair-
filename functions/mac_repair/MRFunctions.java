@@ -344,6 +344,16 @@ public class MRFunctions
         sleepyTime();
     }
     
+    public void Repairer_RadioSubmit(WebDriver driver)
+    {
+    	WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(prop.getProperty("Rad_MakeReservation_Index1"))));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty("Rad_MakeReservation_Index1"))));
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty("Rad_MakeReservation_Index1"))));
+  	    driver.findElement(By.xpath(prop.getProperty("Btn_MakeReservation_Submit"))).click();
+        sleepyTime();
+    }
+    
     /**
      * Helper function to deal with logging out from different pages.
      */

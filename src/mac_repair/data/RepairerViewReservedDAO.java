@@ -336,19 +336,6 @@ public class RepairerViewReservedDAO {
 		StoreResInDB("INSERT INTO `facilityreservation` VALUES ( '" + id + "', '" + res.getFacilitytype() + "', '" + res.getFacilityname() + "', '" + res.getVenue() + "', '" + username + "', '" + res.getDate() + "', '" + res.getTo() + "', '" + res.getFrom() + "' );");
 	}
 	
-	public static String getId(ArrayList<FreeReservations> db) {
-		int id = 0;
-		for(int i = 0; i < db.size(); i++)
-		{
-			if(Integer.parseInt(db.get(i).getId()) > id)
-			{
-				id = Integer.parseInt(db.get(i).getId());
-			}
-		}
-		
-		return Integer.toString(id+1);
-	}
-	
 	public static void cancelReservation(String name, String date, String from, String to)
 	{
 		Statement stmt = null;

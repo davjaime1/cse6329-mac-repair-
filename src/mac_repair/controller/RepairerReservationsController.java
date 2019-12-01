@@ -21,7 +21,7 @@ import mac_repair.model.*;
 public class RepairerReservationsController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	
+	/*
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String action = request.getParameter("action"), url="";
@@ -29,10 +29,10 @@ public class RepairerReservationsController extends HttpServlet {
 		
 		
 		//if 
-		//else // redirect all other gets to post*/
+		//else // redirect all other gets to post
 			doPost(request,response);
 	}
-
+	*/
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String action = request.getParameter("action"), url="";
@@ -42,20 +42,11 @@ public class RepairerReservationsController extends HttpServlet {
 		ArrayList<FreeReservations> freeListInDB = new ArrayList<FreeReservations>();
 		ArrayList<FreeReservations> idDB = new ArrayList<FreeReservations>();
 		
-
-		/*if (action.equalsIgnoreCase("searchOptions"))
-		{
-			ArrayList<Facility> facilitiesInDB = new ArrayList<Facility>();
-            facilitiesInDB = FM_FacilityDAO.listFacilitiesNames();
-            session.setAttribute("FACILTIIES", facilitiesInDB);
-            
-            getServletContext().getRequestDispatcher("/SearchFreeFacilities.jsp").forward(request, response);
-		}
-		else*/ if (action.equalsIgnoreCase("searchFreeFacilities"))
+		if (action.equalsIgnoreCase("searchFreeFacilities"))
         {
 			String username = (String)session.getAttribute("username");
-			if(RepairerViewReservedDAO.canMakeRes(request.getParameter("mar"), username))
-			{
+			//if(RepairerViewReservedDAO.canMakeRes(request.getParameter("mar"), username))
+			//{
 				//action=listSpecificCompany
 				ArrayList<FreeReservations> freeReservations = new ArrayList<FreeReservations>();
 				//Use a java class to make a list of possible reservations
@@ -68,12 +59,12 @@ public class RepairerReservationsController extends HttpServlet {
 				session.setAttribute("FREEREPAIRERS", freeListPoss);
 				session.setAttribute("mar", request.getParameter("mar"));
 				url="/SearchFreeFacilities.jsp";
-			}
+			/*}
 			else
 			{
 				//Stay on the page
 				url="/ListSpecificAssignedRepair.jsp";
-			}
+			}*/
         }
 		else if(action.equalsIgnoreCase("modifyReservations"))
 		{
@@ -128,11 +119,9 @@ public class RepairerReservationsController extends HttpServlet {
 			}
 			else 
 			{ // determine if Submit button was clicked without selecting a reservation
-				if (request.getParameter("ListSelectedResButton")!=null) {
 					String errorMsgs =  "Please select a Reservation";
 					session.setAttribute("errorMsgs",errorMsgs);
 					url="/SearchFreeFacilities.jsp";					
-				}
 			}
 		}
 

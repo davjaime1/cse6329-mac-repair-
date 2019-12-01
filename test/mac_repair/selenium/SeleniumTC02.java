@@ -147,7 +147,6 @@ public class SeleniumTC02 extends MRFunctions {
   
   //====================================AO5 Tests ===========================================
 
-
   //Register a new repairer and then login
   @Test
   @FileParameters("test/mac_repair/selenium/TC02_test_cases.csv")
@@ -371,7 +370,7 @@ public class SeleniumTC02 extends MRFunctions {
 	  takeScreenShot(driver, "TC02g_EntireScenario_1");
   }
   
-  
+
   //Verify modify reservations header and values
   @Test
   @FileParameters("test/mac_repair/selenium/TC02k_test_cases.csv")
@@ -425,22 +424,24 @@ public class SeleniumTC02 extends MRFunctions {
 	  takeScreenShot(driver, "TC02g_EntireScenario_1");
   }
   
-  /*
-  //Full Scenario run through, no verifications
+  
+  //Making a reservation without selecting a radio button
   @Test
-  @FileParameters("test/mac_repair/selenium/TC02g_test_cases.csv")
+  @FileParameters("test/mac_repair/selenium/TC02m_test_cases.csv")
   public void TC02m(int testCaseNumber, String username, String password) throws Exception
   {
 	  driver.get(sAppURL);
 	  MR_Login(driver, username, password);
 	  Repairer_View_Assigned(driver);
 	  Repairer_View_Specific_Assigned(driver);
+	  Repairer_ViewMakeReservation(driver);
+	  Repairer_RadioSubmit(driver);
 	  Repairer_Homepage(driver);
 	  Repairer_Logout(driver);
 	  //Just gonna take a screenshot of the login page (where the full scenario ends)
 	  takeScreenShot(driver, "TC02g_EntireScenario_1");
   }
-*/
+
   
   @After
   public void tearDown() throws Exception {
