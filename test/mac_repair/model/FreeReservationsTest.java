@@ -34,8 +34,8 @@ public class FreeReservationsTest
         possible = RepairerViewReservedDAO.makePossibleFreeList(facilityname, date);
         ArrayList<FreeReservations> inDB = new ArrayList<FreeReservations>();
        
-        inDB = RepairerViewReservedDAO.ReservedListInDB(facilityname, date);
-        FreeReservations.getAvaliableReservations(possible, inDB);
+        //inDB = RepairerViewReservedDAO.ReservedListInDB(facilityname, date);
+        //FreeReservations.getAvaliableReservations(possible, inDB);
         
         Assert.assertTrue(expfacilitytype.equals(ob.getFacilitytype()));
         Assert.assertTrue(expfacilityname.equals(ob.getFacilityname()));

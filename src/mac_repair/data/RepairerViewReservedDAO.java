@@ -115,6 +115,7 @@ public class RepairerViewReservedDAO {
 	
 	public static ArrayList<FreeReservations> ReservedListInDB(String name, String date)
 	{
+		System.out.println("SELECT f.facilityname, f.facilitytype, f.date, f.to, f.from, f.reservationid FROM facilityreservation f WHERE f.date = \"" + date +"\" AND f.facilityname = \"" + name + "\"");
 		return ReturnFreeList("SELECT f.facilityname, f.facilitytype, f.date, f.to, f.from, f.reservationid FROM facilityreservation f WHERE f.date = \"" + date +"\" AND f.facilityname = \"" + name + "\"");
 	}
 	
@@ -229,14 +230,8 @@ public class RepairerViewReservedDAO {
 				int intDate = Integer.parseInt(date.substring(8));
 				date = date.substring(0,8);
 				intDate++;
-				if(intDate < 10)
-				{
-					date = date + "0" + Integer.toString(intDate);
-				}
-				else
-				{
-					date = date + Integer.toString(intDate);
-				}
+
+				date = date + Integer.toString(intDate);
 				fromHour = "6";
 				fromMin = "00";
 				toHour = "7";
@@ -353,19 +348,6 @@ public class RepairerViewReservedDAO {
         }
 	}
 	
-	public static boolean canMakeRes(String mar, String username)
-	{
-		ArrayList<RepairerViewReserved> list = new ArrayList<RepairerViewReserved>();
-		list = ReturnReservedList("SELECT f.date, f.facilityname, f.facilitytype, f.date, f.to, f.from, r.mar FROM facilityreservation f, repairschedule r WHERE f.reservedUser = \"" + username + "\" AND r.username = \"" + username + "\" AND f.reservationid = \"" + mar + "\" AND r.mar = \"" + mar+ "\"");
-		if(list.size()==0)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
 	
 	public static void cancelModReservation(String mar)
 	{
