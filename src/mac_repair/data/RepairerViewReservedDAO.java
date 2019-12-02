@@ -229,14 +229,8 @@ public class RepairerViewReservedDAO {
 				int intDate = Integer.parseInt(date.substring(8));
 				date = date.substring(0,8);
 				intDate++;
-				if(intDate < 10)
-				{
-					date = date + "0" + Integer.toString(intDate);
-				}
-				else
-				{
-					date = date + Integer.toString(intDate);
-				}
+
+				date = date + Integer.toString(intDate);
 				fromHour = "6";
 				fromMin = "00";
 				toHour = "7";
@@ -336,19 +330,6 @@ public class RepairerViewReservedDAO {
 		StoreResInDB("INSERT INTO `facilityreservation` VALUES ( '" + id + "', '" + res.getFacilitytype() + "', '" + res.getFacilityname() + "', '" + res.getVenue() + "', '" + username + "', '" + res.getDate() + "', '" + res.getTo() + "', '" + res.getFrom() + "' );");
 	}
 	
-	public static String getId(ArrayList<FreeReservations> db) {
-		int id = 0;
-		for(int i = 0; i < db.size(); i++)
-		{
-			if(Integer.parseInt(db.get(i).getId()) > id)
-			{
-				id = Integer.parseInt(db.get(i).getId());
-			}
-		}
-		
-		return Integer.toString(id+1);
-	}
-	
 	public static void cancelReservation(String name, String date, String from, String to)
 	{
 		Statement stmt = null;
@@ -366,19 +347,6 @@ public class RepairerViewReservedDAO {
         }
 	}
 	
-	public static boolean canMakeRes(String mar, String username)
-	{
-		ArrayList<RepairerViewReserved> list = new ArrayList<RepairerViewReserved>();
-		list = ReturnReservedList("SELECT f.date, f.facilityname, f.facilitytype, f.date, f.to, f.from, r.mar FROM facilityreservation f, repairschedule r WHERE f.reservedUser = \"" + username + "\" AND r.username = \"" + username + "\" AND f.reservationid = \"" + mar + "\" AND r.mar = \"" + mar+ "\"");
-		if(list.size()==0)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
 	
 	public static void cancelModReservation(String mar)
 	{

@@ -1,39 +1,3 @@
-
-USE `database`;
-INSERT INTO users VALUE ("user1","1001526202","SM","SM","password","U","1121 UTA","Arlington","TX","76010","1001526202","sm@uta.edu");
-INSERT INTO users VALUE ("usr1","1001526202","SM","SM","password","U","1121 UTA","Arlington","TX","76010","1001526202","sm@uta.edu");
-INSERT INTO users VALUE ("rep1","1001526202","SM","SM","password","R","1121 UTA","Arlington","TX","76010","1001526202","sm@uta.edu");
-INSERT INTO users VALUE ("rep2","1001526202","SM","SM","password","R","1121 UTA","Arlington","TX","76010","1001526202","sm@uta.edu");
-INSERT INTO users VALUE ("rep3","1001526202","SM","SM","password","R","1121 UTA","Arlington","TX","76010","1001526202","sm@uta.edu");
-INSERT INTO users VALUE ("rep4","1001526202","SM","SM","password","R","1121 UTA","Arlington","TX","76010","1001526202","sm@uta.edu");
-INSERT INTO users VALUE ("rep","1001526202","SM","SM","password","R","1121 UTA","Arlington","TX","76010","1001526202","sm@uta.edu");
-INSERT INTO users VALUE ("rep5","1001526202","SM","SM","password","R","1121 UTA","Arlington","TX","76010","1001526202","sm@uta.edu");
-
-
-
-INSERT INTO mar VALUE ("1",curdate(),"BMC","BMC1","des","Ma","usr1","rep2",curdate(),"1D"); 
-INSERT INTO mar VALUE ("2",curdate(),"BMC","BMC1","des","Ma","usr1","rep2",curdate(),"1D"); 
-INSERT INTO mar VALUE ("3",curdate(),"BMC","BMC1","des","Ma","usr1","rep2",curdate(),"1D"); 
-INSERT INTO mar VALUE ("4",curdate(),"BMC","BMC1","des","Ma","usr1","rep2",curdate(),"1D"); 
-INSERT INTO mar VALUE ("5",curdate(),"BMC","BMC1","des","Ma","usr1","rep2",curdate(),"1D"); 
-USE `database`;
-INSERT INTO users VALUE ("user1","1001526202","SM","SM","password","U","1121 UTA","Arlington","TX","76010","1001526202","sm@uta.edu");
-INSERT INTO users VALUE ("usr1","1001526202","SM","SM","password","U","1121 UTA","Arlington","TX","76010","1001526202","sm@uta.edu");
-INSERT INTO users VALUE ("rep1","1001526202","SM","SM","password","R","1121 UTA","Arlington","TX","76010","1001526202","sm@uta.edu");
-INSERT INTO users VALUE ("rep2","1001526202","SM","SM","password","R","1121 UTA","Arlington","TX","76010","1001526202","sm@uta.edu");
-INSERT INTO users VALUE ("rep3","1001526202","SM","SM","password","R","1121 UTA","Arlington","TX","76010","1001526202","sm@uta.edu");
-INSERT INTO users VALUE ("rep4","1001526202","SM","SM","password","R","1121 UTA","Arlington","TX","76010","1001526202","sm@uta.edu");
-INSERT INTO users VALUE ("rep","1001526202","SM","SM","password","R","1121 UTA","Arlington","TX","76010","1001526202","sm@uta.edu");
-INSERT INTO users VALUE ("rep5","1001526202","SM","SM","password","R","1121 UTA","Arlington","TX","76010","1001526202","sm@uta.edu");
-
-
-INSERT INTO mar VALUE ("71",curdate(),"BMC","BMC1","des","Ma","usr1",null ,null ,null); 
-INSERT INTO mar VALUE ("72",curdate(),"BMC","BMC3","des","Ma","usr1",null,null,null); 
-INSERT INTO mar VALUE ("73",curdate(),"BMC","BMC4","des","Ma","usr1",null,null,null); 
-INSERT INTO mar VALUE ("74",curdate(),"BMC","BMC4","des","Ma","usr1",null,null,null); 
-INSERT INTO mar VALUE ("75",curdate(),"BMC","BMC4","des","Ma","usr1",null,null,null); 
-
-
 USE `database`;
 INSERT INTO users VALUE ("user1","1001526202","SM","SM","password","U","1121 UTA","Arlington","TX","76010","1001526202","sm@uta.edu");
 INSERT INTO users VALUE ("usr1","1001526202","SM","SM","password","U","1121 UTA","Arlington","TX","76010","1001526202","sm@uta.edu");
@@ -94,8 +58,24 @@ INSERT INTO facilityreservation VALUE("30", "BMC1", "BMC", "I", "rep", "2019-10-
 
 INSERT INTO users VALUE ("repTest","1001526202","SM","SM","password","R","1121 UTA","Arlington","TX","76010","1001526202","sm@uta.edu");
 INSERT INTO mar VALUE ("50","2019-10-24","BMC","BMC1","des","Ma","usr1","repTest","2019-10-25","1D");
+INSERT INTO mar VALUE ("52","2019-10-24","BMC","BMC1","des","Ma","usr1","repTest","2019-10-25","1D");
 INSERT INTO mar VALUE ("51","2019-10-24","BMC","BMC1","des","Ma","usr1","repTest","2019-10-25","1D");
+INSERT INTO mar VALUE ("53","2019-10-24","CR","CR1","des","Ma","usr1","repTest","2019-10-25","1D");
+INSERT INTO mar VALUE ("54","2019-10-24","SCG","SCG","des","Ma","usr1","repTest","2019-10-25","1D");
+INSERT INTO mar VALUE ("55","2019-10-24","OVBC","OVBC1","des","Ma","usr1","repTest","2019-10-25","1D");
+INSERT INTO mar VALUE ("56","2019-10-24","MR","MR1","des","Ma","usr1","repTest","2019-10-25","1D");
+INSERT INTO mar VALUE ("57","2019-10-24","IBBC","IBBC1","des","Ma","usr1","repTest","2019-10-25","1D");
+INSERT INTO mar VALUE ("58","2019-10-24","IVBC","IVBC1","des","Ma","usr1","repTest","2019-10-25","1D");
+INSERT INTO mar VALUE ("59","2019-09-08","OBBC","OBBC1","des","Ma","usr1","repTest","2019-09-09","1D");
+INSERT INTO repairschedule VALUE ("repTest","52","2019-10-24");
 INSERT INTO repairschedule VALUE ("repTest","50","2019-10-24");
 INSERT INTO repairschedule VALUE ("repTest","51","2019-10-24");
-INSERT INTO facilityreservation VALUE("50", "BMC1", "BMC", "I", "repTest", "2019-10-25", "2019-10-25 06:29:59", "2019-10-25 06:00:00");
-INSERT INTO facilityreservation VALUE("51", "BMC1", "BMC", "I", "repTest", "2019-10-25", "2019-10-25 12:59:59", "2019-10-25 12:30:00");
+INSERT INTO repairschedule VALUE ("repTest","53","2019-10-24");
+INSERT INTO repairschedule VALUE ("repTest","54","2019-10-24");
+INSERT INTO repairschedule VALUE ("repTest","55","2019-10-24");
+INSERT INTO repairschedule VALUE ("repTest","56","2019-10-24");
+INSERT INTO repairschedule VALUE ("repTest","57","2019-10-24");
+INSERT INTO repairschedule VALUE ("repTest","58","2019-10-24");
+INSERT INTO repairschedule VALUE ("repTest","59","2019-09-08");
+INSERT INTO facilityreservation VALUE("52", "BMC1", "BMC", "I", "repTest", "2019-10-25", "2019-10-25 12:59:59", "2019-10-25 12:30:00");
+INSERT INTO facilityreservation VALUE("50", "BMC1", "BMC", "I", "repTest", "2019-10-25", "2019-10-25 12:59:59", "2019-10-25 12:30:00");

@@ -44,8 +44,6 @@ public class RepairerViewAssignedController extends HttpServlet {
 		int selectedReservedIndex;
 		session.removeAttribute("errorMsgs");
 
-		if (action.equalsIgnoreCase("listSpecificAssignedRepairs") )
-		{
 			//action=listSpecificCompany
 			ArrayList<MAR> reservedListInDB = new ArrayList<MAR>();
 			MAR selectedReservation = new MAR();
@@ -58,7 +56,6 @@ public class RepairerViewAssignedController extends HttpServlet {
 												reservedListInDB.get(0).getEstimateOfRepair());
 			session.setAttribute("REPAIRERS", selectedReservation);
 			url="/ListSpecificAssignedRepair.jsp";					
-		}
 
 		getServletContext().getRequestDispatcher(url).forward(request, response);	
 	}
